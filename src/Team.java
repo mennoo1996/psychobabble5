@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Team {
 	
 	private ArrayList<Player> team;
+	private ArrayList<Player> currentTeam;
 	private String teamName;
 	private double budget;
 	private Standings standings;
@@ -23,8 +24,48 @@ public class Team {
 		this.standings = standings;
 	}
 	
+	/**
+	 * Method which checks if an arrayList contains 11 players of whom 1 is a goalkeeper
+	 * 
+	 * @param currentTeam	- The arraylist
+	 * @return				- true or false
+	 */
+	public static Boolean isEligible(ArrayList<Player> currentTeam) {
+		if(currentTeam.size() == 11) {
+			int goalkeepers = 0;
+			for(int i = 0; i < 11; i++) {
+				if(currentTeam.get(i) instanceof Goalkeeper) {
+					goalkeepers++;
+				}
+			}
+			if(goalkeepers == 1) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void updateStandings(String result, int goalsFor, int goalsAgainst){
 		standings.updateStandings(result, goalsFor, goalsAgainst);
+	}
+	
+	/**
+	 * @return the currentTeam
+	 */
+	public ArrayList<Player> getCurrentTeam() {
+		return currentTeam;
+	}
+	
+
+	/**
+	 * @param currentTeam the currentTeam to set
+	 */
+	public void setCurrentTeam(ArrayList<Player> currentTeam) throws Exception{
+		if(isEligible(currentTeam)) {
+			this.currentTeam = currentTeam;	
+		} else {
+			throw(new Exception("A playing team should have 11 players of whom 1 is a goalkeeper"));
+		}
 	}
 	
 	/**

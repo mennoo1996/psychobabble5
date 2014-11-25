@@ -30,7 +30,7 @@ public class Goalkeeper extends Player {
 	 */
 	@Override
 	public String toString() {
-		return "FieldPlayer [goalkeepValue=" + goalkeeperValue + ", price=" + getPrice() + ", team=" + getTeam() + ", playerType="
+		return "Goalkeeper [goalkeepValue=" + goalkeeperValue + ", price=" + getPrice() + ", team=" + getTeam() + ", playerType="
 						+ getPlayerType() + ", name=" + getName() + ", age=" + getAge() + ", number=" + getNumber() + "]";
 	}
 
