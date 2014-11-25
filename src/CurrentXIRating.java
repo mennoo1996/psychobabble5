@@ -1,5 +1,5 @@
 import java.util.*;
-public class TeamRating {
+public class CurrentXIRating {
 	
 	private int finishing;
 	private int dribbling;
@@ -14,20 +14,90 @@ public class TeamRating {
 	 * @param defending
 	 * @param goalkeeping
 	 */
-	public TeamRating(int finishing, int dribbling, int stamina, int defending,
-			int goalkeeping, int total) {
-		
+	public CurrentXIRating(int finishing, int dribbling, int stamina,
+			int defending, int goalkeeping, int total) {
+		super();
 		this.finishing = finishing;
-		this.dribbling = dribbling;
+		this.setDribbling(dribbling);
 		this.stamina = stamina;
 		this.defending = defending;
 		this.goalkeeping = goalkeeping;
 		this.total=total;
 	}
 	
-	public static TeamRating calculateTeamRating(Team t) {
+	/**
+	 * @return the finishing
+	 */
+	public int getFinishing() {
+		return finishing;
+	}
+
+	/**
+	 * @param finishing the finishing to set
+	 */
+	public void setFinishing(int finishing) {
+		this.finishing = finishing;
+	}
+
+	/**
+	 * @return the stamina
+	 */
+	public int getStamina() {
+		return stamina;
+	}
+
+	/**
+	 * @param stamina the stamina to set
+	 */
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
+	}
+
+	/**
+	 * @return the defending
+	 */
+	public int getDefending() {
+		return defending;
+	}
+
+	/**
+	 * @param defending the defending to set
+	 */
+	public void setDefending(int defending) {
+		this.defending = defending;
+	}
+
+	/**
+	 * @return the goalkeeping
+	 */
+	public int getGoalkeeping() {
+		return goalkeeping;
+	}
+
+	/**
+	 * @param goalkeeping the goalkeeping to set
+	 */
+	public void setGoalkeeping(int goalkeeping) {
+		this.goalkeeping = goalkeeping;
+	}
+
+	/**
+	 * @return the total
+	 */
+	public int getTotal() {
+		return total;
+	}
+
+	/**
+	 * @param total the total to set
+	 */
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public static CurrentXIRating getCurrentXIRating (Team t) {
 		int finishing, dribbling, stamina, defending, goalkeeping, total;
-		ArrayList<Player> list = t.getTeam();
+		ArrayList<Player> list = t.getCurrentTeam();
 		ArrayList<Integer> attackers = new ArrayList<Integer>();
 		ArrayList<Integer> midfielders = new ArrayList<Integer>();
 		ArrayList<Integer> defenders = new ArrayList<Integer>();
@@ -111,23 +181,21 @@ public class TeamRating {
 		total=0;
 		total+=finishing+dribbling+stamina+defending+goalkeeping;
 		
-		return new TeamRating (finishing, dribbling, stamina, defending, goalkeeping, total);
+		return new CurrentXIRating (finishing, dribbling, stamina, defending, goalkeeping, total);
 	}
 
-	@Override
-	public String toString() {
-		return "TeamRating [finishing=" + finishing + ", dribbling="
-				+ dribbling + ", stamina=" + stamina + ", defending="
-				+ defending + ", goalkeeping=" + goalkeeping + ", total="
-				+ total + "]";
+	/**
+	 * @return the dribbling
+	 */
+	public int getDribbling() {
+		return dribbling;
 	}
-	
-	public int getTotal() {
-		return total;
+
+	/**
+	 * @param dribbling the dribbling to set
+	 */
+	public void setDribbling(int dribbling) {
+		this.dribbling = dribbling;
 	}
-	
-	
-	
-	
 
 }
