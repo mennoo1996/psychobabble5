@@ -20,6 +20,24 @@ import org.w3c.dom.NodeList;
  *
  */
 public class XMLParser {
+	
+	public static Competition readCompetition(String libraryFileName, String schemeFileName) {
+		try {
+			File xmlFile = new File(libraryFileName);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(xmlFile);
+			doc.getDocumentElement().normalize();
+			
+			int roundsPlayed = Integer.parseInt(doc.getDocumentElement().getAttribute("roundsPlayed"));
+			
+			return new Competition(readLibrary(libraryFileName), readCompetitionScheme(schemeFileName), roundsPlayed);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	/**
 	 * Method which returns a Library containing the teams and players parsed from the given file name
 	 * 
@@ -35,7 +53,7 @@ public class XMLParser {
 			Document doc = db.parse(xmlFile);
 			doc.getDocumentElement().normalize();
 			
-			Library res = new Library(Integer.parseInt(doc.getDocumentElement().getAttribute("roundsPlayed")));
+			Library res = new Library();
 			
 			NodeList teamList = doc.getElementsByTagName("team");
 			for(int i = 0; i < teamList.getLength(); i++) {
@@ -100,13 +118,13 @@ public class XMLParser {
 	 * @param fileName	- the file to write the library to
 	 * @param library	- the library to write
 	 */
-	public static void writeLibrary(String fileName, Library library) {
+	public static void writeLibrary(String fileName, Library library, int roundsPlayed) {
 		try {
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = docBuilder.newDocument();
 			Element libraryElement = doc.createElement("library");
 			doc.appendChild(libraryElement);
-			libraryElement.setAttribute("roundsPlayed", String.format("%d", library.getRoundsPlayed()));
+			libraryElement.setAttribute("roundsPlayed", String.format("%d", roundsPlayed));
 			
 			for(int i = 0; i < library.getLibrary().size(); i++) {
 				libraryElement.appendChild(writeTeam(library.getLibrary().get(i), doc));
@@ -297,12 +315,12 @@ public class XMLParser {
 	}
 	
 	/**
-	 * Method which reads a competition from a file
+	 * Method which reads a CompetitionScheme from a file
 	 * 
-	 * @param fileName	- the file to read the competition from
-	 * @return			- the competition
+	 * @param fileName	- the file to read the CompetitionScheme from
+	 * @return			- the CompetitionScheme
 	 */
-	public static Competition readCompetition(String fileName) {
+	public static CompetitionScheme readCompetitionScheme(String fileName) {
 		try {
 			// Get file, parse it and set it's element's in a Document
 			File xmlFile = new File(fileName);
@@ -311,7 +329,7 @@ public class XMLParser {
 			Document doc = db.parse(xmlFile);
 			doc.getDocumentElement().normalize();
 			
-			Competition res = new Competition();
+			CompetitionScheme res = new CompetitionScheme();
 			NodeList roundList = doc.getElementsByTagName("roundScheme");
 			
 			for(int i = 0; i < roundList.getLength(); i++) {

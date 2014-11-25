@@ -8,14 +8,12 @@ import java.util.ArrayList;
 public class Library {
 
 	private ArrayList<Team> library;
-	private int roundsPlayed;
 
 	/**
 	 *  Constructor which initialises an empty library
 	 */
-	public Library(int roundsPlayed) {
+	public Library() {
 		library = new ArrayList<Team>();
-		this.roundsPlayed = roundsPlayed;
 	}
 	
 	/**
@@ -26,30 +24,25 @@ public class Library {
 		library.add(team);
 	}
 	
+	public Team getTeamForName(String teamName) {
+		for(int i = 0; i < library.size(); i++) {
+			if(teamName.equals(library.get(i).getTeamName())) {
+				return library.get(i);
+			}
+		}
+		return null;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		String res = "Library, roundsPlayed=" + roundsPlayed;
+		String res = "Library:";
 		for(int i = 0; i < library.size(); i++) {
 			res += "\n\n" + library.get(i).toString(); 
 		}
 		return res;
-	}
-
-	/**
-	 * @return the roundsPlayed
-	 */
-	public int getRoundsPlayed() {
-		return roundsPlayed;
-	}
-
-	/**
-	 * @param roundsPlayed the roundsPlayed to set
-	 */
-	public void setRoundsPlayed(int roundsPlayed) {
-		this.roundsPlayed = roundsPlayed;
 	}
 
 	/**
