@@ -7,23 +7,14 @@ public class TestXMLParse {
 //		Library library = myXMLParserOld.readLibrary("playersDatabase by player.xml");
 
 		
-		Library library = XMLParser.readLibrary("players.xml");
-
-		
-		Team team = library.getLibrary().get(0);
-		System.out.println(team.getTeamName());
-		
-		team.updateStandings("won", 10, 2);
-		System.out.println(library.toString());
-		
-		
-		
-		XMLParser.writeLibrary("players2.xml", library);
-		
-		System.out.println("\n\n");
-		
-		Competition competition = XMLParser.readCompetition("competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("players Database by team with empty standings.xml", "competition-scheme.xml");
 		System.out.println(competition.toString());
+		System.out.println("\n\n\n");
+		competition.printStandings();
+		
+		System.out.println("\n\n\n");
+		competition.getLibrary().getLibrary().get(0).updateStandings("won", 10, 2);
+		competition.printStandings();
 		
 	}	
 }
