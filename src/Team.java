@@ -87,7 +87,7 @@ public class Team {
 		try {
 			this.setCurrentTeam(res);
 		} catch (Exception e) {
-			System.out.println("Niet gelukt");
+			e.printStackTrace();
 		}
 	}
 	

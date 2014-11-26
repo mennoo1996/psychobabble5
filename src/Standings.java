@@ -2,7 +2,7 @@
 public class Standings {
 
 	private int won, draw, lost, points, goalsFor, goalsAgainst, goalDifference;
-
+	private String teamName;
 	
 
 	/**
@@ -153,6 +153,21 @@ public class Standings {
 	public void setGoalDifference(int goalDifference) {
 		this.goalDifference = goalDifference;
 	}
+
+	/**
+	 * @return the teamName
+	 */
+	public String getTeamName() {
+		return teamName;
+	}
+
+	/**
+	 * @param teamName the teamName to set
+	 */
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+	
 	
 	
 	
