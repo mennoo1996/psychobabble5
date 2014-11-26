@@ -39,6 +39,16 @@ public class XMLParser {
 	}
 	
 	/**
+	 * Method to write a competition to a xml file
+	 * 
+	 * @param libraryFileName	- The file to write to
+	 * @param competition		- The competition to write
+	 */
+	public static void writeCompetition(String libraryFileName, Competition competition) {
+		writeLibrary(libraryFileName, competition.getLibrary(), competition.getRoundsPlayed());
+	}
+	
+	/**
 	 * Method which returns a Library containing the teams and players parsed from the given file name
 	 * 
 	 * @param fileName	- File to read library from
@@ -83,7 +93,7 @@ public class XMLParser {
 		
 		NodeList standingsList = teamElement.getElementsByTagName("standings");
 		Element standingsElement = (Element)standingsList.item(0);
-		Standings standings = readStandings(standingsElement);
+		Standings standings = readStandings(standingsElement, teamName);
 		
 		Team myTeam = new Team(teamName, budget, standings);
 		
@@ -100,16 +110,17 @@ public class XMLParser {
 	/**
 	 * Method which read standings from an element
 	 * @param standingsElement	- the element to read the standings from
+	 * @param teamName			- The name of the team the standings belongs to
 	 * @return					- the standings
 	 */
-	private static Standings readStandings(Element standingsElement) {
+	private static Standings readStandings(Element standingsElement, String teamName) {
 		int won = Integer.parseInt(getNodeValue(standingsElement, "won"));
 		int draw = Integer.parseInt(getNodeValue(standingsElement, "draw"));
 		int lost = Integer.parseInt(getNodeValue(standingsElement, "lost"));
 		int goalsFor = Integer.parseInt(getNodeValue(standingsElement, "goalsFor"));
 		int goalsAgainst = Integer.parseInt(getNodeValue(standingsElement, "goalsAgainst"));
 
-		return new Standings(won, draw, lost, goalsFor, goalsAgainst);
+		return new Standings(won, draw, lost, goalsFor, goalsAgainst, teamName);
 	}
 	
 	/**
@@ -126,8 +137,8 @@ public class XMLParser {
 			doc.appendChild(libraryElement);
 			libraryElement.setAttribute("roundsPlayed", String.format("%d", roundsPlayed));
 			
-			for(int i = 0; i < library.getLibrary().size(); i++) {
-				libraryElement.appendChild(writeTeam(library.getLibrary().get(i), doc));
+			for(Team team : library.getLibrary()) {
+				libraryElement.appendChild(writeTeam(team, doc));
 			}
 			
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
