@@ -12,58 +12,129 @@ public class GameLogic {
 		allresults[0]=result;
 		if (result==0) {
 			int difference = (t1rating.getFinishing() + t2rating.getFinishing() - t1rating.getDefending() - t2rating.getDefending());
-			if (difference >0) {
+			if (difference >10) {
 				int random = GameLogic.randomGenerator(0,  100);
-				if (random<=10) {
+				if (random<=25) {
 					allresults[1]=0;
 					allresults[2]=0;
-				} else if (random > 11 && random <=50) {
+				} else if (random > 25 && random <=70) {
 					allresults[1]=1;
 					allresults[2]=1;
-				} else if (random > 50 && random <=90) {
+				} else if (random > 70 && random <=95) {
 					allresults[1]=2;
 					allresults[2]=2;
 				} else {
 					allresults[1]=3;
 					allresults[2]=3;
 				}
-			} else {
+			} else if (difference > 5 && difference <=10) {
 				int random = GameLogic.randomGenerator(0, 100);
-				if (random <=45) {
+				if (random <=35) {
 					allresults[1]=0;
 					allresults[2]=0;
-				} else if (random > 45 && random <=90) {
+				} else if (random > 35 && random <=85) {
 					allresults[1]=1;
 					allresults[2]=1;
 				} else {
 					allresults[1]=2;
 					allresults[2]=2;
 				}
+			} else if (difference > 0 && difference <=5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=55) {
+					allresults[1]=0;
+					allresults[2]=0;
+				} else if (random >55 && random <=95) {
+					allresults[1]=1;
+					allresults[2]=1;
+				} else {
+					allresults[1]=2;
+					allresults[2]=2;
+				}
+			} else if (difference <= 0 && difference > -5 ) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=75) {
+					allresults[1]=0;
+					allresults[2]=0;
+				} else {
+					allresults[1]=1;
+					allresults[2]=1;
+				}
+			} else if (difference <= -5 && difference>-10) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=90) {
+					allresults[1]=0;
+					allresults[2]=0;
+				} else {
+					allresults[1]=1;
+					allresults[2]=1;
+				}
+			} else {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random<=95) {
+					allresults[1]=0;
+					allresults[2]=0;
+				} else{
+					allresults[1]=1;
+					allresults[2]=1;
+				}
 			}
 		} else if (result==1) {
 			int difference=t1rating.getDefending() - t2rating.getFinishing();
-			if (difference>0) {
+			if (difference>10) {
 				int random = GameLogic.randomGenerator(0, 100);
-				if (random <=45) {
+				if (random <=95) {
 					allresults[2]=0;
-				} else if (random >45 && random <=90) {
+				} else {
+					allresults[2]=1;
+				}
+			} else if (difference >5 && difference <=10) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=90) {
+					allresults[2]=0;
+				} else {
+					allresults[2]=1;
+				}
+			} else if (difference >0 && difference <=5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=70) {
+					allresults[2]=0;
+				} else if (random >70 && random <=95) {
+					allresults[2]=1;
+				} else {
+					allresults[2]=2;
+				}
+			} else if (difference <=0 && difference >-5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <= 55) {
+					allresults[2]=0;
+				} else if (random >55 && random <=95) {
+					allresults[2]=1;
+				} else {
+					allresults[2]=2;
+				}
+			} else if (difference <=-5 && difference >-10) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=40) {
+					allresults[2]=0;
+				} else if (random >40 && random <=90) {
 					allresults[2]=1;
 				} else {
 					allresults[2]=2;
 				}
 			} else {
 				int random = GameLogic.randomGenerator(0, 100);
-				if (random <=45) {
+				if (random <=25) {
+					allresults[2]=0;
+				} else if (random>25 && random <=80) {
 					allresults[2]=1;
-				} else if (random >45 && random <=90) {
-					allresults[2]=2;
 				} else {
-					allresults[2]=3;
+					allresults[2]=2;
 				}
 			}
 			
 			difference = t1rating.getFinishing() - t2rating.getDefending();
-			if (difference>0) {
+			if (difference>10) {
 				int random = GameLogic.randomGenerator(0, 100);
 				if (random <=10) {
 					allresults[1]=allresults[2]+1;
@@ -74,38 +145,104 @@ public class GameLogic {
 				} else {
 					allresults[1]=allresults[2]+4;
 				}
-			} else {
+			} else if (difference >5 && difference <=10) {
 				int random = GameLogic.randomGenerator(0,  100);
-				if (random<=80) {
+				if (random<=35) {
+					allresults[1]=allresults[2]+1;
+				} else if (random >35 && random <=80) {
+					allresults[1]=allresults[2]+2;
+				} else if (random >80 && random <=95) {
+					allresults[1]=allresults[2]+3;
+				} else {
+					allresults[1]=allresults[2]+4;
+				}
+			} else if (difference >0 && difference <=5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=55) {
+					allresults[1]=allresults[2]+1;
+				} else if (random >55 && random <=95) {
+					allresults[1]=allresults[2]+2;
+				} else {
+					allresults[1]=allresults[2]+3;
+				}
+			} else if (difference <=0 && difference >-5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=75) {
 					allresults[1]=allresults[2]+1;
 				} else {
+					allresults[1]=allresults[2]+2;
+				}
+			} else if (difference <=-5 && difference >-10) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=90) {
 					allresults[1]=allresults[2]+1;
+				} else {
+					allresults[1]=allresults[2]+2;
+				}
+			} else {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=95) {
+					allresults[1]=allresults[2]+1;
+				} else {
+					allresults[1]=allresults[2]+2;
 				}
 			}
 		} else {
-			int difference=t2rating.getDefending() - t1rating.getFinishing();
-			if (difference>0) {
+			int difference=t1rating.getDefending() - t2rating.getFinishing();
+			if (difference>10) {
 				int random = GameLogic.randomGenerator(0, 100);
-				if (random <=45) {
+				if (random <=95) {
 					allresults[1]=0;
-				} else if (random >45 && random <=90) {
+				} else {
+					allresults[1]=1;
+				}
+			} else if (difference >5 && difference <=10) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=90) {
+					allresults[1]=0;
+				} else {
+					allresults[1]=1;
+				}
+			} else if (difference >0 && difference <=5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=70) {
+					allresults[1]=0;
+				} else if (random >70 && random <=95) {
+					allresults[1]=1;
+				} else {
+					allresults[1]=2;
+				}
+			} else if (difference <=0 && difference >-5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <= 55) {
+					allresults[1]=0;
+				} else if (random >55 && random <=95) {
+					allresults[1]=1;
+				} else {
+					allresults[1]=2;
+				}
+			} else if (difference <=-5 && difference >-10) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=40) {
+					allresults[1]=0;
+				} else if (random >40 && random <=90) {
 					allresults[1]=1;
 				} else {
 					allresults[1]=2;
 				}
 			} else {
 				int random = GameLogic.randomGenerator(0, 100);
-				if (random <=45) {
+				if (random <=25) {
+					allresults[1]=0;
+				} else if (random>25 && random <=80) {
 					allresults[1]=1;
-				} else if (random >45 && random <=90) {
-					allresults[1]=2;
 				} else {
-					allresults[1]=3;
+					allresults[1]=2;
 				}
 			}
 			
-			difference = t2rating.getFinishing() - t1rating.getDefending();
-			if (difference>0) {
+			difference = t1rating.getFinishing() - t2rating.getDefending();
+			if (difference>10) {
 				int random = GameLogic.randomGenerator(0, 100);
 				if (random <=10) {
 					allresults[2]=allresults[1]+1;
@@ -116,12 +253,46 @@ public class GameLogic {
 				} else {
 					allresults[2]=allresults[1]+4;
 				}
-			} else {
+			} else if (difference >5 && difference <=10) {
 				int random = GameLogic.randomGenerator(0,  100);
-				if (random<=80) {
+				if (random<=35) {
+					allresults[2]=allresults[1]+1;
+				} else if (random >35 && random <=80) {
+					allresults[2]=allresults[1]+2;
+				} else if (random >80 && random <=95) {
+					allresults[2]=allresults[1]+3;
+				} else {
+					allresults[2]=allresults[1]+4;
+				}
+			} else if (difference >0 && difference <=5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=55) {
+					allresults[2]=allresults[1]+1;
+				} else if (random >55 && random <=95) {
+					allresults[2]=allresults[1]+2;
+				} else {
+					allresults[2]=allresults[1]+3;
+				}
+			} else if (difference <=0 && difference >-5) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=75) {
 					allresults[2]=allresults[1]+1;
 				} else {
+					allresults[2]=allresults[1]+2;
+				}
+			} else if (difference <=-5 && difference >-10) {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=90) {
 					allresults[2]=allresults[1]+1;
+				} else {
+					allresults[2]=allresults[1]+2;
+				}
+			} else {
+				int random = GameLogic.randomGenerator(0, 100);
+				if (random <=95) {
+					allresults[2]=allresults[1]+1;
+				} else {
+					allresults[2]=allresults[1]+2;
 				}
 			}
 			
