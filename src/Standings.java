@@ -53,7 +53,7 @@ public class Standings {
 		this.goalsAgainst += goalsAgainst;
 		
 		this.points = 3*won + draw;
-		this.goalDifference = goalsFor - goalsAgainst;
+		this.goalDifference += (goalsFor - goalsAgainst);
 	}
 
 	/**

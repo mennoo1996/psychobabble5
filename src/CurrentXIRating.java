@@ -25,6 +25,14 @@ public class CurrentXIRating {
 		this.total=total;
 	}
 	
+	@Override
+	public String toString() {
+		return "CurrentXIRating [finishing=" + finishing + ", dribbling="
+				+ dribbling + ", stamina=" + stamina + ", defending="
+				+ defending + ", goalkeeping=" + goalkeeping + ", total="
+				+ total + "]";
+	}
+
 	/**
 	 * @return the finishing
 	 */

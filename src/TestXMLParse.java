@@ -30,6 +30,10 @@ public class TestXMLParse {
 
 		System.out.println(competition.printStandings());
 		
+		for (int i=0;i<20;i++) {
+			System.out.println(competition.getLibrary().getLibrary().get(i).getStandings().toString());
+		}
+		
 //		System.out.println(competition.getScheme().toString());
 		
 	}	
