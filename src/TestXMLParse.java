@@ -8,12 +8,24 @@ public class TestXMLParse {
 
 		
 		Competition competition = XMLParser.readCompetition("players Database by team with empty standings.xml", "competition-scheme.xml");
-		System.out.println(competition.toString());
-		System.out.println("\n\n\n");
+//		System.out.println(competition.toString());
+//		System.out.println("\n\n\n");
+//		competition.printStandings();
+//		
+//		System.out.println("\n\n\n");
+//		competition.getLibrary().getLibrary().get(0).updateStandings("won", 10, 2);
+//		competition.printStandings();
+		
+		for(int i = 0; i < competition.getLibrary().getLibrary().size(); i++) {
+			Team team = competition.getLibrary().getLibrary().get(i);
+			team.setFirst11AsCurrentTeam();
+		}
+		
 		competition.printStandings();
 		
-		System.out.println("\n\n\n");
-		competition.getLibrary().getLibrary().get(0).updateStandings("won", 10, 2);
+		competition.playRound();
+		competition.playRound();
+		
 		competition.printStandings();
 		
 	}	

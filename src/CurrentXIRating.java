@@ -98,12 +98,14 @@ public class CurrentXIRating {
 	public static CurrentXIRating getCurrentXIRating (Team t) {
 		int finishing, dribbling, stamina, defending, goalkeeping, total;
 		ArrayList<Player> list = t.getCurrentTeam();
+		System.out.println(list);
 		ArrayList<Integer> attackers = new ArrayList<Integer>();
 		ArrayList<Integer> midfielders = new ArrayList<Integer>();
 		ArrayList<Integer> defenders = new ArrayList<Integer>();
 		ArrayList<Integer> goalkeepers = new ArrayList<Integer>();
 		Player tempPlayer;
-		for (int i=0;i<list.size();i++) {
+		
+		for (int i=0; i < list.size(); i++) {
 			tempPlayer=list.get(i);
 			if (tempPlayer instanceof Attacker) {
 				attackers.add(i);

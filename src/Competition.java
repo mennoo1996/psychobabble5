@@ -24,11 +24,21 @@ public class Competition {
 			Team team1 = library.getTeamForName(match.getTeam1());
 			Team team2 = library.getTeamForName(match.getTeam2());
 			
-			System.out.println(team1.toString());
-			System.out.println(team2.toString());
+			int result = GameLogic.getWinner(team1, team2);
 			
-			// actually play the round
+			if(result == 0) {
+				team1.updateStandings("draw", 0, 0);
+				team2.updateStandings("draw", 0, 0);
+			} else if(result == 1) {
+				team1.updateStandings("won", 0, 0);
+				team2.updateStandings("lost", 0, 0);
+			} else if(result == 2) {
+				team1.updateStandings("lost", 0, 0);
+				team2.updateStandings("won", 0, 0);
+			}
 		}
+
+		this.roundsPlayed++;
 	}
 	
 	public void printStandings() {

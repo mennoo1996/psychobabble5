@@ -68,6 +68,29 @@ public class Team {
 		}
 	}
 	
+	public void setFirst11AsCurrentTeam() {
+		ArrayList<Player> res = new ArrayList<Player>();
+		
+		int fieldPlayers = 0, goalkeepers = 0;
+		
+		for(int i = 0; i < team.size(); i++) {
+			Player player = team.get(i);
+			if((player instanceof Attacker || player instanceof Midfielder || player instanceof Defender) && fieldPlayers < 10) {
+				fieldPlayers++;
+				res.add(player);
+			} else if(player instanceof Goalkeeper && goalkeepers < 1) {
+				goalkeepers++;
+				res.add(player);
+			}
+		}
+		
+		try {
+			this.setCurrentTeam(res);
+		} catch (Exception e) {
+			System.out.println("Niet gelukt");
+		}
+	}
+	
 	/**
 	 * @return the budget
 	 */
