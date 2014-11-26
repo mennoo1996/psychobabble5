@@ -25,7 +25,6 @@ public class Attacker extends FieldPlayer {
 				staminaValue, number);
 		this.setPlayerType("Attacker");
 	}
-
 	
 	
 }

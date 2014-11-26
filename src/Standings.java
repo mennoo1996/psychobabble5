@@ -37,12 +37,14 @@ public class Standings {
 	public void updateStandings(String result, int goalsFor, int goalsAgainst){
 		switch(result) {
 		case "won":
+		case "win":
 			won++;
 			break;
 		case "draw":
 			draw++;
 			break;
 		case "lost":
+		case "loss":
 			lost++;
 			break;
 		}

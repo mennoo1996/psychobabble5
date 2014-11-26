@@ -29,16 +29,11 @@ public class GameLogic {
 		} else if (t1RandomNumber>t2RandomNumber) {
 			return 1;
 		} else return 2;
-		
-		
-		
-		
-		
 	}
 	
 	
 	public static int randomGenerator(int min, int max) {
-		Random rand = new Random();
+		Random rand = new Random(System.currentTimeMillis());
 		int randomNum=rand.nextInt((max-min)+1)+min;
 		return randomNum;
 		
