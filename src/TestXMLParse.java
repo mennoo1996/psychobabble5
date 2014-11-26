@@ -20,13 +20,17 @@ public class TestXMLParse {
 			Team team = competition.getLibrary().getLibrary().get(i);
 			team.setFirst11AsCurrentTeam();
 		}
+		System.out.println(competition.printStandings());
 		
-		competition.printStandings();
 		
-		competition.playRound();
-		competition.playRound();
+		for(int i =0; i < 38; i++) {
+			System.out.println(i);
+			competition.playRound();
+		}
+
+		System.out.println(competition.printStandings());
 		
-		competition.printStandings();
+//		System.out.println(competition.getScheme().toString());
 		
 	}	
 }

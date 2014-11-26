@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Competition {
 	
 	private Library library;
@@ -41,12 +44,22 @@ public class Competition {
 		this.roundsPlayed++;
 	}
 	
-	public void printStandings() {
-		System.out.println("Rounds played: " + roundsPlayed);
+	public String printStandings() {
+		ArrayList<Standings> standings = new ArrayList<Standings>();
 		
 		for(int i = 0; i < library.getLibrary().size(); i++) {
-			System.out.println(library.getLibrary().get(i).getTeamName() + ": " + library.getLibrary().get(i).getStandings().toString());
+			Standings standing =  library.getLibrary().get(i).getStandings();
+			standing.setTeamName(library.getLibrary().get(i).getTeamName());
+			standings.add(standing);				
 		}
+		
+		Collections.sort(standings, new sortStandingsByPoints());
+		String res = "Rounds played: " + roundsPlayed + "\n";
+		for(int p = 0; p < standings.size(); p++) {
+			res += String.format("%-20s%10d", standings.get(p).getTeamName(), standings.get(p).getPoints()) + "\n";
+		}
+		
+		return res;
 	}
 
 	/* (non-Javadoc)

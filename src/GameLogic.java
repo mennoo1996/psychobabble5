@@ -24,7 +24,7 @@ public class GameLogic {
 		int t1RandomNumber = GameLogic.randomGenerator(1, t1rating);
 		int t2RandomNumber = GameLogic.randomGenerator(1, t2rating);
 		
-		if ((Math.abs(t1RandomNumber-t2RandomNumber))<7000) {
+		if ((Math.abs(t1RandomNumber-t2RandomNumber))<3000) {
 			return 0;
 		} else if (t1RandomNumber>t2RandomNumber) {
 			return 1;
