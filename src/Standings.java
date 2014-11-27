@@ -12,12 +12,13 @@ public class Standings {
 	 * @param goalsFor
 	 * @param goalsAgainst
 	 */
-	public Standings(int won, int draw, int lost, int goalsFor, int goalsAgainst) {
+	public Standings(int won, int draw, int lost, int goalsFor, int goalsAgainst, String teamName) {
 		this.won = won;
 		this.draw = draw;
 		this.lost = lost;
 		this.goalsFor = goalsFor;
 		this.goalsAgainst = goalsAgainst;
+		this.teamName = teamName;
 		
 		this.points = 3*won + draw;
 		this.goalDifference = goalsFor - goalsAgainst;

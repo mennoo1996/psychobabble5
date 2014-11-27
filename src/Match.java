@@ -3,6 +3,11 @@ public class Match {
 
 	private String team1, team2;
 	
+	/**
+	 * Constructor which initializes a match with the two given team names
+	 * @param team1	- The first team name
+	 * @param team2	- the second team name
+	 */
 	public Match(String team1, String team2) {
 		this.team1 = team1;
 		this.team2 = team2;
