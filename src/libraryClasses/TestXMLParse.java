@@ -20,7 +20,8 @@ public class TestXMLParse {
 		
 		XMLParser.writeCompetition("demoOut.xml", competition);
 		
-	}	
+	}
 		
 		
 }
+

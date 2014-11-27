@@ -29,17 +29,17 @@ public class Competition {
 			Team team1 = library.getTeamForName(match.getTeam1());
 			Team team2 = library.getTeamForName(match.getTeam2());
 			
-			int result = GameLogic.getWinner(team1, team2);
+			int[] result = GameLogic.getMatchResults(team1, team2);
 			
-			if(result == 0) {
-				team1.updateStandings("draw", 0, 0);
-				team2.updateStandings("draw", 0, 0);
-			} else if(result == 1) {
-				team1.updateStandings("won", 0, 0);
-				team2.updateStandings("lost", 0, 0);
-			} else if(result == 2) {
-				team1.updateStandings("lost", 0, 0);
-				team2.updateStandings("won", 0, 0);
+			if(result[0] == 0) {
+				team1.updateStandings("draw", result[1], result[2]);
+				team2.updateStandings("draw", result[1], result[2]);
+			} else if(result[0] == 1) {
+				team1.updateStandings("won", result[1], result[2]);
+				team2.updateStandings("lost", result[2], result[1]);
+			} else if(result[0] == 2) {
+				team1.updateStandings("lost", result[1], result[2]);
+				team2.updateStandings("won", result[2], result[1]);
 			}
 		}
 
@@ -69,6 +69,8 @@ public class Competition {
 		}
 		
 		return res;
+		
+		
 	}
 
 	/* (non-Javadoc)
