@@ -4,19 +4,34 @@ import java.util.ArrayList;
 public class CompetitionScheme {
 
 	private ArrayList<Round> rounds;
-//	private Standings standings;
 	
+	/**
+	 * Constructor which initiliazes an empty competitionScheme
+	 */
 	public CompetitionScheme() {
 		this.rounds = new ArrayList<Round>();
-//		this.standings = standings;
 	}
 	
-//	public void playRound() {
-//		
-//	}
-	
+	/**
+	 * Method to add a round to the competition scheme
+	 * @param round
+	 */
 	public void add(Round round) {
 		rounds.add(round);
+	}
+	
+	/**
+	 * Method which return the round confirming to the given round number
+	 * @param roundNumber	- the number of the round you want
+	 * @return				- the round
+	 */
+	public Round getRound(int roundNumber) {
+		for(Round round : rounds) {
+			if(round.getRoundNumber() == roundNumber) {
+				return round;
+			}
+		}
+		return null;
 	}
 
 	/* (non-Javadoc)
@@ -46,21 +61,6 @@ public class CompetitionScheme {
 	public void setRounds(ArrayList<Round> rounds) {
 		this.rounds = rounds;
 	}
-
-//	/**
-//	 * @return the standings
-//	 */
-//	public Standings getStandings() {
-//		return standings;
-//	}
-//
-//	/**
-//	 * @param standings the standings to set
-//	 */
-//	public void setStandings(Standings standings) {
-//		this.standings = standings;
-//	}
-	
 	
 	
 }

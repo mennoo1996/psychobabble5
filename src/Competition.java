@@ -18,12 +18,13 @@ public class Competition {
 		this.roundsPlayed = roundsPlayed;
 	}
 	
+	/**
+	 * Method which simulates a round by playing all matches in the current Round
+	 */
 	public void playRound() {
-		Round currentRound = scheme.getRounds().get(roundsPlayed);
+		Round currentRound = scheme.getRound(roundsPlayed + 1);
 		
-		for(int i = 0; i < currentRound.getMatches().size(); i++) {
-			Match match = currentRound.getMatches().get(i);
-			
+		for(Match match : currentRound.getMatches()) {
 			Team team1 = library.getTeamForName(match.getTeam1());
 			Team team2 = library.getTeamForName(match.getTeam2());
 			
@@ -44,7 +45,11 @@ public class Competition {
 		this.roundsPlayed++;
 	}
 	
-	public String printStandings() {
+	/**
+	 * Method which turns the current standings into a string
+	 * @return	- the string containing the current standigns
+	 */
+	public String standingsToString() {
 		ArrayList<Standings> standings = new ArrayList<Standings>();
 		
 		for(int i = 0; i < library.getLibrary().size(); i++) {
@@ -54,9 +59,12 @@ public class Competition {
 		}
 		
 		Collections.sort(standings, new sortStandingsByPoints());
-		String res = "Rounds played: " + roundsPlayed + "\n";
+		String res = "Rounds played: " + roundsPlayed + "\n\n";
+		res += String.format("%-20s%10s%10s%10s%10s", "Team", "Points", "Won", "Draw", "Lost");
+		res += "\n--------------------------------------------------------------\n";
 		for(int p = 0; p < standings.size(); p++) {
-			res += String.format("%-20s%10d", standings.get(p).getTeamName(), standings.get(p).getPoints()) + "\n";
+			Standings standing = standings.get(p);
+			res += String.format("%-20s%10d%10d%10d%10d", standing.getTeamName(), standing.getPoints(), standing.getWon(), standing.getDraw(), standing.getLost()) + "\n";
 		}
 		
 		return res;
