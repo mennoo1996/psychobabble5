@@ -1,3 +1,4 @@
+package libraryClasses;
 import java.math.BigDecimal;
 
 /**
@@ -5,7 +6,7 @@ import java.math.BigDecimal;
  * @author Bart de Jonge
  *
  */
-public class Defender extends FieldPlayer {
+public class Midfielder extends FieldPlayer {
 
 	/**
 	 * @param price
@@ -18,13 +19,13 @@ public class Defender extends FieldPlayer {
 	 * @param staminaValue
 	 * @param number
 	 */
-	public Defender(BigDecimal price, String team, String name, int age,
+	public Midfielder(BigDecimal price, String team, String name, int age,
 			int dribblingValue, int finishingValue, int defenseValue,
 			int staminaValue, int number) {
 		super(price, team, name, age, dribblingValue, finishingValue, defenseValue,
 				staminaValue, number);
-		this.setPlayerType("Defender");
+		this.setPlayerType("Midfielder");
 	}
-
+	
 	
 }
