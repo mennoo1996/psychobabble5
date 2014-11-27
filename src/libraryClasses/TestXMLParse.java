@@ -1,5 +1,7 @@
 package libraryClasses;
 
+import java.util.ArrayList;
+
 public class TestXMLParse {
 
 	public static void main(String[] args) {
@@ -12,16 +14,25 @@ public class TestXMLParse {
 			team.setFirst11AsCurrentTeam();
 		}
 		
+
+		
+
+
 		for(int i =0; i < 38; i++) {
+
 			competition.playRound();
-		}
+
 
 		System.out.println(competition.standingsToString());
 		
 		XMLParser.writeCompetition("demoOut.xml", competition);
 		
 	}
+		System.out.println(competition.getLibrary().getLibrary().get(0).getStandings().toString());
 		
 		
+		
+	}
 }
+
 
