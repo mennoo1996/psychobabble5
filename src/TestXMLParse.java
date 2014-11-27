@@ -23,10 +23,7 @@ public class TestXMLParse {
 		System.out.println(competition.printStandings());
 		
 		
-		for(int i =0; i < 38; i++) {
-			System.out.println(i);
-			competition.playRound();
-		}
+		competition.playRound();
 
 		System.out.println(competition.printStandings());
 		
