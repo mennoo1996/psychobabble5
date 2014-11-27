@@ -10,7 +10,7 @@ public abstract class Player {
 	
 	private BigDecimal price;
 	private String team, playerType, name;
-	private int age, number;
+	private int age, number, goals, assists, yellowcards, redcards;
 
 	/**
 	 * Constructor
@@ -29,7 +29,79 @@ public abstract class Player {
 		this.number = number;
 	}
 	
+	public void madeGoal() {
+		goals++;
+	}
 	
+	public void madeAssist() {
+		assists++;
+	}
+	
+	public void gotYellow() {
+		yellowcards++;
+	}
+	
+	public void gotRed() {
+		redcards++;
+	}
+	
+
+	/**
+	 * @return the goals
+	 */
+	public int getGoals() {
+		return goals;
+	}
+
+	/**
+	 * @param goals the goals to set
+	 */
+	public void setGoals(int goals) {
+		this.goals = goals;
+	}
+
+	/**
+	 * @return the assists
+	 */
+	public int getAssists() {
+		return assists;
+	}
+
+	/**
+	 * @param assists the assists to set
+	 */
+	public void setAssists(int assists) {
+		this.assists = assists;
+	}
+
+	/**
+	 * @return the yellowcards
+	 */
+	public int getYellowcards() {
+		return yellowcards;
+	}
+
+	/**
+	 * @param yellowcards the yellowcards to set
+	 */
+	public void setYellowcards(int yellowcards) {
+		this.yellowcards = yellowcards;
+	}
+
+	/**
+	 * @return the redcards
+	 */
+	public int getRedcards() {
+		return redcards;
+	}
+
+	/**
+	 * @param redcards the redcards to set
+	 */
+	public void setRedcards(int redcards) {
+		this.redcards = redcards;
+	}
+
 
 	/**
 	 * @return the number

@@ -41,6 +41,26 @@ public class Competition {
 				team1.updateStandings("lost", result[1], result[2]);
 				team2.updateStandings("won", result[2], result[1]);
 			}
+			
+			ArrayList<FieldPlayer> goalMakers = GameLogic.getGoals(team1, team2, result[1], result[2]);
+			for (Player a:goalMakers) {
+				a.madeGoal();
+			}
+			
+			ArrayList<FieldPlayer> assistMakers = GameLogic.getAssists(team1, team2, result[1], result[2]);
+			for (Player a:assistMakers) {
+				a.madeAssist();
+			}
+			
+			ArrayList<Player> yellowCardGetters = GameLogic.getYellowCards(team1, team2);
+			for (Player a:yellowCardGetters) {
+				a.gotYellow();
+			}
+			
+			ArrayList<Player> redCardGetters = GameLogic.getRedCards(team1, team2);
+			for (Player a:redCardGetters) {
+				a.gotRed();
+			}
 		}
 
 		this.roundsPlayed++;
