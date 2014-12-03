@@ -13,22 +13,33 @@ public abstract class Player {
 	private int age, number, goals, assists, yellowcards, redcards;
 
 	/**
-	 * Constructor
-	 * 
-	 * @param price			- The price of the player
-	 * @param team			- The team of the player
-	 * @param name			- The name of the player
-	 * @param age			- The age of the player
+	 * @param price
+	 * @param team
+	 * @param playerType
+	 * @param name
+	 * @param age
+	 * @param number
+	 * @param goals
+	 * @param assists
+	 * @param yellowcards
+	 * @param redcards
 	 */
-	public Player(BigDecimal price, String team, String name, int age, int number) {
-		super();
+	public Player(BigDecimal price, String team, String name, 
+			int age, int number, int goals, int assists,
+			int yellowcards, int redcards) {
 		this.price = price;
 		this.team = team;
 		this.name = name;
 		this.age = age;
 		this.number = number;
+		this.goals = goals;
+		this.assists = assists;
+		this.yellowcards = yellowcards;
+		this.redcards = redcards;
 	}
 	
+	public abstract String toString();
+
 	public void madeGoal() {
 		goals++;
 	}

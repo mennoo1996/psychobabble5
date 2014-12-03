@@ -13,19 +13,23 @@ public class Attacker extends FieldPlayer {
 	 * @param team
 	 * @param name
 	 * @param age
+	 * @param number
 	 * @param dribblingValue
 	 * @param finishingValue
 	 * @param defenseValue
 	 * @param staminaValue
-	 * @param number
+	 * @param goals
+	 * @param assists
+	 * @param yellowcards
+	 * @param redcards
 	 */
 	public Attacker(BigDecimal price, String team, String name, int age,
-			int dribblingValue, int finishingValue, int defenseValue,
-			int staminaValue, int number) {
-		super(price, team, name, age, dribblingValue, finishingValue, defenseValue,
-				staminaValue, number);
+			int number, int dribblingValue, int finishingValue,
+			int defenseValue, int staminaValue, int goals, int assists,
+			int yellowcards, int redcards) {
+		super(price, team, name, age, number, dribblingValue, finishingValue,
+				defenseValue, staminaValue, goals, assists, yellowcards, redcards);
 		this.setPlayerType("Attacker");
 	}
-	
 	
 }

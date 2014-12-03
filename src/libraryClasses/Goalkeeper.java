@@ -10,29 +10,35 @@ public class Goalkeeper extends Player {
 
 	private int goalkeeperValue;
 
-
 	/**
 	 * @param price
 	 * @param team
 	 * @param name
 	 * @param age
 	 * @param number
+	 * @param goals
+	 * @param assists
+	 * @param yellowcards
+	 * @param redcards
 	 * @param goalkeeperValue
 	 */
 	public Goalkeeper(BigDecimal price, String team, String name, int age,
-			int goalkeeperValue, int number) {
-		super(price, team, name, age, number);
+			int goalkeeperValue, int number, int goals, int assists, int yellowcards, int redcards) {
+		super(price, team, name, age, number, goals, assists, yellowcards,
+				redcards);
 		this.goalkeeperValue = goalkeeperValue;
 		this.setPlayerType("Goalkeeper");
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Goalkeeper [goalkeepValue=" + goalkeeperValue + ", price=" + getPrice() + ", team=" + getTeam() + ", playerType="
-						+ getPlayerType() + ", name=" + getName() + ", age=" + getAge() + ", number=" + getNumber() + "]";
+		return this.getPlayerType() + " [name=" + this.getName() + ", age=" + this.getAge() + ", team=" + this.getTeam()
+				+ ", number=" + this.getNumber() + ", price=" + this.getPrice() + ", goalkeeperValue=" + this.goalkeeperValue
+				+ ", goals=" + this.getGoals() + ", assists=" + this.getAssists() + ", yellowCards=" + this.getYellowcards()
+				+ ", redCards=" + this.getRedcards();
 	}
 
 	/**

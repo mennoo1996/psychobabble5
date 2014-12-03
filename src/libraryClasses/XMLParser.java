@@ -294,11 +294,11 @@ public class XMLParser {
 			int stamina = Integer.parseInt(getNodeValue(element, "staminaValue"));
 
 			if(playerType.equals("Attacker")) {
-				player = new Attacker(price, teamName, name, age, dribbling, finishing, defense, stamina, number);
+				player = new Attacker(price, teamName, name, age, number, dribbling, finishing, defense, stamina, 0, 0, 0, 0);
 			} else if(playerType.equals("Midfielder")) {
-				player = new Midfielder(price, teamName, name, age, dribbling, finishing, defense, stamina, number);
+				player = new Midfielder(price, teamName, name, age, number, dribbling, finishing, defense, stamina, 0, 0, 0, 0);
 			} else if(playerType.equals("Defender")) {
-				player = new Defender(price, teamName, name, age, dribbling, finishing, defense, stamina, number);
+				player = new Defender(price, teamName, name, age, number, dribbling, finishing, defense, stamina, 0, 0, 0, 0);
 			} else {
 				player = null;
 			}
@@ -306,7 +306,7 @@ public class XMLParser {
 		} else if (playerType.equals("Goalkeeper")){
 			// player is a goalkeeper
 			int goalkeeperValue = Integer.parseInt(getNodeValue(element, "goalkeeperValue"));
-			player = new Goalkeeper(price, teamName, name, age, goalkeeperValue, number);
+			player = new Goalkeeper(price, teamName, name, age, goalkeeperValue, number, 0, 0, 0, 0);
 		} else {
 			player = null;
 		}

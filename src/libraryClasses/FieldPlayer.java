@@ -10,38 +10,46 @@ public abstract class FieldPlayer extends Player {
 
 	private int dribblingValue, finishingValue, defenseValue, staminaValue;
 	
+
 	/**
-	 * Constructor
-	 * 
-	 * @param price			- The price of the fieldplayer
-	 * @param team			- The team of the fieldplayer
-	 * @param name			- The name of the fieldplayer
-	 * @param age			- The age of the fieldplayer
-	 * @param attackValue	- The attack value of the fieldplayer
-	 * @param defenseValue	- The defense value of the fieldplayer
-	 * @param staminaValue	- The stamina value of the fieldplayer
+	 * @param price
+	 * @param team
+	 * @param name
+	 * @param age
+	 * @param number
+	 * @param goals
+	 * @param assists
+	 * @param yellowcards
+	 * @param redcards
+	 * @param dribblingValue
+	 * @param finishingValue
+	 * @param defenseValue
+	 * @param staminaValue
 	 */
 	public FieldPlayer(BigDecimal price, String team, String name, int age,
-			int dribblingValue, int finishingValue, int defenseValue, int staminaValue, int number) {
-		super(price, team, name, age, number);
+			int number, int dribblingValue, int finishingValue, int defenseValue,
+			int staminaValue, int goals, int assists, int yellowcards, int redcards) {
+		super(price, team, name, age, number, goals, assists, yellowcards,
+				redcards);
 		this.dribblingValue = dribblingValue;
 		this.finishingValue = finishingValue;
 		this.defenseValue = defenseValue;
 		this.staminaValue = staminaValue;
 	}
-	
+
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "FieldPlayer [dribblingValue=" + dribblingValue
-				+ ", finishingValue=" + finishingValue + ", defenseValue="
-				+ defenseValue + ", staminaValue=" + staminaValue + ", price=" + getPrice() + ", team=" + getTeam() + ", playerType="
-						+ getPlayerType() + ", name=" + getName() + ", age=" + getAge() + ", number=" + getNumber() + "]";
+		return this.getPlayerType() + " [name=" + this.getName() + ", age=" + this.getAge() + ", team=" + this.getTeam()
+				+ ", number=" + this.getNumber() + ", price=" + this.getPrice() + ", dribblingValue=" + dribblingValue
+				+ ", finishingValue=" + finishingValue + ", defenseValue=" + defenseValue + ", staminaValue=" + staminaValue
+				+ ", goals=" + this.getGoals() + ", assists=" + this.getAssists() + ", yellowCards=" + this.getYellowcards()
+				+ ", redCards=" + this.getRedcards();
 	}
-
 	
 
 	/**
