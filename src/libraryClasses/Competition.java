@@ -81,11 +81,11 @@ public class Competition {
 		
 		Collections.sort(standings, new sortStandingsByPoints());
 		String res = "Rounds played: " + roundsPlayed + "\n\n";
-		res += String.format("%-20s%10s%10s%10s%10s", "Team", "Points", "Won", "Draw", "Lost");
-		res += "\n--------------------------------------------------------------\n";
+		res += String.format("%-20s%10s%10s%10s%10s%15s%15s%15s", "Team", "Points", "Won", "Draw", "Lost", "      Goal Difference", "Goals for", "   Goals against");
+		res += "\n----------------------------------------------------------------------------------------------------------------\n";
 		for(int p = 0; p < standings.size(); p++) {
 			Standings standing = standings.get(p);
-			res += String.format("%-20s%10d%10d%10d%10d", standing.getTeamName(), standing.getPoints(), standing.getWon(), standing.getDraw(), standing.getLost()) + "\n";
+			res += String.format("%-20s%10d%10d%10d%10d%15d%15d%15d", standing.getTeamName(), standing.getPoints(), standing.getWon(), standing.getDraw(), standing.getLost(), standing.getGoalDifference(), standing.getGoalsFor(), standing.getGoalsAgainst()) + "\n";
 		}
 		
 		return res;
