@@ -64,8 +64,24 @@ public class Competition {
 			ArrayList<Player> redCardGetters = GameLogic.getRedCards(team1, team2);
 			for (Player a:redCardGetters) {
 				a.gotRed();
+				a.gotSuspension(2);
+			}
+			
+			ArrayList<Player> playersWithInjuries = GameLogic.getInjuredPlayers(team1, team2);
+			int[] injurieslengths = GameLogic.getInjuriesLength(playersWithInjuries);
+			for (int i=0;i<playersWithInjuries.size();i++) {
+				playersWithInjuries.get(i).gotInjury(injurieslengths[i]+1);
 			}
 		}
+		
+		for (int i=0;i<library.getLibrary().size();i++) {
+			Team t = library.getLibrary().get(i);
+			for (int j=0;j<t.getTeam().size();j++) {
+				t.getTeam().get(j).roundPlayed();
+			}
+		}
+		
+		
 
 		this.roundsPlayed++;
 	}

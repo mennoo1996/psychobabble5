@@ -26,15 +26,19 @@ public class Team {
 	}
 	
 	/**
-	 * Method which checks if an arrayList contains 11 players of whom 1 is a goalkeeper
+	 * Method which checks if a Team has got a CurrentTeam that is allowed to play
 	 * 
-	 * @param currentTeam	- The arraylist
-	 * @return				- true or false
+	 * @param t	- The Team
+	 * @return				- true if the team is eligible to play, false otherwise
 	 */
 	public static Boolean isEligible(ArrayList<Player> currentTeam) {
+		
 		if(currentTeam.size() == 11) {
 			int goalkeepers = 0;
 			for(int i = 0; i < 11; i++) {
+				if (!(currentTeam.get(i).isEligible())) {
+					return false;
+				}
 				if(currentTeam.get(i) instanceof Goalkeeper) {
 					goalkeepers++;
 				}

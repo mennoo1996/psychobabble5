@@ -10,7 +10,8 @@ public abstract class Player {
 	
 	private BigDecimal price;
 	private String team, playerType, name;
-	private int age, number, goals, assists, yellowcards, redcards;
+	private int age, number, goals, assists, yellowcards, redcards, daysInjured, daysSuspended;
+	private boolean isEligible;
 
 	/**
 	 * @param price
@@ -36,9 +37,75 @@ public abstract class Player {
 		this.assists = assists;
 		this.yellowcards = yellowcards;
 		this.redcards = redcards;
+		this.setEligible(true);
 	}
 	
 	public abstract String toString();
+	
+	
+	
+	/**
+	 * Decreases the amount of days a player is still not eligible by one (method called after each round)
+	 */
+	public void roundPlayed() {
+		if (daysInjured >0) {
+			daysInjured--;
+		}
+		
+		if (daysSuspended>0) {
+			daysSuspended--;
+		}
+		if (daysInjured==0 && daysSuspended==0) {
+			setEligible(true);
+		}
+	}
+	/**
+	 * Gives the player an injury
+	 * @param length the length of the injury
+	 */
+	public void gotInjury (int length) {
+		setEligible(false);
+		daysInjured=length;
+	}
+
+	/**
+	 * Gives the player a suspension
+	 * @param length the length of the suspension
+	 */
+	public void gotSuspension (int length) {
+		setEligible(false);
+		daysSuspended = length;
+		
+	}
+	
+	
+	/**
+	 * @return the daysInjured
+	 */
+	public int getDaysInjured() {
+		return daysInjured;
+	}
+
+	/**
+	 * @param daysInjured the daysInjured to set
+	 */
+	public void setDaysInjured(int daysInjured) {
+		this.daysInjured = daysInjured;
+	}
+
+	/**
+	 * @return the daysSuspended
+	 */
+	public int getDaysSuspended() {
+		return daysSuspended;
+	}
+
+	/**
+	 * @param daysSuspended the daysSuspended to set
+	 */
+	public void setDaysSuspended(int daysSuspended) {
+		this.daysSuspended = daysSuspended;
+	}
 
 	public void madeGoal() {
 		goals++;
@@ -204,5 +271,19 @@ public abstract class Player {
 	 */
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	/**
+	 * @return the isEligible
+	 */
+	public boolean isEligible() {
+		return isEligible;
+	}
+
+	/**
+	 * @param isEligible the isEligible to set
+	 */
+	public void setEligible(boolean isEligible) {
+		this.isEligible = isEligible;
 	}	
 }
