@@ -1,5 +1,13 @@
-package libraryClasses;
+package gameLogic;
 import java.util.*;
+
+import libraryClasses.Attacker;
+import libraryClasses.Defender;
+import libraryClasses.FieldPlayer;
+import libraryClasses.Goalkeeper;
+import libraryClasses.Midfielder;
+import libraryClasses.Player;
+import libraryClasses.Team;
 public class CurrentXIRating {
 	
 	private int finishing;

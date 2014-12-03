@@ -1,4 +1,4 @@
-package libraryClasses;
+package xmlIO;
 import java.io.File;
 import java.math.BigDecimal;
 
@@ -10,6 +10,20 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import libraryClasses.Attacker;
+import libraryClasses.Competition;
+import libraryClasses.CompetitionScheme;
+import libraryClasses.Defender;
+import libraryClasses.FieldPlayer;
+import libraryClasses.Goalkeeper;
+import libraryClasses.Library;
+import libraryClasses.Match;
+import libraryClasses.Midfielder;
+import libraryClasses.Player;
+import libraryClasses.Round;
+import libraryClasses.Standings;
+import libraryClasses.Team;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

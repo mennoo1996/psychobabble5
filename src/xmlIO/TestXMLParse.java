@@ -1,4 +1,7 @@
-package libraryClasses;
+package xmlIO;
+
+import libraryClasses.Competition;
+import libraryClasses.Team;
 
 
 public class TestXMLParse {

@@ -1,6 +1,9 @@
-package libraryClasses;
-import java.util.Random;
+package gameLogic;
 import java.util.*;
+
+import libraryClasses.FieldPlayer;
+import libraryClasses.Player;
+import libraryClasses.Team;
 
 /** This class contains all the GameLogic ; it calculates the results, goalmakers, assistmakers and who got yellow/red cards
  * It will be expanded with injuries

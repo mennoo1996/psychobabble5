@@ -1,6 +1,10 @@
 package libraryClasses;
+import gameLogic.GameLogic;
+
 import java.util.ArrayList;
 import java.util.Collections;
+
+import xmlIO.sortStandingsByPoints;
 
 public class Competition {
 	
