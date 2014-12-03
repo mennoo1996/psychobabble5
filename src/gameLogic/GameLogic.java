@@ -17,6 +17,44 @@ public class GameLogic {
 	 * @param t2 The away playing team
 	 * @return an ArrayList of Players who got Red Cards in a match. An empty ArrayList if no Red Cards were given
 	 */
+	public static ArrayList<Player> getInjuredPlayers (Team t1, Team t2) {
+		ArrayList<Player> t1CurrentTeam = t1.getCurrentTeam();
+		ArrayList<Player> t2CurrentTeam = t2.getCurrentTeam();
+		ArrayList<Player> injuredPlayers = new ArrayList<Player>();
+		for (int i=0;i<t1CurrentTeam.size();i++) {
+			int random = GameLogic.randomGenerator(1, 100);
+			if (random <=3) {
+				injuredPlayers.add(t1CurrentTeam.get(i));
+			}
+		}
+		for (int i=0;i<t2CurrentTeam.size();i++) {
+			int random = GameLogic.randomGenerator(1, 100);
+			if (random <=3) {
+				injuredPlayers.add(t2CurrentTeam.get(i));
+			}
+		}
+		
+		return injuredPlayers;
+	}
+	
+	public static int[] getInjuriesLength (ArrayList<Player> injuredPlayers) {
+		int[] injurieslengths = new int[injuredPlayers.size()];
+		for (int i=0;i<injuredPlayers.size();i++) {
+			int random = GameLogic.randomGenerator(1, 100);
+			if (random <=75) {
+				injurieslengths[i]=1;
+			} else if (random > 75 && random <=90) {
+				injurieslengths[i]=3;
+			} else if (random > 90 && random <=97) {
+				injurieslengths[i]=6;
+			} else {
+				injurieslengths[i]=12;
+			}
+		}
+		
+		return injurieslengths;
+	}
+	
 	public static ArrayList<Player> getRedCards (Team t1, Team t2) {
 		int amountofred1=0, amountofred2=0;
 		ArrayList<Player> playersWithRed = new ArrayList<Player>();
