@@ -11,16 +11,18 @@ import libraryClasses.Team;
  *
  */
 public class GameLogic {
-	/** This method calculates if and which players got red cards
+	
+	/** Returns the players that got injured in a match
 	 * 
-	 * @param t1 The home playing team
-	 * @param t2 The away playing team
-	 * @return an ArrayList of Players who got Red Cards in a match. An empty ArrayList if no Red Cards were given
+	 * @param t1 The home-playing team
+	 * @param t2 The away-playing team
+	 * @return an ArrayList with players that got an injury ; the length is not yet specified1
 	 */
 	public static ArrayList<Player> getInjuredPlayers (Team t1, Team t2) {
 		ArrayList<Player> t1CurrentTeam = t1.getCurrentTeam();
 		ArrayList<Player> t2CurrentTeam = t2.getCurrentTeam();
 		ArrayList<Player> injuredPlayers = new ArrayList<Player>();
+		// every player has a 3% chance for an injury in a match
 		for (int i=0;i<t1CurrentTeam.size();i++) {
 			int random = GameLogic.randomGenerator(1, 100);
 			if (random <=3) {
@@ -36,17 +38,25 @@ public class GameLogic {
 		
 		return injuredPlayers;
 	}
-	
+	/** Returns the lengths of the injuries of the players that got injured
+	 * 
+	 * @param injuredPlayers the ArrayList containing the injured players (comes from getInjuredPlayers())
+	 * @return an array of ints that represent the lengths of the injuries of the players in injuredPlayers
+	 */
 	public static int[] getInjuriesLength (ArrayList<Player> injuredPlayers) {
 		int[] injurieslengths = new int[injuredPlayers.size()];
 		for (int i=0;i<injuredPlayers.size();i++) {
 			int random = GameLogic.randomGenerator(1, 100);
+			// 75% chance for a 1 match injury
 			if (random <=75) {
 				injurieslengths[i]=1;
+			// 15% chance for a 3 match injury
 			} else if (random > 75 && random <=90) {
 				injurieslengths[i]=3;
+			// 7% chance for a 6 match injury
 			} else if (random > 90 && random <=97) {
 				injurieslengths[i]=6;
+			// 3% chance for a 12 match injury
 			} else {
 				injurieslengths[i]=12;
 			}
@@ -54,7 +64,12 @@ public class GameLogic {
 		
 		return injurieslengths;
 	}
-	
+	/** This method calculates if and which players got red cards
+	 * 
+	 * @param t1 The home playing team
+	 * @param t2 The away playing team
+	 * @return an ArrayList of Players who got Red Cards in a match. An empty ArrayList if no Red Cards were given
+	 */
 	public static ArrayList<Player> getRedCards (Team t1, Team t2) {
 		int amountofred1=0, amountofred2=0;
 		ArrayList<Player> playersWithRed = new ArrayList<Player>();
