@@ -87,6 +87,23 @@ public class Competition {
 	}
 	
 	/**
+	 * Method which returns a sorted arraylist with standings
+	 * @return arraylist
+	 */
+	public ArrayList<Standings> getSortedStandings() {
+		ArrayList<Standings> standings = new ArrayList<Standings>();
+		
+		for(int i = 0; i < library.getLibrary().size(); i++) {
+			Standings standing =  library.getLibrary().get(i).getStandings();
+			standing.setTeamName(library.getLibrary().get(i).getTeamName());
+			standings.add(standing);				
+		}
+		
+		Collections.sort(standings, new sortStandingsByPoints());
+		return standings;
+	}
+	
+	/**
 	 * Method which turns the current standings into a string
 	 * @return	- the string containing the current standigns
 	 */
