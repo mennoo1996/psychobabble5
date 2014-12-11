@@ -1,18 +1,20 @@
 package swinggui;
 
-import java.awt.BorderLayout;
-import java.awt.Panel;
-import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JButton;
-import javax.swing.JTable;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.BorderFactory;
 
-public class HeaderBar extends JFrame {
-	public HeaderBar() {
+public class HeaderBar extends JPanel {
+	private ActionListener buttonListener;
+	
+	public HeaderBar(ActionListener listener) {
+		buttonListener = listener;
 		initUI();
 	}
 	
@@ -21,14 +23,8 @@ public class HeaderBar extends JFrame {
 	 */
 	public final void initUI() {
 		
-		// Add table to main view
-		GenTable firstTable = new GenTable();
-		
-		// Create header bar
-		JPanel header = new JPanel();
-		
-		header.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-		header.setSize(300, 50);
+		setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		setSize(300, 50);
 		
 		// Add the buttons
 		String[] buttons = { 
@@ -39,36 +35,26 @@ public class HeaderBar extends JFrame {
 				"Transfers"
 		};
 		
+		// Shortcut keys
+		Character[] menuKey = { 
+				KeyEvent.VK_O,
+				KeyEvent.VK_S,
+				KeyEvent.VK_P,
+				KeyEvent.VK_R,
+				KeyEvent.VK_T
+		};
+		
 		for (int i = 0; i < buttons.length; i++) {
-			header.add(new JButton(buttons[i]));
+			JButton menuItem = new JButton(buttons[i]);
+			
+			menuItem.setMnemonic(menuKey[i]);
+			
+			final String name = menuItem.getText();
+			
+			menuItem.addActionListener(buttonListener);
+			
+			add(menuItem);
 		}
 		
-		add(header, BorderLayout.NORTH);
-		
-		add(firstTable, BorderLayout.SOUTH);
-		
-		pack();
-		
-		setLayout(new BorderLayout());
-		
-		// Make fullscreen
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		int xSize = (int) tk.getScreenSize().getWidth();
-		int ySize = (int) tk.getScreenSize().getHeight();
-		setSize(xSize, ySize);
-		setTitle("Football Manager 2015");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-	}
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				HeaderBar ex = new HeaderBar();
-				ex.setVisible(true);
-			}
-		});
 	}
 }

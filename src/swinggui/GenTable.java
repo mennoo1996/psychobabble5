@@ -1,9 +1,10 @@
 package swinggui;
 
 // Import player here
+import libraryClasses.*;
+import xmlIO.XMLParser;
 
 import java.awt.BorderLayout;
-
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -21,9 +22,22 @@ public class GenTable extends JPanel {
 	 * Initialize the table within a scroll pane
 	 */
 	public final void initUI() {
-		Object rowDate[][] = { { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
-				{ "Row2-Column1", "Row2-Column2", "Row2-Column3" } };
 		
+		Competition competition = XMLParser.readCompetition("files/players Database by team with empty standings.xml", "files/competition-scheme.xml");
+		
+		Team team = competition.getLibrary().getLibrary().get(0);
+		
+		Object rowDate[][] = new Object[team.getTeam().size()][3];
+		
+		for (int i = 0; i < team.getTeam().size(); i++) {
+			Player guy = team.getTeam().get(i);
+			Object newRow[] = { guy.getName(), guy.getAge(), guy.getNumber() };
+		    rowDate[i] = newRow;
+		}
+		
+//		Object rowDate[][] = { { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+//				{ "Row2-Column1", "Row2-Column2", "Row2-Column3" } };
+//		
 		Object columnNames[] = { "Column 1", "Column2", "Column3" };
 		
 		table = new JTable(rowDate,columnNames);
