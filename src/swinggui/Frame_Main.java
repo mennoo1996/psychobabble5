@@ -55,7 +55,12 @@ public class Frame_Main extends JFrame implements ActionListener{
 		current = "nada";
 		roundNum = 0;
 		curComp = XMLParser.readCompetition("files/players Database by team with empty standings.xml", "files/competition-scheme.xml");
-				
+		
+		// Initialize teams
+		for(Team team : curComp.getLibrary().getLibrary()) {
+			team.setFirst11AsCurrentTeam();
+		}
+		
 		initUI();
 	}
 	
@@ -179,9 +184,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 					
 					// Should this be encapsulated by a game logic class method?
 					// For the demo this runs through the entire season
-					for(Team team : curComp.getLibrary().getLibrary()) {
-						team.setFirst11AsCurrentTeam();
-					}
+					
 					
 					if (roundNum < 38) {
 						curComp.playRound();
