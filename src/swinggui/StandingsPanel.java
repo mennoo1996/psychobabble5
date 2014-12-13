@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import libraryClasses.Competition;
 import libraryClasses.Standings;
@@ -43,7 +44,7 @@ public class StandingsPanel extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(new Box.Filler(new Dimension(1,5), new Dimension(1,5), new Dimension(1,5)));
 		
-		JLabel standingsTitle = new JLabel("Current Standings");
+		JLabel standingsTitle = new JLabel("Current Standings (Round " + currentCompetition.getRoundsPlayed() + ")");
 		standingsTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(standingsTitle);
 		
@@ -86,6 +87,17 @@ public class StandingsPanel extends JPanel {
 				return false;
 			}
 		};
+		
+		// center table items
+		DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
+		centerRender.setHorizontalAlignment(JLabel.CENTER);
+		for(int x=1; x < 8; x++){
+	         resultsTable.getColumnModel().getColumn(x).setCellRenderer( centerRender );
+	    }
+		
+		// Always display team name properly
+		resultsTable.getColumnModel().getColumn(0).setMinWidth(120);
+
 		// Disable editing
 		resultsTable.getTableHeader().setReorderingAllowed(false);
 		JScrollPane scrollPane = new JScrollPane(resultsTable);
@@ -94,7 +106,7 @@ public class StandingsPanel extends JPanel {
 		
 		// Adjust dimensions
 		setMinimumSize(new Dimension(100, 500));
-		setPreferredSize(new Dimension(1200, 500));
-		setMaximumSize(new Dimension(1200, 500));
+		setPreferredSize(new Dimension(800, 500));
+		setMaximumSize(new Dimension(900, 500));
 	}
 }
