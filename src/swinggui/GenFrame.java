@@ -40,13 +40,13 @@ public class GenFrame extends JFrame implements ActionListener /*implements Twee
 		currentTable = new GenTable();
 		
 		// Initialize header bar
-		HeaderBar docNav = new HeaderBar(this);
+		Header docNav = new Header(this);
 		
 		add(docNav, BorderLayout.NORTH);
 		add(currentTable, BorderLayout.SOUTH);
 		
 		// Proper formatting
-		pack();
+		pack(); //no packing pls
 		
 		// Make fullscreen
 		Toolkit tk = Toolkit.getDefaultToolkit();
