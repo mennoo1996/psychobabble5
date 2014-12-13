@@ -28,8 +28,6 @@ public class StatisticsPanel extends JPanel {
 		
 		// add the overview panels
 		add(new StandingsPanel(currentCompetition));
-		add(new Panel_Example1());
-		// Right now have it display the results of the season
 		
 		add(new Box.Filler(minSize, prefSize, null));
 	}

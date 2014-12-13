@@ -53,6 +53,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 	
 	public Frame_Main() {
 		current = "nada";
+		
+		// Currently only supports one season
 		roundNum = 0;
 		curComp = XMLParser.readCompetition("files/competitionDatabase_v2.xml", "files/competition-scheme.xml");
 		
@@ -183,19 +185,18 @@ public class Frame_Main extends JFrame implements ActionListener{
 					System.out.println("Play button was clicked.");
 					
 					// Should this be encapsulated by a game logic class method?
-					// For the demo this runs through the entire season
-					
+					// For the demo this runs through the entire season (round by round)
 					
 					if (roundNum < 38) {
 						curComp.playRound();
 						roundNum++;
+					} else {
+						// trigger an event signalling the start of the
+						// next season?
 					}
-					
-					//System.out.println(curComp.standingsToString());
-					
+										
 					// Then display statistics page showcasing the results of the season
 					current = "statistics";
-					System.out.println("Current screen is: " + current);
 					
 					// Initialize new JPanel and remove current pane
 					StatisticsPanel replStatview = new StatisticsPanel(curComp);
