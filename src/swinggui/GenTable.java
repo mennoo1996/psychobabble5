@@ -5,6 +5,7 @@ import libraryClasses.*;
 import xmlIO.XMLParser;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -44,6 +45,7 @@ public class GenTable extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		
+		scrollPane.setPreferredSize(new Dimension(300,350));
 		this.add(scrollPane,BorderLayout.CENTER);
 		this.setSize(300, 150);
 	}
