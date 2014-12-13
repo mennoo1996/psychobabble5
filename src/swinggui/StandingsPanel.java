@@ -23,6 +23,10 @@ public class StandingsPanel extends JPanel {
 	
 	private Competition currentCompetition;
 	
+	/**
+	 * Create and initialize StandingsPanel object
+	 * @param curComp current competition
+	 */
 	public StandingsPanel(Competition curComp) {
 		currentCompetition = curComp;
 		
@@ -43,13 +47,11 @@ public class StandingsPanel extends JPanel {
 		standingsTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(standingsTitle);
 		
-		// Insert the table here
-		// LOOK AT THE TO STRING METHOD
-		
 		// Preallocate row array
 		int numTeams = currentCompetition.getLibrary().getLibrary().size();
 		Object teamData[][] = new Object[numTeams][8];
 		
+		// Fetch standings and then populate table data
 		ArrayList<Standings> sortedRes = currentCompetition.getSortedStandings();
 		for (int i = 0; i < numTeams; i++) {
 			Standings standing = sortedRes.get(i);
@@ -77,14 +79,22 @@ public class StandingsPanel extends JPanel {
 				"Goals against"
 		};
 		
-		JTable resultsTable = new JTable(teamData, columnNames);
+		// Initialize table
+		JTable resultsTable = new JTable(teamData, columnNames) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		// Disable editing
+		resultsTable.getTableHeader().setReorderingAllowed(false);
 		JScrollPane scrollPane = new JScrollPane(resultsTable);
 		
 		add(scrollPane);
 		
 		// Adjust dimensions
 		setMinimumSize(new Dimension(100, 500));
-		setPreferredSize(new Dimension(800, 500));
-		setMaximumSize(new Dimension(900, 500));
+		setPreferredSize(new Dimension(1200, 500));
+		setMaximumSize(new Dimension(1200, 500));
 	}
 }
