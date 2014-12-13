@@ -1,17 +1,32 @@
 package swinggui;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.text.ParseException;
-import javax.swing.*;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+//import javax.swing;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
 //import aurelienribon.tweenengine.Tween;
 //import aurelienribon.tweenengine.TweenManager;
 
 public class Frame_Main extends JFrame implements ActionListener{
+	
+	private JPanel curPanel;
+	private String current;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
@@ -32,6 +47,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 	}
 	
 	public Frame_Main() {
+		current = "nada";
+		
 		initUI();
 	}
 	
@@ -73,11 +90,12 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 		//adding two panels
 		Center.add(new Panel_Example1());
-		Center.add(new Panel_Example2());	
+		Center.add(new Panel_Example2("not overview"));	
 		
 		Center.add(new Box.Filler(minSize, prefSize, null));
-		add(Center, BorderLayout.CENTER);
 		//Center panel ends here
+		curPanel = Center;
+		add(curPanel, BorderLayout.CENTER);
 		
 		//temporary, for the help text or something, I'll fix it later
 		JPanel Helper = new JPanel();
@@ -113,18 +131,84 @@ public class Frame_Main extends JFrame implements ActionListener{
 			switch (possibleMenuB.getText()) {
 				case "overview ":
 					System.out.println("Overview button was clicked.");
+					
+					// Switch to overview panel if not current
+					if (!current.equals("overview")) {
+						current = "overview";
+						System.out.println("Current screen is: " + current);
+						
+						// Initialize new JPanel and remove current pane
+						OverviewPanel replOverview = new OverviewPanel();
+						remove(curPanel);
+						
+						// Refresh the view
+						add(replOverview, BorderLayout.CENTER, 1);
+						curPanel = replOverview;
+						revalidate();
+						repaint();
+					}
 					break;
 				case "statistics":
 					System.out.println("Statistics button was clicked.");
+					
+					// Switch to statistics panel if not current
+					if (!current.equals("statistics")) {
+						current = "statistics";
+						System.out.println("Current screen is: " + current);
+						
+						// Initialize new JPanel and remove current pane
+						StatisticsPanel replStatview = new StatisticsPanel();
+						remove(curPanel);
+						
+						// Refresh the view
+						add(replStatview, BorderLayout.CENTER, 1);
+						curPanel = replStatview;
+						revalidate();
+						repaint();
+					}
 					break;
 				case "":
 					System.out.println("Play button was clicked.");
+					
+					// Insert play logic here?
 					break;
 				case "positions ":
 					System.out.println("Positions button was clicked.");
+					
+					// Switch to positions panel if not current
+					if (!current.equals("positions")) {
+						current = "positions";
+						System.out.println("Current screen is: " + current);
+						
+						// Initialize new JPanel and remove current pane
+						PositionsPanel replPositsview = new PositionsPanel();
+						remove(curPanel);
+						
+						// Refresh the view
+						add(replPositsview, BorderLayout.CENTER, 1);
+						curPanel = replPositsview;
+						revalidate();
+						repaint();
+					}
 					break;
 				case "transfers":
 					System.out.println("Transfers button was clicked.");
+					
+					// Switch to transfers panel if not current
+					if (!current.equals("transfers")) {
+						current = "transfers";
+						System.out.println("Current screen is: " + current);
+						
+						// Initialize new JPanel and remove current pane
+						TransfersPanel replTransfview = new TransfersPanel();
+						remove(curPanel);
+						
+						// Refresh the view
+						add(replTransfview, BorderLayout.CENTER, 1);
+						curPanel = replTransfview;
+						revalidate();
+						repaint();
+					}
 					break;
 				default:
 					System.out.println("This might not be a menu bar item!");

@@ -9,7 +9,10 @@ import javax.swing.JPanel;
 
 public class Panel_Example2 extends JPanel {
 	
-	public Panel_Example2() {
+	private String panelTitle;
+	
+	public Panel_Example2(String panTitle) {
+		panelTitle = panTitle;
 		initUI();
 	}
 	
@@ -26,7 +29,7 @@ public class Panel_Example2 extends JPanel {
 		panel.add(new Box.Filler(new Dimension(1,5), new Dimension(1,5), new Dimension(1,5)));
 				
 		//panel title
-		JLabel title = new JLabel("Panel title here");
+		JLabel title = new JLabel(panelTitle);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(title);
 				
@@ -42,7 +45,7 @@ public class Panel_Example2 extends JPanel {
 	}
 	
 	public static void main(String[] args) {
-		Panel_Example2 thing = new Panel_Example2();
+		Panel_Example2 thing = new Panel_Example2("Insert title here");
 		thing.setVisible(true);
 	}
 }
