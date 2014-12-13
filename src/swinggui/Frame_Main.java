@@ -54,7 +54,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	public Frame_Main() {
 		current = "nada";
 		roundNum = 0;
-		curComp = XMLParser.readCompetition("files/players Database by team with empty standings.xml", "files/competition-scheme.xml");
+		curComp = XMLParser.readCompetition("files/competitionDatabase_v2.xml", "files/competition-scheme.xml");
 		
 		// Initialize teams
 		for(Team team : curComp.getLibrary().getLibrary()) {
