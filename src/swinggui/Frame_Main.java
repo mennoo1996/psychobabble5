@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.text.ParseException;
 
 import javax.swing.JFrame;
@@ -17,8 +16,12 @@ import javax.swing.BoxLayout;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
-//import javax.swing;
 import javax.swing.plaf.synth.SynthLookAndFeel;
+
+import xmlIO.XMLParser;
+
+import libraryClasses.Competition;
+import libraryClasses.Team;
 
 //import aurelienribon.tweenengine.Tween;
 //import aurelienribon.tweenengine.TweenManager;
@@ -27,6 +30,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 	
 	private JPanel curPanel;
 	private String current;
+	private Competition curComp;
+	private int roundNum;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
@@ -48,7 +53,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 	
 	public Frame_Main() {
 		current = "nada";
-		
+		roundNum = 0;
+		curComp = XMLParser.readCompetition("files/players Database by team with empty standings.xml", "files/competition-scheme.xml");
+				
 		initUI();
 	}
 	
@@ -157,7 +164,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 						System.out.println("Current screen is: " + current);
 						
 						// Initialize new JPanel and remove current pane
-						StatisticsPanel replStatview = new StatisticsPanel();
+						StatisticsPanel replStatview = new StatisticsPanel(curComp);
 						remove(curPanel);
 						
 						// Refresh the view
@@ -170,7 +177,33 @@ public class Frame_Main extends JFrame implements ActionListener{
 				case "":
 					System.out.println("Play button was clicked.");
 					
-					// Insert play logic here?
+					// Should this be encapsulated by a game logic class method?
+					// For the demo this runs through the entire season
+					for(Team team : curComp.getLibrary().getLibrary()) {
+						team.setFirst11AsCurrentTeam();
+					}
+					
+					if (roundNum < 38) {
+						curComp.playRound();
+						roundNum++;
+					}
+					
+					//System.out.println(curComp.standingsToString());
+					
+					// Then display statistics page showcasing the results of the season
+					current = "statistics";
+					System.out.println("Current screen is: " + current);
+					
+					// Initialize new JPanel and remove current pane
+					StatisticsPanel replStatview = new StatisticsPanel(curComp);
+					remove(curPanel);
+					
+					// Refresh the view
+					add(replStatview, BorderLayout.CENTER, 1);
+					curPanel = replStatview;
+					revalidate();
+					repaint();
+					
 					break;
 				case "positions ":
 					System.out.println("Positions button was clicked.");

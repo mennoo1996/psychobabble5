@@ -7,12 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.Box;
 
+import libraryClasses.Competition;
+
 public class StatisticsPanel extends JPanel {
+	
+	private Competition currentCompetition;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
 	
-	public StatisticsPanel() {
+	public StatisticsPanel(Competition curComp) {
+		currentCompetition = curComp;
+		
 		initUI();
 	}
 	
@@ -21,8 +27,9 @@ public class StatisticsPanel extends JPanel {
 		add(new Box.Filler(minSize, prefSize, null));
 		
 		// add the overview panels
-		add(new Panel_Example2("Statistics"));
+		add(new StandingsPanel(currentCompetition));
 		add(new Panel_Example1());
+		// Right now have it display the results of the season
 		
 		add(new Box.Filler(minSize, prefSize, null));
 	}
