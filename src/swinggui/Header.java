@@ -54,9 +54,14 @@ public class Header extends JPanel {
 		//create buttons
 		for(int i = 0 ; i < 5 ; i++){
 			JButton button = new JButton(ButtonText[i]);
-			//button.setMnemonic(menuKey[i]); //temporarily disabled because it causes titlebar undercasing (?!?!?!)
+			button.setMnemonic(menuKey[i]);
+			button.setDisplayedMnemonicIndex(-1);
 			button.setName(ButtonName[i]);
+			if (i == 2) {
+				button.setToolTipText("play");
+			}
 			button.addActionListener(buttonListener);
+			
 			panel.add(button);
 		}
 		

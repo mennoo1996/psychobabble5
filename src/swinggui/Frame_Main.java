@@ -105,7 +105,32 @@ public class Frame_Main extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		// For now the main frame only listens on buttons from the header
+		// bar. May need to adjust this in a future revision
+		if (e.getSource() instanceof JButton) {
+			JButton possibleMenuB = (JButton) e.getSource();
+			
+			switch (possibleMenuB.getText()) {
+				case "overview ":
+					System.out.println("Overview button was clicked.");
+					break;
+				case "statistics":
+					System.out.println("Statistics button was clicked.");
+					break;
+				case "":
+					System.out.println("Play button was clicked.");
+					break;
+				case "positions ":
+					System.out.println("Positions button was clicked.");
+					break;
+				case "transfers":
+					System.out.println("Transfers button was clicked.");
+					break;
+				default:
+					System.out.println("This might not be a menu bar item!");
+					break;
+			}
+		}
 		
 	}
 
