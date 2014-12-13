@@ -251,6 +251,24 @@ public class XMLParser {
 		playerElement.appendChild(numberElement);
 		numberElement.appendChild(doc.createTextNode(String.format("%d", player.getNumber())));
 		
+		Element goalsElement = doc.createElement("goals");
+		playerElement.appendChild(goalsElement);
+		goalsElement.appendChild(doc.createTextNode(String.format("%d", player.getGoals())));
+		
+		Element assistsElement = doc.createElement("assists");
+		playerElement.appendChild(assistsElement);
+		assistsElement.appendChild(doc.createTextNode(String.format("%d", player.getAssists())));
+		
+		Element	yellowCardsElement = doc.createElement("yellowCards");
+		playerElement.appendChild(yellowCardsElement);
+		yellowCardsElement.appendChild(doc.createTextNode(String.format("%d", player.getYellowcards())));
+		
+		Element redCardsElement = doc.createElement("redCards");
+		playerElement.appendChild(redCardsElement);
+		redCardsElement.appendChild(doc.createTextNode(String.format("%d", player.getRedcards())));
+		
+		
+		
 		if(player instanceof Attacker || player instanceof Midfielder || player instanceof Defender) {
 			// Player is a fieldplayer
 			
@@ -297,6 +315,10 @@ public class XMLParser {
 		int age = Integer.parseInt(getNodeValue(element, "age"));
 		int number = Integer.parseInt(getNodeValue(element, "number"));
 		BigDecimal price = new BigDecimal(getNodeValue(element, "price"));
+		int goals = Integer.parseInt(getNodeValue(element, "goals"));
+		int assists = Integer.parseInt(getNodeValue(element, "assists"));
+		int redCards = Integer.parseInt(getNodeValue(element, "redCards"));
+		int yellowCards = Integer.parseInt(getNodeValue(element, "yellowCards"));
 
 		Player player;
 		
@@ -308,11 +330,11 @@ public class XMLParser {
 			int stamina = Integer.parseInt(getNodeValue(element, "staminaValue"));
 
 			if(playerType.equals("Attacker")) {
-				player = new Attacker(price, teamName, name, age, number, dribbling, finishing, defense, stamina, 0, 0, 0, 0);
+				player = new Attacker(price, teamName, name, age, number, dribbling, finishing, defense, stamina, goals, assists, yellowCards, redCards);
 			} else if(playerType.equals("Midfielder")) {
-				player = new Midfielder(price, teamName, name, age, number, dribbling, finishing, defense, stamina, 0, 0, 0, 0);
+				player = new Midfielder(price, teamName, name, age, number, dribbling, finishing, defense, stamina, goals, assists, yellowCards, redCards);
 			} else if(playerType.equals("Defender")) {
-				player = new Defender(price, teamName, name, age, number, dribbling, finishing, defense, stamina, 0, 0, 0, 0);
+				player = new Defender(price, teamName, name, age, number, dribbling, finishing, defense, stamina, goals, assists, yellowCards, redCards);
 			} else {
 				player = null;
 			}
@@ -320,7 +342,7 @@ public class XMLParser {
 		} else if (playerType.equals("Goalkeeper")){
 			// player is a goalkeeper
 			int goalkeeperValue = Integer.parseInt(getNodeValue(element, "goalkeeperValue"));
-			player = new Goalkeeper(price, teamName, name, age, goalkeeperValue, number, 0, 0, 0, 0);
+			player = new Goalkeeper(price, teamName, name, age, goalkeeperValue, number, goals, assists, yellowCards, redCards);
 		} else {
 			player = null;
 		}
