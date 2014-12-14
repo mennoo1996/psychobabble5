@@ -3,6 +3,7 @@ package libraryClasses;
 public class Match {
 
 	private String team1, team2;
+	private int score1, score2;
 	
 	/**
 	 * Constructor which initializes a match with the two given team names
@@ -54,7 +55,41 @@ public class Match {
 		this.team2 = team2;
 	}
 
+	/**
+	 * @param set team1's score
+	 */
+	public void setScoreTeam1(int score) {
+		score1 = score;
+	}
 	
+	/**
+	 * @param set team2's score
+	 */
+	public void setScoreTeam2(int score) {
+		score2 = score;
+	}
+	
+	
+	/**
+	 * @return team1's score
+	 */
+	public int getScoreTeam1() {
+		return score1;
+	}
+	
+	/**
+	 * @return team2's score
+	 */
+	public int getScoreTeam2() {
+		return score2;
+	}
+	
+	/**
+	 * @return the number of the winning team (1 for team1, 2 for team2)
+	 */
+	public int getWinner() {
+		return (score1 == score2) ? 0 : (score1 > score2) ? 1 : 2;
+	}
 	
 	
 	

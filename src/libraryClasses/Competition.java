@@ -35,6 +35,10 @@ public class Competition {
 			
 			int[] result = GameLogic.getMatchResults(team1, team2);
 			
+			// Set the scores
+			match.setScoreTeam1(result[1]);
+			match.setScoreTeam2(result[2]);
+			
 			if(result[0] == 0) {
 				team1.updateStandings("draw", result[1], result[2]);
 				team2.updateStandings("draw", result[1], result[2]);
