@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class Goalkeeper extends Player {
 
 	private int goalkeeperValue;
-
+	
 	/**
 	 * @param price
 	 * @param team
@@ -20,16 +20,22 @@ public class Goalkeeper extends Player {
 	 * @param assists
 	 * @param yellowcards
 	 * @param redcards
+	 * @param daysInjured
+	 * @param daysSuspended
+	 * @param isEligible
 	 * @param goalkeeperValue
 	 */
 	public Goalkeeper(BigDecimal price, String team, String name, int age,
-			int goalkeeperValue, int number, int goals, int assists, int yellowcards, int redcards) {
+			int number, int goals, int assists, int yellowcards, int redcards,
+			int daysInjured, int daysSuspended, boolean isEligible,
+			int goalkeeperValue) {
 		super(price, team, name, age, number, goals, assists, yellowcards,
-				redcards);
+				redcards, daysInjured, daysSuspended, isEligible);
 		this.goalkeeperValue = goalkeeperValue;
 		this.setPlayerType("Goalkeeper");
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

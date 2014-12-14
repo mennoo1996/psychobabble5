@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 public abstract class FieldPlayer extends Player {
 
 	private int dribblingValue, finishingValue, defenseValue, staminaValue;
-	
 
 	/**
 	 * @param price
@@ -21,22 +20,27 @@ public abstract class FieldPlayer extends Player {
 	 * @param assists
 	 * @param yellowcards
 	 * @param redcards
+	 * @param daysInjured
+	 * @param daysSuspended
+	 * @param isEligible
 	 * @param dribblingValue
 	 * @param finishingValue
 	 * @param defenseValue
 	 * @param staminaValue
 	 */
 	public FieldPlayer(BigDecimal price, String team, String name, int age,
-			int number, int dribblingValue, int finishingValue, int defenseValue,
-			int staminaValue, int goals, int assists, int yellowcards, int redcards) {
+			int number, int goals, int assists, int yellowcards, int redcards,
+			int daysInjured, int daysSuspended, boolean isEligible,
+			int dribblingValue, int finishingValue, int defenseValue,
+			int staminaValue) {
 		super(price, team, name, age, number, goals, assists, yellowcards,
-				redcards);
+				redcards, daysInjured, daysSuspended, isEligible);
 		this.dribblingValue = dribblingValue;
 		this.finishingValue = finishingValue;
 		this.defenseValue = defenseValue;
 		this.staminaValue = staminaValue;
+		this.setPlayerType("FieldPlayer");
 	}
-
 
 
 	/* (non-Javadoc)

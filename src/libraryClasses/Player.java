@@ -16,7 +16,6 @@ public abstract class Player {
 	/**
 	 * @param price
 	 * @param team
-	 * @param playerType
 	 * @param name
 	 * @param age
 	 * @param number
@@ -27,7 +26,8 @@ public abstract class Player {
 	 */
 	public Player(BigDecimal price, String team, String name, 
 			int age, int number, int goals, int assists,
-			int yellowcards, int redcards) {
+			int yellowcards, int redcards, int daysInjured, int daysSuspended,
+			boolean isEligible) {
 		this.price = price;
 		this.team = team;
 		this.name = name;
@@ -37,7 +37,10 @@ public abstract class Player {
 		this.assists = assists;
 		this.yellowcards = yellowcards;
 		this.redcards = redcards;
-		this.setEligible(true);
+		this.daysInjured = daysInjured;
+		this.daysSuspended = daysSuspended;
+		this.isEligible = isEligible;
+		this.playerType = "Player";
 	}
 	
 	public abstract String toString();
@@ -93,6 +96,7 @@ public abstract class Player {
 		this.daysInjured = daysInjured;
 	}
 
+	
 	/**
 	 * @return the daysSuspended
 	 */

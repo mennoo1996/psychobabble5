@@ -24,7 +24,7 @@ public class GenTable extends JPanel {
 	 */
 	public final void initUI() {
 		
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v2.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");
 		
 		Team team = competition.getLibrary().getLibrary().get(0);
 		
