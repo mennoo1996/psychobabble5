@@ -7,12 +7,18 @@ import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.Box;
 
+import libraryClasses.Competition;
+
 public class OverviewPanel extends JPanel {
+	
+	private Competition currentComp;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
 	
-	public OverviewPanel() {
+	public OverviewPanel(Competition cComp) {
+		currentComp = cComp;
+		
 		initUI();
 	}
 	
@@ -21,8 +27,8 @@ public class OverviewPanel extends JPanel {
 		add(new Box.Filler(minSize, prefSize, null));
 		
 		// add the overview panels
-		add(new Panel_Example2("Overview"));
-		add(new Panel_Example1());
+		add(new StandingsPanel(currentComp, false));
+		add(new RecentMatchesPanel(currentComp));
 		
 		add(new Box.Filler(minSize, prefSize, null));
 	}

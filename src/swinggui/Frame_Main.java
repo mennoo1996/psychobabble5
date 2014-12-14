@@ -98,7 +98,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		add(header);
 		
 		//Center panel begins here
-		OverviewPanel overviewPanel = new OverviewPanel();
+		OverviewPanel overviewPanel = new OverviewPanel(curComp);
 		
 		// set current screen string
 		current = "overview";
@@ -148,7 +148,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 						System.out.println("Current screen is: " + current);
 						
 						// Initialize new JPanel and remove current pane
-						OverviewPanel replOverview = new OverviewPanel();
+						OverviewPanel replOverview = new OverviewPanel(curComp);
 						remove(curPanel);
 						
 						// Refresh the view
