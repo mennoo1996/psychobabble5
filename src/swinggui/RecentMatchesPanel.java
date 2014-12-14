@@ -99,44 +99,44 @@ public class RecentMatchesPanel extends JPanel {
 			
 			add(scrollPane);
 		}
-		
-		// Upcoming matches table array
-		Object upcomingMatches[][] = new Object[10][1];
-		
-		// Get upcoming matches
-		ArrayList<Match> roundsMatches = curScheme.getRound(curRound + 1).getMatches();
-		for (int i = 0; i < 10; i++) {
-			Match curMatch = roundsMatches.get(i);
+		if (curRound < 38) {
+			// Upcoming matches table array
+			Object upcomingMatches[][] = new Object[10][1];
 			
-			Object matchRow[] = {
-				curMatch.getTeam1() + " vs " + curMatch.getTeam2()
-			};
-			upcomingMatches[i] = matchRow;
-		}
-		
-		Object columnNamesNext[] = {
-				"Upcoming"
-		};
-		
-		// Initialize tables
-
-		
-		JTable upcomingTable = new JTable(upcomingMatches, columnNamesNext) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
+			// Get upcoming matches
+			ArrayList<Match> roundsMatches = curScheme.getRound(curRound + 1).getMatches();
+			for (int i = 0; i < 10; i++) {
+				Match curMatch = roundsMatches.get(i);
+				
+				Object matchRow[] = {
+					curMatch.getTeam1() + " vs " + curMatch.getTeam2()
+				};
+				upcomingMatches[i] = matchRow;
 			}
-		};
-		
-		// Always display team name properly
-		upcomingTable.getColumnModel().getColumn(0).setMinWidth(120);
-
-		// Disable editing
-		upcomingTable.getTableHeader().setReorderingAllowed(false);
-		JScrollPane scrollPaneUp = new JScrollPane(upcomingTable);
-		
-		add(scrollPaneUp);
-		
+			
+			Object columnNamesNext[] = {
+					"Upcoming"
+			};
+			
+			// Initialize tables
+	
+			
+			JTable upcomingTable = new JTable(upcomingMatches, columnNamesNext) {
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			};
+			
+			// Always display team name properly
+			upcomingTable.getColumnModel().getColumn(0).setMinWidth(120);
+	
+			// Disable editing
+			upcomingTable.getTableHeader().setReorderingAllowed(false);
+			JScrollPane scrollPaneUp = new JScrollPane(upcomingTable);
+			
+			add(scrollPaneUp);
+		}
 		
 		// Adjust dimensions
 		setMinimumSize(new Dimension(100,500));

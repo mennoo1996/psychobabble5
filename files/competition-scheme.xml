@@ -1260,10 +1260,7 @@
 		<team2>Sunderland</team2>
 	</match>
 	</roundScheme>
-	<match>
-		<team1>Everton</team1>
-		<team2>Burnley</team2>
-	</match><roundScheme round="31">
+	<roundScheme round="31">
 	<match>
 		<team1>Arsenal</team1>
 		<team2>Liverpool</team2>
@@ -1349,6 +1346,9 @@
 	</roundScheme>
 	<roundScheme round="33">
 	<match>
+		<team1>Everton</team1>
+		<team2>Burnley</team2>
+	</match><match>
 		<team1>Arsenal</team1>
 		<team2>Sunderland</team2>
 	</match>

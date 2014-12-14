@@ -52,15 +52,15 @@ public class AgendaPanel extends JPanel {
 		
 		
 		// Preallocate row array
-		Object teamData[][] = new Object[320][2];
+		Object teamData[][] = new Object[417][2];
 		
 		// Fetch scheme and then populate table data
 		CompetitionScheme curScheme = currentCompetition.getScheme();
 		
-		// Loop through 32 rounds
-		for (int i = 1; i <= 32; i++) {
+		// Loop through 38 rounds
+		for (int i = 1; i <= 38; i++) {
 			ArrayList<Match> roundsMatches = curScheme.getRound(i).getMatches();
-			
+
 			// Each match
 			for (int j = 0; j < 10; j++) {
 				Match curMatch = roundsMatches.get(j);
@@ -74,7 +74,11 @@ public class AgendaPanel extends JPanel {
 						curMatch.getTeam1() + " vs " + curMatch.getTeam2(),
 						scoreString
 				};
-				teamData[(i-1)*10 + j] = matchRow;
+				teamData[(i-1)*11 + j] = matchRow;
+			}
+			if (i > 1 && i < 38) {
+				Object spacing[] = { " ", " " };
+				teamData[(i-1)*11 + 10] = spacing;
 			}
 		}
 		
