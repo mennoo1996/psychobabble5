@@ -267,7 +267,24 @@ public class XMLParser {
 		playerElement.appendChild(redCardsElement);
 		redCardsElement.appendChild(doc.createTextNode(String.format("%d", player.getRedcards())));
 		
+		Element	daysInjuredElement = doc.createElement("daysInjured");
+		playerElement.appendChild(daysInjuredElement);
+		daysInjuredElement.appendChild(doc.createTextNode(String.format("%d", player.getDaysInjured())));
 		
+		Element daysSuspendedElement = doc.createElement("daysSuspended");
+		playerElement.appendChild(daysSuspendedElement);
+		daysSuspendedElement.appendChild(doc.createTextNode(String.format("%d", player.getDaysSuspended())));
+		
+		String eligible;
+		if(player.isEligible()) {
+			eligible = "1";
+		} else {
+			eligible = "0";
+		}
+		
+		Element eligibleElement = doc.createElement("eligible");
+		playerElement.appendChild(eligibleElement);
+		eligibleElement.appendChild(doc.createTextNode(eligible));
 		
 		if(player instanceof Attacker || player instanceof Midfielder || player instanceof Defender) {
 			// Player is a fieldplayer
@@ -319,22 +336,31 @@ public class XMLParser {
 		int assists = Integer.parseInt(getNodeValue(element, "assists"));
 		int redCards = Integer.parseInt(getNodeValue(element, "redCards"));
 		int yellowCards = Integer.parseInt(getNodeValue(element, "yellowCards"));
+		int daysInjured = Integer.parseInt(getNodeValue(element, "daysInjured"));
+		int daysSuspended = Integer.parseInt(getNodeValue(element, "daysSuspended"));
+		
+		boolean eligible;
+		if(getNodeValue(element, "eligible").equals("1")) {
+			eligible = true;
+		} else {
+			eligible = false;
+		}
 
 		Player player;
 		
 		if(playerType.equals("Attacker") || playerType.equals("Defender") || playerType.equals("Midfielder")) {
 			// player is attacker | defender | midfielder
-			int dribbling = Integer.parseInt(getNodeValue(element, "dribblingValue"));
-			int finishing = Integer.parseInt(getNodeValue(element, "finishingValue"));
-			int defense = Integer.parseInt(getNodeValue(element, "defenseValue"));
-			int stamina = Integer.parseInt(getNodeValue(element, "staminaValue"));
+			int dribblingValue = Integer.parseInt(getNodeValue(element, "dribblingValue"));
+			int finishingValue = Integer.parseInt(getNodeValue(element, "finishingValue"));
+			int defenseValue = Integer.parseInt(getNodeValue(element, "defenseValue"));
+			int staminaValue = Integer.parseInt(getNodeValue(element, "staminaValue"));
 
 			if(playerType.equals("Attacker")) {
-				player = new Attacker(price, teamName, name, age, number, dribbling, finishing, defense, stamina, goals, assists, yellowCards, redCards);
+				player = new Attacker(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
 			} else if(playerType.equals("Midfielder")) {
-				player = new Midfielder(price, teamName, name, age, number, dribbling, finishing, defense, stamina, goals, assists, yellowCards, redCards);
+				player = new Midfielder(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
 			} else if(playerType.equals("Defender")) {
-				player = new Defender(price, teamName, name, age, number, dribbling, finishing, defense, stamina, goals, assists, yellowCards, redCards);
+				player = new Defender(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
 			} else {
 				player = null;
 			}
@@ -342,7 +368,7 @@ public class XMLParser {
 		} else if (playerType.equals("Goalkeeper")){
 			// player is a goalkeeper
 			int goalkeeperValue = Integer.parseInt(getNodeValue(element, "goalkeeperValue"));
-			player = new Goalkeeper(price, teamName, name, age, goalkeeperValue, number, goals, assists, yellowCards, redCards);
+			player = new Goalkeeper(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, goalkeeperValue);
 		} else {
 			player = null;
 		}
