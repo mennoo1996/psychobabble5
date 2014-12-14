@@ -27,7 +27,7 @@ public class StatisticsPanel extends JPanel {
 		add(new Box.Filler(minSize, prefSize, null));
 		
 		// add the overview panels
-		add(new StandingsPanel(currentCompetition));
+		add(new StandingsPanel(currentCompetition, true));
 		add(new AgendaPanel(currentCompetition));
 		
 		add(new Box.Filler(minSize, prefSize, null));

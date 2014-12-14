@@ -27,7 +27,7 @@ public class AgendaPanel extends JPanel {
 	private Competition currentCompetition;
 	
 	/**
-	 * Create and initialize StandingsPanel object
+	 * Create and initialize AgendaPanel object
 	 * @param curComp current competition
 	 */
 	public AgendaPanel(Competition curComp) {
@@ -60,7 +60,7 @@ public class AgendaPanel extends JPanel {
 		// Loop through 32 rounds
 		for (int i = 1; i <= 32; i++) {
 			ArrayList<Match> roundsMatches = curScheme.getRound(i).getMatches();
-			System.out.println(roundsMatches.size());
+			
 			// Each match
 			for (int j = 0; j < 10; j++) {
 				Match curMatch = roundsMatches.get(j);

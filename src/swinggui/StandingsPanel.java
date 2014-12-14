@@ -6,7 +6,6 @@ package swinggui;
 
 import java.awt.Component;
 import java.awt.Dimension;
-
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -23,13 +22,16 @@ import libraryClasses.Standings;
 public class StandingsPanel extends JPanel {
 	
 	private Competition currentCompetition;
+	private boolean detailedLayout;
 	
 	/**
 	 * Create and initialize StandingsPanel object
 	 * @param curComp current competition
+	 * @param hasDetail show detailed statistics or just the points
 	 */
-	public StandingsPanel(Competition curComp) {
+	public StandingsPanel(Competition curComp, boolean hasDetail) {
 		currentCompetition = curComp;
+		detailedLayout = hasDetail;
 		
 		initUI();
 	}
@@ -50,26 +52,39 @@ public class StandingsPanel extends JPanel {
 		
 		// Preallocate row array
 		int numTeams = currentCompetition.getLibrary().getLibrary().size();
-		Object teamData[][] = new Object[numTeams][8];
+		
+		int detail = detailedLayout ? 8 : 2;
+		Object teamData[][] = new Object[numTeams][detail];
 		
 		// Fetch standings and then populate table data
 		ArrayList<Standings> sortedRes = currentCompetition.getSortedStandings();
 		for (int i = 0; i < numTeams; i++) {
 			Standings standing = sortedRes.get(i);
-			Object teamRow[] = {
-				standing.getTeamName(),
-				standing.getPoints(),
-				standing.getWon(),
-				standing.getDraw(),
-				standing.getLost(),
-				standing.getGoalDifference(),
-				standing.getGoalsFor(),
-				standing.getGoalsAgainst()
-			};
-			teamData[i] = teamRow;
+			
+			// Detailed or simple layout
+			if (detailedLayout) { 
+				Object teamRowComp[] = {
+						standing.getTeamName(),
+						standing.getPoints(),
+						standing.getWon(),
+						standing.getDraw(),
+						standing.getLost(),
+						standing.getGoalDifference(),
+						standing.getGoalsFor(),
+						standing.getGoalsAgainst()
+				};
+				
+				teamData[i] = teamRowComp;
+			} else {
+				Object teamRowSimp[] = {
+						standing.getTeamName(),
+						standing.getPoints()
+				};
+				teamData[i] = teamRowSimp;
+			}
 		}
 		
-		Object columnNames[] = { 
+		Object columnNamesComplex[] =  { 
 				"Team",
 				"Points",
 				"Won",
@@ -80,8 +95,13 @@ public class StandingsPanel extends JPanel {
 				"Goals against"
 		};
 		
+		Object columnNamesSimp[] = {
+				"Team",
+				"Points"
+		};
+		
 		// Initialize table
-		JTable resultsTable = new JTable(teamData, columnNames) {
+		JTable resultsTable = new JTable(teamData, (detailedLayout) ? columnNamesComplex : columnNamesSimp) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -91,7 +111,7 @@ public class StandingsPanel extends JPanel {
 		// center table items
 		DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
 		centerRender.setHorizontalAlignment(JLabel.CENTER);
-		for(int x=1; x < 8; x++){
+		for(int x=1; x < detail; x++){
 	         resultsTable.getColumnModel().getColumn(x).setCellRenderer( centerRender );
 	    }
 		
