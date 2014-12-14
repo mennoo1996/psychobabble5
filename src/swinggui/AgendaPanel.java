@@ -18,7 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import libraryClasses.Competition;
-import libraryClasses.Standings;
+import libraryClasses.CompetitionScheme;
+import libraryClasses.Round;
+import libraryClasses.Match;
 
 public class AgendaPanel extends JPanel {
 	
@@ -44,40 +46,41 @@ public class AgendaPanel extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(new Box.Filler(new Dimension(1,5), new Dimension(1,5), new Dimension(1,5)));
 		
-		JLabel standingsTitle = new JLabel("Current Standings (Round " + currentCompetition.getRoundsPlayed() + ")");
-		standingsTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(standingsTitle);
+		JLabel agendaTitle = new JLabel("Agenda");
+		agendaTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+		add(agendaTitle);
+		
 		
 		// Preallocate row array
-		int numTeams = currentCompetition.getLibrary().getLibrary().size();
-		Object teamData[][] = new Object[numTeams][8];
+		Object teamData[][] = new Object[320][2];
 		
-		// Fetch standings and then populate table data
-		ArrayList<Standings> sortedRes = currentCompetition.getSortedStandings();
-		for (int i = 0; i < numTeams; i++) {
-			Standings standing = sortedRes.get(i);
-			Object teamRow[] = {
-				standing.getTeamName(),
-				standing.getPoints(),
-				standing.getWon(),
-				standing.getDraw(),
-				standing.getLost(),
-				standing.getGoalDifference(),
-				standing.getGoalsFor(),
-				standing.getGoalsAgainst()
-			};
-			teamData[i] = teamRow;
+		// Fetch scheme and then populate table data
+		CompetitionScheme curScheme = currentCompetition.getScheme();
+		
+		// Loop through 32 rounds
+		for (int i = 1; i <= 32; i++) {
+			ArrayList<Match> roundsMatches = curScheme.getRound(i).getMatches();
+			System.out.println(roundsMatches.size());
+			// Each match
+			for (int j = 0; j < 10; j++) {
+				Match curMatch = roundsMatches.get(j);
+				
+				String scoreString = "-";
+				if (curMatch.getScoreTeam1() != -1) {
+					scoreString = curMatch.getScoreTeam1() + " - " + curMatch.getScoreTeam2();
+				}
+				
+				Object matchRow[] = {
+						curMatch.getTeam1() + " vs " + curMatch.getTeam2(),
+						scoreString
+				};
+				teamData[(i-1)*10 + j] = matchRow;
+			}
 		}
 		
 		Object columnNames[] = { 
-				"Team",
-				"Points",
-				"Won",
-				"Draw",
-				"Lost",
-				"Goal Difference",
-				"Goals for",
-				"Goals against"
+				"Match",
+				"Score"
 		};
 		
 		// Initialize table
@@ -91,9 +94,8 @@ public class AgendaPanel extends JPanel {
 		// center table items
 		DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
 		centerRender.setHorizontalAlignment(JLabel.CENTER);
-		for(int x=1; x < 8; x++){
-	         resultsTable.getColumnModel().getColumn(x).setCellRenderer( centerRender );
-	    }
+        resultsTable.getColumnModel().getColumn(1).setCellRenderer( centerRender );
+	    
 		
 		// Always display team name properly
 		resultsTable.getColumnModel().getColumn(0).setMinWidth(120);
@@ -105,8 +107,8 @@ public class AgendaPanel extends JPanel {
 		add(scrollPane);
 		
 		// Adjust dimensions
-		setMinimumSize(new Dimension(100, 500));
-		setPreferredSize(new Dimension(800, 500));
-		setMaximumSize(new Dimension(900, 500));
+		setMinimumSize(new Dimension(100,500));
+		setPreferredSize(new Dimension(800,500));
+		setMaximumSize(new Dimension(900,500));
 	}
 }

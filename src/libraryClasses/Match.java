@@ -13,6 +13,8 @@ public class Match {
 	public Match(String team1, String team2) {
 		this.team1 = team1;
 		this.team2 = team2;
+		this.score1 = -1;
+		this.score2 = -1;
 	}
 
 	
@@ -71,14 +73,14 @@ public class Match {
 	
 	
 	/**
-	 * @return team1's score
+	 * @return team1's score (-1 if not yet played)
 	 */
 	public int getScoreTeam1() {
 		return score1;
 	}
 	
 	/**
-	 * @return team2's score
+	 * @return team2's score (-1 if not yet played)
 	 */
 	public int getScoreTeam2() {
 		return score2;

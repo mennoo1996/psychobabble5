@@ -75,7 +75,7 @@ public class StandingsPanel extends JPanel {
 				"Won",
 				"Draw",
 				"Lost",
-				"Goal Difference",
+				"Goal Diff",
 				"Goals for",
 				"Goals against"
 		};
