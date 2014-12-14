@@ -46,7 +46,7 @@ public class AgendaPanel extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		add(new Box.Filler(new Dimension(1,5), new Dimension(1,5), new Dimension(1,5)));
 		
-		JLabel agendaTitle = new JLabel("Agenda");
+		JLabel agendaTitle = new JLabel("Fixtures");
 		agendaTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 		add(agendaTitle);
 		

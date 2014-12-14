@@ -98,17 +98,13 @@ public class Frame_Main extends JFrame implements ActionListener{
 		add(header);
 		
 		//Center panel begins here
-		JPanel Center = new JPanel();
-		Center.setLayout(new BoxLayout(Center, BoxLayout.X_AXIS));
-		Center.add(new Box.Filler(minSize, prefSize, null));
+		OverviewPanel overviewPanel = new OverviewPanel();
 		
-		//adding two panels
-		Center.add(new Panel_Example1());
-		Center.add(new Panel_Example2("not overview"));	
+		// set current screen string
+		current = "overview";
 		
-		Center.add(new Box.Filler(minSize, prefSize, null));
 		//Center panel ends here
-		curPanel = Center;
+		curPanel = overviewPanel;
 		add(curPanel, BorderLayout.CENTER);
 		
 		//temporary, for the help text or something, I'll fix it later
