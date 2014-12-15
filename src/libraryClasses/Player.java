@@ -357,5 +357,10 @@ public abstract class Player {
 	 */
 	public void setEligible(boolean isEligible) {
 		this.isEligible = isEligible;
-	}	
+	}
+
+	
+
+	
+	
 }

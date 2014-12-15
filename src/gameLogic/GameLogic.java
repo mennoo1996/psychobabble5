@@ -12,6 +12,8 @@ import libraryClasses.Team;
  */
 public class GameLogic {
 	
+	private static int rngCounter = (int)System.currentTimeMillis();
+	
 	/** Returns the players that got injured in a match
 	 * 
 	 * @param t1 The home-playing team
@@ -730,7 +732,8 @@ public class GameLogic {
 	 */
 	public static int randomGenerator(int min, int max) {
 		// Use currentTimeMillis for a truly random seed, and therefore number
-		Random rand = new Random(System.currentTimeMillis());
+		Random rand = new Random(rngCounter);
+		rngCounter++;
 		// Make it maximum inclusive
 		int randomNum=rand.nextInt((max-min)+1)+min;
 		return randomNum;
