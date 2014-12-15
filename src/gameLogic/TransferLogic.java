@@ -4,6 +4,14 @@ import java.util.*;
 
 public class TransferLogic {
 	
+	public static boolean getAnswerForExistingTransfer(Player player, double bid, Library library, TransferList existingTransfers, double returnedprice) {
+		if (bid<returnedprice) {
+			return false;
+		} else {
+			return TransferLogic.getAnswer(player, bid, library, existingTransfers);
+		}
+	}
+	
 	public static boolean getAnswer(Player player, double bid, Library library, TransferList existingTransfers) {
 		Team team = library.getTeamForName(player.getTeam());
 		ArrayList<Player> playerlist = new ArrayList<Player>();
@@ -37,7 +45,7 @@ public class TransferLogic {
 			}
 		}
 		
-		if (player.getPlayerType().equals("Goalkeeper") && playerlist.size()==1) {
+		if (playerlist.size()==1) {
 			
 			return false;
 		}
@@ -139,7 +147,114 @@ public class TransferLogic {
 		
 	}
 		
+	public static String requestTransfer(Player player, Team playersTeam, double bid, Library library, TransferList existingTransfers) {
+		if (existingTransfers.getTransfer(player)==null) {
+			boolean answer = TransferLogic.getAnswer(player, bid, library, existingTransfers);
+			if (answer) {
+				Team opponentsTeam = library.getTeamForName(player.getTeam());
+				if (opponentsTeam.getCurrentTeam().contains(player)) {
+					boolean itsdone=false;
+					for (int i=0;i<opponentsTeam.getTeam().size();i++) {
+						if (!itsdone) {
+							Player p = opponentsTeam.getTeam().get(i);
+							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getCurrentTeam().contains(p))) {
+								opponentsTeam.replacePlayerInCurrentTeam(player, p);
+								itsdone=true;
+							}
+						}
+					}
+					if (!itsdone) {
+						for (int i=0;i<opponentsTeam.getTeam().size();i++) {
+							if (!itsdone) {
+								Player p = opponentsTeam.getTeam().get(i);
+								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getCurrentTeam().contains(p))) {
+									opponentsTeam.replacePlayerInCurrentTeam(player, p);
+									itsdone=true;
+								}
+							}
+						}
+					}
+					
+					
+				}
+				
+				playersTeam.add(player);
+				opponentsTeam.getTeam().remove(player);
+				player.setTeam(playersTeam.getTeamName());
+				return "Congratulations! Your bid of " + bid + " got accepted and " + player.getName() + " is now part of your team";
+			} else {
+				double percentage = bid/player.getPrice().doubleValue()*100-100;
+				double returnedprice=0;
+				double price = player.getPrice().doubleValue();
+				if (percentage<-10) {
+					returnedprice=0.9*price;
+				} else if (percentage>=-10 && percentage<0) {
+					returnedprice=price;
+				} else if (percentage>=0 && percentage<5) {
+					returnedprice=1.05*price;
+				} else if (percentage>=5 && percentage<10) {
+					returnedprice=1.1*price;
+				} else if (percentage>=10 && percentage<15) {
+					returnedprice=1.15*price;
+				} else if (percentage>=15 && percentage<20) {
+					returnedprice=1.2*price;
+				} else if (percentage>=20 && percentage<25) {
+					returnedprice=1.25*price;
+				} else if (percentage>=25 && percentage<30) {
+					returnedprice=1.3*price;
+				}
+				
+				TransferInProgress tp = new TransferInProgress(player, returnedprice, bid);
+				existingTransfers.addTransfer(tp);
+				
+				return player.getTeam() + " did not accept your offer of " + bid + " for " + player.getName() + ". They have indicated they want at least " + returnedprice + " for this player";
+				
+			}
+		} else {
+			TransferInProgress tp = existingTransfers.getTransfer(player);
+			boolean answer = TransferLogic.getAnswerForExistingTransfer(player, bid, library, existingTransfers, tp.getPriceReturned());
+			if (answer) {
+				Team opponentsTeam = library.getTeamForName(player.getTeam());
+				if (opponentsTeam.getCurrentTeam().contains(player)) {
+					boolean itsdone=false;
+					for (int i=0;i<opponentsTeam.getTeam().size();i++) {
+						if (!itsdone) {
+							Player p = opponentsTeam.getTeam().get(i);
+							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getCurrentTeam().contains(p))) {
+								opponentsTeam.replacePlayerInCurrentTeam(player, p);
+								itsdone=true;
+							}
+						}
+					}
+					if (!itsdone) {
+						for (int i=0;i<opponentsTeam.getTeam().size();i++) {
+							if (!itsdone) {
+								Player p = opponentsTeam.getTeam().get(i);
+								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getCurrentTeam().contains(p))) {
+									opponentsTeam.replacePlayerInCurrentTeam(player, p);
+									itsdone=true;
+								}
+							}
+						}
+					}
+					
+					
+				}
+				
+				playersTeam.add(player);
+				opponentsTeam.getTeam().remove(player);
+				player.setTeam(playersTeam.getTeamName());
+				existingTransfers.getTransfers().remove(tp);
+				return "Congratulations! Your bid of " + bid + " got accepted and " + player.getName() + " is now part of your team";
+				
+			} else {
+				existingTransfers.getTransfer(player).setBid(bid);
+				return player.getTeam() + " did not accept your offer of " + bid + " for " + player.getName() + ". They have indicated they want at least " + existingTransfers.getTransfer(player).getPriceReturned() + " for this player";
+			}
+			
+		}
 		
+	}
 		
 		
 		

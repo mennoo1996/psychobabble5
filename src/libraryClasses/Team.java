@@ -129,6 +129,7 @@ public class Team {
 			res += "\n" + team.get(i);
 		}
 		return res;
+		
 	}
 	
 	
@@ -173,6 +174,11 @@ public class Team {
 	 */
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
+	}
+	
+	public void replacePlayerInCurrentTeam(Player playerout, Player playerin) {
+		currentTeam.remove(playerout);
+		currentTeam.add(playerin);
 	}
 	
 }

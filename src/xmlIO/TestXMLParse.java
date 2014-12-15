@@ -15,9 +15,9 @@ public class TestXMLParse {
 		
 		System.out.println(competition.toString());
 		
-//		for(Team t : competition.getLibrary().getLibrary()) {
-//			t.setFirst11AsCurrentTeam();
-//		}
+		for(Team t : competition.getLibrary().getLibrary()) {
+			t.setFirst11AsCurrentTeam();
+		}
 //		
 //		for(int i = 0; i < 38; i++) {
 //			competition.playRound();
@@ -28,9 +28,15 @@ public class TestXMLParse {
 //		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
 //		
 		
+		System.out.println(competition.getLibrary().getLibrary().get(0).getCurrentTeam());
 		TransferList existingTransfers = new TransferList();
-		Player p = competition.getLibrary().getLibrary().get(0).getTeam().get(1);
-		TransferLogic.getAnswer(p, 37000000, competition.getLibrary(), existingTransfers);
+		Player p = competition.getLibrary().getLibrary().get(0).getTeam().get(0);
+		Team myteam = competition.getLibrary().getLibrary().get(1);
+		System.out.println(TransferLogic.requestTransfer(p, myteam,  20000000, competition.getLibrary(), existingTransfers));
+		System.out.println(p);
+		System.out.println(myteam);
+		System.out.println(competition.getLibrary().getLibrary().get(0).getCurrentTeam());
+		System.out.println(TransferLogic.requestTransfer(p, myteam, 33000000, competition.getLibrary(), existingTransfers));
 	}
 }
 
