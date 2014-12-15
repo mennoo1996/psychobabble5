@@ -248,6 +248,32 @@ public class TransferLogic {
 				return "Congratulations! Your bid of " + bid + " got accepted and " + player.getName() + " is now part of your team";
 				
 			} else {
+				double pricereturned = existingTransfers.getTransfer(player).getPriceReturned();
+				
+				if (bid>pricereturned) {
+					double percentage = bid/player.getPrice().doubleValue()*100-100;
+					double returnedprice=0;
+					double price = player.getPrice().doubleValue();
+					if (percentage<-10) {
+						returnedprice=0.9*price;
+					} else if (percentage>=-10 && percentage<0) {
+						returnedprice=price;
+					} else if (percentage>=0 && percentage<5) {
+						returnedprice=1.05*price;
+					} else if (percentage>=5 && percentage<10) {
+						returnedprice=1.1*price;
+					} else if (percentage>=10 && percentage<15) {
+						returnedprice=1.15*price;
+					} else if (percentage>=15 && percentage<20) {
+						returnedprice=1.2*price;
+					} else if (percentage>=20 && percentage<25) {
+						returnedprice=1.25*price;
+					} else if (percentage>=25 && percentage<30) {
+						returnedprice=1.3*price;
+					}
+					existingTransfers.getTransfer(player).setPriceReturned(returnedprice);
+				}
+				
 				existingTransfers.getTransfer(player).setBid(bid);
 				return player.getTeam() + " did not accept your offer of " + bid + " for " + player.getName() + ". They have indicated they want at least " + existingTransfers.getTransfer(player).getPriceReturned() + " for this player";
 			}

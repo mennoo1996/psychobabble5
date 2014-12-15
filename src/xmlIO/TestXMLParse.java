@@ -37,6 +37,7 @@ public class TestXMLParse {
 		System.out.println(myteam);
 		System.out.println(competition.getLibrary().getLibrary().get(0).getCurrentTeam());
 		System.out.println(TransferLogic.requestTransfer(p, myteam, 33000000, competition.getLibrary(), existingTransfers));
+		System.out.println(TransferLogic.requestTransfer(p, myteam, 37000000, competition.getLibrary(), existingTransfers));
 	}
 }
 
