@@ -42,10 +42,30 @@ public class Goalkeeper extends Player {
 	@Override
 	public String toString() {
 		return this.getPlayerType() + " [name=" + this.getName() + ", age=" + this.getAge() + ", team=" + this.getTeam()
-				+ ", number=" + this.getNumber() + ", price=" + this.getPrice() + ", goalkeeperValue=" + this.goalkeeperValue
+				+ ", number=" + this.getNumber() + ", price=" + this.getPrice() + ", goalkeeperValue=" + this.getGoalkeeperValue()
 				+ ", goals=" + this.getGoals() + ", assists=" + this.getAssists() + ", yellowCards=" + this.getYellowcards()
-				+ ", redCards=" + this.getRedcards();
+				+ ", redCards=" + this.getRedcards() + ", daysInjured=" + this.getDaysInjured() + ", daysSuspended=" + this.getDaysSuspended()
+				+ ", eligible=" + this.isEligible() + "]";
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		Goalkeeper other = (Goalkeeper) obj;
+		if (goalkeeperValue != other.goalkeeperValue) {
+			return false;
+		}
+		return true;
+	}
+
 
 	/**
 	 * @return the goalkeeperValue
