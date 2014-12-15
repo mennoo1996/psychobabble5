@@ -1,7 +1,9 @@
 package xmlIO;
 
 import libraryClasses.Competition;
+import libraryClasses.Player;
 import libraryClasses.Team;
+import gameLogic.*;
 
 
 public class TestXMLParse {
@@ -23,8 +25,12 @@ public class TestXMLParse {
 //		
 //		System.out.println(competition.standingsToString());
 		
-		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
+//		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
+//		
 		
+		TransferList existingTransfers = new TransferList();
+		Player p = competition.getLibrary().getLibrary().get(0).getTeam().get(1);
+		TransferLogic.getAnswer(p, 37000000, competition.getLibrary(), existingTransfers);
 	}
 }
 

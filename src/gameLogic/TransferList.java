@@ -15,7 +15,10 @@ public class TransferList {
 	}
 	
 	public TransferInProgress getTransfer(int index) {
-		return transfers.get(index);
+		if (index<transfers.size()) {
+			
+			return transfers.get(index);
+		} else return null;
 	}
 	
 	public TransferInProgress getTransfer(String name) {
@@ -38,6 +41,14 @@ public class TransferList {
 	
 	public ArrayList<TransferInProgress> getTransfers() {
 		return transfers;
+	}
+	
+	public boolean transferExists(Player player) {
+		for (int i=0;i<transfers.size();i++) {
+			if(player.equals(transfers.get(i).getPlayer())) {
+				return true;
+			}
+		} return false;
 	}
 	
 

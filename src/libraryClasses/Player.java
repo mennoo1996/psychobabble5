@@ -289,5 +289,59 @@ public abstract class Player {
 	 */
 	public void setEligible(boolean isEligible) {
 		this.isEligible = isEligible;
-	}	
+	}
+
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		if (age != other.age)
+			return false;
+		if (assists != other.assists)
+			return false;
+		if (daysInjured != other.daysInjured)
+			return false;
+		if (daysSuspended != other.daysSuspended)
+			return false;
+		if (goals != other.goals)
+			return false;
+		if (isEligible != other.isEligible)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (number != other.number)
+			return false;
+		if (playerType == null) {
+			if (other.playerType != null)
+				return false;
+		} else if (!playerType.equals(other.playerType))
+			return false;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;
+		if (redcards != other.redcards)
+			return false;
+		if (team == null) {
+			if (other.team != null)
+				return false;
+		} else if (!team.equals(other.team))
+			return false;
+		if (yellowcards != other.yellowcards)
+			return false;
+		return true;
+	}
+	
+	
 }
