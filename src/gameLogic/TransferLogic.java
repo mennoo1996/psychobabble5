@@ -7,6 +7,7 @@ import java.util.*;
  *
  */
 public class TransferLogic {
+
 	/** This method returns the answer for a transfer request for a player that you have already bid for before
 	 * 
 	 * @param player The player you want to buy
@@ -309,12 +310,5 @@ public class TransferLogic {
 		
 	}
 		
-		
-		
-		
-		
-	
-	
-	
 
 }

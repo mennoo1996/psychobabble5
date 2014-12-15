@@ -52,9 +52,38 @@ public abstract class FieldPlayer extends Player {
 				+ ", number=" + this.getNumber() + ", price=" + this.getPrice() + ", dribblingValue=" + dribblingValue
 				+ ", finishingValue=" + finishingValue + ", defenseValue=" + defenseValue + ", staminaValue=" + staminaValue
 				+ ", goals=" + this.getGoals() + ", assists=" + this.getAssists() + ", yellowCards=" + this.getYellowcards()
-				+ ", redCards=" + this.getRedcards();
+				+ ", redCards=" + this.getRedcards() + ", daysInjured=" + this.getDaysInjured() + ", daysSuspended=" + this.getDaysSuspended()
+				+ ", eligible=" + this.isEligible() + "]";
 	}
-	
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		FieldPlayer other = (FieldPlayer) obj;
+		if (defenseValue != other.defenseValue) {
+			return false;
+		}
+		if (dribblingValue != other.dribblingValue) {
+			return false;
+		}
+		if (finishingValue != other.finishingValue) {
+			return false;
+		}
+		if (staminaValue != other.staminaValue) {
+			return false;
+		}
+		return true;
+	}
+
 
 	/**
 	 * @return the dribblingValue
