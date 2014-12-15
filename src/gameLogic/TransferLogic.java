@@ -1,9 +1,21 @@
 package gameLogic;
 import libraryClasses.*;
 import java.util.*;
-
+/** This class contains all the logic for transfers
+ * 
+ * @author Menno
+ *
+ */
 public class TransferLogic {
-	
+	/** This method returns the answer for a transfer request for a player that you have already bid for before
+	 * 
+	 * @param player The player you want to buy
+	 * @param bid The bid you place for this player
+	 * @param library The library of all teams and players
+	 * @param existingTransfers the list with transfers that already exist
+	 * @param returnedprice the price that was returned last time you tried to buy this player
+	 * @return true if the team has accepted your offer, false if the team has denied your offer
+	 */
 	public static boolean getAnswerForExistingTransfer(Player player, double bid, Library library, TransferList existingTransfers, double returnedprice) {
 		if (bid<returnedprice) {
 			return false;
@@ -11,7 +23,14 @@ public class TransferLogic {
 			return TransferLogic.getAnswer(player, bid, library, existingTransfers);
 		}
 	}
-	
+	/** This method returns the answer for a transfer request
+	 * 
+	 * @param player The player you want to buy
+	 * @param bid The bid you place for this player
+	 * @param library The library of all teams and players
+	 * @param existingTransfers The list with transfers that already exist
+	 * @return true if the team has accepted your offer, false if the team has denied your offer
+	 */
 	public static boolean getAnswer(Player player, double bid, Library library, TransferList existingTransfers) {
 		Team team = library.getTeamForName(player.getTeam());
 		ArrayList<Player> playerlist = new ArrayList<Player>();
@@ -146,7 +165,15 @@ public class TransferLogic {
 		
 		
 	}
-		
+	/** Calling this method represents requesting a transfer
+	 * 	
+	 * @param player The player you want to buy
+	 * @param playersTeam The team you are currently managing
+	 * @param bid The bid you want to place for this player
+	 * @param library The library of all teams and players
+	 * @param existingTransfers The list with transfers that already exist
+	 * @return a String with a meaningful message (to show to the user), about the acceptance or denial of his/her bid for that player
+	 */
 	public static String requestTransfer(Player player, Team playersTeam, double bid, Library library, TransferList existingTransfers) {
 		if (existingTransfers.getTransfer(player)==null) {
 			boolean answer = TransferLogic.getAnswer(player, bid, library, existingTransfers);
