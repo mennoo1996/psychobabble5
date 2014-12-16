@@ -13,7 +13,7 @@ public class TestXMLParse {
 		
 		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");
 		
-		System.out.println(competition.toString());
+//		System.out.println(competition.toString());
 		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
@@ -28,17 +28,17 @@ public class TestXMLParse {
 //		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
 //		
 		
-		System.out.println(competition.getLibrary().getLibrary().get(0).getCurrentTeam());
-		TransferList existingTransfers = new TransferList();
-		Player p = competition.getLibrary().getLibrary().get(0).getTeam().get(0);
-		Team myteam = competition.getLibrary().getLibrary().get(1);
-		System.out.println(TransferLogic.requestTransfer(p, myteam,  20000000, competition.getLibrary(), existingTransfers));
-		System.out.println(p);
-		System.out.println(myteam);
-		System.out.println(competition.getLibrary().getLibrary().get(0).getCurrentTeam());
-		System.out.println(TransferLogic.requestTransfer(p, myteam, 33000000, competition.getLibrary(), existingTransfers));
-		System.out.println(TransferLogic.requestTransfer(p, myteam, 37000000, competition.getLibrary(), existingTransfers));
-	}
+		Team playersTeam = competition.getLibrary().getLibrary().get(0);
+		Player player = playersTeam.getTeam().get(0);
+		int askingPrice = (int) (10*player.getPrice().doubleValue());
+		
+		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
+		System.out.println(player.isCanBeSold());
+		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
+		competition.playRound();
+		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
+		
+		}
 }
 
 
