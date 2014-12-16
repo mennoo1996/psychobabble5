@@ -369,7 +369,8 @@ public class TransferLogic {
 			buyingTeam.setBudget(buyingTeam.getBudget()-askingPrice);
 			buyingTeam.add(player);
 			player.setTeam(buyingTeam.getTeamName());
-			playersTeam.getTeam().remove(player);
+			boolean remove = playersTeam.getTeam().remove(player);
+			
 			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + askingPrice;
 		} else {
 			return "Unfortunately your player didn't get bought. Lowering the asking price might increase the chances for a team buying your player.";
