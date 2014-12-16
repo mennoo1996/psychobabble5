@@ -311,7 +311,14 @@ public class TransferLogic {
 		}
 		
 	}
-		
+	/** With this method you can request selling a player from your team
+	 * 	
+	 * @param player the player you want to sell
+	 * @param playersTeam the team you are currently managing
+	 * @param askingPrice the price you ask for the player
+	 * @param library the library containing all the teams and players
+	 * @return a String with information on succession/failure of selling the player
+	 */
 	public static String requestSell(Player player, Team playersTeam, double askingPrice, Library library) {
 		
 		ArrayList<Team> teamswithbudget = new ArrayList<Team>();
@@ -369,7 +376,9 @@ public class TransferLogic {
 			buyingTeam.setBudget(buyingTeam.getBudget()-askingPrice);
 			buyingTeam.add(player);
 			player.setTeam(buyingTeam.getTeamName());
-			boolean remove = playersTeam.getTeam().remove(player);
+			playersTeam.getTeam().remove(player);
+			player.setNumber(buyingTeam.getTeam().size());
+			
 			
 			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + askingPrice;
 		} else {
