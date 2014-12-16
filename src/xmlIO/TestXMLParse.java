@@ -30,12 +30,13 @@ public class TestXMLParse {
 		
 		Team playersTeam = competition.getLibrary().getLibrary().get(0);
 		Player player = playersTeam.getTeam().get(0);
-		int askingPrice = (int) (0.8*player.getPrice().doubleValue());
-		System.out.println(playersTeam.toString());
-		System.out.println(player.toString());
+		int askingPrice = (int) (10*player.getPrice().doubleValue());
+		
 		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
-		System.out.println(playersTeam.toString());
-		System.out.println(player.toString());
+		System.out.println(player.isCanBeSold());
+		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
+		competition.playRound();
+		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
 		
 		}
 }

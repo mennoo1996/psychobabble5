@@ -10,8 +10,8 @@ public abstract class Player {
 	
 	private BigDecimal price;
 	private String team, playerType, name;
-	private int age, number, goals, assists, yellowcards, redcards, daysInjured, daysSuspended;
-	private boolean isEligible;
+	private int age, number, goals, assists, yellowcards, redcards, daysInjured, daysSuspended, daysNotForSale;
+	private boolean isEligible, canBeSold;
 
 	/**
 	 * @param price
@@ -41,6 +41,8 @@ public abstract class Player {
 		this.daysSuspended = daysSuspended;
 		this.isEligible = isEligible;
 		this.playerType = "Player";
+		this.canBeSold=true;
+		this.daysNotForSale=0;
 	}
 	
 	public abstract String toString();
@@ -128,6 +130,12 @@ public abstract class Player {
 		}
 		if (daysInjured==0 && daysSuspended==0) {
 			setEligible(true);
+		}
+		if (daysNotForSale>0) {
+			daysNotForSale--;
+		}
+		if (daysNotForSale==0) {
+			setCanBeSold(true);
 		}
 	}
 	/**
@@ -357,6 +365,39 @@ public abstract class Player {
 	 */
 	public void setEligible(boolean isEligible) {
 		this.isEligible = isEligible;
+	}
+
+	/**
+	 * @return the canBeSold
+	 */
+	public boolean isCanBeSold() {
+		return canBeSold;
+	}
+
+	/**
+	 * @param canBeSold the canBeSold to set
+	 */
+	public void setCanBeSold(boolean canBeSold) {
+		this.canBeSold = canBeSold;
+	}
+	
+	public void triedToSell() {
+		this.setCanBeSold(false);
+		this.setDaysNotForSale(3);
+	}
+
+	/**
+	 * @return the daysNotForSale
+	 */
+	public int getDaysNotForSale() {
+		return daysNotForSale;
+	}
+
+	/**
+	 * @param daysNotForSale the daysNotForSale to set
+	 */
+	public void setDaysNotForSale(int daysNotForSale) {
+		this.daysNotForSale = daysNotForSale;
 	}
 
 	

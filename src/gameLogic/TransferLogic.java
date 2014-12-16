@@ -320,6 +320,9 @@ public class TransferLogic {
 	 * @return a String with information on succession/failure of selling the player
 	 */
 	public static String requestSell(Player player, Team playersTeam, double askingPrice, Library library) {
+		if (!player.isCanBeSold()) {
+			return "You can't try to sell this player until after " + player.getDaysNotForSale() + " more rounds";
+		}
 		
 		ArrayList<Team> teamswithbudget = new ArrayList<Team>();
 		for (int i=0;i<library.getLibrary().size();i++) {
@@ -332,6 +335,7 @@ public class TransferLogic {
 			
 		}
 		if (teamswithbudget.size()==0) {
+			player.triedToSell();
 			return "Your player was not bought by any team, due to the fact that none of the teams has got enough money to fulfill your asking price";
 		}
 		
@@ -382,6 +386,7 @@ public class TransferLogic {
 			
 			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + askingPrice;
 		} else {
+			player.triedToSell();
 			return "Unfortunately your player didn't get bought. Lowering the asking price might increase the chances for a team buying your player.";
 		}
 		
