@@ -209,6 +209,8 @@ public class TransferLogic {
 				playersTeam.add(player);
 				opponentsTeam.getTeam().remove(player);
 				player.setTeam(playersTeam.getTeamName());
+				playersTeam.setBudget(playersTeam.getBudget()-bid);
+				opponentsTeam.setBudget(opponentsTeam.getBudget()+bid);
 				return "Congratulations! Your bid of " + bid + " got accepted and " + player.getName() + " is now part of your team";
 			} else {
 				double percentage = bid/player.getPrice().doubleValue()*100-100;
@@ -310,5 +312,71 @@ public class TransferLogic {
 		
 	}
 		
-
+	public static String requestSell(Player player, Team playersTeam, double askingPrice, Library library) {
+		
+		ArrayList<Team> teamswithbudget = new ArrayList<Team>();
+		for (int i=0;i<library.getLibrary().size();i++) {
+			Team t = library.getLibrary().get(i);
+			if (t!=playersTeam) {
+				if (t.getBudget()>=askingPrice) {
+					teamswithbudget.add(t);
+				}
+			}
+			
+		}
+		if (teamswithbudget.size()==0) {
+			return "Your player was not bought by any team, due to the fact that none of the teams has got enough money to fulfill your asking price";
+		}
+		
+		double percentage = askingPrice/player.getPrice().doubleValue()*100-100;
+		boolean sell = false;
+		int random = GameLogic.randomGenerator(1, 100);
+		if (percentage<-10) {
+			sell=true;
+		} else if (percentage >=-10 && percentage<0) {
+			if (random<=95) {
+				sell=true;
+			}
+		} else if (percentage>=0 && percentage <5) {
+			if (random<=75) {
+				sell=true;
+			}
+		} else if (percentage>=5 && percentage <10) {
+			if (random<=50) {
+				sell=true;
+			}
+		} else if (percentage>=10 && percentage <15) {
+			if (random<=30) {
+				sell=true;
+			}
+		} else if (percentage>=15 && percentage <20) {
+			if (random<=20) {
+				sell=true;
+			}
+		} else if (percentage>=20 && percentage<25) {
+			if (random<=10) {
+				sell=true;
+			}
+		} else if (percentage>=25 && percentage<30) {
+			if (random==1) {
+				sell=true;
+			}
+		}
+		
+		if (sell) {
+			Team buyingTeam = teamswithbudget.get(GameLogic.randomGenerator(0, teamswithbudget.size()-1));
+			playersTeam.setBudget(playersTeam.getBudget()+askingPrice);
+			buyingTeam.setBudget(buyingTeam.getBudget()-askingPrice);
+			buyingTeam.add(player);
+			player.setTeam(buyingTeam.getTeamName());
+			playersTeam.getTeam().remove(player);
+			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + askingPrice;
+		} else {
+			return "Unfortunately your player didn't get bought. Lowering the asking price might increase the chances for a team buying your player.";
+		}
+		
+		
+		
+		
+	}
 }
