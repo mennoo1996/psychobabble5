@@ -302,10 +302,12 @@ public class GameLogic {
 			GameLogic.gelijkSpel(allresults, t1rating, t2rating);
 			
 		} else if (result==1) {
-			GameLogic.Team1Wint(allresults, t1rating, t2rating);
+			GameLogic.Team1WintLoserScore(allresults, t1rating, t2rating);
+			GameLogic.Team1WintWinnerScore(allresults, t1rating, t2rating);
 			
 		} else {
-			GameLogic.Team2Wint(allresults, t1rating, t2rating);
+			GameLogic.Team2WintLoserScore(allresults, t1rating, t2rating);
+			GameLogic.Team2WintWinnerScore(allresults, t1rating, t2rating);
 		}
 		
 		return allresults;
@@ -319,7 +321,7 @@ public class GameLogic {
 	 * @param t1rating the rating of the Current Team of t1
 	 * @param t2rating the rating of the Current Team of t2
 	 */
-	public static void Team2Wint(int[] allresults, CurrentXIRating t1rating, CurrentXIRating t2rating) {
+	public static void Team2WintLoserScore(int[] allresults, CurrentXIRating t1rating, CurrentXIRating t2rating) {
 		/* The calculation of the scores follows a basic pattern
 		 * First the difference of loser.finishing and winner.defending is calculated
 		 * Based on this result, there are certain boundaries (percentages) that represent the chance for a score for the loser to happen
@@ -331,9 +333,10 @@ public class GameLogic {
 			int difference=t2rating.getDefending() - t1rating.getFinishing();
 			// The difference is higher than 10 --> the defending of the winner was much better than the finishing of the loser
 			// This will cause a high chance of a low score for the loser
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (difference>10) {
 				// A random number is generated between 0 and 100
-				int random = GameLogic.randomGenerator(0, 100, -1);
+				
 				// If it is smaller than 95 (that is, in 95% of the cases), the loser gets a score of 0
 				if (random <=95) {
 					allresults[1]=0;
@@ -342,14 +345,12 @@ public class GameLogic {
 					allresults[1]=1;
 				}
 			} else if (difference >5 && difference <=10) {
-				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=90) {
 					allresults[1]=0;
 				} else {
 					allresults[1]=1;
 				}
 			} else if (difference >0 && difference <=5) {
-				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=70) {
 					allresults[1]=0;
 				} else if (random >70 && random <=95) {
@@ -358,7 +359,6 @@ public class GameLogic {
 					allresults[1]=2;
 				}
 			} else if (difference <=0 && difference >-5) {
-				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <= 55) {
 					allresults[1]=0;
 				} else if (random >55 && random <=95) {
@@ -367,7 +367,6 @@ public class GameLogic {
 					allresults[1]=2;
 				}
 			} else if (difference <=-5 && difference >-10) {
-				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=40) {
 					allresults[1]=0;
 				} else if (random >40 && random <=90) {
@@ -376,7 +375,6 @@ public class GameLogic {
 					allresults[1]=2;
 				}
 			} else {
-				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=25) {
 					allresults[1]=0;
 				} else if (random>25 && random <=80) {
@@ -386,93 +384,90 @@ public class GameLogic {
 				}
 			}
 			
-			difference = t2rating.getFinishing() - t1rating.getDefending();
-			// If the difference is higher than 10 (that is, the finishing of the winner was much higher that the defending of the loser)
-			if (difference>10) {
-				// Generate a random number between 0 and 100 (100 to keep it simple, percentages)
-				int random = GameLogic.randomGenerator(0, 100, -1);
-				// in 10 % of the cases the goal difference is 1
-				if (random <=10) {
-					allresults[2]=allresults[1]+1;
-					// in 40 % of the cases the goal difference is 2
-				} else if (random >10 && random <=50) {
-					allresults[2]=allresults[1]+2;
-					// in 40% of the cases the goal difference is 3
-				} else if (random > 50 && random <=90) {
-					allresults[2]=allresults[1]+3;
-					// in 10% of the cases the goal difference is 4
-				} else {
-					allresults[2]=allresults[1]+4;
-				}
-			} else if (difference >5 && difference <=10) {
-				int random = GameLogic.randomGenerator(0,  100, -1);
-				if (random<=35) {
-					allresults[2]=allresults[1]+1;
-				} else if (random >35 && random <=80) {
-					allresults[2]=allresults[1]+2;
-				} else if (random >80 && random <=95) {
-					allresults[2]=allresults[1]+3;
-				} else {
-					allresults[2]=allresults[1]+4;
-				}
-			} else if (difference >0 && difference <=5) {
-				int random = GameLogic.randomGenerator(0, 100, -1);
-				if (random <=55) {
-					allresults[2]=allresults[1]+1;
-				} else if (random >55 && random <=95) {
-					allresults[2]=allresults[1]+2;
-				} else {
-					allresults[2]=allresults[1]+3;
-				}
-			} else if (difference <=0 && difference >-5) {
-				int random = GameLogic.randomGenerator(0, 100, -1);
-				if (random <=75) {
-					allresults[2]=allresults[1]+1;
-				} else {
-					allresults[2]=allresults[1]+2;
-				}
-			} else if (difference <=-5 && difference >-10) {
-				int random = GameLogic.randomGenerator(0, 100, -1);
-				if (random <=90) {
-					allresults[2]=allresults[1]+1;
-				} else {
-					allresults[2]=allresults[1]+2;
-				}
-			} else {
-				int random = GameLogic.randomGenerator(0, 100, -1);
-				if (random <=95) {
-					allresults[2]=allresults[1]+1;
-				} else {
-					allresults[2]=allresults[1]+2;
-				}
-			}
+			
 			
 		}
+	
+	public static void Team2WintWinnerScore(int[] allresults, CurrentXIRating t1rating, CurrentXIRating t2rating) {
+		int difference = t2rating.getFinishing() - t1rating.getDefending();
+		int random = GameLogic.randomGenerator(0, 100, -1);
+		// If the difference is higher than 10 (that is, the finishing of the winner was much higher that the defending of the loser)
+		if (difference>10) {
+			// Generate a random number between 0 and 100 (100 to keep it simple, percentages)
+			// in 10 % of the cases the goal difference is 1
+			if (random <=10) {
+				allresults[2]=allresults[1]+1;
+				// in 40 % of the cases the goal difference is 2
+			} else if (random >10 && random <=50) {
+				allresults[2]=allresults[1]+2;
+				// in 40% of the cases the goal difference is 3
+			} else if (random > 50 && random <=90) {
+				allresults[2]=allresults[1]+3;
+				// in 10% of the cases the goal difference is 4
+			} else {
+				allresults[2]=allresults[1]+4;
+			}
+		} else if (difference >5 && difference <=10) {
+			if (random<=35) {
+				allresults[2]=allresults[1]+1;
+			} else if (random >35 && random <=80) {
+				allresults[2]=allresults[1]+2;
+			} else if (random >80 && random <=95) {
+				allresults[2]=allresults[1]+3;
+			} else {
+				allresults[2]=allresults[1]+4;
+			}
+		} else if (difference >0 && difference <=5) {
+			if (random <=55) {
+				allresults[2]=allresults[1]+1;
+			} else if (random >55 && random <=95) {
+				allresults[2]=allresults[1]+2;
+			} else {
+				allresults[2]=allresults[1]+3;
+			}
+		} else if (difference <=0 && difference >-5) {
+			if (random <=75) {
+				allresults[2]=allresults[1]+1;
+			} else {
+				allresults[2]=allresults[1]+2;
+			}
+		} else if (difference <=-5 && difference >-10) {
+			if (random <=90) {
+				allresults[2]=allresults[1]+1;
+			} else {
+				allresults[2]=allresults[1]+2;
+			}
+		} else {
+			if (random <=95) {
+				allresults[2]=allresults[1]+1;
+			} else {
+				allresults[2]=allresults[1]+2;
+			}
+		}
+	}
 	/** The method calculates the scores for a match in which Team 1 wins
 	 * 
 	 * @param allresults an array of integers of which the first value is 1, it will be appended with the scores of both teams
 	 * @param t1rating the rating of the Current Team of the home playing team
 	 * @param t2rating the rating of the Current Team of the away playing team
 	 */
-	public static void Team1Wint(int[] allresults, CurrentXIRating t1rating, CurrentXIRating t2rating) {
+	public static void Team1WintLoserScore(int[] allresults, CurrentXIRating t1rating, CurrentXIRating t2rating) {
 		// This method follows the same structure as Team2Wint(), but then the other way around. Read the comments there to understand the way of calculating
 		int difference=t1rating.getDefending() - t2rating.getFinishing();
+		int random = GameLogic.randomGenerator(0, 100, -1);
 		if (difference>10) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=95) {
 				allresults[2]=0;
 			} else {
 				allresults[2]=1;
 			}
 		} else if (difference >5 && difference <=10) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=90) {
 				allresults[2]=0;
 			} else {
 				allresults[2]=1;
 			}
 		} else if (difference >0 && difference <=5) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=70) {
 				allresults[2]=0;
 			} else if (random >70 && random <=95) {
@@ -481,7 +476,6 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else if (difference <=0 && difference >-5) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <= 55) {
 				allresults[2]=0;
 			} else if (random >55 && random <=95) {
@@ -490,7 +484,6 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else if (difference <=-5 && difference >-10) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=40) {
 				allresults[2]=0;
 			} else if (random >40 && random <=90) {
@@ -499,7 +492,6 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=25) {
 				allresults[2]=0;
 			} else if (random>25 && random <=80) {
@@ -509,9 +501,13 @@ public class GameLogic {
 			}
 		}
 		
-		difference = t1rating.getFinishing() - t2rating.getDefending();
+		
+	}
+	
+	public static void Team1WintWinnerScore(int[] allresults, CurrentXIRating t1rating, CurrentXIRating t2rating) {
+		int difference = t1rating.getFinishing() - t2rating.getDefending();
+		int random = GameLogic.randomGenerator(0, 100, -1);
 		if (difference>10) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=10) {
 				allresults[1]=allresults[2]+1;
 			} else if (random >10 && random <=50) {
@@ -522,7 +518,6 @@ public class GameLogic {
 				allresults[1]=allresults[2]+4;
 			}
 		} else if (difference >5 && difference <=10) {
-			int random = GameLogic.randomGenerator(0,  100, -1);
 			if (random<=35) {
 				allresults[1]=allresults[2]+1;
 			} else if (random >35 && random <=80) {
@@ -533,7 +528,6 @@ public class GameLogic {
 				allresults[1]=allresults[2]+4;
 			}
 		} else if (difference >0 && difference <=5) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=55) {
 				allresults[1]=allresults[2]+1;
 			} else if (random >55 && random <=95) {
@@ -542,21 +536,18 @@ public class GameLogic {
 				allresults[1]=allresults[2]+3;
 			}
 		} else if (difference <=0 && difference >-5) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=75) {
 				allresults[1]=allresults[2]+1;
 			} else {
 				allresults[1]=allresults[2]+2;
 			}
 		} else if (difference <=-5 && difference >-10) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=90) {
 				allresults[1]=allresults[2]+1;
 			} else {
 				allresults[1]=allresults[2]+2;
 			}
 		} else {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=95) {
 				allresults[1]=allresults[2]+1;
 			} else {
@@ -577,8 +568,8 @@ public class GameLogic {
 		 * 
 		 */
 		int difference = (t1rating.getFinishing() + t2rating.getFinishing() - t1rating.getDefending() - t2rating.getDefending());
+		int random = GameLogic.randomGenerator(0, 100, -1);
 		if (difference >10) {
-			int random = GameLogic.randomGenerator(0,  100, -1);
 			if (random<=25) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -593,7 +584,6 @@ public class GameLogic {
 				allresults[2]=3;
 			}
 		} else if (difference > 5 && difference <=10) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=35) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -605,7 +595,6 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else if (difference > 0 && difference <=5) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=55) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -617,7 +606,6 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else if (difference <= 0 && difference > -5 ) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=75) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -626,7 +614,6 @@ public class GameLogic {
 				allresults[2]=1;
 			}
 		} else if (difference <= -5 && difference>-10) {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=90) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -635,7 +622,6 @@ public class GameLogic {
 				allresults[2]=1;
 			}
 		} else {
-			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random<=95) {
 				allresults[1]=0;
 				allresults[2]=0;
