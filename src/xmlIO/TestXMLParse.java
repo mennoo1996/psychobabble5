@@ -18,6 +18,7 @@ public class TestXMLParse {
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
+		competition.playRound();
 //		
 //		for(int i = 0; i < 38; i++) {
 //			competition.playRound();
@@ -27,16 +28,16 @@ public class TestXMLParse {
 		
 //		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
 //		
+//		System.out.println(GameLogic.randomGenerator(1,50,5));
+//		System.out.println(GameLogic.randomGenerator(1,100,5));
+//		System.out.println(GameLogic.randomGenerator(1,150,5));
 		
-		Team playersTeam = competition.getLibrary().getLibrary().get(0);
-		Player player = playersTeam.getTeam().get(0);
-		int askingPrice = (int) (10*player.getPrice().doubleValue());
+		for (int i=0;i<200;i++) {
+			GameLogic.setSeed(i);
+			GameLogic.setTesting(true);
+			System.out.println(i + " " + GameLogic.randomGenerator(0, 100));
+		}
 		
-		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
-		System.out.println(player.isCanBeSold());
-		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
-		competition.playRound();
-		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
 		
 		}
 }
