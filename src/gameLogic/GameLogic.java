@@ -292,16 +292,26 @@ public class GameLogic {
 		// retrieve the ratings of the Current XI
 		CurrentXIRating t1rating = CurrentXIRating.getCurrentXIRating(t1);
 		CurrentXIRating t2rating = CurrentXIRating.getCurrentXIRating(t2);
-		// calculate the winner of the match
-		int result = getWinner(t1rating, t2rating);
+		
+		int t1random = GameLogic.getRandomNumberForTeam(t1rating, true);
+		int t2random = GameLogic.getRandomNumberForTeam(t2rating, false);
 		int[] allresults = new int[3];
-		allresults[0]=result;
+		if ((Math.abs(t1random-t2random))<3000) {
+			allresults[0]=0;
+		} else if (t1random>t2random) {
+			allresults[0]=1;
+		} else {
+			allresults[0]=2;
+		}
+		// calculate the winner of the match
+		
+		
 		// call the right method to calculate the scores, based on the winner
-		if (result==0) {
+		if (allresults[0]==0) {
 			
 			GameLogic.gelijkSpel(allresults, t1rating, t2rating);
 			
-		} else if (result==1) {
+		} else if (allresults[1]==1) {
 			GameLogic.Team1WintLoserScore(allresults, t1rating, t2rating);
 			GameLogic.Team1WintWinnerScore(allresults, t1rating, t2rating);
 			
@@ -693,6 +703,22 @@ public class GameLogic {
 		} else if (t1RandomNumber>t2RandomNumber) {
 			return 1;
 		} else return 2;
+	}
+	
+	public static int getRandomNumberForTeam (CurrentXIRating trating, boolean home) {
+		int totalrating = trating.getTotal();
+		
+		totalrating = (int) Math.pow(1.03, totalrating);
+		
+		int luck = GameLogic.randomGenerator(0, 50, -1);
+		luck = 1+ ((luck-25)/100);
+		
+		totalrating=totalrating*luck;
+		if (home) {
+			totalrating=(int)1.15*totalrating;
+		}
+		
+		return GameLogic.randomGenerator(1, totalrating, -1);
 	}
 	
 	
