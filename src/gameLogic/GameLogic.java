@@ -21,7 +21,9 @@ public class GameLogic {
 		seed=seedIn;
 	}
 	
-	
+	public static void setTesting(boolean testingIn) {
+		testing=testingIn;
+	}
 	/** Returns the players of t that got injured in the match
 	 * 
 	 * @param t the team
@@ -52,13 +54,13 @@ public class GameLogic {
 			if (random <=75) {
 				injurieslengths[i]=1;
 			// 15% chance for a 3 match injury
-			} else if (random > 75 && random <=90) {
+			} if (random > 75 && random <=90) {
 				injurieslengths[i]=3;
 			// 7% chance for a 6 match injury
-			} else if (random > 90 && random <=97) {
+			} if (random > 90 && random <=97) {
 				injurieslengths[i]=6;
 			// 3% chance for a 12 match injury
-			} else {
+			} if (random>97) {
 				injurieslengths[i]=12;
 			}
 		}
@@ -74,13 +76,15 @@ public class GameLogic {
 	public static int getAmountOfRedCards(Team t) {
 		int random = GameLogic.randomGenerator(1, 100);
 		//calculate the amount of red cards for team 1 based on random number
+		int res=0;
 		if (random <=90) {
-			return 0;
-		} else if (random >90 && random <=99) {
-			return 1;
-		} else {
-			return 2;
+			res=0;
+		} if (random >90 && random <=99) {
+			res=1;
+		} if (random==100) {
+			res=2;
 		}
+		return res;
 		
 	}
 	/** This method calculates which players of a team got the red cards
@@ -105,19 +109,21 @@ public class GameLogic {
 	public static int getAmountOfYellowCards(Team t) {
 		int random = GameLogic.randomGenerator(1, 100);
 		// calculate the amount of yellow cards for team 2, based on certain boundares and the random number
+		int res=0;
 		if (random <=5) {
-			return 0;
-		} else if (random >5 && random <=65) {
-			return 1;
-		} else if (random>65 && random <=85) {
-			return 2;
-		} else if (random>85 && random <=93) {
-			return 3;
-		} else if (random>93 && random <=98) {
-			return 4;
-		} else {
-			return 5;
+			res=0;
+		} if (random >5 && random <=65) {
+			res=1;
+		} if (random>65 && random <=85) {
+			res= 2;
+		} if (random>85 && random <=93) {
+			res= 3;
+		} if (random>93 && random <=98) {
+			res= 4;
+		} if (random>98) {
+			res= 5;
 		}
+		return res;
 	}
 	/** This method calculates which players of a team got the yellow cards
 	 * 
@@ -317,7 +323,7 @@ public class GameLogic {
 			
 			GameLogic.gelijkSpel(allresults, t1rating, t2rating);
 			
-		} else if (allresults[1]==1) {
+		} else if (allresults[0]==1) {
 			GameLogic.Team1WintLoserScore(allresults, t1rating, t2rating);
 			GameLogic.Team1WintWinnerScore(allresults, t1rating, t2rating);
 			
@@ -360,42 +366,42 @@ public class GameLogic {
 				} else {
 					allresults[1]=1;
 				}
-			} else if (difference >5 && difference <=10) {
+			} if (difference >5 && difference <=10) {
 				if (random <=90) {
 					allresults[1]=0;
 				} else {
 					allresults[1]=1;
 				}
-			} else if (difference >0 && difference <=5) {
+			} if (difference >0 && difference <=5) {
 				if (random <=70) {
 					allresults[1]=0;
-				} else if (random >70 && random <=95) {
+				} if (random >70 && random <=95) {
 					allresults[1]=1;
-				} else {
+				} if (random>95) {
 					allresults[1]=2;
 				}
-			} else if (difference <=0 && difference >-5) {
+			} if (difference <=0 && difference >-5) {
 				if (random <= 55) {
 					allresults[1]=0;
-				} else if (random >55 && random <=95) {
+				} if (random >55 && random <=95) {
 					allresults[1]=1;
-				} else {
+				} if (random>95) {
 					allresults[1]=2;
 				}
-			} else if (difference <=-5 && difference >-10) {
+			} if (difference <=-5 && difference >-10) {
 				if (random <=40) {
 					allresults[1]=0;
-				} else if (random >40 && random <=90) {
+				} if (random >40 && random <=90) {
 					allresults[1]=1;
-				} else {
+				} if (random>90) {
 					allresults[1]=2;
 				}
-			} else {
+			} if (difference<=-10) {
 				if (random <=25) {
 					allresults[1]=0;
-				} else if (random>25 && random <=80) {
+				} if (random>25 && random <=80) {
 					allresults[1]=1;
-				} else {
+				} if (random>80) {
 					allresults[1]=2;
 				}
 			}
@@ -414,46 +420,46 @@ public class GameLogic {
 			if (random <=10) {
 				allresults[2]=allresults[1]+1;
 				// in 40 % of the cases the goal difference is 2
-			} else if (random >10 && random <=50) {
+			} if (random >10 && random <=50) {
 				allresults[2]=allresults[1]+2;
 				// in 40% of the cases the goal difference is 3
-			} else if (random > 50 && random <=90) {
+			} if (random > 50 && random <=90) {
 				allresults[2]=allresults[1]+3;
 				// in 10% of the cases the goal difference is 4
-			} else {
+			} if (random>90) {
 				allresults[2]=allresults[1]+4;
 			}
-		} else if (difference >5 && difference <=10) {
+		} if (difference >5 && difference <=10) {
 			if (random<=35) {
 				allresults[2]=allresults[1]+1;
-			} else if (random >35 && random <=80) {
+			} if (random >35 && random <=80) {
 				allresults[2]=allresults[1]+2;
-			} else if (random >80 && random <=95) {
+			} if (random >80 && random <=95) {
 				allresults[2]=allresults[1]+3;
-			} else {
+			} if (random>95) {
 				allresults[2]=allresults[1]+4;
 			}
-		} else if (difference >0 && difference <=5) {
+		} if (difference >0 && difference <=5) {
 			if (random <=55) {
 				allresults[2]=allresults[1]+1;
-			} else if (random >55 && random <=95) {
+			} if (random >55 && random <=95) {
 				allresults[2]=allresults[1]+2;
-			} else {
+			} if (random>95) {
 				allresults[2]=allresults[1]+3;
 			}
-		} else if (difference <=0 && difference >-5) {
+		} if (difference <=0 && difference >-5) {
 			if (random <=75) {
 				allresults[2]=allresults[1]+1;
 			} else {
 				allresults[2]=allresults[1]+2;
 			}
-		} else if (difference <=-5 && difference >-10) {
+		} if (difference <=-5 && difference >-10) {
 			if (random <=90) {
 				allresults[2]=allresults[1]+1;
 			} else {
 				allresults[2]=allresults[1]+2;
 			}
-		} else {
+		} if (difference<=-10) {
 			if (random <=95) {
 				allresults[2]=allresults[1]+1;
 			} else {
@@ -477,42 +483,42 @@ public class GameLogic {
 			} else {
 				allresults[2]=1;
 			}
-		} else if (difference >5 && difference <=10) {
+		} if (difference >5 && difference <=10) {
 			if (random <=90) {
 				allresults[2]=0;
 			} else {
 				allresults[2]=1;
 			}
-		} else if (difference >0 && difference <=5) {
+		} if (difference >0 && difference <=5) {
 			if (random <=70) {
 				allresults[2]=0;
-			} else if (random >70 && random <=95) {
+			} if (random >70 && random <=95) {
 				allresults[2]=1;
-			} else {
+			} if (random>95) {
 				allresults[2]=2;
 			}
-		} else if (difference <=0 && difference >-5) {
+		} if (difference <=0 && difference >-5) {
 			if (random <= 55) {
 				allresults[2]=0;
-			} else if (random >55 && random <=95) {
+			} if (random >55 && random <=95) {
 				allresults[2]=1;
-			} else {
+			} if (random>95) {
 				allresults[2]=2;
 			}
-		} else if (difference <=-5 && difference >-10) {
+		} if (difference <=-5 && difference >-10) {
 			if (random <=40) {
 				allresults[2]=0;
-			} else if (random >40 && random <=90) {
+			} if (random >40 && random <=90) {
 				allresults[2]=1;
-			} else {
+			} if (random>90) {
 				allresults[2]=2;
 			}
-		} else {
+		} if (difference<=-10) {
 			if (random <=25) {
 				allresults[2]=0;
-			} else if (random>25 && random <=80) {
+			} if (random>25 && random <=80) {
 				allresults[2]=1;
-			} else {
+			} if (random>80) {
 				allresults[2]=2;
 			}
 		}
@@ -526,44 +532,44 @@ public class GameLogic {
 		if (difference>10) {
 			if (random <=10) {
 				allresults[1]=allresults[2]+1;
-			} else if (random >10 && random <=50) {
+			} if (random >10 && random <=50) {
 				allresults[1]=allresults[2]+2;
-			} else if (random > 50 && random <=90) {
+			} if (random > 50 && random <=90) {
 				allresults[1]=allresults[2]+3;
-			} else {
+			} if (random>90) {
 				allresults[1]=allresults[2]+4;
 			}
-		} else if (difference >5 && difference <=10) {
+		} if (difference >5 && difference <=10) {
 			if (random<=35) {
 				allresults[1]=allresults[2]+1;
-			} else if (random >35 && random <=80) {
+			} if (random >35 && random <=80) {
 				allresults[1]=allresults[2]+2;
-			} else if (random >80 && random <=95) {
+			} if (random >80 && random <=95) {
 				allresults[1]=allresults[2]+3;
-			} else {
+			} if (random>95) {
 				allresults[1]=allresults[2]+4;
 			}
-		} else if (difference >0 && difference <=5) {
+		} if (difference >0 && difference <=5) {
 			if (random <=55) {
 				allresults[1]=allresults[2]+1;
-			} else if (random >55 && random <=95) {
+			} if (random >55 && random <=95) {
 				allresults[1]=allresults[2]+2;
-			} else {
+			} if (random>95) {
 				allresults[1]=allresults[2]+3;
 			}
-		} else if (difference <=0 && difference >-5) {
+		} if (difference <=0 && difference >-5) {
 			if (random <=75) {
 				allresults[1]=allresults[2]+1;
 			} else {
 				allresults[1]=allresults[2]+2;
 			}
-		} else if (difference <=-5 && difference >-10) {
+		} if (difference <=-5 && difference >-10) {
 			if (random <=90) {
 				allresults[1]=allresults[2]+1;
 			} else {
 				allresults[1]=allresults[2]+2;
 			}
-		} else {
+		} if (difference<=-10) {
 			if (random <=95) {
 				allresults[1]=allresults[2]+1;
 			} else {
@@ -589,39 +595,39 @@ public class GameLogic {
 			if (random<=25) {
 				allresults[1]=0;
 				allresults[2]=0;
-			} else if (random > 25 && random <=70) {
+			} if (random > 25 && random <=70) {
 				allresults[1]=1;
 				allresults[2]=1;
-			} else if (random > 70 && random <=95) {
+			} if (random > 70 && random <=95) {
 				allresults[1]=2;
 				allresults[2]=2;
-			} else {
+			} if (random>95) {
 				allresults[1]=3;
 				allresults[2]=3;
 			}
-		} else if (difference > 5 && difference <=10) {
+		} if (difference > 5 && difference <=10) {
 			if (random <=35) {
 				allresults[1]=0;
 				allresults[2]=0;
-			} else if (random > 35 && random <=85) {
+			} if (random > 35 && random <=85) {
 				allresults[1]=1;
 				allresults[2]=1;
-			} else {
+			} if (random>85) {
 				allresults[1]=2;
 				allresults[2]=2;
 			}
-		} else if (difference > 0 && difference <=5) {
+		} if (difference > 0 && difference <=5) {
 			if (random <=55) {
 				allresults[1]=0;
 				allresults[2]=0;
-			} else if (random >55 && random <=95) {
+			} if (random >55 && random <=95) {
 				allresults[1]=1;
 				allresults[2]=1;
-			} else {
+			} if (random>95) {
 				allresults[1]=2;
 				allresults[2]=2;
 			}
-		} else if (difference <= 0 && difference > -5 ) {
+		} if (difference <= 0 && difference > -5 ) {
 			if (random <=75) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -629,7 +635,7 @@ public class GameLogic {
 				allresults[1]=1;
 				allresults[2]=1;
 			}
-		} else if (difference <= -5 && difference>-10) {
+		} if (difference <= -5 && difference>-10) {
 			if (random <=90) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -637,7 +643,7 @@ public class GameLogic {
 				allresults[1]=1;
 				allresults[2]=1;
 			}
-		} else {
+		} if (difference<=-10) {
 			if (random<=95) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -669,47 +675,8 @@ public class GameLogic {
 		return randomNum;
 		
 	}
-	/** This method returns the winner of a match
-	 * 
-	 * @param t1rating the rating of the Current Team of the home-playing team
-	 * @param t2rating the rating of the Current Team of the away-playing team
-	 * @return 0 if draw, 1 if home wins, 2 if away wins
-	 */
-	public static int getWinner (CurrentXIRating t1rating, CurrentXIRating t2rating) {
-		// retrieve the total ratings of the current teams of the teams
-		int t1totalrating = t1rating.getTotal();
-		int t2totalrating = t2rating.getTotal();
-		
-		// calculate 1.03 ^ totalrating (this is to create bigger differences, to make results more realistic)
-		t1totalrating= (int) Math.pow(1.03, t1totalrating);
-		t2totalrating= (int) Math.pow(1.03, t2totalrating);
-		
-		// calculate the luck of both teams as a random integer between 0 and 50
-		int t1luck = GameLogic.randomGenerator(0, 50);
-		int t2luck = GameLogic.randomGenerator(0, 50);
-		
-		// convert the luck number into a -25% to 25% lose/bonus
-		t1luck = 1+ ((t1luck-25)/100);
-		t2luck = 1+ ((t2luck-25)/100);
-		
-		// apply the luck to the rating
-		t1totalrating = t1totalrating*t1luck;
-		t2totalrating = t2totalrating*t2luck;
-		
-		// give the home team a 15% home advantage
-		t1totalrating = (int)1.15*t1totalrating;
-		
-		// generate random numbers between 1 and the computed totalrating, for both teams
-		int t1RandomNumber = GameLogic.randomGenerator(1, t1totalrating);
-		int t2RandomNumber = GameLogic.randomGenerator(1, t2totalrating);
-		
-		// The team with the higher random number wins, except if the numbers lie less than 3000 apart, then it is a draw
-		if ((Math.abs(t1RandomNumber-t2RandomNumber))<3000) {
-			return 0;
-		} else if (t1RandomNumber>t2RandomNumber) {
-			return 1;
-		} else return 2;
-	}
+	
+	
 	
 	public static int getRandomNumberForTeam (CurrentXIRating trating, boolean home) {
 		int totalrating = trating.getTotal();
