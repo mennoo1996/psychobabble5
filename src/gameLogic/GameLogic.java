@@ -15,30 +15,22 @@ public class GameLogic {
 	
 	private static int rngCounter = (int)System.currentTimeMillis();
 	
-	/** Returns the players that got injured in a match
+	
+	/** Returns the players of t that got injured in the match
 	 * 
-	 * @param t1 The home-playing team
-	 * @param t2 The away-playing team
-	 * @return an ArrayList with players that got an injury ; the length is not yet specified1
+	 * @param t the team
+	 * @return an ArrayList with players that got an injury;the length is not yet specified
 	 */
-	public static ArrayList<Player> getInjuredPlayers (Team t1, Team t2) {
-		ArrayList<Player> t1CurrentTeam = t1.getCurrentTeam();
-		ArrayList<Player> t2CurrentTeam = t2.getCurrentTeam();
+	public static ArrayList<Player> getInjuredPlayers (Team t) {
+		ArrayList<Player> tCurrentTeam = t.getCurrentTeam();
 		ArrayList<Player> injuredPlayers = new ArrayList<Player>();
-		// every player has a 3% chance for an injury in a match
-		for (int i=0;i<t1CurrentTeam.size();i++) {
-			int random = GameLogic.randomGenerator(1, 100, -1);
-			if (random <=3) {
-				injuredPlayers.add(t1CurrentTeam.get(i));
-			}
-		}
-		for (int i=0;i<t2CurrentTeam.size();i++) {
-			int random = GameLogic.randomGenerator(1, 100, -1);
-			if (random <=3) {
-				injuredPlayers.add(t2CurrentTeam.get(i));
-			}
-		}
 		
+		for (int i=0;i<tCurrentTeam.size();i++) {
+			int random = GameLogic.randomGenerator(1, 100, -1);
+			if (random<=3) {
+				injuredPlayers.add(tCurrentTeam.get(i));
+			}
+		}
 		return injuredPlayers;
 	}
 	/** Returns the lengths of the injuries of the players that got injured

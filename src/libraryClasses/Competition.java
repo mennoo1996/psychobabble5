@@ -71,10 +71,16 @@ public class Competition {
 				a.gotSuspension(2);
 			}
 			
-			ArrayList<Player> playersWithInjuries = GameLogic.getInjuredPlayers(team1, team2);
-			int[] injurieslengths = GameLogic.getInjuriesLength(playersWithInjuries);
-			for (int i=0;i<playersWithInjuries.size();i++) {
-				playersWithInjuries.get(i).gotInjury(injurieslengths[i]+1);
+			ArrayList<Player> playersWithInjuriest1 = GameLogic.getInjuredPlayers(team1);
+			ArrayList<Player> playersWithInjuriest2 = GameLogic.getInjuredPlayers(team2);
+			int[] injurieslengthst1 = GameLogic.getInjuriesLength(playersWithInjuriest1);
+			int[] injurieslengthst2 = GameLogic.getInjuriesLength(playersWithInjuriest2);
+			for (int i=0;i<playersWithInjuriest1.size();i++) {
+				playersWithInjuriest1.get(i).gotInjury(injurieslengthst1[i]+1);
+			}
+			
+			for (int i=0;i<playersWithInjuriest2.size();i++) {
+				playersWithInjuriest2.get(i).gotInjury(injurieslengthst2[i]+1);
 			}
 		}
 		
