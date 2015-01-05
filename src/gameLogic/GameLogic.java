@@ -136,54 +136,42 @@ public class GameLogic {
 	 * @return An ArrayList of FieldPlayers that made the goals for t1 and t2 respectively. An empty 
 	 * ArrayList if the score was 0-0
 	 */
-	public static ArrayList<FieldPlayer> getGoals (Team t1, Team t2, int score1, int score2) {
+	public static ArrayList<FieldPlayer> getGoals (Team t, int score) {
 		// first retrieve the current team
-		ArrayList<Player> t1players = t1.getCurrentTeam();
-		ArrayList<Player> t2players = t2.getCurrentTeam();
+		ArrayList<Player> tplayers = t.getCurrentTeam();
 		// make an ArrayList that will contain the fieldplayers of t1's current team and one that will contain
 		// the fieldplayers of t2's current team
-		ArrayList<FieldPlayer> t1fieldplayers = new ArrayList<FieldPlayer>();
-		ArrayList<FieldPlayer> t2fieldplayers = new ArrayList<FieldPlayer>();
+		ArrayList<FieldPlayer> tfieldplayers = new ArrayList<FieldPlayer>();
 		// For every player of the current team, check if it is a FieldPlayer and if this is true, add him to t1fieldplayers
 		for (int i=0;i<11;i++) {
-			Player a = t1players.get(i);
+			Player a = tplayers.get(i);
 			if (a instanceof FieldPlayer) {
-				t1fieldplayers.add((FieldPlayer) a);
+				tfieldplayers.add((FieldPlayer) a);
 			}
 			
-		}
-		// Do the same for team 2
-		for (int i=0;i<11;i++) {
-			Player a = t2players.get(i);
-			if (a instanceof FieldPlayer) {
-				t2fieldplayers.add((FieldPlayer) a);
-			}
 		}
 		
 		// Retrieve all the finishing ratings for the fieldplayers and put them in an array
-		int[] t1finishingRatings = new int[10];
-		int[] t2finishingRatings = new int[10];
+		int[] tfinishingRatings = new int[10];
 		for (int i=0;i<10;i++) {
 			
-			t2finishingRatings[i]=t2fieldplayers.get(i).getFinishingValue();
-			t1finishingRatings[i]=t1fieldplayers.get(i).getFinishingValue();
+			
+			tfinishingRatings[i]=tfieldplayers.get(i).getFinishingValue();
 		}
 		
 		// On every element of the arrays that contain the finishing ratings, compute the calculation 1.05^finishing rating
 		// This is to increase the gaps, to get more realistic goalmakers further on
 		for (int i=0;i<10;i++) {
-			t1finishingRatings[i]=(int) Math.pow(1.05, t1finishingRatings[i]);
-			t2finishingRatings[i]=(int) Math.pow(1.05, t2finishingRatings[i]);
+			tfinishingRatings[i]=(int) Math.pow(1.05, tfinishingRatings[i]);
+			
 			
 		}
 		// Compute the total finishing rating
 		// Note: actually we mean: The total 1.05^finishing rating, but from now on, that will just be called finishing rating
-		int t1finishingtotal=0;
-		int t2finishingtotal=0;
+		int tfinishingtotal=0;
 		
 		for (int i=0;i<10;i++) {
-			t1finishingtotal+=t1finishingRatings[i];
-			t2finishingtotal+=t2finishingRatings[i];
+			tfinishingtotal+=tfinishingRatings[i];
 		}
 		
 		ArrayList<FieldPlayer> playersWithGoals = new ArrayList<FieldPlayer>();
@@ -195,8 +183,8 @@ public class GameLogic {
 		*/
 		for (int i=0;i<10;i++) {
 			if (i>0) {
-				t1finishingRatings[i]+=t1finishingRatings[i-1];
-				t2finishingRatings[i]+=t2finishingRatings[i-1];
+				tfinishingRatings[i]+=tfinishingRatings[i-1];
+				
 			}
 		}
 		
@@ -204,28 +192,21 @@ public class GameLogic {
 		// The numbers in the array of finishingratings are now the boundaries to determine the player that scored
 		// Players with a higher finishing ranking have of course a greater percentage of the total
 		// Find the right player and add him to the ArrayList
-		for (int i=0;i<score1;i++) {
-			int random = GameLogic.randomGenerator(1, t1finishingtotal, -1);
+		for (int i=0;i<score;i++) {
+			int random = GameLogic.randomGenerator(1, tfinishingtotal, -1);
 			for (int j=0;j<10;j++) {
-				if (random<=t1finishingRatings[j]) {
-					playersWithGoals.add(t1fieldplayers.get(j));
-					break;
-				}
-			}
-		}
-		// Do the same for team 2
-		for (int i=0;i<score2;i++) {
-			int random = GameLogic.randomGenerator(1, t2finishingtotal, -1);
-			for (int j=0;j<10;j++) {
-				if (random<=t2finishingRatings[j]) {
-					playersWithGoals.add(t2fieldplayers.get(j));
+				if (random<=tfinishingRatings[j]) {
+					playersWithGoals.add(tfieldplayers.get(j));
 					break;
 				}
 			}
 		}
 		
+		
 		return playersWithGoals;
 	}
+	
+	
 	/** The method returns the players that made the assists
 	 * 
 	 * @param t1 The home-playing team

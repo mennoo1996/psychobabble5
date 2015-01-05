@@ -50,8 +50,13 @@ public class Competition {
 				team2.updateStandings("won", result[2], result[1]);
 			}
 			
-			ArrayList<FieldPlayer> goalMakers = GameLogic.getGoals(team1, team2, result[1], result[2]);
-			for (Player a:goalMakers) {
+			ArrayList<FieldPlayer> goalMakerst1 = GameLogic.getGoals(team1, result[1]);
+			ArrayList<FieldPlayer> goalMakerst2 = GameLogic.getGoals(team2, result[2]);
+			for (Player a:goalMakerst1) {
+				a.madeGoal();
+			}
+			
+			for (Player a:goalMakerst2) {
 				a.madeGoal();
 			}
 			
