@@ -1,5 +1,6 @@
 package gameLogic;
 import java.util.*;
+import java.util.stream.DoubleStream;
 
 import libraryClasses.FieldPlayer;
 import libraryClasses.Player;
@@ -26,13 +27,13 @@ public class GameLogic {
 		ArrayList<Player> injuredPlayers = new ArrayList<Player>();
 		// every player has a 3% chance for an injury in a match
 		for (int i=0;i<t1CurrentTeam.size();i++) {
-			int random = GameLogic.randomGenerator(1, 100);
+			int random = GameLogic.randomGenerator(1, 100, -1);
 			if (random <=3) {
 				injuredPlayers.add(t1CurrentTeam.get(i));
 			}
 		}
 		for (int i=0;i<t2CurrentTeam.size();i++) {
-			int random = GameLogic.randomGenerator(1, 100);
+			int random = GameLogic.randomGenerator(1, 100, -1);
 			if (random <=3) {
 				injuredPlayers.add(t2CurrentTeam.get(i));
 			}
@@ -48,7 +49,7 @@ public class GameLogic {
 	public static int[] getInjuriesLength (ArrayList<Player> injuredPlayers) {
 		int[] injurieslengths = new int[injuredPlayers.size()];
 		for (int i=0;i<injuredPlayers.size();i++) {
-			int random = GameLogic.randomGenerator(1, 100);
+			int random = GameLogic.randomGenerator(1, 100, -1);
 			// 75% chance for a 1 match injury
 			if (random <=75) {
 				injurieslengths[i]=1;
@@ -76,7 +77,7 @@ public class GameLogic {
 		int amountofred1=0, amountofred2=0;
 		ArrayList<Player> playersWithRed = new ArrayList<Player>();
 		// generate a random number between 1 and 100
-		int random = GameLogic.randomGenerator(1, 100);
+		int random = GameLogic.randomGenerator(1, 100, -1);
 		//calculate the amount of red cards for team 1 based on random number
 		if (random <=90) {
 			amountofred1=0;
@@ -86,7 +87,7 @@ public class GameLogic {
 			amountofred1=2;
 		}
 		//calculate the amount of red cards for team 2 based on random number
-		random = GameLogic.randomGenerator(1, 100);
+		random = GameLogic.randomGenerator(1, 100, -1);
 		if (random <=90) {
 			amountofred2=0;
 		} else if (random >90 && random <=99) {
@@ -97,7 +98,7 @@ public class GameLogic {
 		// for the amount of red cards that team 1 got, generate a random number between 0 and 10 inclusive, and give
 		// the corresponding player a red card (add him to the list)
 		for (int i=0;i<amountofred1;i++) {
-			random=GameLogic.randomGenerator(0,10);
+			random=GameLogic.randomGenerator(0,10, -1);
 			playersWithRed.add(t1.getCurrentTeam().get(random));
 			
 		}
@@ -105,7 +106,7 @@ public class GameLogic {
 		// the corresponding player a red card (add him to the list)
 		for (int i=0;i<amountofred2;i++) {
 			
-			random=GameLogic.randomGenerator(0, 10);
+			random=GameLogic.randomGenerator(0, 10, -1);
 			playersWithRed.add(t2.getCurrentTeam().get(random));
 		}
 		return playersWithRed;
@@ -120,7 +121,7 @@ public class GameLogic {
 		int amountofyellow1=0, amountofyellow2=0;
 		ArrayList<Player> playersWithYellow = new ArrayList<Player>();
 		// generate a random number between 1 and 100
-		int random = GameLogic.randomGenerator(1, 100);
+		int random = GameLogic.randomGenerator(1, 100, -1);
 		// calculate the amount of yellow cards for team 1, based on certain boundaries and the random number
 		if (random <=5) {
 			amountofyellow1=0;
@@ -136,7 +137,7 @@ public class GameLogic {
 			amountofyellow1=5;
 		}
 		// generate a random number between 1 and 100
-		random = GameLogic.randomGenerator(1, 100);
+		random = GameLogic.randomGenerator(1, 100, -1);
 		// calculate the amount of yellow cards for team 2, based on certain boundares and the random number
 		if (random <=5) {
 			amountofyellow2=0;
@@ -155,7 +156,7 @@ public class GameLogic {
 		// for the amount of yellow cards that team 1 got, generate a random number between 0 and 10 and add the corresponding
 		// player to the ArrayList
 		for (int i=0;i<amountofyellow1;i++) {
-			random=GameLogic.randomGenerator(0,10);
+			random=GameLogic.randomGenerator(0,10, -1);
 			playersWithYellow.add(t1.getCurrentTeam().get(random));
 			
 		}
@@ -163,7 +164,7 @@ public class GameLogic {
 		// player to the ArrayList
 		for (int i=0;i<amountofyellow2;i++) {
 			
-			random=GameLogic.randomGenerator(0, 10);
+			random=GameLogic.randomGenerator(0, 10, -1);
 			playersWithYellow.add(t2.getCurrentTeam().get(random));
 		}
 		return playersWithYellow;
@@ -247,7 +248,7 @@ public class GameLogic {
 		// Players with a higher finishing ranking have of course a greater percentage of the total
 		// Find the right player and add him to the ArrayList
 		for (int i=0;i<score1;i++) {
-			int random = GameLogic.randomGenerator(1, t1finishingtotal);
+			int random = GameLogic.randomGenerator(1, t1finishingtotal, -1);
 			for (int j=0;j<10;j++) {
 				if (random<=t1finishingRatings[j]) {
 					playersWithGoals.add(t1fieldplayers.get(j));
@@ -257,7 +258,7 @@ public class GameLogic {
 		}
 		// Do the same for team 2
 		for (int i=0;i<score2;i++) {
-			int random = GameLogic.randomGenerator(1, t2finishingtotal);
+			int random = GameLogic.randomGenerator(1, t2finishingtotal, -1);
 			for (int j=0;j<10;j++) {
 				if (random<=t2finishingRatings[j]) {
 					playersWithGoals.add(t2fieldplayers.get(j));
@@ -339,7 +340,7 @@ public class GameLogic {
 		// Generate a random number between 1 and the total dribbling value, find the players that corresponds with this number
 		// and add him to the ArrayList
 		for (int i=0;i<score1;i++) {
-			int random = GameLogic.randomGenerator(1, t1dribblingtotal);
+			int random = GameLogic.randomGenerator(1, t1dribblingtotal, -1);
 			for (int j=0;j<10;j++) {
 				if (random<=t1dribblingRatings[j]) {
 					playersWithAssists.add(t1fieldplayers.get(j));
@@ -349,7 +350,7 @@ public class GameLogic {
 		}
 		// Do the same for team 2
 		for (int i=0;i<score2;i++) {
-			int random = GameLogic.randomGenerator(1, t2dribblingtotal);
+			int random = GameLogic.randomGenerator(1, t2dribblingtotal, -1);
 			for (int j=0;j<10;j++) {
 				if (random<=t2dribblingRatings[j]) {
 					playersWithAssists.add(t2fieldplayers.get(j));
@@ -412,7 +413,7 @@ public class GameLogic {
 			// This will cause a high chance of a low score for the loser
 			if (difference>10) {
 				// A random number is generated between 0 and 100
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				// If it is smaller than 95 (that is, in 95% of the cases), the loser gets a score of 0
 				if (random <=95) {
 					allresults[1]=0;
@@ -421,14 +422,14 @@ public class GameLogic {
 					allresults[1]=1;
 				}
 			} else if (difference >5 && difference <=10) {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=90) {
 					allresults[1]=0;
 				} else {
 					allresults[1]=1;
 				}
 			} else if (difference >0 && difference <=5) {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=70) {
 					allresults[1]=0;
 				} else if (random >70 && random <=95) {
@@ -437,7 +438,7 @@ public class GameLogic {
 					allresults[1]=2;
 				}
 			} else if (difference <=0 && difference >-5) {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <= 55) {
 					allresults[1]=0;
 				} else if (random >55 && random <=95) {
@@ -446,7 +447,7 @@ public class GameLogic {
 					allresults[1]=2;
 				}
 			} else if (difference <=-5 && difference >-10) {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=40) {
 					allresults[1]=0;
 				} else if (random >40 && random <=90) {
@@ -455,7 +456,7 @@ public class GameLogic {
 					allresults[1]=2;
 				}
 			} else {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=25) {
 					allresults[1]=0;
 				} else if (random>25 && random <=80) {
@@ -469,7 +470,7 @@ public class GameLogic {
 			// If the difference is higher than 10 (that is, the finishing of the winner was much higher that the defending of the loser)
 			if (difference>10) {
 				// Generate a random number between 0 and 100 (100 to keep it simple, percentages)
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				// in 10 % of the cases the goal difference is 1
 				if (random <=10) {
 					allresults[2]=allresults[1]+1;
@@ -484,7 +485,7 @@ public class GameLogic {
 					allresults[2]=allresults[1]+4;
 				}
 			} else if (difference >5 && difference <=10) {
-				int random = GameLogic.randomGenerator(0,  100);
+				int random = GameLogic.randomGenerator(0,  100, -1);
 				if (random<=35) {
 					allresults[2]=allresults[1]+1;
 				} else if (random >35 && random <=80) {
@@ -495,7 +496,7 @@ public class GameLogic {
 					allresults[2]=allresults[1]+4;
 				}
 			} else if (difference >0 && difference <=5) {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=55) {
 					allresults[2]=allresults[1]+1;
 				} else if (random >55 && random <=95) {
@@ -504,21 +505,21 @@ public class GameLogic {
 					allresults[2]=allresults[1]+3;
 				}
 			} else if (difference <=0 && difference >-5) {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=75) {
 					allresults[2]=allresults[1]+1;
 				} else {
 					allresults[2]=allresults[1]+2;
 				}
 			} else if (difference <=-5 && difference >-10) {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=90) {
 					allresults[2]=allresults[1]+1;
 				} else {
 					allresults[2]=allresults[1]+2;
 				}
 			} else {
-				int random = GameLogic.randomGenerator(0, 100);
+				int random = GameLogic.randomGenerator(0, 100, -1);
 				if (random <=95) {
 					allresults[2]=allresults[1]+1;
 				} else {
@@ -537,21 +538,21 @@ public class GameLogic {
 		// This method follows the same structure as Team2Wint(), but then the other way around. Read the comments there to understand the way of calculating
 		int difference=t1rating.getDefending() - t2rating.getFinishing();
 		if (difference>10) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=95) {
 				allresults[2]=0;
 			} else {
 				allresults[2]=1;
 			}
 		} else if (difference >5 && difference <=10) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=90) {
 				allresults[2]=0;
 			} else {
 				allresults[2]=1;
 			}
 		} else if (difference >0 && difference <=5) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=70) {
 				allresults[2]=0;
 			} else if (random >70 && random <=95) {
@@ -560,7 +561,7 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else if (difference <=0 && difference >-5) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <= 55) {
 				allresults[2]=0;
 			} else if (random >55 && random <=95) {
@@ -569,7 +570,7 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else if (difference <=-5 && difference >-10) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=40) {
 				allresults[2]=0;
 			} else if (random >40 && random <=90) {
@@ -578,7 +579,7 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=25) {
 				allresults[2]=0;
 			} else if (random>25 && random <=80) {
@@ -590,7 +591,7 @@ public class GameLogic {
 		
 		difference = t1rating.getFinishing() - t2rating.getDefending();
 		if (difference>10) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=10) {
 				allresults[1]=allresults[2]+1;
 			} else if (random >10 && random <=50) {
@@ -601,7 +602,7 @@ public class GameLogic {
 				allresults[1]=allresults[2]+4;
 			}
 		} else if (difference >5 && difference <=10) {
-			int random = GameLogic.randomGenerator(0,  100);
+			int random = GameLogic.randomGenerator(0,  100, -1);
 			if (random<=35) {
 				allresults[1]=allresults[2]+1;
 			} else if (random >35 && random <=80) {
@@ -612,7 +613,7 @@ public class GameLogic {
 				allresults[1]=allresults[2]+4;
 			}
 		} else if (difference >0 && difference <=5) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=55) {
 				allresults[1]=allresults[2]+1;
 			} else if (random >55 && random <=95) {
@@ -621,21 +622,21 @@ public class GameLogic {
 				allresults[1]=allresults[2]+3;
 			}
 		} else if (difference <=0 && difference >-5) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=75) {
 				allresults[1]=allresults[2]+1;
 			} else {
 				allresults[1]=allresults[2]+2;
 			}
 		} else if (difference <=-5 && difference >-10) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=90) {
 				allresults[1]=allresults[2]+1;
 			} else {
 				allresults[1]=allresults[2]+2;
 			}
 		} else {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=95) {
 				allresults[1]=allresults[2]+1;
 			} else {
@@ -657,7 +658,7 @@ public class GameLogic {
 		 */
 		int difference = (t1rating.getFinishing() + t2rating.getFinishing() - t1rating.getDefending() - t2rating.getDefending());
 		if (difference >10) {
-			int random = GameLogic.randomGenerator(0,  100);
+			int random = GameLogic.randomGenerator(0,  100, -1);
 			if (random<=25) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -672,7 +673,7 @@ public class GameLogic {
 				allresults[2]=3;
 			}
 		} else if (difference > 5 && difference <=10) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=35) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -684,7 +685,7 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else if (difference > 0 && difference <=5) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=55) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -696,7 +697,7 @@ public class GameLogic {
 				allresults[2]=2;
 			}
 		} else if (difference <= 0 && difference > -5 ) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=75) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -705,7 +706,7 @@ public class GameLogic {
 				allresults[2]=1;
 			}
 		} else if (difference <= -5 && difference>-10) {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random <=90) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -714,7 +715,7 @@ public class GameLogic {
 				allresults[2]=1;
 			}
 		} else {
-			int random = GameLogic.randomGenerator(0, 100);
+			int random = GameLogic.randomGenerator(0, 100, -1);
 			if (random<=95) {
 				allresults[1]=0;
 				allresults[2]=0;
@@ -730,10 +731,17 @@ public class GameLogic {
 	 * @param max The maximum of the random number to be generated
 	 * @return a random number between min and max
 	 */
-	public static int randomGenerator(int min, int max) {
+	public static int randomGenerator(int min, int max, int seed) {
+		Random rand=null;
 		// Use currentTimeMillis for a truly random seed, and therefore number
-		Random rand = new Random(rngCounter);
-		rngCounter++;
+		if (seed==-1) {
+			
+		
+			rand = new Random(rngCounter);
+			rngCounter++;
+		} else {
+			rand = new Random(seed);
+		}
 		// Make it maximum inclusive
 		int randomNum=rand.nextInt((max-min)+1)+min;
 		return randomNum;
@@ -755,8 +763,8 @@ public class GameLogic {
 		t2totalrating= (int) Math.pow(1.03, t2totalrating);
 		
 		// calculate the luck of both teams as a random integer between 0 and 50
-		int t1luck = GameLogic.randomGenerator(0, 50);
-		int t2luck = GameLogic.randomGenerator(0, 50);
+		int t1luck = GameLogic.randomGenerator(0, 50, -1);
+		int t2luck = GameLogic.randomGenerator(0, 50, -1);
 		
 		// convert the luck number into a -25% to 25% lose/bonus
 		t1luck = 1+ ((t1luck-25)/100);
@@ -770,8 +778,8 @@ public class GameLogic {
 		t1totalrating = (int)1.15*t1totalrating;
 		
 		// generate random numbers between 1 and the computed totalrating, for both teams
-		int t1RandomNumber = GameLogic.randomGenerator(1, t1totalrating);
-		int t2RandomNumber = GameLogic.randomGenerator(1, t2totalrating);
+		int t1RandomNumber = GameLogic.randomGenerator(1, t1totalrating, -1);
+		int t2RandomNumber = GameLogic.randomGenerator(1, t2totalrating, -1);
 		
 		// The team with the higher random number wins, except if the numbers lie less than 3000 apart, then it is a draw
 		if ((Math.abs(t1RandomNumber-t2RandomNumber))<3000) {

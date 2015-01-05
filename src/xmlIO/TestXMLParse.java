@@ -28,15 +28,8 @@ public class TestXMLParse {
 //		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
 //		
 		
-		Team playersTeam = competition.getLibrary().getLibrary().get(0);
-		Player player = playersTeam.getTeam().get(0);
-		int askingPrice = (int) (10*player.getPrice().doubleValue());
+		System.out.println(GameLogic.randomGenerator(0, 100, 5));System.out.println(GameLogic.randomGenerator(0, 100, 5));System.out.println(GameLogic.randomGenerator(0, 100, 5));
 		
-		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
-		System.out.println(player.isCanBeSold());
-		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
-		competition.playRound();
-		System.out.println(TransferLogic.requestSell(player, playersTeam, askingPrice, competition.getLibrary()));
 		
 		}
 }
