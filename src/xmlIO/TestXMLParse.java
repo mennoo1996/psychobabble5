@@ -18,6 +18,7 @@ public class TestXMLParse {
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
+		competition.playRound();
 //		
 //		for(int i = 0; i < 38; i++) {
 //			competition.playRound();

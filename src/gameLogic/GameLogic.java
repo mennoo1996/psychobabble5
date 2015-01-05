@@ -91,64 +91,41 @@ public class GameLogic {
 		}
 		return playersWithRed;
 	}
-	/** This method calculates if and which players got yellow cards
-	 *  	
-	 * @param t1 The home playing team
-	 * @param t2 The away playing team
-	 * @return an ArrayList of Players who got Yellow Cards. The ArrayList is empty if no Yellow Cards were given
+	/**This method calculates the amount of yellow cards a team got in a match
+	 * 
+	 * @param t the team
+	 * @return the amount of yellow cards for this team
 	 */
-	public static ArrayList<Player> getYellowCards (Team t1, Team t2) {
-		int amountofyellow1=0, amountofyellow2=0;
-		ArrayList<Player> playersWithYellow = new ArrayList<Player>();
-		// generate a random number between 1 and 100
+	public static int getAmountOfYellowCards(Team t) {
 		int random = GameLogic.randomGenerator(1, 100, -1);
-		// calculate the amount of yellow cards for team 1, based on certain boundaries and the random number
-		if (random <=5) {
-			amountofyellow1=0;
-		} else if (random >5 && random <=65) {
-			amountofyellow1=1;
-		} else if (random>65 && random <=85) {
-			amountofyellow1=2;
-		} else if (random>85 && random <=93) {
-			amountofyellow1=3;
-		} else if (random>93 && random <=98) {
-			amountofyellow1=4;
-		} else {
-			amountofyellow1=5;
-		}
-		// generate a random number between 1 and 100
-		random = GameLogic.randomGenerator(1, 100, -1);
 		// calculate the amount of yellow cards for team 2, based on certain boundares and the random number
 		if (random <=5) {
-			amountofyellow2=0;
+			return 0;
 		} else if (random >5 && random <=65) {
-			amountofyellow2=1;
+			return 1;
 		} else if (random>65 && random <=85) {
-			amountofyellow2=2;
+			return 2;
 		} else if (random>85 && random <=93) {
-			amountofyellow2=3;
+			return 3;
 		} else if (random>93 && random <=98) {
-			amountofyellow2=4;
+			return 4;
 		} else {
-			amountofyellow2=5;
+			return 5;
 		}
-		
-		// for the amount of yellow cards that team 1 got, generate a random number between 0 and 10 and add the corresponding
-		// player to the ArrayList
-		for (int i=0;i<amountofyellow1;i++) {
-			random=GameLogic.randomGenerator(0,10, -1);
-			playersWithYellow.add(t1.getCurrentTeam().get(random));
-			
-		}
-		// for the amount of yellow cards that team 2 got, generate a random number between 0 and 10 and add the corresponding
-		// player to the ArrayList
-		for (int i=0;i<amountofyellow2;i++) {
-			
-			random=GameLogic.randomGenerator(0, 10, -1);
-			playersWithYellow.add(t2.getCurrentTeam().get(random));
-		}
-		return playersWithYellow;
-		
+	}
+	/** This method calculates which players of a team got the yellow cards
+	 * 
+	 * @param amount the amount of yellow cards for the team
+	 * @param t the team
+	 * @return an ArrayList of Players that got yellow cards
+	 */
+	public static ArrayList<Player> getYellowCards (int amount, Team t) {
+		int random =0;
+		ArrayList<Player> playersWithYellow = new ArrayList<Player>();
+		for (int i=0;i<amount;i++) {
+			random = GameLogic.randomGenerator(0, 10, -1);
+			playersWithYellow.add(t.getCurrentTeam().get(random));
+		} return playersWithYellow;
 	}
 	/** This method returns the players that scored the goals
 	 * 

@@ -60,8 +60,15 @@ public class Competition {
 				a.madeAssist();
 			}
 			
-			ArrayList<Player> yellowCardGetters = GameLogic.getYellowCards(team1, team2);
-			for (Player a:yellowCardGetters) {
+			int amountyellowt1 = GameLogic.getAmountOfYellowCards(team1);
+			int amountyellowt2 = GameLogic.getAmountOfYellowCards(team2);
+			ArrayList<Player> yellowCardGetterst1 = GameLogic.getYellowCards(amountyellowt1, team1);
+			ArrayList<Player> yellowCardGetterst2 = GameLogic.getYellowCards(amountyellowt2, team2);
+			for (Player a:yellowCardGetterst1) {
+				a.gotYellow();
+			}
+			
+			for (Player a:yellowCardGetterst2) {
 				a.gotYellow();
 			}
 			
