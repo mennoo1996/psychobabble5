@@ -65,8 +65,16 @@ public class Competition {
 				a.gotYellow();
 			}
 			
-			ArrayList<Player> redCardGetters = GameLogic.getRedCards(team1, team2);
-			for (Player a:redCardGetters) {
+			int amountredt1 = GameLogic.getAmountOfRedCards(team1);
+			int amountredt2 = GameLogic.getAmountOfRedCards(team2);
+			ArrayList<Player> redCardGetterst1 = GameLogic.getRedCards(amountredt1, team1);
+			ArrayList<Player> redCardGetterst2 = GameLogic.getRedCards(amountredt2, team2);
+			for (Player a:redCardGetterst1) {
+				a.gotRed();
+				a.gotSuspension(2);
+			}
+			
+			for (Player a:redCardGetterst2) {
 				a.gotRed();
 				a.gotSuspension(2);
 			}

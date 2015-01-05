@@ -59,47 +59,35 @@ public class GameLogic {
 		
 		return injurieslengths;
 	}
-	/** This method calculates if and which players got red cards
+	
+	/** This method calculates the amount of red cards a team got in a match
 	 * 
-	 * @param t1 The home playing team
-	 * @param t2 The away playing team
-	 * @return an ArrayList of Players who got Red Cards in a match. An empty ArrayList if no Red Cards were given
+	 * @param t the team
+	 * @return the amount of red cards for this team
 	 */
-	public static ArrayList<Player> getRedCards (Team t1, Team t2) {
-		int amountofred1=0, amountofred2=0;
-		ArrayList<Player> playersWithRed = new ArrayList<Player>();
-		// generate a random number between 1 and 100
+	public static int getAmountOfRedCards(Team t) {
 		int random = GameLogic.randomGenerator(1, 100, -1);
 		//calculate the amount of red cards for team 1 based on random number
 		if (random <=90) {
-			amountofred1=0;
+			return 0;
 		} else if (random >90 && random <=99) {
-			amountofred1=1;
+			return 1;
 		} else {
-			amountofred1=2;
+			return 2;
 		}
-		//calculate the amount of red cards for team 2 based on random number
-		random = GameLogic.randomGenerator(1, 100, -1);
-		if (random <=90) {
-			amountofred2=0;
-		} else if (random >90 && random <=99) {
-			amountofred2=1;
-		} else {
-			amountofred2=2;
-		}
-		// for the amount of red cards that team 1 got, generate a random number between 0 and 10 inclusive, and give
-		// the corresponding player a red card (add him to the list)
-		for (int i=0;i<amountofred1;i++) {
-			random=GameLogic.randomGenerator(0,10, -1);
-			playersWithRed.add(t1.getCurrentTeam().get(random));
-			
-		}
-		// for the amount of red cards that team 2 got, generate a random number between 0 and 10 inclusive, and give
-		// the corresponding player a red card (add him to the list)
-		for (int i=0;i<amountofred2;i++) {
-			
-			random=GameLogic.randomGenerator(0, 10, -1);
-			playersWithRed.add(t2.getCurrentTeam().get(random));
+		
+	}
+	/** This method calculates which players of a team got the red cards
+	 * 
+	 * @param amount the amount of red cards for the team
+	 * @param t the team
+	 * @return an ArrayList with players that got the red cards
+	 */
+	public static ArrayList<Player> getRedCards(int amount, Team t) {
+		ArrayList<Player> playersWithRed = new ArrayList<Player>();
+		for (int i=0;i<amount;i++) {
+			int random = GameLogic.randomGenerator(0, 10, -1);
+			playersWithRed.add(t.getCurrentTeam().get(random));
 		}
 		return playersWithRed;
 	}
