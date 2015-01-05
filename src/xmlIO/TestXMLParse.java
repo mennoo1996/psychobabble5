@@ -33,7 +33,7 @@ public class TestXMLParse {
 //		System.out.println(GameLogic.randomGenerator(1,150,5));
 		
 		for (int i=0;i<200;i++) {
-			System.out.println(i + " " + GameLogic.randomGenerator(1,100,i));
+			System.out.println(i + " " + GameLogic.randomGenerator(1,100));
 		}
 		
 		

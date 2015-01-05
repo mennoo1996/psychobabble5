@@ -81,7 +81,7 @@ public class TransferLogic {
 				}
 			}
 		}
-		int random = GameLogic.randomGenerator(1, 100, -1);
+		int random = GameLogic.randomGenerator(1, 100);
 		double percentage = bid/player.getPrice().doubleValue()*100-100;
 		if (typecounter==1||typecounter==2) {
 			if(percentage<0) {
@@ -341,7 +341,7 @@ public class TransferLogic {
 		
 		double percentage = askingPrice/player.getPrice().doubleValue()*100-100;
 		boolean sell = false;
-		int random = GameLogic.randomGenerator(1, 100, -1);
+		int random = GameLogic.randomGenerator(1, 100);
 		if (percentage<-10) {
 			sell=true;
 		} else if (percentage >=-10 && percentage<0) {
@@ -375,7 +375,7 @@ public class TransferLogic {
 		}
 		
 		if (sell) {
-			Team buyingTeam = teamswithbudget.get(GameLogic.randomGenerator(0, teamswithbudget.size()-1, -1));
+			Team buyingTeam = teamswithbudget.get(GameLogic.randomGenerator(0, teamswithbudget.size()-1));
 			playersTeam.setBudget(playersTeam.getBudget()+askingPrice);
 			buyingTeam.setBudget(buyingTeam.getBudget()-askingPrice);
 			buyingTeam.add(player);
