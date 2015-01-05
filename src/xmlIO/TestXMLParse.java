@@ -27,8 +27,13 @@ public class TestXMLParse {
 		
 //		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
 //		
+//		System.out.println(GameLogic.randomGenerator(1,50,5));
+//		System.out.println(GameLogic.randomGenerator(1,100,5));
+//		System.out.println(GameLogic.randomGenerator(1,150,5));
 		
-		System.out.println(GameLogic.randomGenerator(0, 100, 5));System.out.println(GameLogic.randomGenerator(0, 100, 5));System.out.println(GameLogic.randomGenerator(0, 100, 5));
+		for (int i=0;i<200;i++) {
+			System.out.println(i + " " + GameLogic.randomGenerator(1,100,i));
+		}
 		
 		
 		}
