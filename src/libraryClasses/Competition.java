@@ -60,8 +60,13 @@ public class Competition {
 				a.madeGoal();
 			}
 			
-			ArrayList<FieldPlayer> assistMakers = GameLogic.getAssists(team1, team2, result[1], result[2]);
-			for (Player a:assistMakers) {
+			ArrayList<FieldPlayer> assistMakerst1 = GameLogic.getAssists(team1, result[1]);
+			ArrayList<FieldPlayer> assistMakerst2 = GameLogic.getAssists(team2, result[2]);
+			for (Player a:assistMakerst1) {
+				a.madeAssist();
+			}
+			
+			for (Player a:assistMakerst2) {
 				a.madeAssist();
 			}
 			

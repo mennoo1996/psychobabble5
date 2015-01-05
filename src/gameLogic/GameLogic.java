@@ -215,54 +215,47 @@ public class GameLogic {
 	 * @param score2 The score of t2
 	 * @return An ArrayList of FieldPlayers who made the assists. An empty ArrayList if the score is 0-0
 	 */
-	public static ArrayList<FieldPlayer> getAssists(Team t1, Team t2, int score1, int score2) {
+	public static ArrayList<FieldPlayer> getAssists(Team t, int score) {
 		// Note: The comments in this method are short. For a more detailed explanation, see getGoals(), which
 		// uses the same calculation method, only with a different player attribute
 		// get the current teams of t1 and t2
-		ArrayList<Player> t1players = t1.getCurrentTeam();
-		ArrayList<Player> t2players = t2.getCurrentTeam();
+		ArrayList<Player> tplayers = t.getCurrentTeam();
 		
 		// Retrieve the fieldplayers of t1 and t2 and put them in the right ArrayLists
-		ArrayList<FieldPlayer> t1fieldplayers = new ArrayList<FieldPlayer>();
-		ArrayList<FieldPlayer> t2fieldplayers = new ArrayList<FieldPlayer>();
+		ArrayList<FieldPlayer> tfieldplayers = new ArrayList<FieldPlayer>();
+		
 		for (int i=0;i<11;i++) {
-			Player a = t1players.get(i);
+			Player a = tplayers.get(i);
 			if (a instanceof FieldPlayer) {
-				t1fieldplayers.add((FieldPlayer) a);
+				tfieldplayers.add((FieldPlayer) a);
 			}
 			
 		}
 		
-		for (int i=0;i<11;i++) {
-			Player a = t2players.get(i);
-			if (a instanceof FieldPlayer) {
-				t2fieldplayers.add((FieldPlayer) a);
-			}
-		}
+		
 		
 		// Put the dribbling values of all the fieldplayers in arrays
-		int[] t1dribblingRatings = new int[10];
-		int[] t2dribblingRatings = new int[10];
+		int[] tdribblingRatings = new int[10];
+		
 		for (int i=0;i<10;i++) {
 			
-			t2dribblingRatings[i]=t2fieldplayers.get(i).getDribblingValue();
-			t1dribblingRatings[i]=t1fieldplayers.get(i).getDribblingValue();
+			
+			tdribblingRatings[i]=tfieldplayers.get(i).getDribblingValue();
 		}
 		
 		// Compute the 1.05^dribbling rating for all elements of these arrays
 		for (int i=0;i<10;i++) {
-			t1dribblingRatings[i]=(int) Math.pow(1.05, t1dribblingRatings[i]);
-			t2dribblingRatings[i]=(int) Math.pow(1.05, t2dribblingRatings[i]);
+			tdribblingRatings[i]=(int) Math.pow(1.05, tdribblingRatings[i]);
+			
 			
 		}
 		
-		int t1dribblingtotal=0;
-		int t2dribblingtotal=0;
+		int tdribblingtotal=0;
 		
 		// Compute the total dribbling rating
 		for (int i=0;i<10;i++) {
-			t1dribblingtotal+=t1dribblingRatings[i];
-			t2dribblingtotal+=t2dribblingRatings[i];
+			tdribblingtotal+=tdribblingRatings[i];
+			
 		}
 		
 		ArrayList<FieldPlayer> playersWithAssists = new ArrayList<FieldPlayer>();
@@ -270,28 +263,17 @@ public class GameLogic {
 		// Give every element the value that is equal to the sum of all its successors
 		for (int i=0;i<10;i++) {
 			if (i>0) {
-				t1dribblingRatings[i]+=t1dribblingRatings[i-1];
-				t2dribblingRatings[i]+=t2dribblingRatings[i-1];
+				tdribblingRatings[i]+=tdribblingRatings[i-1];
 			}
 		}
 		
 		// Generate a random number between 1 and the total dribbling value, find the players that corresponds with this number
 		// and add him to the ArrayList
-		for (int i=0;i<score1;i++) {
-			int random = GameLogic.randomGenerator(1, t1dribblingtotal, -1);
+		for (int i=0;i<score;i++) {
+			int random = GameLogic.randomGenerator(1, tdribblingtotal, -1);
 			for (int j=0;j<10;j++) {
-				if (random<=t1dribblingRatings[j]) {
-					playersWithAssists.add(t1fieldplayers.get(j));
-					break;
-				}
-			}
-		}
-		// Do the same for team 2
-		for (int i=0;i<score2;i++) {
-			int random = GameLogic.randomGenerator(1, t2dribblingtotal, -1);
-			for (int j=0;j<10;j++) {
-				if (random<=t2dribblingRatings[j]) {
-					playersWithAssists.add(t2fieldplayers.get(j));
+				if (random<=tdribblingRatings[j]) {
+					playersWithAssists.add(tfieldplayers.get(j));
 					break;
 				}
 			}
