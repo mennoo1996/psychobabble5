@@ -1,6 +1,8 @@
 package swinggui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -19,7 +21,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import xmlIO.XMLParser;
-
 import libraryClasses.Competition;
 import libraryClasses.Team;
 
@@ -62,8 +63,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 		for(Team team : curComp.getLibrary().getLibrary()) {
 			team.setFirst11AsCurrentTeam();
 		}
-		
-		System.out.println(curComp.getLibrary().getTeamForName("Manchester United").getTeam().toString());
 		
 		initUI();
 	}
@@ -110,17 +109,19 @@ public class Frame_Main extends JFrame implements ActionListener{
 		add(curPanel, BorderLayout.CENTER);
 		
 		//temporary, for the help text or something, I'll fix it later
-		JPanel Helper = new JPanel();
-		Helper.setLayout(new BoxLayout(Helper, BoxLayout.X_AXIS));
-		Helper.add(new Box.Filler(minSize, prefSize, prefSize));
-		JPanel HelperBox = new JPanel();
-		HelperBox.setName("Panel");
-		Helper.add(HelperBox);
-		Helper.add(new Box.Filler(minSize, prefSize, prefSize));
-		add(Helper);
+//		JPanel Helper = new JPanel();
+//		Helper.setLayout(new BoxLayout(Helper, BoxLayout.X_AXIS));
+//		Helper.add(new Box.Filler(minSize, prefSize, prefSize));
+//		JPanel HelperBox = new JPanel();
+//		HelperBox.setName("Panel"); HelperBox.setOpaque(false);
+//		Helper.add(HelperBox);
+//		Helper.add(new Box.Filler(minSize, prefSize, prefSize));
+//		add(Helper);
 		
 		//southern space
-		add(Box.createRigidArea(new Dimension(boxwidth,108)));
+//		Component test = Box.createRigidArea(new Dimension(boxwidth, 108));
+//		test.setBackground(new Color(0,0,0,200));
+//		add(test);
 	}
 	
 	public static void main(String[] args){

@@ -147,10 +147,16 @@
     </state>
   </style>
   
+  <style id = "playerpanelStyle">
+	  	<insets top="0" left="4" bottom="2" right="0"/>
+	  	<opaque value="FALSE"/>
+	  	<imagePainter method="panelBackground" path="images/playerpanel.png" sourceInsets="10 10 30 10"/>
+  </style> 
   
   <bind style="basicStyle" type="region" key=".*"/>
   <bind style="basiclabelStyle" type="region" key="Label"/>
   <bind style="basicpanelStyle" type="name" key="Panel"/>
+  <bind style="playerpanelStyle" type="name" key="playerPanel"/>
   <bind style="basicbuttonStyle" type="name" key="Test"/>
   <bind style="shirtlabelStyle" type="name" key="shirtLabel"/>
   
