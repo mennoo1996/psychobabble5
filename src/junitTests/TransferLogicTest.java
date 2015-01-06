@@ -253,6 +253,30 @@ public class TransferLogicTest {
 		result = TransferLogic.requestSell(player, playersTeam, 43000000, library);
 		expected = "Congratulations! Sánchez got bought by Aston Villa for the price of 4.3E7";
 		assertEquals(expected, result);
+		result = TransferLogic.requestSell(player, playersTeam, 44000000, library);
+		expected = "Congratulations! Sánchez got bought by Aston Villa for the price of 4.4E7";
+		assertEquals(expected, result);
+		GameLogic.setSeed(72);
+		expected = "Unfortunately your player didn't get bought. Lowering the asking price might increase the chances for a team buying your player.";
+		result = TransferLogic.requestSell(player, playersTeam, 35500000, library);
+		assertEquals(expected, result);
+		player.setCanBeSold(true);
+		result = TransferLogic.requestSell(player, playersTeam, 37000000, library);
+		assertEquals(expected, result);
+		player.setCanBeSold(true);
+		result = TransferLogic.requestSell(player, playersTeam, 39000000, library);
+		assertEquals(expected, result);
+		player.setCanBeSold(true);
+		result = TransferLogic.requestSell(player, playersTeam, 41000000, library);
+		assertEquals(expected, result);
+		player.setCanBeSold(true);
+		result = TransferLogic.requestSell(player, playersTeam, 43000000, library);
+		assertEquals(expected, result);
+		player.setCanBeSold(true);
+		result = TransferLogic.requestSell(player, playersTeam, 44000000, library);
+		assertEquals(expected, result);
+		
+		
 		
 	}
 

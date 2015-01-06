@@ -64,6 +64,35 @@ public class TransferInProgress {
 	public void setBid(double bid) {
 		this.bid = bid;
 	}
+
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TransferInProgress other = (TransferInProgress) obj;
+		if (Double.doubleToLongBits(bid) != Double.doubleToLongBits(other.bid))
+			return false;
+		if (player == null) {
+			if (other.player != null)
+				return false;
+		} else if (!player.equals(other.player))
+			return false;
+		if (Double.doubleToLongBits(priceReturned) != Double
+				.doubleToLongBits(other.priceReturned))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	
