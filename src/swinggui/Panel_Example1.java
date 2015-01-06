@@ -2,17 +2,37 @@ package swinggui;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.TransferHandler;
 
 public class Panel_Example1 extends JPanel {
 	
 	public Panel_Example1() {
 		initUI();
 	}
+	
+	public ImageIcon createImageIcon(String path) {
+		java.net.URL imgURL = getClass().getResource(path);
+		if (imgURL != null) {
+			return new ImageIcon(imgURL, null);
+		}
+		else {
+			System.err.println("Couldn't find file: " + path);
+			return null;
+		}
+	}	
+	
 	
 	/**
 	 * Initialize an example panel
@@ -32,30 +52,40 @@ public class Panel_Example1 extends JPanel {
 		panel.add(title);
 		
 		//content begins here, I just added two meaningless buttons
-		JButton Button1 = new JButton("Button");
+		
+		//draggable image
+		ImageIcon icon1 = createImageIcon("images/draggableimage.png");
+		
+		//dragger label
+		JLabel Label1 = new JLabel(icon1);
+		
+		panel.add(Label1);
+		
+		//dropper button
+		JButton Button1 = new JButton("Drag here");
 		Button1.setName("Test");
 		Button1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		Button1.setFocusable(false);
 		panel.add(Button1);
+		
+		MouseListener listener = new DragMouseAdapter();
+		Label1.addMouseListener(listener);
+		Label1.setTransferHandler(new TransferHandler("icon"));
+		Button1.setTransferHandler(new TransferHandler("icon"));
+		
+		
+		JTextField field = new JTextField();
+		panel.add(field);
+		
+		Button1.setTransferHandler(new TransferHandler("Text"));
+		field.setDragEnabled(true);
+		
 		
 		JButton Button2 = new JButton("Another button");
 		Button2.setName("Test");
 		Button2.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panel.add(Button2);
 		
-		JButton Button3 = new JButton("Even more buttons!");
-		Button3.setName("Test");
-		Button3.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(Button3);
-		
-		JButton Button4 = new JButton("Hi there, button here!");
-		Button4.setName("Test");
-		Button4.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(Button4);
-		
-		JButton Button5 = new JButton("Button");
-		Button5.setName("Test");
-		Button5.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panel.add(Button5);
 		//content ends here
 		
 		//add panel
@@ -64,6 +94,14 @@ public class Panel_Example1 extends JPanel {
 		panel.setMaximumSize(new Dimension(900,500));
 		this.add(panel);
 	}
+	
+	class DragMouseAdapter extends MouseAdapter {
+        public void mousePressed(MouseEvent e) {
+            JComponent c = (JComponent) e.getSource();
+            TransferHandler handler = c.getTransferHandler();
+            handler.exportAsDrag(c, e, TransferHandler.COPY);
+        }
+    }	
 	
 	public static void main(String[] args) {
 		Panel_Example1 thing = new Panel_Example1();
