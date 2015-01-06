@@ -63,6 +63,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 			team.setFirst11AsCurrentTeam();
 		}
 		
+		System.out.println(curComp.getLibrary().getTeamForName("Manchester United").getTeam().toString());
+		
 		initUI();
 	}
 	
@@ -214,7 +216,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 						System.out.println("Current screen is: " + current);
 						
 						// Initialize new JPanel and remove current pane
-						PositionsPanel replPositsview = new PositionsPanel();
+						PositionsPanel replPositsview = new PositionsPanel(curComp);
 						remove(curPanel);
 						
 						// Refresh the view

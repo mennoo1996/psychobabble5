@@ -21,8 +21,8 @@ public class TransfersPanel extends JPanel {
 		add(new Box.Filler(minSize, prefSize, null));
 		
 		// add the overview panels
-		add(new Panel_Example2("Transfers"));
 		add(new Panel_Example1());
+		add(new Panel_Example2("Transfers"));
 		
 		add(new Box.Filler(minSize, prefSize, null));
 	}

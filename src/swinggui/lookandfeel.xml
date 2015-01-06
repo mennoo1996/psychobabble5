@@ -123,8 +123,28 @@
   </style>
   
   
+  <style id = "shirtlabelStyle">
+	  <state>
+	  		<insets top="35" left = "35" bottom = "35" right = "35"/>
+	  		<opaque value="FALSE"/>
+	  		<color value="#FFFFFF" type="TEXT_FOREGROUND"/>
+	  		<imagePainter method="labelBackground" path="images/T-Shirt.png" sourceInsets ="0 0 0 0"/>
+	  </state>
+  </style>
+  
+  
   <style id = "basicLineSeparatorStyle">
   		<imagePainter method="labelBackground" path="images/Line_Separator.png" sourceInsets="0 0 0 0"/>
+  </style>
+  
+  <style id="ScrollBarThumbStyle">
+    <opaque value="FALSE"/>
+    <insets top="0" left="0" bottom="0" right="0"/>
+    <property key="ScrollBar.minimumThumbSize" type="dimension" value="40 140"/>
+    <state>
+    		<color value="BLACK" type="BACKGROUND"/>
+      		<imagePainter method="scrollBarThumbBackground" direction="vertical" path="images/scrollbar.png" sourceInsets="8 0 8 0" />
+    </state>
   </style>
   
   
@@ -132,7 +152,9 @@
   <bind style="basiclabelStyle" type="region" key="Label"/>
   <bind style="basicpanelStyle" type="name" key="Panel"/>
   <bind style="basicbuttonStyle" type="name" key="Test"/>
+  <bind style="shirtlabelStyle" type="name" key="shirtLabel"/>
   
+  <bind style="ScrollBarThumbStyle" type="region" key="ScrollBarThumb"/>
   
   <bind style="headerouter" type="name" key="HeaderOuter"/>
   <bind style="headerouter2" type="name" key="HeaderOuter2"/>
