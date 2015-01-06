@@ -126,11 +126,11 @@ public class CurrentXIRating {
 			if (tempPlayer instanceof Attacker) {
 				attackers.add(i);
 			
-			} else if (tempPlayer instanceof Midfielder) {
+			} if (tempPlayer instanceof Midfielder) {
 				midfielders.add(i);
-			} else if (tempPlayer instanceof Defender) {
+			} if (tempPlayer instanceof Defender) {
 				defenders.add(i);
-			} else {
+			} if (tempPlayer instanceof Goalkeeper) {
 				goalkeepers.add(i);
 			}
 			
@@ -200,6 +200,39 @@ public class CurrentXIRating {
 		total+=finishing+dribbling+stamina+defending+goalkeeping;
 		
 		return new CurrentXIRating (finishing, dribbling, stamina, defending, goalkeeping, total);
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CurrentXIRating other = (CurrentXIRating) obj;
+		if (defending != other.defending)
+			return false;
+		if (dribbling != other.dribbling)
+			return false;
+		if (finishing != other.finishing)
+			return false;
+		if (goalkeeping != other.goalkeeping)
+			return false;
+		if (stamina != other.stamina)
+			return false;
+		if (total != other.total)
+			return false;
+		return true;
 	}
 
 	/**
