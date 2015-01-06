@@ -46,19 +46,19 @@ public class TransferLogic {
 				FieldPlayer p = (FieldPlayer)playerlist.get(i);
 				ratings[i]= (int) (0.6*p.getFinishingValue() + 0.2*p.getDribblingValue() + 0.2*p.getStaminaValue());
 			}
-		} else if (player.getPlayerType().equals("Midfielder")) {
+		} if (player.getPlayerType().equals("Midfielder")) {
 			for (int i=0;i<playerlist.size();i++) {
 				FieldPlayer p = (FieldPlayer)playerlist.get(i);
 				ratings[i]=(int) (0.15*p.getFinishingValue() + 0.4*p.getDribblingValue() + 0.3*p.getStaminaValue() + 0.15*p.getDefenseValue());
 				
 			}
-		} else if (player.getPlayerType().equals("Defender")) {
+		} if (player.getPlayerType().equals("Defender")) {
 			for (int i=0;i<playerlist.size();i++) {
 				FieldPlayer p = (FieldPlayer)playerlist.get(i);
 				ratings[i]=(int) (0.05*p.getDribblingValue() + 0.25*p.getStaminaValue() + 0.7*p.getDefenseValue());
 				
 			}
-		} else {
+		} if (player.getPlayerType().equals("Goalkeeper")) {
 			for (int i=0;i<playerlist.size();i++) {
 				Goalkeeper p = (Goalkeeper)playerlist.get(i);
 				ratings[i]=p.getGoalkeeperValue();
@@ -87,57 +87,57 @@ public class TransferLogic {
 			if(percentage<0) {
 				return false;
 				
-			} else if (percentage>=0 && percentage<5) {
+			} if (percentage>=0 && percentage<5) {
 				if (random<=10) {
 					return true;
 				} else return false;
 				
 				
-			} else if (percentage>=5 && percentage<10) {
+			} if (percentage>=5 && percentage<10) {
 				if (random<=20) {
 					return true;
 				} else return false;
-			} else if (percentage>=10 && percentage<15) {
+			} if (percentage>=10 && percentage<15) {
 				if (random<=30) {
 					return true;
 				} else return false;
-			} else if (percentage>=15 && percentage<20) {
+			} if (percentage>=15 && percentage<20) {
 				if (random<=40) {
 					return true;
 				} else return false;
-			} else if (percentage>=20 && percentage<25) {
+			} if (percentage>=20 && percentage<25) {
 				if (random<=50) {
 					return true;
 				} else return false;
-			} else if (percentage>=25 && percentage<30) {
+			} if (percentage>=25 && percentage<30) {
 				if (random<=75) {
 					return true;
 				} else return false;
 			} else return true;
-		} else if (typecounter==3 || typecounter==4 || typecounter==5) {
+		} if (typecounter==3 || typecounter==4 || typecounter==5) {
 			if (percentage<-10) {
 				return false;
-			} else if (percentage>=-10 && percentage<0) {
+			} if (percentage>=-10 && percentage<0) {
 				if (random<=5) {
 					return true;
 				} else return false;
-			} else if (percentage>=0 && percentage <5) {
+			} if (percentage>=0 && percentage <5) {
 				if (random<=15) {
 					return true;
 				} else return false;
-			} else if (percentage>=5 && percentage<10) {
+			} if (percentage>=5 && percentage<10) {
 				if (random<=30) {
 					return true;
 				} else return false;
-			} else if (percentage>=10 && percentage<15) {
+			} if (percentage>=10 && percentage<15) {
 				if (random<=45) {
 					return true;
 				} else return false;
-			} else if (percentage>=15 && percentage<20) {
+			} if (percentage>=15 && percentage<20) {
 				if (random<=60) {
 					return true;
 				} else return false;
-			} else if (percentage>=20 && percentage<25) {
+			} if (percentage>=20 && percentage<25) {
 				if (random<=80) {
 					return true;
 				} else return false;
@@ -145,19 +145,19 @@ public class TransferLogic {
 		} else {
 			if (percentage<-10) {
 				return false;
-			} else if (percentage>=-10 && percentage<0) {
+			} if (percentage>=-10 && percentage<0) {
 				if (random<=20) {
 					return true;
 				} else return false;
-			} else if (percentage>=0 && percentage<5) {
+			} if (percentage>=0 && percentage<5) {
 				if (random<=45) {
 					return true;
 				} else return false;
-			} else if (percentage>=5 && percentage<10) {
+			} if (percentage>=5 && percentage<10) {
 				if (random<=70) {
 					return true;
 				} else return false;
-			} else if (percentage>=10 && percentage<15) {
+			} if (percentage>=10 && percentage<15) {
 				if (random<=85) {
 					return true;
 				} else return false;
@@ -218,21 +218,21 @@ public class TransferLogic {
 				double price = player.getPrice().doubleValue();
 				if (percentage<-10) {
 					returnedprice=0.9*price;
-				} else if (percentage>=-10 && percentage<0) {
+				} if (percentage>=-10 && percentage<0) {
 					returnedprice=price;
-				} else if (percentage>=0 && percentage<5) {
+				} if (percentage>=0 && percentage<5) {
 					returnedprice=1.05*price;
-				} else if (percentage>=5 && percentage<10) {
+				} if (percentage>=5 && percentage<10) {
 					returnedprice=1.1*price;
-				} else if (percentage>=10 && percentage<15) {
+				} if (percentage>=10 && percentage<15) {
 					returnedprice=1.15*price;
-				} else if (percentage>=15 && percentage<20) {
+				} if (percentage>=15 && percentage<20) {
 					returnedprice=1.2*price;
-				} else if (percentage>=20 && percentage<25) {
+				} if (percentage>=20 && percentage<25) {
 					returnedprice=1.25*price;
-				} else if (percentage>=25 && percentage<30) {
+				} if (percentage>=25 && percentage<30) {
 					returnedprice=1.3*price;
-				}
+				} 
 				
 				TransferInProgress tp = new TransferInProgress(player, returnedprice, bid);
 				existingTransfers.addTransfer(tp);
@@ -286,19 +286,19 @@ public class TransferLogic {
 					double price = player.getPrice().doubleValue();
 					if (percentage<-10) {
 						returnedprice=0.9*price;
-					} else if (percentage>=-10 && percentage<0) {
+					} if (percentage>=-10 && percentage<0) {
 						returnedprice=price;
-					} else if (percentage>=0 && percentage<5) {
+					} if (percentage>=0 && percentage<5) {
 						returnedprice=1.05*price;
-					} else if (percentage>=5 && percentage<10) {
+					} if (percentage>=5 && percentage<10) {
 						returnedprice=1.1*price;
-					} else if (percentage>=10 && percentage<15) {
+					} if (percentage>=10 && percentage<15) {
 						returnedprice=1.15*price;
-					} else if (percentage>=15 && percentage<20) {
+					} if (percentage>=15 && percentage<20) {
 						returnedprice=1.2*price;
-					} else if (percentage>=20 && percentage<25) {
+					} if (percentage>=20 && percentage<25) {
 						returnedprice=1.25*price;
-					} else if (percentage>=25 && percentage<30) {
+					} if (percentage>=25 && percentage<30) {
 						returnedprice=1.3*price;
 					}
 					existingTransfers.getTransfer(player).setPriceReturned(returnedprice);
@@ -344,31 +344,31 @@ public class TransferLogic {
 		int random = GameLogic.randomGenerator(1, 100);
 		if (percentage<-10) {
 			sell=true;
-		} else if (percentage >=-10 && percentage<0) {
+		} if (percentage >=-10 && percentage<0) {
 			if (random<=95) {
 				sell=true;
 			}
-		} else if (percentage>=0 && percentage <5) {
+		} if (percentage>=0 && percentage <5) {
 			if (random<=75) {
 				sell=true;
 			}
-		} else if (percentage>=5 && percentage <10) {
+		} if (percentage>=5 && percentage <10) {
 			if (random<=50) {
 				sell=true;
 			}
-		} else if (percentage>=10 && percentage <15) {
+		} if (percentage>=10 && percentage <15) {
 			if (random<=30) {
 				sell=true;
 			}
-		} else if (percentage>=15 && percentage <20) {
+		} if (percentage>=15 && percentage <20) {
 			if (random<=20) {
 				sell=true;
 			}
-		} else if (percentage>=20 && percentage<25) {
+		} if (percentage>=20 && percentage<25) {
 			if (random<=10) {
 				sell=true;
 			}
-		} else if (percentage>=25 && percentage<30) {
+		} if (percentage>=25 && percentage<30) {
 			if (random==1) {
 				sell=true;
 			}

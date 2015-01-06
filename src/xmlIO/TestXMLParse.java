@@ -35,8 +35,11 @@ public class TestXMLParse {
 		for (int i=0;i<200;i++) {
 			GameLogic.setSeed(i);
 			GameLogic.setTesting(true);
-			System.out.println(i + " " + GameLogic.randomGenerator(0, 100));
+			System.out.println(i + " " + GameLogic.randomGenerator(1, 100));
 		}
+		
+		System.out.println(competition.getLibrary().getLibrary().get(0).getTeam().get(0));
+		System.out.println(competition.getLibrary().getLibrary().get(0));
 		
 		
 		}
