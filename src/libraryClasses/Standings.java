@@ -37,18 +37,26 @@ public class Standings {
 	}
 	
 	public void updateStandings(String result, int goalsFor, int goalsAgainst){
-		switch(result) {
-		case "won":
-		case "win":
+		
+		
+		if (result.equals("won")) {
 			won++;
-			break;
-		case "draw":
+		}
+		
+		if (result.equals("win")) {
+			won++;
+		}
+		
+		if (result.equals("draw")) {
 			draw++;
-			break;
-		case "lost":
-		case "loss":
+		}
+		
+		if (result.equals("lost")) {
 			lost++;
-			break;
+		}
+		
+		if (result.equals("loss")) {
+			lost++;
 		}
 		
 		this.goalsFor += goalsFor;
@@ -169,6 +177,44 @@ public class Standings {
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
+
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Standings other = (Standings) obj;
+		if (draw != other.draw)
+			return false;
+		if (goalDifference != other.goalDifference)
+			return false;
+		if (goalsAgainst != other.goalsAgainst)
+			return false;
+		if (goalsFor != other.goalsFor)
+			return false;
+		if (lost != other.lost)
+			return false;
+		if (points != other.points)
+			return false;
+		if (teamName == null) {
+			if (other.teamName != null)
+				return false;
+		} else if (!teamName.equals(other.teamName))
+			return false;
+		if (won != other.won)
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	
