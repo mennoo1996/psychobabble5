@@ -41,20 +41,21 @@ import javax.swing.border.Border;
 
 import libraryClasses.Competition;
 import libraryClasses.FieldPlayer;
+import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
+import libraryClasses.Team;
 
 public class PositionsPanel_Left extends JPanel implements DragGestureListener, Transferable {
 	
-	private Competition currentComp;
+	private Team currentTeam;
 	private ArrayList<Player> Team;
 	
-	public PositionsPanel_Left(Competition cComp) {
-		currentComp = cComp;
-		Team = cComp.getLibrary().getTeamForName("Manchester United").getTeam();
+	public PositionsPanel_Left(Team cTeam) {
+		currentTeam = cTeam;
+		Team = cTeam.getTeam();
 		initUI();
 	}
 	
-		
 	
 	/**
 	 * Initialize an example panel
@@ -164,6 +165,13 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 							label3.add(AttrLabel[e]);
 						}
 					}
+					else{
+						Goalkeeper player = (Goalkeeper) Team.get(w);
+						label3.setLayout(new BoxLayout(label3, BoxLayout.X_AXIS));
+						JLabel attr = new JLabel("Stat: " + player.getGoalkeeperValue());
+						attr.setFont(fontPlayerattr);
+						label3.add(attr);
+					}
 					
 					//finish up
 					Playerpanel.add(label1, BorderLayout.WEST);
@@ -205,7 +213,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
         if (event.getDragAction() == DnDConstants.ACTION_COPY) {
             cursor = DragSource.DefaultCopyDrop;
         }
-        event.startDrag(cursor, new TransferablePlayer(player));
+        event.startDrag(cursor, new TransferablePlayer(player, 0));
     }
 
 	@Override
@@ -253,12 +261,17 @@ class ListPanel extends JPanel {
 //Transferable	
 class TransferablePlayer implements Transferable {
     protected static DataFlavor playerFlavor = new DataFlavor(Player.class, "A Player Object");
+    protected static DataFlavor intFlavor = new DataFlavor(int.class, "An Integer Object");
     protected static DataFlavor[] supportedFlavors = {
         playerFlavor,
+        intFlavor,
     };
+    
     Player player;
-    public TransferablePlayer(Player player) {
+    int position;
+    public TransferablePlayer(Player player, int position) {
     	this.player = player;
+    	this.position = position;
     }
     public DataFlavor[] getTransferDataFlavors() {
     	return supportedFlavors;
@@ -272,6 +285,9 @@ class TransferablePlayer implements Transferable {
    public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
      if (flavor.equals(playerFlavor)){
          return player;
+     }
+     else if(flavor.equals(intFlavor)){
+    	 return position;
      }
      else{
     	 throw new UnsupportedFlavorException(flavor);

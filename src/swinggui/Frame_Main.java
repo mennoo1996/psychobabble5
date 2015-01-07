@@ -22,6 +22,8 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import xmlIO.XMLParser;
 import libraryClasses.Competition;
+import libraryClasses.Player;
+import libraryClasses.Positions;
 import libraryClasses.Team;
 
 //import aurelienribon.tweenengine.Tween;
@@ -32,6 +34,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	private JPanel curPanel;
 	private String current;
 	private Competition curComp;
+	private Team curTeam;
 	private int roundNum;
 	
 	public Dimension minSize = new Dimension(20,20);
@@ -58,6 +61,17 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Currently only supports one season
 		roundNum = 0;
 		curComp = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");
+		curTeam = curComp.getLibrary().getTeamForName("Manchester United");
+		
+		//temporarily initialize team positions (randomly, just the first 11 players);
+		Player[] positions = new Player[11];
+		for(int i = 0; i < 11; i++){
+			positions[i] = curTeam.getTeam().get(i);
+			//System.out.println(positions[i].toString());
+		}
+		Positions positions2 = new Positions(positions);
+		curTeam.setPositions(positions2);
+		
 		
 		// Initialize teams
 		for(Team team : curComp.getLibrary().getLibrary()) {
@@ -217,7 +231,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 						System.out.println("Current screen is: " + current);
 						
 						// Initialize new JPanel and remove current pane
-						PositionsPanel replPositsview = new PositionsPanel(curComp);
+						PositionsPanel replPositsview = new PositionsPanel(curTeam);
 						remove(curPanel);
 						
 						// Refresh the view
