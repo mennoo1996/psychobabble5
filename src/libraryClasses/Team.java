@@ -13,7 +13,8 @@ public class Team {
 	private String teamName;
 	private double budget;
 	private Standings standings;
-
+	private Positions positions;
+	
 	/**
 	 * Constructor which initialises an empty team with the given team name
 	 * @param teamName - The name of the team
@@ -180,5 +181,21 @@ public class Team {
 		currentTeam.remove(playerout);
 		currentTeam.add(playerin);
 	}
+
+	/**
+	 * @return the positions
+	 */
+	public Positions getPositions() {
+		return positions;
+	}
+
+	/**
+	 * @param positions the positions to set
+	 */
+	public void setPositions(Positions positions) {
+		this.positions = positions;
+	}
+	
+	
 	
 }
