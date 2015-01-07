@@ -126,6 +126,119 @@ public class TeamRating {
 	public int getTotal() {
 		return total;
 	}
+
+	/**
+	 * @return the finishing
+	 */
+	public int getFinishing() {
+		return finishing;
+	}
+
+	/**
+	 * @param finishing the finishing to set
+	 */
+	public void setFinishing(int finishing) {
+		this.finishing = finishing;
+	}
+
+	/**
+	 * @return the dribbling
+	 */
+	public int getDribbling() {
+		return dribbling;
+	}
+
+	/**
+	 * @param dribbling the dribbling to set
+	 */
+	public void setDribbling(int dribbling) {
+		this.dribbling = dribbling;
+	}
+
+	/**
+	 * @return the stamina
+	 */
+	public int getStamina() {
+		return stamina;
+	}
+
+	/**
+	 * @param stamina the stamina to set
+	 */
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
+	}
+
+	/**
+	 * @return the defending
+	 */
+	public int getDefending() {
+		return defending;
+	}
+
+	/**
+	 * @param defending the defending to set
+	 */
+	public void setDefending(int defending) {
+		this.defending = defending;
+	}
+
+	/**
+	 * @return the goalkeeping
+	 */
+	public int getGoalkeeping() {
+		return goalkeeping;
+	}
+
+	/**
+	 * @param goalkeeping the goalkeeping to set
+	 */
+	public void setGoalkeeping(int goalkeeping) {
+		this.goalkeeping = goalkeeping;
+	}
+
+	/**
+	 * @param total the total to set
+	 */
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TeamRating other = (TeamRating) obj;
+		if (defending != other.defending)
+			return false;
+		if (dribbling != other.dribbling)
+			return false;
+		if (finishing != other.finishing)
+			return false;
+		if (goalkeeping != other.goalkeeping)
+			return false;
+		if (stamina != other.stamina)
+			return false;
+		if (total != other.total)
+			return false;
+		return true;
+	}
+	
+	
+	
+	
 	
 	
 	

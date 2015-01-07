@@ -62,6 +62,30 @@ public class CompetitionScheme {
 	public void setRounds(ArrayList<Round> rounds) {
 		this.rounds = rounds;
 	}
+
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CompetitionScheme other = (CompetitionScheme) obj;
+		if (rounds == null) {
+			if (other.rounds != null)
+				return false;
+		} else if (!rounds.equals(other.rounds))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 }
