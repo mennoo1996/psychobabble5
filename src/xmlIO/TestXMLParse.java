@@ -16,21 +16,21 @@ public class TestXMLParse {
 		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
 		
 		
-		System.out.println(competition.toString());
+//		System.out.println(competition.toString());
+//		
+//		for(Team t : competition.getLibrary().getLibrary()) {
+//			t.setPositionsAsCurrentTeam();;
+//		}
+//		competition.playRound();
+//		
+//		for(int i = 0; i < 37; i++) {
+//			System.out.println("Round: " + i);
+//			competition.playRound();
+//		}
+//		
+//		System.out.println(competition.standingsToString());
 		
-		for(Team t : competition.getLibrary().getLibrary()) {
-			t.setPositionsAsCurrentTeam();;
-		}
-		competition.playRound();
-		
-		for(int i = 0; i < 37; i++) {
-			System.out.println("Round: " + i);
-			competition.playRound();
-		}
-		
-		System.out.println(competition.standingsToString());
-		
-//		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
+		XMLParser.writeCompetition("files/competitionDatabase_v5.xml", competition);
 //		
 //		System.out.println(GameLogic.randomGenerator(1,50,5));
 //		System.out.println(GameLogic.randomGenerator(1,100,5));
