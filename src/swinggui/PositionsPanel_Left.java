@@ -41,30 +41,32 @@ import javax.swing.border.Border;
 
 import libraryClasses.Competition;
 import libraryClasses.FieldPlayer;
+import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
+import libraryClasses.Team;
 
 public class PositionsPanel_Left extends JPanel implements DragGestureListener, Transferable {
 	
-	private Competition currentComp;
+	private Team currentTeam;
 	private ArrayList<Player> Team;
 	
-	public PositionsPanel_Left(Competition cComp) {
-		currentComp = cComp;
-		Team = cComp.getLibrary().getTeamForName("Manchester United").getTeam();
+	public PositionsPanel_Left(Team cTeam) {
+		currentTeam = cTeam;
+		Team = cTeam.getTeam();
 		initUI();
 	}
 	
-		
 	
 	/**
 	 * Initialize an example panel
 	 */
 	public final void initUI() {
 		//new panel
-		JPanel panel = new JPanel();
-		panel.setOpaque(false);
-		panel.setName("Panel");
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		//JPanel panel = new JPanel();
+		setOpaque(false);
+		setName("Panel");
+		//setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(145,143,143)));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		//dragsource
 		DragSource ds = new DragSource();
@@ -72,17 +74,18 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 		//panel title
 		JPanel titlepanel = new JPanel();
 		JLabel title = new JLabel("Players");
+		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(145,143,143)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
 		titlepanel.add(title);
-		panel.add(titlepanel);
+		add(titlepanel);
 
 		//content begins here
 		
 		//Fonts here
 		Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
-		Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 20);
-		Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 12);
+		Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 16);
+		Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
 		
 		//top level JPanel holds all content for the scrollable.
 		JPanel ScrollPaneContent = new JPanel(); ScrollPaneContent.setLayout(new BoxLayout(ScrollPaneContent, BoxLayout.Y_AXIS));
@@ -100,10 +103,12 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 			
 			//add a separator
 			JPanel separator = new JPanel(); 
-			separator.setPreferredSize(new Dimension(separator.getWidth(), 25));
+			separator.setMinimumSize(new Dimension(0,25));
+			//separator.setPreferredSize(new Dimension(separator.getWidth(), 25));
 			separator.setOpaque(true);
 			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(180,180,180)));
 			separator.setBackground(new Color(230,230,230));
+			
 			//separator title
 			JLabel separatortitle = new JLabel(PlayerTypes[q] + "s");
 			separatortitle.setFont(fontSeparator);
@@ -130,20 +135,22 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 					    public void paintComponent (Graphics g) {
 					        super.paintComponent (g);
 					        //System.out.println("override");
-					        g.drawImage (myImageIcon.getImage(), 0, 0, 60, 60, null);
+					        g.drawImage (myImageIcon.getImage(), 0, 0, 55, 55, null);
 					    }
 					};
-					label1.setPreferredSize(new Dimension(80,60));
-					
+					label1.setPreferredSize(new Dimension(65,55));
 					
 					//name label
 					JLabel label2 = new JLabel(Team.get(w).getName());
 					label2.setFont(fontPlayername);
-					label2.setPreferredSize(new Dimension(100, 50));
-					
+					label2.setMinimumSize(new Dimension(20,50));
+					label2.setPreferredSize(new Dimension(90, 50));
+					label2.setMaximumSize(new Dimension(100,50));
 					//attributes
 					JPanel label3 = new JPanel();
-					label3.setPreferredSize(new Dimension(140, label3.getSize().height));
+					label3.setMinimumSize(new Dimension(75, label3.getSize().height));
+					label3.setPreferredSize(new Dimension(80, label3.getSize().height));
+					label3.setMaximumSize(new Dimension(100, label3.getSize().height));
 					if(PlayerTypes[q] != "Goalkeeper"){
 						FieldPlayer player = (FieldPlayer) Team.get(w);
 						label3.setLayout(new GridLayout(2,2));
@@ -164,10 +171,18 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 							label3.add(AttrLabel[e]);
 						}
 					}
+					else{
+						Goalkeeper player = (Goalkeeper) Team.get(w);
+						label3.setLayout(new BoxLayout(label3, BoxLayout.X_AXIS));
+						JLabel attr = new JLabel("Stat: " + player.getGoalkeeperValue());
+						attr.setFont(fontPlayerattr);
+						label3.add(attr);
+					}
 					
 					//finish up
 					Playerpanel.add(label1, BorderLayout.WEST);
-					Playerpanel.add(label2);
+					JPanel fill = new JPanel();
+					Playerpanel.add(label2, BorderLayout.CENTER);
 					Playerpanel.add(label3, BorderLayout.EAST);
 					ScrollPaneGrid.add(Playerpanel);
 					ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, this);
@@ -180,16 +195,18 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 		}
 		
 		JScrollPane ScrollPane = new JScrollPane(ScrollPaneContent, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
-		ScrollPane.setPreferredSize(new Dimension(400,500));
+		ScrollPane.getVerticalScrollBar().setUnitIncrement(10);
+		//ScrollPane.setMinimumSize(new Dimension(100,300));
+		//ScrollPane.setPreferredSize(new Dimension(400,500));
 		
-		panel.add(ScrollPane);
+		add(ScrollPane);
 		//content ends here
 		
 		//add panel
-		panel.setMinimumSize(new Dimension(100,500));
-		panel.setPreferredSize(new Dimension(450,550));
-		panel.setMaximumSize(new Dimension(900,600));
-		this.add(panel);
+		setMinimumSize(new Dimension(100,500));
+		setPreferredSize(new Dimension(450,550));
+		setMaximumSize(new Dimension(900,600));
+		//this.add(panel);
 	}
 	
 	public static void main(String[] args) {
@@ -205,7 +222,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
         if (event.getDragAction() == DnDConstants.ACTION_COPY) {
             cursor = DragSource.DefaultCopyDrop;
         }
-        event.startDrag(cursor, new TransferablePlayer(player));
+        event.startDrag(cursor, new TransferablePlayer(player, 0));
     }
 
 	@Override
@@ -253,12 +270,17 @@ class ListPanel extends JPanel {
 //Transferable	
 class TransferablePlayer implements Transferable {
     protected static DataFlavor playerFlavor = new DataFlavor(Player.class, "A Player Object");
+    protected static DataFlavor intFlavor = new DataFlavor(int.class, "An Integer Object");
     protected static DataFlavor[] supportedFlavors = {
         playerFlavor,
+        intFlavor,
     };
+    
     Player player;
-    public TransferablePlayer(Player player) {
+    int position;
+    public TransferablePlayer(Player player, int position) {
     	this.player = player;
+    	this.position = position;
     }
     public DataFlavor[] getTransferDataFlavors() {
     	return supportedFlavors;
@@ -272,6 +294,9 @@ class TransferablePlayer implements Transferable {
    public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
      if (flavor.equals(playerFlavor)){
          return player;
+     }
+     else if(flavor.equals(intFlavor)){
+    	 return position;
      }
      else{
     	 throw new UnsupportedFlavorException(flavor);

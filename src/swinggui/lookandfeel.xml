@@ -111,7 +111,7 @@
   <style id = "basicpanelStyle">
 	  	<insets top="32" left="47" bottom="62" right="47"/>
 	  	<opaque value="FALSE"/>
-	  	<imagePainter method="panelBackground" path="images/panel.png" sourceInsets="60 60 80 60"/>
+	  	<imagePainter method="panelBackground" path="images/panel.png" sourceInsets="60 60 62 60"/>
   </style>
   
   
@@ -137,14 +137,22 @@
   		<imagePainter method="labelBackground" path="images/Line_Separator.png" sourceInsets="0 0 0 0"/>
   </style>
   
+  <style id="ScrollBar">
+  		<property key="ScrollBar.minimumThumbSize" type="dimension" value="0 40"/>
+  		<property key="ScrollBar.squareButtons" type="boolean" value="true"/>
+  		<state>
+    			<color value="BLACK" type="BACKGROUND"/>
+      			<imagePainter method="scrollBarBackground" direction="vertical" path="images/scrollbutton.png" sourceInsets="14 0 14 0" />
+    	</state>
+  </style>
+  
   <style id="ScrollBarThumbStyle">
-    <opaque value="FALSE"/>
-    <insets top="0" left="0" bottom="0" right="0"/>
-    <property key="ScrollBar.minimumThumbSize" type="dimension" value="40 140"/>
-    <state>
-    		<color value="BLACK" type="BACKGROUND"/>
-      		<imagePainter method="scrollBarThumbBackground" direction="vertical" path="images/scrollbar.png" sourceInsets="8 0 8 0" />
-    </state>
+    	<opaque value="FALSE"/>
+    	<insets top="0" left="0" bottom="0" right="0"/>
+    	<state>
+    			<color value="BLACK" type="BACKGROUND"/>
+      			<imagePainter method="scrollBarThumbBackground" direction="vertical" path="images/scrollbar.png" sourceInsets="15 0 15 0" />
+    	</state>
   </style>
   
   <style id = "playerpanelStyle">
@@ -161,6 +169,7 @@
   <bind style="shirtlabelStyle" type="name" key="shirtLabel"/>
   
   <bind style="ScrollBarThumbStyle" type="region" key="ScrollBarThumb"/>
+  <bind style="ScrollBar" type="region" key="ScrollBar"/>
   
   <bind style="headerouter" type="name" key="HeaderOuter"/>
   <bind style="headerouter2" type="name" key="HeaderOuter2"/>
