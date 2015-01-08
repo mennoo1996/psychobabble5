@@ -108,6 +108,23 @@ public class Team {
 		}
 	}
 	
+	public void setPositionsAsCurrentTeam() {
+		ArrayList<Player> res = new ArrayList<Player>();
+		
+		Player[] playerArray = positions.getPositionArray();
+		
+		for(int i = 0; i < 11; i++) {
+			res.add(playerArray[i]);
+		}
+		
+		try {
+			this.setCurrentTeam(res);
+		} catch (Exception e) {
+			
+		}
+		
+	}
+	
 	/**
 	 * @return the budget
 	 */

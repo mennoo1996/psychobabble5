@@ -15,18 +15,20 @@ public class TestXMLParse {
 		
 		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
 		
-//		System.out.println(competition.toString());
 		
-//		for(Team t : competition.getLibrary().getLibrary()) {
-//			t.setFirst11AsCurrentTeam();
-//		}
-//		competition.playRound();
-//		
-//		for(int i = 0; i < 38; i++) {
-//			competition.playRound();
-//		}
-//		
-//		System.out.println(competition.standingsToString());
+		System.out.println(competition.toString());
+		
+		for(Team t : competition.getLibrary().getLibrary()) {
+			t.setPositionsAsCurrentTeam();;
+		}
+		competition.playRound();
+		
+		for(int i = 0; i < 37; i++) {
+			System.out.println("Round: " + i);
+			competition.playRound();
+		}
+		
+		System.out.println(competition.standingsToString());
 		
 //		XMLParser.writeCompetition("files/competitionDatabase_v3.xml", competition);
 //		
@@ -43,17 +45,17 @@ public class TestXMLParse {
 //		System.out.println(competition.getLibrary().getLibrary().get(0).getTeam().get(0));
 //		System.out.println(competition.getLibrary().getLibrary().get(0));
 //		
-		ArrayList<Team> libraryArray = competition.getLibrary().getLibrary();
-		for(int i = 0; i < 20; i++) {
-			System.out.println(libraryArray.get(i).getTeamName());
-			if(libraryArray.get(i).getTeamName().equals("Leicester City")) {
-				for (Player player :libraryArray.get(i).getPositions().getPositionArray()) {
-					System.out.println(player.toString());
-				}
-			}
-			System.out.println(libraryArray.get(i).toString());
-			System.out.println("\n\n");
-		}
+//		ArrayList<Team> libraryArray = competition.getLibrary().getLibrary();
+//		for(int i = 0; i < 20; i++) {
+//			System.out.println(libraryArray.get(i).getTeamName());
+//			if(libraryArray.get(i).getTeamName().equals("Leicester City")) {
+//				for (Player player :libraryArray.get(i).getPositions().getPositionArray()) {
+//					System.out.println(player.toString());
+//				}
+//			}
+//			System.out.println(libraryArray.get(i).toString());
+//			System.out.println("\n\n");
+//		}
 	}
 }
 
