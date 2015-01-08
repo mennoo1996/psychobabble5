@@ -62,7 +62,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		JPanel titlepanel = new JPanel();
 		JLabel title = new JLabel("Positions");
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(145,143,143)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
 		titlepanel.add(title);
 		add(titlepanel);
 				

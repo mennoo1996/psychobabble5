@@ -65,6 +65,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 		//JPanel panel = new JPanel();
 		setOpaque(false);
 		setName("Panel");
+		//setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(145,143,143)));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		//dragsource
@@ -75,7 +76,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 		JLabel title = new JLabel("Players");
 		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(145,143,143)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
 		titlepanel.add(title);
 		add(titlepanel);
 
@@ -194,6 +195,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 		}
 		
 		JScrollPane ScrollPane = new JScrollPane(ScrollPaneContent, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+		ScrollPane.getVerticalScrollBar().setUnitIncrement(10);
 		//ScrollPane.setMinimumSize(new Dimension(100,300));
 		//ScrollPane.setPreferredSize(new Dimension(400,500));
 		

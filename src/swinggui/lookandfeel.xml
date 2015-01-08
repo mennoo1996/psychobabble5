@@ -111,7 +111,7 @@
   <style id = "basicpanelStyle">
 	  	<insets top="32" left="47" bottom="62" right="47"/>
 	  	<opaque value="FALSE"/>
-	  	<imagePainter method="panelBackground" path="images/panel.png" sourceInsets="60 60 80 60"/>
+	  	<imagePainter method="panelBackground" path="images/panel.png" sourceInsets="60 60 62 60"/>
   </style>
   
   
@@ -140,6 +140,10 @@
   <style id="ScrollBar">
   		<property key="ScrollBar.minimumThumbSize" type="dimension" value="0 40"/>
   		<property key="ScrollBar.squareButtons" type="boolean" value="true"/>
+  		<state>
+    			<color value="BLACK" type="BACKGROUND"/>
+      			<imagePainter method="scrollBarBackground" direction="vertical" path="images/scrollbutton.png" sourceInsets="14 0 14 0" />
+    	</state>
   </style>
   
   <style id="ScrollBarThumbStyle">
