@@ -216,6 +216,36 @@ public class Competition {
 	public void setRoundsPlayed(int roundsPlayed) {
 		this.roundsPlayed = roundsPlayed;
 	}
+
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Competition other = (Competition) obj;
+		if (library == null) {
+			if (other.library != null)
+				return false;
+		} else if (!library.equals(other.library))
+			return false;
+		if (roundsPlayed != other.roundsPlayed)
+			return false;
+		if (scheme == null) {
+			if (other.scheme != null)
+				return false;
+		} else if (!scheme.equals(other.scheme))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	
