@@ -31,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import libraryClasses.Player;
+import libraryClasses.Positions;
 import libraryClasses.Team;
 
 public class PositionsPanel_Right extends JPanel implements DragGestureListener, Transferable{
@@ -50,10 +51,9 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 	 */
 	public final void initUI() {
 		//new panel
-		JPanel panel = new JPanel();
-		panel.setOpaque(false);
-		panel.setName("Panel");
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		setOpaque(false);
+		setName("Panel");
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		//dragsource
 		DragSource ds = new DragSource();
@@ -64,7 +64,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
 		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(145,143,143)));
 		titlepanel.add(title);
-		panel.add(titlepanel);
+		add(titlepanel);
 				
 		//content begins here
 		
@@ -80,56 +80,24 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 			}	
 		};
 		
-		ContentPanel.setPreferredSize(new Dimension(ContentPanel.getWidth(), 500));
-		
-		//GridBagConstraints c = new GridBagConstraints();
-		
-		PlayerPanel Test;
-		//TOP ROW
-		
-		//PlayerPanel[] panels = new PlayerPanel[11];
+		//loop through team of 11 players
 		
 		for(int i = 1; i < 12; i++){
 			
 			panels[i - 1] = new PlayerPanel(null, i);
-			
-			//PlayerPanel playerPanel = new PlayerPanel(null, i);
 			panels[i - 1].setName("playerPanel");
 			panels[i - 1].setLayout(new BoxLayout(panels[i - 1], BoxLayout.X_AXIS));
 			panels[i - 1].setPreferredSize(new Dimension(150,50));
 			panels[i - 1].setMinimumSize(new Dimension(150,50));
 			
-			JLabel label2 = new JLabel();
-			ImageIcon myImageIcon;
-			Component box;
-			//shirt
-			if(currentTeam.getPositions().getPositionArray()[i - 1]== null){
-				System.out.println(currentTeam.getPositions().getPositionArray()[i-1]);
-				myImageIcon = createImageIcon("images/Shirts/T-Shirt.png");
-				label2 = new JLabel("Select player");
-				box = Box.createRigidArea(new Dimension(0,0));
+			//panel content
+			if(currentTeam.getPositions() == null || currentTeam.getPositions().getPositionArray()[i - 1]== null){
+				setPlayerPanel(true,null,currentTeam,i, false);		
 			}
-			else{
-				panels[i - 1].setPlayer(currentTeam.getPositions().getPositionArray()[i-1]);
-				myImageIcon = createImageIcon("images/Shirts/" + i + ".png");
-				label2 = new JLabel(currentTeam.getPositions().getPositionArray()[i-1].getName());
-				box = Box.createRigidArea(new Dimension(10,0));
+			else{		
+				setPlayerPanel(false, currentTeam.getPositions().getPositionArray()[i-1],currentTeam, i, false);	
 			}
-			JLabel label1 = new JLabel ("  	   ") {
-			    @Override
-			    public void paintComponent (Graphics g) {
-			        super.paintComponent (g);
-			        g.drawImage (myImageIcon.getImage(), 0, 0, 38, 38, null);
-			    }
-			};
 			
-			//name
-			label2.setFont(fontTitle);
-			
-			//finish up
-			panels[i - 1].add(label1);
-			panels[i - 1].add(box);
-			panels[i - 1].add(label2);
 			new MyDropTargetListener(panels[i - 1]);
 			
 			//layout
@@ -139,7 +107,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 				case(1): //player 1
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(0,0,0,80);
-					c.weighty = 0.5;
+					//c.weighty = 0.5;
 					c.gridx = 0;
 					c.gridy = 0;
 					c.gridwidth = 2;
@@ -147,15 +115,15 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 				case(2): //player 2
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(80,0,0,0);
-					c.weighty = 0.5;
+					//c.weighty = 0.5;
 					c.gridx = 1;
 					c.gridy = 0;
 					c.gridwidth = 2;
 					break;
 				case(3): //player 3
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,30,0,0);
-					c.weighty = 0.5;
+					c.insets = new Insets(0,80,0,0);
+					//c.weighty = 0.5;
 					c.gridx = 2;
 					c.gridy = 0;
 					c.gridwidth = 2;
@@ -163,7 +131,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 				//row 2
 				case(4): //player 4
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,30,0,0);
+					c.insets = new Insets(0,0,0,60);
 					c.weightx = 0.5;
 					c.weighty = 0.5;
 					c.gridx = 0;
@@ -181,7 +149,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					break;
 				case(6): //player 6
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,0,0,30);
+					c.insets = new Insets(0,60,0,0);
 					c.weightx = 0.5;
 					c.weighty = 0.5;
 					c.gridx = 2;
@@ -241,22 +209,23 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 			ContentPanel.add(panels[i - 1], c);
 		}
 		
-		panel.add(ContentPanel);
+		add(ContentPanel);
+		add(new Box.Filler(new Dimension(1,20), new Dimension(1,20), new Dimension(1,20)));
 		
 		//content ends here
 				
 		//add panel
-		panel.setMinimumSize(new Dimension(100,500));
-		panel.setPreferredSize(new Dimension(800,550));
-		panel.setMaximumSize(new Dimension(900,600));
+		setMinimumSize(new Dimension(100,500));
+		setPreferredSize(new Dimension(800,550));
+		setMaximumSize(new Dimension(900,600));
 		
-		this.add(panel);
 	}
 	
 	public static void main(String[] args) {
 		Panel_Example2 thing = new Panel_Example2("Insert title here");
 		thing.setVisible(true);
 	}
+	
 	
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
@@ -299,61 +268,17 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		      Player switchPlayer = ((PlayerPanel) panel).getPlayer();
 		      int oldPosition = (int) tr.getTransferData(TransferablePlayer.intFlavor);
 		      if (event.isDataFlavorSupported(TransferablePlayer.playerFlavor)) {
-		          event.acceptDrop(DnDConstants.ACTION_COPY);
-		          this.panel.removeAll();
-			        //shirt
-			  		ImageIcon myImageIcon = createImageIcon("images/Shirts/" +	Integer.toString(player.getNumber()) + ".png");
-			  		JLabel label1 = new JLabel ("  	   ") {
-			  		    @Override
-			  		    public void paintComponent (Graphics g) {
-			  		        super.paintComponent (g);
-			  		        g.drawImage (myImageIcon.getImage(), 0, 0, 38, 38, null);
-			  		    }
-			  		};
-			  		
-			  		//name
-			  		JLabel label2 = new JLabel(player.getName());
-			  		label2.setFont(fontTitle);
-			  		
-			  		//finish up
-			  		panel.add(label1);
-			  		panel.add(Box.createRigidArea(new Dimension(10,0)));
-			  		panel.add(label2);
-			  		((PlayerPanel) panel).setPlayer(player);
-			  		this.panel.revalidate();
-		          	this.panel.repaint();
+		          
+		    	  event.acceptDrop(DnDConstants.ACTION_COPY);
+		          
+		          setPlayerPanel(false, player,currentTeam, ((PlayerPanel) panel).getPosition(), false);
 		          
 		          if(oldPosition != 0){
-		        	  
-		        	 System.out.println("Origin: " +  panels[oldPosition - 1].player.toString());
-		        	 panels[oldPosition - 1].removeAll();
-		        	 //shirt
-		        	 ImageIcon myImageIcon2 = createImageIcon("images/Shirts/" +	Integer.toString(switchPlayer.getNumber()) + ".png");
-		        	 JLabel label3 = new JLabel ("  	   ") {
-				  		    @Override
-				  		    public void paintComponent (Graphics g) {
-				  		        super.paintComponent (g);
-				  		        g.drawImage (myImageIcon.getImage(), 0, 0, 38, 38, null);
-				  		    }
-				  	};
-				  	//name
-			  		JLabel label4 = new JLabel(switchPlayer.getName());
-			  		label4.setFont(fontTitle);
-			  		//finish up
-			  		panels[oldPosition - 1].add(label3);
-			  		panels[oldPosition - 1].add(Box.createRigidArea(new Dimension(10,0)));
-			  		panels[oldPosition - 1].add(label4);
-			  		((PlayerPanel) panels[oldPosition - 1]).setPlayer(switchPlayer);
-			  		panels[oldPosition - 1].revalidate();
-			  		panels[oldPosition - 1].repaint();
+		        	 setPlayerPanel(false, switchPlayer, currentTeam, oldPosition, false);
 		          }
 		          
-		          
-		          
-		          
-		          
-		          
 		          event.dropComplete(true);
+		          
 		          return;
 		      }
 		      event.rejectDrop();
@@ -364,6 +289,102 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		    }
 		}
     }
+	
+	
+	public void setPlayerPanel(boolean empty, Player player, Team team, int position, boolean keeper){
+		
+		panels[position - 1].removeAll();
+		
+		JLabel label2 = new JLabel();
+		ImageIcon myImageIcon;
+		Component box;
+
+		if(empty){
+			//content
+			((PlayerPanel) panels[position - 1]).setPlayer(player);
+			myImageIcon = createImageIcon("images/Shirts/T-Shirt.png");
+			label2 = new JLabel("Select player");
+			box = Box.createRigidArea(new Dimension(0,0));
+			setPosition(position, null, team);
+		}
+		else if(keeper){
+			//content
+			((PlayerPanel) panels[position - 1]).setPlayer(player);
+			myImageIcon = createImageIcon("images/Shirts/T-Shirt-orange.png");
+			label2 = new JLabel("Select keeper");
+			box = Box.createRigidArea(new Dimension(0,0));
+			setPosition(position, null, team);
+		}
+		else if(player == null){
+			//content
+			((PlayerPanel) panels[position - 1]).setPlayer(player);
+			myImageIcon = createImageIcon("images/Shirts/T-Shirt.png");
+			label2 = new JLabel("Select player");
+			box = Box.createRigidArea(new Dimension(0,0));
+			setPosition(position, null, team);
+		}
+		else{
+			//loop through players to check for doubles
+			for(int i = 0; i < 11; i++){
+				if(
+						i != (position - 1) &&
+						panels[i] != null &&
+						panels[i].getPlayer() != null &&
+						((PlayerPanel) panels[i]).getPlayer().equals(player)
+						){
+					setPlayerPanel(true, null,team, i + 1, false);
+				}
+			}
+			//content
+			((PlayerPanel) panels[position - 1]).setPlayer(player);
+			myImageIcon = createImageIcon("images/Shirts/" + Integer.toString(player.getNumber()) + ".png");
+			label2 = new JLabel(player.getName());
+			box = Box.createRigidArea(new Dimension(10,0));
+		}
+		
+		//shirt override paint component to scale image
+   	 	JLabel label1 = new JLabel ("  	   ") {
+	  		    @Override
+	  		    public void paintComponent (Graphics g) {
+	  		        super.paintComponent (g);
+	  		        g.drawImage (myImageIcon.getImage(), 0, 0, 38, 38, null);
+	  		    }
+	  	};
+	  	
+  		label2.setFont(fontTitle);
+  		
+  		//finish
+	  	panels[position - 1].add(label1);
+	  	panels[position - 1].add(box);
+	  	panels[position - 1].add(label2);
+  		
+  		//redraw
+  		panels[position - 1].revalidate();
+  		panels[position - 1].repaint();
+  		
+  		//final check
+  		if(player != null && position == 11 && player.getPlayerType().toString() != "Goalkeeper"){
+  			setPlayerPanel(false, null,team, 11, true);
+  		}
+  		else if(player != null && position != 11 && player.getPlayerType().toString() == "Goalkeeper"){
+  			setPlayerPanel(true, null,team, position, false);
+  		}
+  		
+  		//set position
+  		setPosition(position, player, team);
+	}
+	
+	public static void setPosition(int position, Player player, Team team){
+//		if(team.getPositions().getPositionArray() != null){
+//			
+//		}
+		Player[] positions = team.getPositions().getPositionArray();
+		positions[position - 1] = player;
+		team.setPositions(new Positions(positions));
+		
+		//System.out.println(team.getPositions().getPositionArray()[10]);
+		
+	}
 	
 	@Override
 	public DataFlavor[] getTransferDataFlavors() {
