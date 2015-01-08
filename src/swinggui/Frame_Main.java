@@ -22,6 +22,8 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import xmlIO.XMLParser;
 import libraryClasses.Competition;
+import libraryClasses.Player;
+import libraryClasses.Positions;
 import libraryClasses.Team;
 
 //import aurelienribon.tweenengine.Tween;
@@ -32,6 +34,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	private JPanel curPanel;
 	private String current;
 	private Competition curComp;
+	private Team curTeam;
 	private int roundNum;
 	
 	public Dimension minSize = new Dimension(20,20);
@@ -58,8 +61,18 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Currently only supports one season
 		roundNum = 0;
 		curComp = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");
+		curTeam = curComp.getLibrary().getTeamForName("Manchester United");
 		
-		// Initialize teams
+		//temporarily initialize team positions (randomly, just the first 11 players);
+		Player[] positions = new Player[11];
+		for(int i = 0; i < 11; i++){
+			positions[i] = curTeam.getTeam().get(i);
+		}
+		Positions positions2 = new Positions(positions);
+		curTeam.setPositions(positions2);
+		
+		
+//		 Initialize teams
 		for(Team team : curComp.getLibrary().getLibrary()) {
 			team.setFirst11AsCurrentTeam();
 		}
@@ -84,7 +97,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		//initialize some stuff
 		setTitle("Football Manager 2015");
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		setMinimumSize(new Dimension(1280, 720));
+		setMinimumSize(new Dimension(1024, 720));
 		setSize(1280, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -111,11 +124,14 @@ public class Frame_Main extends JFrame implements ActionListener{
 		//temporary, for the help text or something, I'll fix it later
 //		JPanel Helper = new JPanel();
 //		Helper.setLayout(new BoxLayout(Helper, BoxLayout.X_AXIS));
-//		Helper.add(new Box.Filler(minSize, prefSize, prefSize));
+//		Helper.add(new Box.Filler(minSize, prefSize, null));
 //		JPanel HelperBox = new JPanel();
 //		HelperBox.setName("Panel"); HelperBox.setOpaque(false);
+//		HelperBox.setMinimumSize(new Dimension(200,40));
+//		HelperBox.setPreferredSize(new Dimension(1200,40));
+//		HelperBox.setMaximumSize(new Dimension(1800,100));
 //		Helper.add(HelperBox);
-//		Helper.add(new Box.Filler(minSize, prefSize, prefSize));
+//		Helper.add(new Box.Filler(minSize, prefSize, null));
 //		add(Helper);
 		
 		//southern space
@@ -217,7 +233,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 						System.out.println("Current screen is: " + current);
 						
 						// Initialize new JPanel and remove current pane
-						PositionsPanel replPositsview = new PositionsPanel(curComp);
+						PositionsPanel replPositsview = new PositionsPanel(curTeam);
 						remove(curPanel);
 						
 						// Refresh the view
