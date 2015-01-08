@@ -1,6 +1,6 @@
 package junitTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotEquals;
 
 import java.math.BigDecimal;
@@ -104,6 +104,27 @@ public class PlayerTest {
 		attacker.roundPlayed();
 		attacker.roundPlayed();
 		assertEquals(attacker.isEligible(), true);
+	}
+	
+	@Test
+	public void testRoundPlayedDaysNotForSale() {
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		assertEquals(attacker.getDaysNotForSale(), 0);
+		attacker.setCanBeSold(false);
+		attacker.roundPlayed();
+		assertEquals(attacker.isCanBeSold(), true);
+		attacker.setDaysNotForSale(3);
+		attacker.roundPlayed();
+		assertEquals(attacker.getDaysNotForSale(), 2);
+	}
+	
+	@Test
+	public void testTriedToSell() {
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		attacker.setCanBeSold(true);
+		attacker.triedToSell();
+		assertFalse(attacker.isCanBeSold());
+		assertEquals(attacker.getDaysNotForSale(), 3);
 	}
 
 	@Test

@@ -92,6 +92,43 @@ public class Match {
 	public int getWinner() {
 		return (score1 == score2) ? 0 : (score1 > score2) ? 1 : 2;
 	}
+
+
+
+	
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Match other = (Match) obj;
+		if (score1 != other.score1)
+			return false;
+		if (score2 != other.score2)
+			return false;
+		if (team1 == null) {
+			if (other.team1 != null)
+				return false;
+		} else if (!team1.equals(other.team1))
+			return false;
+		if (team2 == null) {
+			if (other.team2 != null)
+				return false;
+		} else if (!team2.equals(other.team2))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	
