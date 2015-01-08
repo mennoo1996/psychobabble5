@@ -205,6 +205,8 @@ public class TeamTest {
 		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 13, 5, true, 88, 96, 45, 80);
 		t.add(attacker);
 		String expected = "team1 with budget: 10.0\n" + t.getStandings().toString() + "\n" + attacker.toString();
+		System.out.println(t.toString());
+		System.out.println(expected);
 		assertEquals(expected, t.toString());
 	}
 
