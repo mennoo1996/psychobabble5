@@ -11,19 +11,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import libraryClasses.Attacker;
-import libraryClasses.Competition;
-import libraryClasses.CompetitionScheme;
-import libraryClasses.Defender;
-import libraryClasses.FieldPlayer;
-import libraryClasses.Goalkeeper;
-import libraryClasses.Library;
-import libraryClasses.Match;
-import libraryClasses.Midfielder;
-import libraryClasses.Player;
-import libraryClasses.Round;
-import libraryClasses.Standings;
-import libraryClasses.Team;
+import libraryClasses.*;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -119,6 +107,12 @@ public class XMLParser {
 			myTeam.add(readPlayer(player, teamName));
 		}
 		
+		NodeList positionsList = teamElement.getElementsByTagName("positions");
+		Element positionsElement = (Element)positionsList.item(0);
+		
+		Positions positions = readPositions(positionsElement, myTeam);
+		myTeam.setPositions(positions);
+		
 		return myTeam;
 	}
 	
@@ -136,6 +130,23 @@ public class XMLParser {
 		int goalsAgainst = Integer.parseInt(getNodeValue(standingsElement, "goalsAgainst"));
 
 		return new Standings(won, draw, lost, goalsFor, goalsAgainst, teamName);
+	}
+	
+	private static Positions readPositions(Element positionsElement, Team team) {
+		Player[] positionsArray = new Player[11];
+		for(int i = 0; i < 11; i++) {
+			String playerString = "player" + (i+1);
+			NodeList playerList = positionsElement.getElementsByTagName(playerString);
+			Element playerElement = (Element)playerList.item(0);
+			
+			int age = Integer.parseInt(getNodeValue(playerElement, "age"));
+			String name = getNodeValue(playerElement, "name");
+			
+			Player player = team.getPlayerForNameAndAge(name, age);
+			positionsArray[i] = player;
+		}
+		Positions positions = new Positions(positionsArray);
+		return positions;
 	}
 	
 	/**

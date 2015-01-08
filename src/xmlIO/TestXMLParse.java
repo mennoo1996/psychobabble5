@@ -1,5 +1,7 @@
 package xmlIO;
 
+import java.util.ArrayList;
+
 import libraryClasses.Competition;
 import libraryClasses.Player;
 import libraryClasses.Team;
@@ -11,14 +13,14 @@ public class TestXMLParse {
 	public static void main(String[] args) {
 //		Competition competition = XMLParser.readCompetition("players Database by team with empty standings.xml", "competition-scheme.xml");
 		
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
 		
 //		System.out.println(competition.toString());
 		
-		for(Team t : competition.getLibrary().getLibrary()) {
-			t.setFirst11AsCurrentTeam();
-		}
-		competition.playRound();
+//		for(Team t : competition.getLibrary().getLibrary()) {
+//			t.setFirst11AsCurrentTeam();
+//		}
+//		competition.playRound();
 //		
 //		for(int i = 0; i < 38; i++) {
 //			competition.playRound();
@@ -32,17 +34,27 @@ public class TestXMLParse {
 //		System.out.println(GameLogic.randomGenerator(1,100,5));
 //		System.out.println(GameLogic.randomGenerator(1,150,5));
 		
-		for (int i=0;i<200;i++) {
-			GameLogic.setSeed(i);
-			GameLogic.setTesting(true);
-			System.out.println(i + " " + GameLogic.randomGenerator(1, 100));
+//		for (int i=0;i<200;i++) {
+//			GameLogic.setSeed(i);
+//			GameLogic.setTesting(true);
+//			System.out.println(i + " " + GameLogic.randomGenerator(1, 100));
+//		}
+		
+//		System.out.println(competition.getLibrary().getLibrary().get(0).getTeam().get(0));
+//		System.out.println(competition.getLibrary().getLibrary().get(0));
+//		
+		ArrayList<Team> libraryArray = competition.getLibrary().getLibrary();
+		for(int i = 0; i < 20; i++) {
+			System.out.println(libraryArray.get(i).getTeamName());
+			if(libraryArray.get(i).getTeamName().equals("Leicester City")) {
+				for (Player player :libraryArray.get(i).getPositions().getPositionArray()) {
+					System.out.println(player.toString());
+				}
+			}
+			System.out.println(libraryArray.get(i).toString());
+			System.out.println("\n\n");
 		}
-		
-		System.out.println(competition.getLibrary().getLibrary().get(0).getTeam().get(0));
-		System.out.println(competition.getLibrary().getLibrary().get(0));
-		
-		
-		}
+	}
 }
 
 

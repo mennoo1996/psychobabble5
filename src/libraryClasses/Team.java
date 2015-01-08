@@ -57,6 +57,15 @@ public class Team {
 		standings.updateStandings(result, goalsFor, goalsAgainst);
 	}
 	
+	public Player getPlayerForNameAndAge(String name, int age) {
+		for(Player player : team) {
+			if(player.getName().equals(name) && player.getAge() == age) {
+				return player;
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * @return the currentTeam
 	 */
@@ -132,6 +141,7 @@ public class Team {
 	public String toString() {
 		String res = teamName + " with budget: " + budget;
 		res += "\n" + standings.toString();
+		res += "\n" + positions.toString();
 		for(int i = 0; i < team.size(); i++) {
 			res += "\n" + team.get(i);
 		}
