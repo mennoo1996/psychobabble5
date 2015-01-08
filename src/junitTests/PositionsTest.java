@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import libraryClasses.Attacker;
 import libraryClasses.Player;
 import libraryClasses.Positions;
+import libraryClasses.Standings;
 
 import org.junit.Test;
 
@@ -60,6 +61,22 @@ public class PositionsTest {
 		assertNull(result[0]);
 		assertNotNull(result[2]);
 		assertEquals(result[2], attacker);
+	}
+	
+	@Test
+	public void testEquals() {
+		Positions p = new Positions();
+		Positions p2 = new Positions();
+		assertTrue(p.equals(p));
+		assertFalse(p.equals(null));
+		assertFalse(p.equals(new Standings(1, 2, 3, 4, 5, "team1")));
+		Player[] array1 = new Player[11];
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		array1[0]=attacker;
+		p.setPositionArray(array1);
+		assertFalse(p.equals(p2));
+		p2.setPositionArray(array1);
+		assertTrue(p.equals(p2));
 	}
 
 }

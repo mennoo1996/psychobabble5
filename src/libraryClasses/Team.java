@@ -21,9 +21,11 @@ public class Team {
 	 */
 	public Team(String teamName, double budget, Standings standings) {
 		team = new ArrayList<Player>();
+		currentTeam = new ArrayList<Player>();
 		this.teamName = teamName;
 		this.budget = budget;
 		this.standings = standings;
+		this.positions=new Positions();
 	}
 	
 	/**
@@ -93,7 +95,7 @@ public class Team {
 		try {
 			this.setCurrentTeam(res);
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 		}
 	}
 	
@@ -117,6 +119,10 @@ public class Team {
 	 */
 	public void add(Player player) {
 		team.add(player);
+	}
+	
+	public void addToCurrentTeam(Player player) {
+		currentTeam.add(player);
 	}
 
 	/* (non-Javadoc)
@@ -195,6 +201,53 @@ public class Team {
 	public void setPositions(Positions positions) {
 		this.positions = positions;
 	}
+
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Team other = (Team) obj;
+		if (Double.doubleToLongBits(budget) != Double
+				.doubleToLongBits(other.budget))
+			return false;
+		if (currentTeam == null) {
+			if (other.currentTeam != null)
+				return false;
+		} else if (!currentTeam.equals(other.currentTeam))
+			return false;
+		if (positions == null) {
+			if (other.positions != null)
+				return false;
+		} else if (!positions.equals(other.positions))
+			return false;
+		if (standings == null) {
+			if (other.standings != null)
+				return false;
+		} else if (!standings.equals(other.standings))
+			return false;
+		if (team == null) {
+			if (other.team != null)
+				return false;
+		} else if (!team.equals(other.team))
+			return false;
+		if (teamName == null) {
+			if (other.teamName != null)
+				return false;
+		} else if (!teamName.equals(other.teamName))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	
