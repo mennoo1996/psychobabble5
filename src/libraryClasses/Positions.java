@@ -20,6 +20,16 @@ public class Positions {
 	public Player[] getPositionArray() {
 		return positionArray;
 	}
+	
+	public boolean contains(Player p) {
+		for (int i=0;i<positionArray.length;i++) {
+			Player p2 = positionArray[i];
+			if (p.equals(p2)); {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * @param positionArray the positionArray to set

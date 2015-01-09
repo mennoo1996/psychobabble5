@@ -196,6 +196,12 @@ public class Team {
 	public void replacePlayerInCurrentTeam(Player playerout, Player playerin) {
 		currentTeam.remove(playerout);
 		currentTeam.add(playerin);
+		Player[] array = positions.getPositionArray();
+		for (int i=0;i<array.length;i++) {
+			if (array[i].equals(playerout)) {
+				array[i]=playerin;
+			}
+		}
 	}
 
 	/**
