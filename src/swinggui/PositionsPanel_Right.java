@@ -82,7 +82,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		
 		//loop through team of 11 players
 		
-		for(int i = 1; i < 12; i++){
+		for(int i = 11; i > 0; i--){
 			
 			panels[i - 1] = new PlayerPanel(null, i);
 			panels[i - 1].setName("playerPanel");
@@ -104,7 +104,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 			GridBagConstraints c = new GridBagConstraints();
 			switch(i){
 				//row 1
-				case(1): //player 1
+				case(11): //player 1
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(0,0,0,80);
 					//c.weighty = 0.5;
@@ -112,7 +112,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridy = 0;
 					c.gridwidth = 2;
 					break;
-				case(2): //player 2
+				case(10): //player 2
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(80,0,0,0);
 					//c.weighty = 0.5;
@@ -120,7 +120,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridy = 0;
 					c.gridwidth = 2;
 					break;
-				case(3): //player 3
+				case(9): //player 3
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(0,80,0,0);
 					//c.weighty = 0.5;
@@ -129,7 +129,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridwidth = 2;
 					break;
 				//row 2
-				case(4): //player 4
+				case(8): //player 4
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(0,0,0,60);
 					c.weightx = 0.5;
@@ -138,7 +138,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridy = 1;
 					c.gridwidth = 2;
 					break;
-				case(5): //player 5
+				case(7): //player 5
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(30,0,0,0);
 					c.weightx = 0.5;
@@ -157,7 +157,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridwidth = 2;
 					break;
 				//row 3
-				case(7): //player 7
+				case(5): //player 7
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(0,0,30,0);
 					c.weightx = 0.5;
@@ -166,7 +166,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridy = 2;
 					c.gridwidth = 1;
 					break;
-				case(8): //player 8
+				case(4): //player 8
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(10,0,0,0);
 					c.weightx = 0.5;
@@ -175,7 +175,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridy = 2;
 					c.gridwidth = 1;
 					break;
-				case(9): //player 9
+				case(3): //player 9
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(10,0,0,0);
 					c.weightx = 0.5;
@@ -184,7 +184,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridy = 2;
 					c.gridwidth = 1;
 					break;
-				case(10): //player 10
+				case(2): //player 10
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(0,0,30,0);
 					c.weightx = 0.5;
@@ -194,7 +194,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					c.gridwidth = 1;
 					break;
 				//row 4
-				case(11): //player 11
+				case(1): //player 11
 					c.fill = GridBagConstraints.NONE;
 					c.insets = new Insets(0,0,20,0);
 					c.ipady = 0;
@@ -363,10 +363,10 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
   		panels[position - 1].repaint();
   		
   		//final check
-  		if(player != null && position == 11 && player.getPlayerType().toString() != "Goalkeeper"){
-  			setPlayerPanel(false, null,team, 11, true);
+  		if(player != null && position == 1 && player.getPlayerType().toString() != "Goalkeeper"){
+  			setPlayerPanel(false, null,team, 1, true);
   		}
-  		else if(player != null && position != 11 && player.getPlayerType().toString() == "Goalkeeper"){
+  		else if(player != null && position != 1 && player.getPlayerType().toString() == "Goalkeeper"){
   			setPlayerPanel(true, null,team, position, false);
   		}
   		
