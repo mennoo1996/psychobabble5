@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import libraryClasses.Attacker;
+import libraryClasses.Competition;
 import libraryClasses.Defender;
 import libraryClasses.Goalkeeper;
 import libraryClasses.Midfielder;
@@ -15,6 +16,8 @@ import libraryClasses.Standings;
 import libraryClasses.Team;
 
 import org.junit.Test;
+
+import xmlIO.XMLParser;
 
 public class TeamTest {
 
@@ -200,11 +203,18 @@ public class TeamTest {
 
 	@Test
 	public void testToString() {
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		
 		Standings s = new Standings(1, 2, 3, 4, 5, "team1");
 		Team t = new Team ("team1", 10, s);
+		Player[] array = t.getPositions().getPositionArray();
+		
 		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 13, 5, true, 88, 96, 45, 80);
+		for (int i=0;i<array.length;i++) {
+			array[i]=attacker;
+		}
 		t.add(attacker);
-		String expected = "team1 with budget: 10.0\n" + t.getStandings().toString() + "\n" + attacker.toString();
+		String expected = "team1 with budget: 10.0\n" + t.getStandings().toString() + "\n"+ t.getPositions().toString() + "\n" + attacker.toString();
 		System.out.println(t.toString());
 		System.out.println(expected);
 		assertEquals(expected, t.toString());
@@ -270,11 +280,14 @@ public class TeamTest {
 
 	@Test
 	public void testReplacePlayerInCurrentTeam() {
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+
 		Standings s = new Standings(1, 2, 3, 4, 5, "team1");
-		Team t = new Team ("team1", 10, s);
+		Team t = competition.getLibrary().getLibrary().get(0);
 		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 13, 5, true, 88, 96, 45, 80);
 		Attacker attacker2 = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 19, 42, 7, 3, 2, 1, 13, 5, true, 88, 96, 45, 80);
 		t.addToCurrentTeam(attacker);
+		t.getPositions().getPositionArray()[0]=attacker;
 		assertTrue(t.getCurrentTeam().contains(attacker));
 		t.replacePlayerInCurrentTeam(attacker, attacker2);
 		assertFalse(t.getCurrentTeam().contains(attacker));
