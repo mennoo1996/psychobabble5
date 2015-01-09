@@ -60,7 +60,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 		// Currently only supports one season
 		roundNum = 0;
-		curComp = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");
+		curComp = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
 		curTeam = curComp.getLibrary().getTeamForName("Manchester United");
 		
 		//temporarily initialize team positions (randomly, just the first 11 players);
@@ -73,9 +73,12 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 		
 //		 Initialize teams
-		for(Team team : curComp.getLibrary().getLibrary()) {
-			team.setFirst11AsCurrentTeam();
-		}
+//		for(Team team : curComp.getLibrary().getLibrary()) {
+//			team.setPositionsAsCurrentTeam();
+//		}
+		
+		System.out.println(curTeam.toString());
+		
 		
 		initUI();
 	}
