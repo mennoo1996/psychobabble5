@@ -63,13 +63,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		curComp = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
 		curTeam = curComp.getLibrary().getTeamForName("Manchester United");
 		
-		//temporarily initialize team positions (randomly, just the first 11 players);
-		Player[] positions = new Player[11];
-		for(int i = 0; i < 11; i++){
-			positions[i] = curTeam.getTeam().get(i);
-		}
-		Positions positions2 = new Positions(positions);
-		curTeam.setPositions(positions2);
+	
 		
 		
 //		 Initialize teams
