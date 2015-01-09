@@ -119,14 +119,14 @@ public class CurrentXIRatingTest {
 			t.setFirst11AsCurrentTeam();
 		}
 		Team t = competition.getLibrary().getLibrary().get(0);
-		CurrentXIRating expected = new CurrentXIRating(77, 70, 73, 50, 80, 350);
+		CurrentXIRating expected = new CurrentXIRating(82, 67, 72, 79, 80, 380);
 		assertEquals(expected, CurrentXIRating.getCurrentXIRating(t));
 		Player p = t.getTeam().get(19);
 		t.replacePlayerInCurrentTeam(t.getTeam().get(4), p);
-		expected.setDribbling(69);
-		expected.setStamina(72);
-		expected.setDefending(64);
-		expected.setTotal(362);
+		expected.setDribbling(66);
+		expected.setStamina(70);
+		expected.setDefending(78);
+		expected.setTotal(376);
 		assertEquals(expected, CurrentXIRating.getCurrentXIRating(t));
 		
 		

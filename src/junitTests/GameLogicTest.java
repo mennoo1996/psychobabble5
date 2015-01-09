@@ -33,9 +33,7 @@ public class GameLogicTest {
 	@Test
 	public void testGetInjuredPlayers() {
 		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
-		for(Team t : competition.getLibrary().getLibrary()) {
-			t.setFirst11AsCurrentTeam();
-		}
+		
 		GameLogic.setTesting(true);
 		Team t = competition.getLibrary().getLibrary().get(0);
 		GameLogic.setSeed(17);
@@ -43,7 +41,7 @@ public class GameLogicTest {
 		assertTrue(result.size()==0);
 		GameLogic.setSeed(18);
 		result = GameLogic.getInjuredPlayers(t);
-		assertEquals(result, t.getCurrentTeam());
+		assertEquals(result.size(), 11);
 		
 	}
 
@@ -100,7 +98,7 @@ public class GameLogicTest {
 		GameLogic.setSeed(0);
 		ArrayList<Player> result = GameLogic.getRedCards(1, t);
 		ArrayList<Player> expected = new ArrayList<Player>();
-		expected.add(t.getTeam().get(0));
+		expected.add(t.getTeam().get(20));
 		assertEquals(expected, result);
 	}
 
@@ -144,7 +142,7 @@ public class GameLogicTest {
 		GameLogic.setSeed(0);
 		ArrayList<Player> result = GameLogic.getYellowCards(1, t);
 		ArrayList<Player> expected = new ArrayList<Player>();
-		expected.add(t.getTeam().get(0));
+		expected.add(t.getTeam().get(20));
 		assertEquals(expected, result);
 		
 	}
@@ -161,7 +159,7 @@ public class GameLogicTest {
 		assertEquals(new ArrayList<FieldPlayer>(), result);
 		GameLogic.setSeed(0);
 		ArrayList<FieldPlayer> expected = new ArrayList<FieldPlayer>();
-		expected.add((FieldPlayer) t.getTeam().get(0));
+		expected.add((FieldPlayer) t.getTeam().get(15));
 		result=GameLogic.getGoals(t, 1);
 		assertEquals(expected, result);
 	}
@@ -178,7 +176,7 @@ public class GameLogicTest {
 		assertEquals(new ArrayList<FieldPlayer>(), result);
 		GameLogic.setSeed(0);
 		ArrayList<FieldPlayer> expected = new ArrayList<FieldPlayer>();
-		expected.add((FieldPlayer) t.getTeam().get(2));
+		expected.add((FieldPlayer) t.getTeam().get(3));
 		result=GameLogic.getAssists(t, 1);
 		assertEquals(expected, result);
 	}
@@ -194,21 +192,21 @@ public class GameLogicTest {
 		Team t1 = competition.getLibrary().getLibrary().get(0);
 		Team t2 = competition.getLibrary().getLibrary().get(1);
 		int[] result = GameLogic.getMatchResults(t1, t2);
-		assertEquals(0, result[0]);
-		assertEquals(1, result[1]);
-		assertEquals(1, result[2]);
+		assertEquals(1, result[0]);
+		assertEquals(2, result[1]);
+		assertEquals(0, result[2]);
 		
 		GameLogic.setSeed(80);
 		result = GameLogic.getMatchResults(t1, t2);
-		assertEquals(2, result[0]);
-		assertEquals(0, result[1]);
-		assertEquals(2, result[2]);
+		assertEquals(1, result[0]);
+		assertEquals(1, result[1]);
+		assertEquals(0, result[2]);
 		
 		GameLogic.setSeed(82);
 		result = GameLogic.getMatchResults(t1, t2);
 		assertEquals(1, result[0]);
-		assertEquals(4, result[1]);
-		assertEquals(1, result[2]);
+		assertEquals(2, result[1]);
+		assertEquals(0, result[2]);
 	}
 
 	@Test
@@ -570,7 +568,7 @@ public class GameLogicTest {
 		Team t = competition.getLibrary().getLibrary().get(0);
 		CurrentXIRating r = CurrentXIRating.getCurrentXIRating(t);
 		int result = GameLogic.getRandomNumberForTeam(r, true);
-		assertEquals(11331, result);
+		assertEquals(36246, result);
 		
 	}
 
