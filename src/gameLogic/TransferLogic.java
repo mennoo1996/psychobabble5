@@ -180,12 +180,13 @@ public class TransferLogic {
 			boolean answer = TransferLogic.getAnswer(player, bid, library, existingTransfers);
 			if (answer) {
 				Team opponentsTeam = library.getTeamForName(player.getTeam());
-				if (opponentsTeam.getCurrentTeam().contains(player)) {
+				if (opponentsTeam.getPositions().contains(player)) {
+					
 					boolean itsdone=false;
 					for (int i=0;i<opponentsTeam.getTeam().size();i++) {
 						if (!itsdone) {
 							Player p = opponentsTeam.getTeam().get(i);
-							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getCurrentTeam().contains(p))) {
+							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getPositions().contains(p))) {
 								opponentsTeam.replacePlayerInCurrentTeam(player, p);
 								itsdone=true;
 							}
@@ -195,7 +196,7 @@ public class TransferLogic {
 						for (int i=0;i<opponentsTeam.getTeam().size();i++) {
 							if (!itsdone) {
 								Player p = opponentsTeam.getTeam().get(i);
-								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getCurrentTeam().contains(p))) {
+								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getPositions().contains(p))) {
 									opponentsTeam.replacePlayerInCurrentTeam(player, p);
 									itsdone=true;
 								}
@@ -245,12 +246,12 @@ public class TransferLogic {
 			boolean answer = TransferLogic.getAnswerForExistingTransfer(player, bid, library, existingTransfers, tp.getPriceReturned());
 			if (answer) {
 				Team opponentsTeam = library.getTeamForName(player.getTeam());
-				if (opponentsTeam.getCurrentTeam().contains(player)) {
+				if (opponentsTeam.getPositions().contains(player)) {
 					boolean itsdone=false;
 					for (int i=0;i<opponentsTeam.getTeam().size();i++) {
 						if (!itsdone) {
 							Player p = opponentsTeam.getTeam().get(i);
-							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getCurrentTeam().contains(p))) {
+							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getPositions().contains(p))) {
 								opponentsTeam.replacePlayerInCurrentTeam(player, p);
 								itsdone=true;
 							}
@@ -260,7 +261,7 @@ public class TransferLogic {
 						for (int i=0;i<opponentsTeam.getTeam().size();i++) {
 							if (!itsdone) {
 								Player p = opponentsTeam.getTeam().get(i);
-								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getCurrentTeam().contains(p))) {
+								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getPositions().contains(p))) {
 									opponentsTeam.replacePlayerInCurrentTeam(player, p);
 									itsdone=true;
 								}
