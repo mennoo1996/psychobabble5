@@ -15,7 +15,7 @@ public class TransferInProgressTest {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testTransferInProgress() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -30,7 +30,7 @@ public class TransferInProgressTest {
 
 	@Test
 	public void testGetPlayer() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -41,7 +41,7 @@ public class TransferInProgressTest {
 
 	@Test
 	public void testSetPlayer() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -55,7 +55,7 @@ public class TransferInProgressTest {
 
 	@Test
 	public void testGetPriceReturned() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -67,7 +67,7 @@ public class TransferInProgressTest {
 
 	@Test
 	public void testSetPriceReturned() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -80,7 +80,7 @@ public class TransferInProgressTest {
 
 	@Test
 	public void testGetBid() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -91,7 +91,7 @@ public class TransferInProgressTest {
 
 	@Test
 	public void testSetBid() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -104,7 +104,7 @@ public class TransferInProgressTest {
 	
 	@Test
 	public void testEquals() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v3.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
