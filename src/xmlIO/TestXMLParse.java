@@ -54,6 +54,10 @@ public class TestXMLParse {
 			System.out.println(libraryArray.get(i).toString());
 			System.out.println("\n\n");
 		}
+		
+		for (int i=0;i<20;i++) {
+			System.out.println(competition.getLibrary().getLibrary().get(i).getPositions().toString());
+		}
 	}
 }
 

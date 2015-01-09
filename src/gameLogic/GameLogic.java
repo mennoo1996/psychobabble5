@@ -30,13 +30,13 @@ public class GameLogic {
 	 * @return an ArrayList with players that got an injury;the length is not yet specified
 	 */
 	public static ArrayList<Player> getInjuredPlayers (Team t) {
-		ArrayList<Player> tCurrentTeam = t.getCurrentTeam();
+		Player[] tCurrentTeam = t.getPositions().getPositionArray();
 		ArrayList<Player> injuredPlayers = new ArrayList<Player>();
 		
-		for (int i=0;i<tCurrentTeam.size();i++) {
+		for (int i=0;i<tCurrentTeam.length;i++) {
 			int random = GameLogic.randomGenerator(1, 100);
 			if (random<=3) {
-				injuredPlayers.add(tCurrentTeam.get(i));
+				injuredPlayers.add(tCurrentTeam[i]);
 			}
 		}
 		return injuredPlayers;
@@ -97,7 +97,7 @@ public class GameLogic {
 		ArrayList<Player> playersWithRed = new ArrayList<Player>();
 		for (int i=0;i<amount;i++) {
 			int random = GameLogic.randomGenerator(0, 10);
-			playersWithRed.add(t.getCurrentTeam().get(random));
+			playersWithRed.add(t.getPositions().getPositionArray()[random]);
 		}
 		return playersWithRed;
 	}
@@ -136,7 +136,7 @@ public class GameLogic {
 		ArrayList<Player> playersWithYellow = new ArrayList<Player>();
 		for (int i=0;i<amount;i++) {
 			random = GameLogic.randomGenerator(0, 10);
-			playersWithYellow.add(t.getCurrentTeam().get(random));
+			playersWithYellow.add(t.getPositions().getPositionArray()[random]);
 		} return playersWithYellow;
 	}
 	/** This method returns the players that scored the goals
@@ -150,13 +150,13 @@ public class GameLogic {
 	 */
 	public static ArrayList<FieldPlayer> getGoals (Team t, int score) {
 		// first retrieve the current team
-		ArrayList<Player> tplayers = t.getCurrentTeam();
+		Player[] tplayers = t.getPositions().getPositionArray();
 		// make an ArrayList that will contain the fieldplayers of t1's current team and one that will contain
 		// the fieldplayers of t2's current team
 		ArrayList<FieldPlayer> tfieldplayers = new ArrayList<FieldPlayer>();
 		// For every player of the current team, check if it is a FieldPlayer and if this is true, add him to t1fieldplayers
 		for (int i=0;i<11;i++) {
-			Player a = tplayers.get(i);
+			Player a = tplayers[i];
 			if (a instanceof FieldPlayer) {
 				tfieldplayers.add((FieldPlayer) a);
 			}
@@ -231,13 +231,13 @@ public class GameLogic {
 		// Note: The comments in this method are short. For a more detailed explanation, see getGoals(), which
 		// uses the same calculation method, only with a different player attribute
 		// get the current teams of t1 and t2
-		ArrayList<Player> tplayers = t.getCurrentTeam();
+		Player[] tplayers = t.getPositions().getPositionArray();
 		
 		// Retrieve the fieldplayers of t1 and t2 and put them in the right ArrayLists
 		ArrayList<FieldPlayer> tfieldplayers = new ArrayList<FieldPlayer>();
 		
 		for (int i=0;i<11;i++) {
-			Player a = tplayers.get(i);
+			Player a = tplayers[i];
 			if (a instanceof FieldPlayer) {
 				tfieldplayers.add((FieldPlayer) a);
 			}

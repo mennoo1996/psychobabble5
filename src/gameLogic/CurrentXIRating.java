@@ -114,15 +114,15 @@ public class CurrentXIRating {
 
 	public static CurrentXIRating getCurrentXIRating (Team t) {
 		int finishing, dribbling, stamina, defending, goalkeeping, total;
-		ArrayList<Player> list = t.getCurrentTeam();
+		Player[] list = t.getPositions().getPositionArray();
 		ArrayList<Integer> attackers = new ArrayList<Integer>();
 		ArrayList<Integer> midfielders = new ArrayList<Integer>();
 		ArrayList<Integer> defenders = new ArrayList<Integer>();
 		ArrayList<Integer> goalkeepers = new ArrayList<Integer>();
 		Player tempPlayer;
 		
-		for (int i=0; i < list.size(); i++) {
-			tempPlayer=list.get(i);
+		for (int i=0; i < list.length; i++) {
+			tempPlayer=list[i];
 			if (tempPlayer instanceof Attacker) {
 				attackers.add(i);
 			
@@ -138,41 +138,41 @@ public class CurrentXIRating {
 		
 		finishing=0;
 		for (int i=0;i<attackers.size();i++) {
-			finishing+=10*((FieldPlayer) list.get(attackers.get(i))).getFinishingValue();
+			finishing+=10*((FieldPlayer) list[attackers.get(i)]).getFinishingValue();
 			
 			
 		}
 		for (int i=0;i<midfielders.size();i++) {
-			finishing+=7*((FieldPlayer) list.get(midfielders.get(i))).getFinishingValue();
+			finishing+=7*((FieldPlayer) list[midfielders.get(i)]).getFinishingValue();
 		}
 		finishing = finishing/(10*attackers.size() + 7*midfielders.size());
 		
 		dribbling=0;
 		for (int i=0;i<attackers.size();i++) {
-			dribbling+=5*((FieldPlayer) list.get(attackers.get(i))).getDribblingValue();
+			dribbling+=5*((FieldPlayer) list[attackers.get(i)]).getDribblingValue();
 		}
 		
 		for (int i=0;i<midfielders.size();i++) {
-			dribbling+=5*((FieldPlayer) list.get(midfielders.get(i))).getDribblingValue();
+			dribbling+=5*((FieldPlayer) list[midfielders.get(i)]).getDribblingValue();
 		}
 		
 		for (int i=0;i<defenders.size();i++) {
-			dribbling+=1*((FieldPlayer) list.get(defenders.get(i))).getDribblingValue();
+			dribbling+=1*((FieldPlayer) list[defenders.get(i)]).getDribblingValue();
 		}
 		dribbling=dribbling/(5*attackers.size() + 5*midfielders.size() + 1*defenders.size());
 		
 		
 		stamina=0;
 		for (int i=0;i<attackers.size();i++) {
-			stamina+=1*((FieldPlayer) list.get(attackers.get(i))).getStaminaValue();
+			stamina+=1*((FieldPlayer) list[attackers.get(i)]).getStaminaValue();
 		}
 		
 		for (int i=0;i<midfielders.size();i++) {
-			stamina+=2*((FieldPlayer) list.get(midfielders.get(i))).getStaminaValue();
+			stamina+=2*((FieldPlayer) list[midfielders.get(i)]).getStaminaValue();
 		}
 		
 		for (int i=0;i<defenders.size();i++) {
-			stamina+=1*((FieldPlayer) list.get(defenders.get(i))).getStaminaValue();
+			stamina+=1*((FieldPlayer) list[defenders.get(i)]).getStaminaValue();
 		}
 		
 		stamina=stamina/(attackers.size() + 2*midfielders.size() + defenders.size());
@@ -180,18 +180,18 @@ public class CurrentXIRating {
 		
 		defending=0;
 		for (int i=0;i<midfielders.size();i++) {
-			defending+=1*((FieldPlayer) list.get(midfielders.get(i))).getDefenseValue();
+			defending+=1*((FieldPlayer) list[midfielders.get(i)]).getDefenseValue();
 		}
 		
 		for (int i=0;i<defenders.size();i++) {
-			defending+=10*((FieldPlayer) list.get(defenders.get(i))).getDefenseValue();
+			defending+=10*((FieldPlayer) list[defenders.get(i)]).getDefenseValue();
 		}
 		
 		defending=defending/(1*midfielders.size() + 10*defenders.size());
 		
 		goalkeeping=0;
 		for (int i=0;i<goalkeepers.size();i++) {
-			goalkeeping+=((Goalkeeper) list.get(goalkeepers.get(i))).getGoalkeeperValue();
+			goalkeeping+=((Goalkeeper) list[goalkeepers.get(i)]).getGoalkeeperValue();
 		}
 		
 		goalkeeping=goalkeeping/(goalkeepers.size());
