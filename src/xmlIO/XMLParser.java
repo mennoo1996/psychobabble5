@@ -196,6 +196,9 @@ public class XMLParser {
 		for(int p = 0; p < team.getTeam().size(); p++) {
 			teamElement.appendChild(writePlayer(team.getTeam().get(p), doc));
 		}
+		
+		teamElement.appendChild(writePositions(team.getPositions(), doc));
+		
 		return teamElement;
 	}
 	
@@ -230,6 +233,26 @@ public class XMLParser {
 		goalsAgainstElement.appendChild(doc.createTextNode(String.format("%d", team.getStandings().getGoalsAgainst())));
 		
 		return standingsElement;
+	}
+	
+	private static Element writePositions(Positions positions, Document doc) {
+		Element positionsElement = doc.createElement("positions");
+		Player[] positionsArray = positions.getPositionArray();
+		for(int i = 0; i < 11; i++) {
+			String playerString = "player" + (i+1);
+			Element playerElement = doc.createElement(playerString);
+			
+			Element ageElement = doc.createElement("age");
+			playerElement.appendChild(ageElement);
+			ageElement.appendChild(doc.createTextNode(String.format("%d", positionsArray[i].getAge())));
+			
+			Element nameElement = doc.createElement("name");
+			playerElement.appendChild(nameElement);
+			nameElement.appendChild(doc.createTextNode(positionsArray[i].getName()));
+			
+			positionsElement.appendChild(playerElement);
+		}
+		return positionsElement;
 	}
 	
 	/**
