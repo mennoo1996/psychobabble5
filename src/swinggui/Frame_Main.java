@@ -103,24 +103,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
 		curPanel = teamChoose;
 		add(curPanel, BorderLayout.CENTER);
-//		Toolkit tk = Toolkit.getDefaultToolkit(); //what is this even?
-//		int boxwidth = (int) tk.getScreenSize().getWidth();
-//		int boxheight = (int) tk.getScreenSize().getHeight();
-//		
-//		//Header panel
-//		Header header = new Header(this);
-//		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
-//		add(header);
-//		
-//		//Center panel begins here
-//		OverviewPanel overviewPanel = new OverviewPanel(curComp);
-//		
-//		// set current screen string
-//		current = "overview";
-//		
-//		//Center panel ends here
-//		curPanel = overviewPanel;
-//		add(curPanel, BorderLayout.CENTER);
+
 		
 		//temporary, for the help text or something, I'll fix it later
 //		JPanel Helper = new JPanel();
@@ -159,6 +142,39 @@ public class Frame_Main extends JFrame implements ActionListener{
 			JButton possibleMenuB = (JButton) e.getSource();
 			
 			switch (possibleMenuB.getText()) {
+				case "Play as this team":
+					System.out.println("Frame sees the selection!");
+					
+					String teamName = (String)possibleMenuB.getClientProperty("teamName");
+					
+					System.out.println(teamName);
+					
+					curTeam = curComp.getLibrary().getTeamForName(teamName);
+					
+					remove(curPanel);
+					// Start playing!
+					Toolkit tk = Toolkit.getDefaultToolkit(); //what is this even?
+					int boxwidth = (int) tk.getScreenSize().getWidth();
+					int boxheight = (int) tk.getScreenSize().getHeight();
+					
+					//Header panel
+					Header header = new Header(this);
+					header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+					add(header);
+					
+					//Center panel begins here
+					OverviewPanel overviewPanel = new OverviewPanel(curComp);
+					
+					// set current screen string
+					current = "overview";
+					
+					//Center panel ends here
+					curPanel = overviewPanel;
+					add(curPanel, BorderLayout.CENTER);
+					revalidate();
+					repaint();
+					
+					break;
 				case "overview ":
 					System.out.println("Overview button was clicked.");
 					

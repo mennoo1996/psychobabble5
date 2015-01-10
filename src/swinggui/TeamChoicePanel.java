@@ -17,6 +17,10 @@ public class TeamChoicePanel extends JPanel implements MouseListener {
 	private Competition currentComp;
 	private ActionListener chooseTeamListener;
 	private int selectedIndex;
+	private TeamListPanel teamPanel;
+	private TeamDetailPanel deets;
+	private Dimension minSize = new Dimension(20,20);
+	private Dimension prefSize = new Dimension(40,20);
 	
 	public TeamChoicePanel(Competition cComp, ActionListener teamChoiceListener) {
 		currentComp = cComp;
@@ -28,8 +32,16 @@ public class TeamChoicePanel extends JPanel implements MouseListener {
 	
 	public final void initUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
-		add(new TeamListPanel(currentComp.getLibrary().getLibrary(), this));
+		
+		add(new Box.Filler(minSize, prefSize, null));
+		
+		teamPanel = new TeamListPanel(currentComp.getLibrary().getLibrary(), this);
+		add(teamPanel);
+		
+		deets = new TeamDetailPanel(currentComp.getLibrary().getLibrary().get(selectedIndex), chooseTeamListener);
+		add(deets);
+		
+		add(new Box.Filler(minSize, prefSize, null));
 	}
 	
 	/**
@@ -38,10 +50,18 @@ public class TeamChoicePanel extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() instanceof TeamScrollPanel) {
 			TeamScrollPanel selectedTeam = (TeamScrollPanel)e.getSource();
-			// First unselect previous team, then toggle the new one
 			
 			selectedIndex = selectedTeam.getTeamIndex();
-			System.out.println("Team at index " + selectedTeam.getTeamIndex() + " was selected");
+			// First unselect previous team, then toggle the new one
+			teamPanel.newSelection(selectedIndex);
+			
+			// Replace detail panel with the newly selected team
+			remove(deets);
+			TeamDetailPanel refresh = new TeamDetailPanel(currentComp.getLibrary().getLibrary().get(selectedIndex), chooseTeamListener);
+			add(refresh, 2);
+			deets = refresh;
+			revalidate();
+			repaint();
 		}
 	}
 	
