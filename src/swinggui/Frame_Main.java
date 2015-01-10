@@ -136,15 +136,11 @@ public class Frame_Main extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// For now the main frame only listens on buttons from the header
-		// bar. May need to adjust this in a future revision
 		if (e.getSource() instanceof JButton) {
 			JButton possibleMenuB = (JButton) e.getSource();
 			
 			switch (possibleMenuB.getText()) {
-				case "Play as this team":
-					System.out.println("Frame sees the selection!");
-					
+				case "Play as this team":					
 					String teamName = (String)possibleMenuB.getClientProperty("teamName");
 					
 					System.out.println(teamName);
