@@ -142,9 +142,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			switch (possibleMenuB.getText()) {
 				case "Play as this team":					
 					String teamName = (String)possibleMenuB.getClientProperty("teamName");
-					
-					System.out.println(teamName);
-					
+										
 					curTeam = curComp.getLibrary().getTeamForName(teamName);
 					
 					remove(curPanel);

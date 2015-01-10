@@ -42,7 +42,7 @@ public class TeamDetailPanel extends JPanel {
 	public final void initUI() {
 		
 		setBackground(Color.WHITE);
-		setOpaque(false);
+		setName("Panel");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		// Panel name is team name
@@ -65,9 +65,14 @@ public class TeamDetailPanel extends JPanel {
 		
 		// List budget
 		JLabel budgetLabel = new JLabel("Budget:", JLabel.CENTER);
+		budgetLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		JLabel actualBudget = new JLabel("£" + (int)detailTeam.getBudget(), JLabel.CENTER);
+		actualBudget.setAlignmentX(Component.CENTER_ALIGNMENT);
 		statsPanel.add(budgetLabel);
-		statsPanel.add(actualBudget);
+		statsPanel.add(actualBudget, BorderLayout.CENTER);
+		
+		statsPanel.setMinimumSize(new Dimension(200, 50));
+		statsPanel.setPreferredSize(new Dimension(200, 50));
 		
 		detailsPanel.add(statsPanel);
 		detailsPanel.add(new Box.Filler(new Dimension(20, 20), null, null));
@@ -176,8 +181,8 @@ public class TeamDetailPanel extends JPanel {
 		//ScrollPane.setPreferredSize(new Dimension(400,500));
 		
 		detailsPanel.add(ScrollPane);
-		detailsPanel.setMinimumSize(new Dimension(100,450));
-		detailsPanel.setPreferredSize(new Dimension(100,550));
+		detailsPanel.setMinimumSize(new Dimension(200,450));
+		detailsPanel.setPreferredSize(new Dimension(450,550));
 		detailsPanel.setMaximumSize(new Dimension(900,600));
 		
 		add(detailsPanel);

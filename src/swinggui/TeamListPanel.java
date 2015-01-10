@@ -34,6 +34,7 @@ public class TeamListPanel extends JPanel {
 	public final void initUI() {
 		
 		setOpaque(false);
+		setName("Panel");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		// Teams Title Panel

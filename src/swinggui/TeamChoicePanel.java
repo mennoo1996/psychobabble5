@@ -37,7 +37,7 @@ public class TeamChoicePanel extends JPanel implements MouseListener {
 		
 		teamPanel = new TeamListPanel(currentComp.getLibrary().getLibrary(), this);
 		add(teamPanel);
-		add(new Box.Filler(minSize, prefSize, null));
+		
 		deets = new TeamDetailPanel(currentComp.getLibrary().getLibrary().get(selectedIndex), chooseTeamListener);
 		add(deets);
 		
@@ -58,7 +58,7 @@ public class TeamChoicePanel extends JPanel implements MouseListener {
 			// Replace detail panel with the newly selected team
 			remove(deets);
 			TeamDetailPanel refresh = new TeamDetailPanel(currentComp.getLibrary().getLibrary().get(selectedIndex), chooseTeamListener);
-			add(refresh, 3);
+			add(refresh, 2);
 			deets = refresh;
 			revalidate();
 			repaint();
