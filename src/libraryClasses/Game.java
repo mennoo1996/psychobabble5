@@ -118,8 +118,8 @@ public class Game {
 	@Override
 	public String toString() {
 		return "Game [name=" + name + ", savefileData=" + savefileData
-				+ ", savefileScheme=" + savefileScheme + ", team=" + team
-				+ ", competition=" + competition + ", date=" + date + "]";
+				+ ", savefileScheme=" + savefileScheme + ", team=" + team.getTeamName()
+				+ ", date=" + date + "]";
 	}
 
 

@@ -1,6 +1,9 @@
 package xmlIO;
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -39,6 +42,16 @@ public class XMLParser {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * Method to write a competition to a xml file
+	 * 
+	 * @param libraryFileName	- The file to write to
+	 * @param competition		- The competition to write
+	 */
+	public static void writeCompetition(String libraryFileName, String schemeFileName, Competition competition) {
+		writeLibrary(libraryFileName, competition.getLibrary(), competition.getRoundsPlayed());
 	}
 	
 	/**
@@ -92,7 +105,20 @@ public class XMLParser {
 	 */
 	private static Team readTeam(Element teamElement) {
 		String teamName = teamElement.getAttribute("teamName");
-		double budget = Double.parseDouble(teamElement.getAttribute("budget"));
+		
+		double budget = 0;
+		try {
+			budget = Double.parseDouble(teamElement.getAttribute("budget"));
+		} catch(Exception e) {
+			NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+		    Number number = 0;
+			try {
+				number = format.parse(teamElement.getAttribute("budget"));
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		    budget = number.doubleValue();
+		}
 		
 		NodeList standingsList = teamElement.getElementsByTagName("standings");
 		Element standingsElement = (Element)standingsList.item(0);
@@ -516,10 +542,11 @@ public class XMLParser {
 	
 	private static Game readGame(Element saveElement) {
 		String name = getNodeValue(saveElement, "name");
-		String saveFile = getNodeValue(saveElement, "savefile");
+		String dataFile = getNodeValue(saveElement, "datafile");
+		String schemeFile = getNodeValue(saveElement, "schemefile");
 		String teamName = getNodeValue(saveElement, "teamname");
 		
-		return new Game(name, saveFile, teamName);
+		return new Game(name, dataFile, schemeFile, teamName);
 	}
 	
 	public static void writeGameList(String fileName, GameList gameList) {
@@ -551,9 +578,13 @@ public class XMLParser {
 		gameElement.appendChild(nameElement);
 		nameElement.appendChild(doc.createTextNode(game.getName()));
 		
-		Element saveFileElement = doc.createElement("savefile");
-		gameElement.appendChild(saveFileElement);
-		saveFileElement.appendChild(doc.createTextNode(game.getSavefile()));
+		Element dataFileElement = doc.createElement("datafile");
+		gameElement.appendChild(dataFileElement);
+		dataFileElement.appendChild(doc.createTextNode(game.getSavefileData()));
+		
+		Element schemeFileElement = doc.createElement("schemefile");
+		gameElement.appendChild(schemeFileElement);
+		schemeFileElement.appendChild(doc.createTextNode(game.getSavefileScheme()));
 		
 		Element teamNameElement = doc.createElement("teamname");
 		gameElement.appendChild(teamNameElement);
