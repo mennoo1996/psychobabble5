@@ -9,6 +9,7 @@ import libraryClasses.GameList;
 import libraryClasses.Player;
 import libraryClasses.Team;
 import gameLogic.*;
+import java.io.*;
 
 
 public class TestXMLParse {
@@ -61,12 +62,14 @@ public class TestXMLParse {
 //			System.out.println("\n\n");
 //		}
 		
+
 //		GameList gl = new GameList();
 //		Game g = gl.newgame("Menno", "Arsenal");
 //		for (int i=0;i<10;i++) {g.getCompetition().playRound();}
 //		g.save();
 //		
 //		
+
 		
 		GameList gl = XMLParser.readGameList("files/saves_v2.xml");
 		System.out.println(gl.toString());
