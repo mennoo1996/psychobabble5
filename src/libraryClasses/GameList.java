@@ -43,4 +43,33 @@ public class GameList {
 			}
 		} return null;
 
-}}
+	}
+	
+	public void add (Game g) {
+		games.add(g);
+	}
+	
+	public Game get (int index) {
+		if (index>=0 && index<games.size()) {
+			return games.get(index);
+		} return null;
+	}
+
+	/**
+	 * @return the games
+	 */
+	public ArrayList<Game> getGames() {
+		return games;
+	}
+
+	/**
+	 * @param games the games to set
+	 */
+	public void setGames(ArrayList<Game> games) {
+		this.games = games;
+	}
+	
+	
+	
+	
+}
