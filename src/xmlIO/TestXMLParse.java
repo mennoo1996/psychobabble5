@@ -62,11 +62,10 @@ public class TestXMLParse {
 //		}
 		
 		GameList gl = new GameList();
-		System.out.println(gl.newgame("Menno", "Arsenal"));
-		System.out.println(gl.newgame("Bart", "Manchester United"));
-		System.out.println(gl.newgame("Mark", "Burnley"));
-		System.out.println(gl.loadgame("Menno"));
-		System.out.println(gl.loadgame("Menno").getCompetition());
+		Game g = gl.newgame("Menno", "Arsenal");
+		for (int i=0;i<10;i++) {g.getCompetition().playRound();}
+		g.save();
+		
 		
 		
 	}

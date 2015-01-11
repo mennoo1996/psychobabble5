@@ -122,6 +122,10 @@ public class Game {
 		this.date = date;
 	}
 	
+	public void save() {
+		XMLParser.writeCompetition(savefile, competition);
+	}
+	
 	
 	
 	
