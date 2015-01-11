@@ -41,6 +41,38 @@ public abstract class FieldPlayer extends Player {
 		this.staminaValue = staminaValue;
 		this.setPlayerType("FieldPlayer");
 	}
+	
+	/**
+	 * @param price
+	 * @param team
+	 * @param name
+	 * @param age
+	 * @param number
+	 * @param goals
+	 * @param assists
+	 * @param yellowcards
+	 * @param redcards
+	 * @param daysInjured
+	 * @param daysSuspended
+	 * @param isEligible
+	 * @param dribblingValue
+	 * @param finishingValue
+	 * @param defenseValue
+	 * @param staminaValue
+	 */
+	public FieldPlayer(BigDecimal price, String team, String name, int age,
+			int number, int goals, int assists, int yellowcards, int redcards,
+			int daysInjured, int daysSuspended, boolean isEligible,
+			int dribblingValue, int finishingValue, int defenseValue,
+			int staminaValue, int daysNotForSale) {
+		super(price, team, name, age, number, goals, assists, yellowcards,
+				redcards, daysInjured, daysSuspended, isEligible, daysNotForSale);
+		this.dribblingValue = dribblingValue;
+		this.finishingValue = finishingValue;
+		this.defenseValue = defenseValue;
+		this.staminaValue = staminaValue;
+		this.setPlayerType("FieldPlayer");
+	}
 
 
 	/* (non-Javadoc)

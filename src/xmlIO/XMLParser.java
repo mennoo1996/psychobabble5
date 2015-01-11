@@ -335,6 +335,10 @@ public class XMLParser {
 		playerElement.appendChild(daysSuspendedElement);
 		daysSuspendedElement.appendChild(doc.createTextNode(String.format("%d", player.getDaysSuspended())));
 		
+		Element daysNotForSaleElement = doc.createElement("daysNotForSale");
+		playerElement.appendChild(daysNotForSaleElement);
+		daysNotForSaleElement.appendChild(doc.createTextNode(String.format("%d", player.getDaysNotForSale())));
+		
 		String eligible;
 		if(player.isEligible()) {
 			eligible = "1";
@@ -398,6 +402,7 @@ public class XMLParser {
 		int yellowCards = Integer.parseInt(getNodeValue(element, "yellowCards"));
 		int daysInjured = Integer.parseInt(getNodeValue(element, "daysInjured"));
 		int daysSuspended = Integer.parseInt(getNodeValue(element, "daysSuspended"));
+		int daysNotForSale = Integer.parseInt(getNodeValue(element, "daysNotForSale"));
 		
 		boolean eligible;
 		if(getNodeValue(element, "eligible").equals("1")) {
@@ -416,11 +421,11 @@ public class XMLParser {
 			int staminaValue = Integer.parseInt(getNodeValue(element, "staminaValue"));
 
 			if(playerType.equals("Attacker")) {
-				player = new Attacker(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
+				player = new Attacker(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue, daysNotForSale);
 			} else if(playerType.equals("Midfielder")) {
-				player = new Midfielder(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
+				player = new Midfielder(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue, daysNotForSale);
 			} else if(playerType.equals("Defender")) {
-				player = new Defender(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
+				player = new Defender(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue, daysNotForSale);
 			} else {
 				player = null;
 			}
@@ -428,7 +433,7 @@ public class XMLParser {
 		} else if (playerType.equals("Goalkeeper")){
 			// player is a goalkeeper
 			int goalkeeperValue = Integer.parseInt(getNodeValue(element, "goalkeeperValue"));
-			player = new Goalkeeper(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, goalkeeperValue);
+			player = new Goalkeeper(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, goalkeeperValue, daysNotForSale);
 		} else {
 			player = null;
 		}

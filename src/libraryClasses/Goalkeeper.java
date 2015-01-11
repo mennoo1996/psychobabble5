@@ -34,6 +34,31 @@ public class Goalkeeper extends Player {
 		this.goalkeeperValue = goalkeeperValue;
 		this.setPlayerType("Goalkeeper");
 	}
+	
+	/**
+	 * @param price
+	 * @param team
+	 * @param name
+	 * @param age
+	 * @param number
+	 * @param goals
+	 * @param assists
+	 * @param yellowcards
+	 * @param redcards
+	 * @param daysInjured
+	 * @param daysSuspended
+	 * @param isEligible
+	 * @param goalkeeperValue
+	 */
+	public Goalkeeper(BigDecimal price, String team, String name, int age,
+			int number, int goals, int assists, int yellowcards, int redcards,
+			int daysInjured, int daysSuspended, boolean isEligible,
+			int goalkeeperValue, int daysNotForSale) {
+		super(price, team, name, age, number, goals, assists, yellowcards,
+				redcards, daysInjured, daysSuspended, isEligible, daysNotForSale);
+		this.goalkeeperValue = goalkeeperValue;
+		this.setPlayerType("Goalkeeper");
+	}
 
 	
 	/* (non-Javadoc)

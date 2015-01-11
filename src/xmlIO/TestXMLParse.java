@@ -16,7 +16,7 @@ public class TestXMLParse {
 	public static void main(String[] args) {
 //		Competition competition = XMLParser.readCompetition("players Database by team with empty standings.xml", "competition-scheme.xml");
 		
-//		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		
 		
 //		System.out.println(competition.toString());
@@ -68,10 +68,10 @@ public class TestXMLParse {
 //		
 //		
 		
-		GameList gl = XMLParser.readGameList("files/saves_v2.xml");
-		System.out.println(gl.toString());
-		XMLParser.writeGameList("files/saves.xml", gl);
-		
+//		GameList gl = XMLParser.readGameList("files/saves_v2.xml");
+//		System.out.println(gl.toString());
+//		XMLParser.writeGameList("files/saves.xml", gl);
+//		
 	}
 }
 

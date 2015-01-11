@@ -45,6 +45,43 @@ public abstract class Player {
 		this.daysNotForSale=0;
 	}
 	
+	/**
+	 * @param price
+	 * @param team
+	 * @param name
+	 * @param age
+	 * @param number
+	 * @param goals
+	 * @param assists
+	 * @param yellowcards
+	 * @param redcards
+	 */
+	public Player(BigDecimal price, String team, String name, 
+			int age, int number, int goals, int assists,
+			int yellowcards, int redcards, int daysInjured, int daysSuspended,
+			boolean isEligible, int daysNotForSale) {
+		this.price = price;
+		this.team = team;
+		this.name = name;
+		this.age = age;
+		this.number = number;
+		this.goals = goals;
+		this.assists = assists;
+		this.yellowcards = yellowcards;
+		this.redcards = redcards;
+		this.daysInjured = daysInjured;
+		this.daysSuspended = daysSuspended;
+		this.isEligible = isEligible;
+		this.playerType = "Player";
+		this.daysNotForSale = daysNotForSale;
+		
+		if(daysNotForSale > 0) {
+			this.canBeSold=false;
+		} else {
+			this.canBeSold=true;
+		}
+	}
+	
 	public abstract String toString();
 
 	/* (non-Javadoc)

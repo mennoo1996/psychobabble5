@@ -22,7 +22,7 @@ public class LibraryTest {
 
 	@Test
 	public void testAdd() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		Library l = new Library();
 		Team t = competition.getLibrary().getLibrary().get(0);
 		assertEquals(l.getLibrary().size(), 0);
@@ -33,7 +33,7 @@ public class LibraryTest {
 
 	@Test
 	public void testGetTeamForName() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		Library l = new Library();
 		assertNull(l.getTeamForName("Arsenal"));
 		Team arsenal = competition.getLibrary().getLibrary().get(0);
@@ -44,7 +44,7 @@ public class LibraryTest {
 
 	@Test
 	public void testToString() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		Library l = new Library();
 		Team t = competition.getLibrary().getLibrary().get(0);
 		l.add(t);
@@ -56,7 +56,7 @@ public class LibraryTest {
 
 	@Test
 	public void testGetLibrary() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		Library l = new Library();
 		Team t = competition.getLibrary().getLibrary().get(0);
 		l.add(t);
@@ -68,7 +68,7 @@ public class LibraryTest {
 
 	@Test
 	public void testSetLibrary() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		Library l = new Library();
 		Team t = competition.getLibrary().getLibrary().get(0);
 		l.add(t);

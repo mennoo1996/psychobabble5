@@ -203,7 +203,7 @@ public class TeamTest {
 
 	@Test
 	public void testToString() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		
 		Standings s = new Standings(1, 2, 3, 4, 5, "team1");
 		Team t = new Team ("team1", 10, s);
@@ -280,7 +280,7 @@ public class TeamTest {
 
 	@Test
 	public void testReplacePlayerInCurrentTeam() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 
 		Standings s = new Standings(1, 2, 3, 4, 5, "team1");
 		Team t = competition.getLibrary().getLibrary().get(0);
