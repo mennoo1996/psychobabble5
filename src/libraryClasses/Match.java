@@ -1,9 +1,14 @@
 package libraryClasses;
 
+import java.util.ArrayList;
+
 public class Match {
 
 	private String team1, team2;
 	private int score1, score2;
+	private ArrayList<FieldPlayer> goalMakerst1, goalMakerst2, assistMakerst1, assistMakerst2;
+	private ArrayList<Player> yellowCardGetterst1, yellowCardGetterst2, redCardGetterst1, redCardGetterst2, injuredPlayerst1, injuredPlayerst2;
+	private int[] injuriesLengthst1, injuriesLengthst2;
 	
 	/**
 	 * Constructor which initializes a match with the two given team names
@@ -16,9 +21,319 @@ public class Match {
 		this.score1 = -1;
 		this.score2 = -1;
 	}
+	
+	
 
 	
 	
+	/**
+	 * @return the score1
+	 */
+	public int getScore1() {
+		return score1;
+	}
+
+
+
+
+
+	/**
+	 * @param score1 the score1 to set
+	 */
+	public void setScore1(int score1) {
+		this.score1 = score1;
+	}
+
+
+
+
+
+	/**
+	 * @return the score2
+	 */
+	public int getScore2() {
+		return score2;
+	}
+
+
+
+
+
+	/**
+	 * @param score2 the score2 to set
+	 */
+	public void setScore2(int score2) {
+		this.score2 = score2;
+	}
+
+
+
+
+
+	/**
+	 * @return the goalMakerst1
+	 */
+	public ArrayList<FieldPlayer> getGoalMakerst1() {
+		return goalMakerst1;
+	}
+
+
+
+
+
+	/**
+	 * @param goalMakerst1 the goalMakerst1 to set
+	 */
+	public void setGoalMakerst1(ArrayList<FieldPlayer> goalMakerst1) {
+		this.goalMakerst1 = goalMakerst1;
+	}
+
+
+
+
+
+	/**
+	 * @return the goalMakerst2
+	 */
+	public ArrayList<FieldPlayer> getGoalMakerst2() {
+		return goalMakerst2;
+	}
+
+
+
+
+
+	/**
+	 * @param goalMakerst2 the goalMakerst2 to set
+	 */
+	public void setGoalMakerst2(ArrayList<FieldPlayer> goalMakerst2) {
+		this.goalMakerst2 = goalMakerst2;
+	}
+
+
+
+
+
+	/**
+	 * @return the assistMakerst1
+	 */
+	public ArrayList<FieldPlayer> getAssistMakerst1() {
+		return assistMakerst1;
+	}
+
+
+
+
+
+	/**
+	 * @param assistMakerst1 the assistMakerst1 to set
+	 */
+	public void setAssistMakerst1(ArrayList<FieldPlayer> assistMakerst1) {
+		this.assistMakerst1 = assistMakerst1;
+	}
+
+
+
+
+
+	/**
+	 * @return the assistMakerst2
+	 */
+	public ArrayList<FieldPlayer> getAssistMakerst2() {
+		return assistMakerst2;
+	}
+
+
+
+
+
+	/**
+	 * @param assistMakerst2 the assistMakerst2 to set
+	 */
+	public void setAssistMakerst2(ArrayList<FieldPlayer> assistMakerst2) {
+		this.assistMakerst2 = assistMakerst2;
+	}
+
+
+
+
+
+	/**
+	 * @return the yellowCardGetterst1
+	 */
+	public ArrayList<Player> getYellowCardGetterst1() {
+		return yellowCardGetterst1;
+	}
+
+
+
+
+
+	/**
+	 * @param yellowCardGetterst1 the yellowCardGetterst1 to set
+	 */
+	public void setYellowCardGetterst1(ArrayList<Player> yellowCardGetterst1) {
+		this.yellowCardGetterst1 = yellowCardGetterst1;
+	}
+
+
+
+
+
+	/**
+	 * @return the yellowCardGetterst2
+	 */
+	public ArrayList<Player> getYellowCardGetterst2() {
+		return yellowCardGetterst2;
+	}
+
+
+
+
+
+	/**
+	 * @param yellowCardGetterst2 the yellowCardGetterst2 to set
+	 */
+	public void setYellowCardGetterst2(ArrayList<Player> yellowCardGetterst2) {
+		this.yellowCardGetterst2 = yellowCardGetterst2;
+	}
+
+
+
+
+
+	/**
+	 * @return the redCardGetterst1
+	 */
+	public ArrayList<Player> getRedCardGetterst1() {
+		return redCardGetterst1;
+	}
+
+
+
+
+
+	/**
+	 * @param redCardGetterst1 the redCardGetterst1 to set
+	 */
+	public void setRedCardGetterst1(ArrayList<Player> redCardGetterst1) {
+		this.redCardGetterst1 = redCardGetterst1;
+	}
+
+
+
+
+
+	/**
+	 * @return the redCardGetterst2
+	 */
+	public ArrayList<Player> getRedCardGetterst2() {
+		return redCardGetterst2;
+	}
+
+
+
+
+
+	/**
+	 * @param redCardGetterst2 the redCardGetterst2 to set
+	 */
+	public void setRedCardGetterst2(ArrayList<Player> redCardGetterst2) {
+		this.redCardGetterst2 = redCardGetterst2;
+	}
+
+
+
+
+
+	/**
+	 * @return the injuredPlayerst1
+	 */
+	public ArrayList<Player> getInjuredPlayerst1() {
+		return injuredPlayerst1;
+	}
+
+
+
+
+
+	/**
+	 * @param injuredPlayerst1 the injuredPlayerst1 to set
+	 */
+	public void setInjuredPlayerst1(ArrayList<Player> injuredPlayerst1) {
+		this.injuredPlayerst1 = injuredPlayerst1;
+	}
+
+
+
+
+
+	/**
+	 * @return the injuredPlayerst2
+	 */
+	public ArrayList<Player> getInjuredPlayerst2() {
+		return injuredPlayerst2;
+	}
+
+
+
+
+
+	/**
+	 * @param injuredPlayerst2 the injuredPlayerst2 to set
+	 */
+	public void setInjuredPlayerst2(ArrayList<Player> injuredPlayerst2) {
+		this.injuredPlayerst2 = injuredPlayerst2;
+	}
+
+
+
+
+
+	/**
+	 * @return the injuriesLengthst1
+	 */
+	public int[] getInjuriesLengthst1() {
+		return injuriesLengthst1;
+	}
+
+
+
+
+
+	/**
+	 * @param injuriesLengthst1 the injuriesLengthst1 to set
+	 */
+	public void setInjuriesLengthst1(int[] injuriesLengthst1) {
+		this.injuriesLengthst1 = injuriesLengthst1;
+	}
+
+
+
+
+
+	/**
+	 * @return the injuriesLengthst2
+	 */
+	public int[] getInjuriesLengthst2() {
+		return injuriesLengthst2;
+	}
+
+
+
+
+
+	/**
+	 * @param injuriesLengthst2 the injuriesLengthst2 to set
+	 */
+	public void setInjuriesLengthst2(int[] injuriesLengthst2) {
+		this.injuriesLengthst2 = injuriesLengthst2;
+	}
+
+
+
+
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
