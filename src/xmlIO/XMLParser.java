@@ -521,4 +521,45 @@ public class XMLParser {
 		
 		return new Game(name, saveFile, teamName);
 	}
+	
+	public static void writeGameList(String fileName, GameList gameList) {
+		try {
+			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = docBuilder.newDocument();
+			Element saveListElement = doc.createElement("savelist");
+			doc.appendChild(saveListElement);
+			
+			for(Game game : gameList.getGames()) {
+				saveListElement.appendChild(writeGame(game, doc));
+			}
+			
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File(fileName));
+			transformer.transform(source, result);
+			
+		} catch (ParserConfigurationException | TransformerException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static Element writeGame(Game game, Document doc) {
+		Element gameElement = doc.createElement("save");
+		
+		Element nameElement = doc.createElement("name");
+		gameElement.appendChild(nameElement);
+		nameElement.appendChild(doc.createTextNode(game.getName()));
+		
+		Element saveFileElement = doc.createElement("savefile");
+		gameElement.appendChild(saveFileElement);
+		saveFileElement.appendChild(doc.createTextNode(game.getSavefile()));
+		
+		Element teamNameElement = doc.createElement("teamname");
+		gameElement.appendChild(teamNameElement);
+		teamNameElement.appendChild(doc.createTextNode(game.getTeam().getTeamName()));
+		
+		return gameElement;
+		
+	}
 }

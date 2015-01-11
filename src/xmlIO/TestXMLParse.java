@@ -69,6 +69,7 @@ public class TestXMLParse {
 //		
 		
 		GameList gl = XMLParser.readGameList("files/saves.xml");
+		XMLParser.writeGameList("files/test_out.xml", gl);
 		
 	}
 }
