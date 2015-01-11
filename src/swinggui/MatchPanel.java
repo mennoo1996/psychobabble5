@@ -269,7 +269,7 @@ public class MatchPanel extends JPanel {
 		
 		// Cards
 		JPanel cards2 = new JPanel();
-		cards2.setLayout(new BoxLayout(cards1, BoxLayout.Y_AXIS));
+		cards2.setLayout(new BoxLayout(cards2, BoxLayout.Y_AXIS));
 		
 		for(int i = 0; i < curMatch.getRedCardGetterst2().size(); i++) {
 			JLabel redLabel = new JLabel(curMatch.getRedCardGetterst2().get(i).getName() + " (R)");
@@ -297,8 +297,8 @@ public class MatchPanel extends JPanel {
 		JPanel injury2 = new JPanel();
 		injury2.setLayout(new BoxLayout(injury2, BoxLayout.Y_AXIS));
 		
-		for(int i = 0; i < curMatch.getInjuredPlayerst1().size(); i++) {
-			Player injuredP = curMatch.getInjuredPlayerst1().get(i);
+		for(int i = 0; i < curMatch.getInjuredPlayerst2().size(); i++) {
+			Player injuredP = curMatch.getInjuredPlayerst2().get(i);
 			int duration = curMatch.getInjuriesLengthst1()[i];
 			String injuryWeek = duration == 1 ? " week)" : " weeks)";
 			JLabel injuredLabel = new JLabel(injuredP.getName() + " (" + duration + injuryWeek);

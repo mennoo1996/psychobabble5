@@ -60,7 +60,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 		// Currently only supports one season
 		roundNum = 0;
-		curComp = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		//curTeam = curComp.getLibrary().getTeamForName("Manchester United");
 		
 	
