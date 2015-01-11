@@ -16,7 +16,7 @@ public class TestXMLParse {
 	public static void main(String[] args) {
 //		Competition competition = XMLParser.readCompetition("players Database by team with empty standings.xml", "competition-scheme.xml");
 		
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+//		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
 		
 		
 //		System.out.println(competition.toString());
@@ -33,7 +33,7 @@ public class TestXMLParse {
 //		
 //		System.out.println(competition.standingsToString());
 		
-		XMLParser.writeCompetition("files/competitionDatabase_v5.xml", competition);
+//		XMLParser.writeCompetition("files/competitionDatabase_v5.xml", competition);
 //		
 //		System.out.println(GameLogic.randomGenerator(1,50,5));
 //		System.out.println(GameLogic.randomGenerator(1,100,5));
@@ -61,12 +61,14 @@ public class TestXMLParse {
 //			System.out.println("\n\n");
 //		}
 		
-		GameList gl = new GameList();
-		Game g = gl.newgame("Menno", "Arsenal");
-		for (int i=0;i<10;i++) {g.getCompetition().playRound();}
-		g.save();
+//		GameList gl = new GameList();
+//		Game g = gl.newgame("Menno", "Arsenal");
+//		for (int i=0;i<10;i++) {g.getCompetition().playRound();}
+//		g.save();
+//		
+//		
 		
-		
+		GameList gl = XMLParser.readGameList("files/saves.xml");
 		
 	}
 }

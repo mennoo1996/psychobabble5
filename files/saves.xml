@@ -1,0 +1,12 @@
+<savelist>
+<save>
+	<name>Menno</name>
+	<savefile>files/competitionDatabase_v4.xml</savefile>
+	<teamname>Arsenal</teamname>
+</save>
+<save>
+	<name>Bart</name>
+	<savefile>files/competitionDatabase_v4.xml</savefile>
+	<teamname>Manchester City</teamname>
+</save>
+</savelist>

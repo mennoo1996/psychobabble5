@@ -487,4 +487,38 @@ public class XMLParser {
 		Match res = new Match(team1, team2);
 		return res;	
 	}
+	
+	public static GameList readGameList(String gameListFileName) {
+		try {
+			File xmlFile = new File(gameListFileName);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(xmlFile);
+			doc.getDocumentElement().normalize();
+			
+			GameList res = new GameList();
+			
+			NodeList saveList = doc.getElementsByTagName("save");
+			for(int i = 0; i < saveList.getLength(); i++) {
+				Node save = saveList.item(i);
+				if(save.getNodeType() == Node.ELEMENT_NODE) {
+
+					Element saveElement = (Element)save;
+					res.add(readGame(saveElement));
+				}
+			}
+			return res;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private static Game readGame(Element saveElement) {
+		String name = getNodeValue(saveElement, "name");
+		String saveFile = getNodeValue(saveElement, "savefile");
+		String teamName = getNodeValue(saveElement, "teamname");
+		
+		return new Game(name, saveFile, teamName);
+	}
 }
