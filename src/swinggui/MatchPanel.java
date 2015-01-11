@@ -299,7 +299,7 @@ public class MatchPanel extends JPanel {
 		
 		for(int i = 0; i < curMatch.getInjuredPlayerst2().size(); i++) {
 			Player injuredP = curMatch.getInjuredPlayerst2().get(i);
-			int duration = curMatch.getInjuriesLengthst1()[i];
+			int duration = curMatch.getInjuriesLengthst2()[i];
 			String injuryWeek = duration == 1 ? " week)" : " weeks)";
 			JLabel injuredLabel = new JLabel(injuredP.getName() + " (" + duration + injuryWeek);
 			injuredLabel.setMinimumSize(new Dimension(0,40));
