@@ -261,6 +261,138 @@ public class Competition {
 		return true;
 	}
 	
+	public Player[] getTopScorers() {
+		Player[] res = new Player[440];
+		int counter=0;
+		for (int i=0;i<library.getLibrary().size();i++) {
+			Team t = library.getLibrary().get(i);
+			for (int j=0;j<t.getTeam().size();j++) {
+				res[counter]=t.getTeam().get(j);
+				counter++;
+			}
+		} 
+		
+		Player temp;
+		for (int j=0;j<res.length;j++) {
+			for (int i=1;i<res.length-j;i++) {
+				if (res[i-1].getGoals()>res[i].getGoals()) {
+					temp=res[i];
+					res[i]=res[i-1];
+					res[i-1]=temp;
+				}
+			}
+		}
+		
+		Player[] res2 = new Player[440];
+		for (int i=0;i<440;i++) {
+			res2[i]=res[439-i];
+		}
+		
+		
+		
+		
+		return res2;
+	}
+	
+	public Player[] getMostAssists() {
+		Player[] res = new Player[440];
+		int counter=0;
+		for (int i=0;i<library.getLibrary().size();i++) {
+			Team t = library.getLibrary().get(i);
+			for (int j=0;j<t.getTeam().size();j++) {
+				res[counter]=t.getTeam().get(j);
+				counter++;
+			}
+		} 
+		
+		Player temp;
+		for (int j=0;j<res.length;j++) {
+			for (int i=1;i<res.length-j;i++) {
+				if (res[i-1].getAssists()>res[i].getAssists()) {
+					temp=res[i];
+					res[i]=res[i-1];
+					res[i-1]=temp;
+				}
+			}
+		}
+		
+		Player[] res2 = new Player[440];
+		for (int i=0;i<440;i++) {
+			res2[i]=res[439-i];
+		}
+		
+		
+		
+		
+		return res2;
+	}
+	
+	public Player[] getMostYellow() {
+		Player[] res = new Player[440];
+		int counter=0;
+		for (int i=0;i<library.getLibrary().size();i++) {
+			Team t = library.getLibrary().get(i);
+			for (int j=0;j<t.getTeam().size();j++) {
+				res[counter]=t.getTeam().get(j);
+				counter++;
+			}
+		} 
+		
+		Player temp;
+		for (int j=0;j<res.length;j++) {
+			for (int i=1;i<res.length-j;i++) {
+				if (res[i-1].getYellowcards()>res[i].getYellowcards()) {
+					temp=res[i];
+					res[i]=res[i-1];
+					res[i-1]=temp;
+				}
+			}
+		}
+		
+		Player[] res2 = new Player[440];
+		for (int i=0;i<440;i++) {
+			res2[i]=res[439-i];
+		}
+		
+		
+		
+		
+		return res2;
+	}
+	
+	public Player[] getMostRed() {
+		Player[] res = new Player[440];
+		int counter=0;
+		for (int i=0;i<library.getLibrary().size();i++) {
+			Team t = library.getLibrary().get(i);
+			for (int j=0;j<t.getTeam().size();j++) {
+				res[counter]=t.getTeam().get(j);
+				counter++;
+			}
+		} 
+		
+		Player temp;
+		for (int j=0;j<res.length;j++) {
+			for (int i=1;i<res.length-j;i++) {
+				if (res[i-1].getRedcards()>res[i].getRedcards()) {
+					temp=res[i];
+					res[i]=res[i-1];
+					res[i-1]=temp;
+				}
+			}
+		}
+		
+		Player[] res2 = new Player[440];
+		for (int i=0;i<440;i++) {
+			res2[i]=res[439-i];
+		}
+		
+		
+		
+		
+		return res2;
+	}
+	
 	
 	
 	

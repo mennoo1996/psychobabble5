@@ -9,6 +9,7 @@ import libraryClasses.GameList;
 import libraryClasses.Player;
 import libraryClasses.Team;
 import gameLogic.*;
+import java.io.*;
 
 
 public class TestXMLParse {
@@ -26,10 +27,10 @@ public class TestXMLParse {
 //		}
 //		competition.playRound();
 //		
-//		for(int i = 0; i < 37; i++) {
-//			System.out.println("Round: " + i);
-//			competition.playRound();
-//		}
+		for(int i = 0; i < 37; i++) {
+			System.out.println("Round: " + i);
+			competition.playRound();
+		}
 //		
 //		System.out.println(competition.standingsToString());
 		
@@ -61,11 +62,65 @@ public class TestXMLParse {
 //			System.out.println("\n\n");
 //		}
 		
-		GameList gl = new GameList();
-		Game g = gl.newgame("Menno", "Arsenal");
-		for (int i=0;i<10;i++) {g.getCompetition().playRound();}
-		g.save();
+		Player[] res = competition.getTopScorers();
+		for (int i=0;i<res.length;i++) {
+			System.out.println(res[i]);
+		}
 		
+		try {PrintWriter writer = new PrintWriter (new FileWriter ("test.txt"));
+		for (int i=0;i<res.length;i++) {
+			writer.println(res[i]);
+		}
+		writer.close();
+		
+		
+		
+		} catch (IOException e) {}
+		
+		res = competition.getMostAssists();
+		for (int i=0;i<res.length;i++) {
+			System.out.println(res[i]);
+		}
+		
+		try {PrintWriter writer = new PrintWriter (new FileWriter ("test2.txt"));
+		for (int i=0;i<res.length;i++) {
+			writer.println(res[i]);
+		}
+		writer.close();
+		
+		
+		
+		} catch (IOException e) {}
+		
+		res = competition.getMostYellow();
+		for (int i=0;i<res.length;i++) {
+			System.out.println(res[i]);
+		}
+		
+		try {PrintWriter writer = new PrintWriter (new FileWriter ("test3.txt"));
+		for (int i=0;i<res.length;i++) {
+			writer.println(res[i]);
+		}
+		writer.close();
+		
+		
+		
+		} catch (IOException e) {}
+		
+		res = competition.getMostRed();
+		for (int i=0;i<res.length;i++) {
+			System.out.println(res[i]);
+		}
+		
+		try {PrintWriter writer = new PrintWriter (new FileWriter ("test4.txt"));
+		for (int i=0;i<res.length;i++) {
+			writer.println(res[i]);
+		}
+		writer.close();
+		
+		
+		
+		} catch (IOException e) {}
 		
 		
 	}
