@@ -146,21 +146,15 @@ public class Frame_Main extends JFrame implements ActionListener{
 					loadMainScreen(teamName);
 					
 					break;
-				case "overview ":
-					System.out.println("Overview button was clicked.");
-					
+				case "overview ":					
 					loadOverView();
 					
 					break;
 				case "statistics":
-					System.out.println("Statistics button was clicked.");
-					
 					loadStatisticsView();
 					
 					break;
 				case "":
-					System.out.println("Play button was clicked.");
-					
 					// Should this be encapsulated by a game logic class method?
 					// For the demo this runs through the entire season (round by round)
 					
@@ -173,28 +167,24 @@ public class Frame_Main extends JFrame implements ActionListener{
 					}
 										
 					// Then display statistics page showcasing the results of the season
-					current = "statistics";
+					current = "match";
 					
 					// Initialize new JPanel and remove current pane
-					StatisticsPanel replStatview = new StatisticsPanel(curComp);
+					MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
 					remove(curPanel);
 					
 					// Refresh the view
-					add(replStatview, BorderLayout.CENTER, 1);
-					curPanel = replStatview;
+					add(replPlayView, BorderLayout.CENTER, 1);
+					curPanel = replPlayView;
 					revalidate();
 					repaint();
 					
 					break;
 				case "positions ":
-					System.out.println("Positions button was clicked.");
-					
 					loadPositionsView();
 					
 					break;
 				case "transfers":
-					System.out.println("Transfers button was clicked.");
-					
 					loadTransfersView();
 					
 					break;
@@ -236,7 +226,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 	public void loadOverView() {
 		if (!current.equals("overview")) {
 			current = "overview";
-			System.out.println("Current screen is: " + current);
 			
 			// Initialize new JPanel and remove current pane
 			OverviewPanel replOverview = new OverviewPanel(curComp);
@@ -254,7 +243,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to statistics panel if not current
 		if (!current.equals("statistics")) {
 			current = "statistics";
-			System.out.println("Current screen is: " + current);
 			
 			// Initialize new JPanel and remove current pane
 			StatisticsPanel replStatview = new StatisticsPanel(curComp);
@@ -272,7 +260,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to positions panel if not current
 		if (!current.equals("positions")) {
 			current = "positions";
-			System.out.println("Current screen is: " + current);
 			
 			// Initialize new JPanel and remove current pane
 			PositionsPanel replPositsview = new PositionsPanel(curTeam);
@@ -290,7 +277,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to transfers panel if not current
 		if (!current.equals("transfers")) {
 			current = "transfers";
-			System.out.println("Current screen is: " + current);
 			
 			// Initialize new JPanel and remove current pane
 			TransfersPanel replTransfview = new TransfersPanel();
