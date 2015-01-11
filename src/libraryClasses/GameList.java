@@ -14,9 +14,10 @@ public class GameList {
 	
 	public Game newgame(String name, String teamname) {
 		int gamenumber = games.size()+1;
-		String savefile = "savefiles/" + gamenumber + ".xml";
+		String savefileData = "savefiles/" + gamenumber + "-data.xml";
+		String savefileScheme = "savefiles/" + gamenumber + "-scheme.xml";
 		try {
-			PrintWriter writer = new PrintWriter (new FileWriter (savefile));
+			PrintWriter writer = new PrintWriter (new FileWriter (savefileData));
 			BufferedReader reader = new BufferedReader (new FileReader("files/competitionDatabase_v4.xml"));
 			String templine = reader.readLine();
 			while (templine!=null) {
@@ -28,7 +29,22 @@ public class GameList {
 		} catch (IOException e) {
 			System.out.println("Something went wrong while copying the standard database file");
 		}
-		Game res = new Game(name, savefile, teamname);
+		
+		try {
+			PrintWriter writer = new PrintWriter (new FileWriter (savefileScheme));
+			BufferedReader reader = new BufferedReader (new FileReader("files/competition-scheme.xml"));
+			String templine = reader.readLine();
+			while (templine!=null) {
+				writer.println(templine);
+				templine=reader.readLine();
+			}
+			writer.close();
+			reader.close();
+			
+		} catch (IOException e) {
+			System.out.println("Something went wrong while copying the standard scheme file");
+		}
+		Game res = new Game(name, savefileData, savefileScheme, teamname);
 		games.add(res);
 		
 		return res;
@@ -67,6 +83,14 @@ public class GameList {
 	 */
 	public void setGames(ArrayList<Game> games) {
 		this.games = games;
+	}
+
+	public String toString() {
+		String res = "";
+		for (int i=0;i<games.size();i++) {
+			res += games.get(i).toString() + "\n";
+		}
+		return res;
 	}
 	
 	

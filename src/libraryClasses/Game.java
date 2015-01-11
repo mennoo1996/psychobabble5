@@ -7,30 +7,24 @@ import xmlIO.XMLParser;
 public class Game {
 	
 	private String name;
-	private String savefile;
+	private String savefileData;
+	private String savefileScheme;
 	private Team team;
 	private Competition competition;
 	private Date date;
 	
-	public Game (String name, String savefile, String teamname) {
+	public Game (String name, String savefileData, String savefileScheme, String teamname) {
 		this.name=name;
-		this.savefile=savefile;
+		this.savefileData=savefileData;
+		this.savefileScheme=savefileScheme;
 		this.date = new Date();
-		competition=XMLParser.readCompetition(savefile, "files/competition-scheme.xml");
+		competition=XMLParser.readCompetition(savefileData, savefileScheme);
 		team=competition.getLibrary().getTeamForName(teamname);
 	}
 	
 	
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Game [name=" + name + ", savefile=" + savefile + ", team="
-				+ team + ", date=" + date
-				+ "]";
-	}
+	
 
 
 
@@ -52,21 +46,7 @@ public class Game {
 
 
 
-	/**
-	 * @return the savefile
-	 */
-	public String getSavefile() {
-		return savefile;
-	}
-
-
-
-	/**
-	 * @param savefile the savefile to set
-	 */
-	public void setSavefile(String savefile) {
-		this.savefile = savefile;
-	}
+	
 
 
 
@@ -123,8 +103,78 @@ public class Game {
 	}
 	
 	public void save() {
-		XMLParser.writeCompetition(savefile, competition);
+		XMLParser.writeCompetition(savefileData, savefileScheme, competition);
 	}
+
+
+
+
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Game [name=" + name + ", savefileData=" + savefileData
+				+ ", savefileScheme=" + savefileScheme + ", team=" + team
+				+ ", competition=" + competition + ", date=" + date + "]";
+	}
+
+
+
+
+
+
+
+	/**
+	 * @return the savefileData
+	 */
+	public String getSavefileData() {
+		return savefileData;
+	}
+
+
+
+
+
+
+
+	/**
+	 * @param savefileData the savefileData to set
+	 */
+	public void setSavefileData(String savefileData) {
+		this.savefileData = savefileData;
+	}
+
+
+
+
+
+
+
+	/**
+	 * @return the savefileScheme
+	 */
+	public String getSavefileScheme() {
+		return savefileScheme;
+	}
+
+
+
+
+
+
+
+	/**
+	 * @param savefileScheme the savefileScheme to set
+	 */
+	public void setSavefileScheme(String savefileScheme) {
+		this.savefileScheme = savefileScheme;
+	}
+	
+	
 	
 	
 	
