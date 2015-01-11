@@ -143,69 +143,20 @@ public class Frame_Main extends JFrame implements ActionListener{
 				case "Play as this team":					
 					String teamName = (String)possibleMenuB.getClientProperty("teamName");
 										
-					curTeam = curComp.getLibrary().getTeamForName(teamName);
-					
-					remove(curPanel);
-					// Start playing!
-					Toolkit tk = Toolkit.getDefaultToolkit(); //what is this even?
-					int boxwidth = (int) tk.getScreenSize().getWidth();
-					int boxheight = (int) tk.getScreenSize().getHeight();
-					
-					//Header panel
-					Header header = new Header(this);
-					header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
-					add(header);
-					
-					//Center panel begins here
-					OverviewPanel overviewPanel = new OverviewPanel(curComp);
-					
-					// set current screen string
-					current = "overview";
-					
-					//Center panel ends here
-					curPanel = overviewPanel;
-					add(curPanel, BorderLayout.CENTER);
-					revalidate();
-					repaint();
+					loadMainScreen(teamName);
 					
 					break;
 				case "overview ":
 					System.out.println("Overview button was clicked.");
 					
-					// Switch to overview panel if not current
-					if (!current.equals("overview")) {
-						current = "overview";
-						System.out.println("Current screen is: " + current);
-						
-						// Initialize new JPanel and remove current pane
-						OverviewPanel replOverview = new OverviewPanel(curComp);
-						remove(curPanel);
-						
-						// Refresh the view
-						add(replOverview, BorderLayout.CENTER, 1);
-						curPanel = replOverview;
-						revalidate();
-						repaint();
-					}
+					loadOverView();
+					
 					break;
 				case "statistics":
 					System.out.println("Statistics button was clicked.");
 					
-					// Switch to statistics panel if not current
-					if (!current.equals("statistics")) {
-						current = "statistics";
-						System.out.println("Current screen is: " + current);
-						
-						// Initialize new JPanel and remove current pane
-						StatisticsPanel replStatview = new StatisticsPanel(curComp);
-						remove(curPanel);
-						
-						// Refresh the view
-						add(replStatview, BorderLayout.CENTER, 1);
-						curPanel = replStatview;
-						revalidate();
-						repaint();
-					}
+					loadStatisticsView();
+					
 					break;
 				case "":
 					System.out.println("Play button was clicked.");
@@ -238,40 +189,14 @@ public class Frame_Main extends JFrame implements ActionListener{
 				case "positions ":
 					System.out.println("Positions button was clicked.");
 					
-					// Switch to positions panel if not current
-					if (!current.equals("positions")) {
-						current = "positions";
-						System.out.println("Current screen is: " + current);
-						
-						// Initialize new JPanel and remove current pane
-						PositionsPanel replPositsview = new PositionsPanel(curTeam);
-						remove(curPanel);
-						
-						// Refresh the view
-						add(replPositsview, BorderLayout.CENTER, 1);
-						curPanel = replPositsview;
-						revalidate();
-						repaint();
-					}
+					loadPositionsView();
+					
 					break;
 				case "transfers":
 					System.out.println("Transfers button was clicked.");
 					
-					// Switch to transfers panel if not current
-					if (!current.equals("transfers")) {
-						current = "transfers";
-						System.out.println("Current screen is: " + current);
-						
-						// Initialize new JPanel and remove current pane
-						TransfersPanel replTransfview = new TransfersPanel();
-						remove(curPanel);
-						
-						// Refresh the view
-						add(replTransfview, BorderLayout.CENTER, 1);
-						curPanel = replTransfview;
-						revalidate();
-						repaint();
-					}
+					loadTransfersView();
+					
 					break;
 				default:
 					System.out.println("This might not be a menu bar item!");
@@ -279,6 +204,104 @@ public class Frame_Main extends JFrame implements ActionListener{
 			}
 		}
 		
+	}
+	
+	public void loadMainScreen(String chosenTeam) {
+		curTeam = curComp.getLibrary().getTeamForName(chosenTeam);
+		
+		remove(curPanel);
+		// Start playing!
+		Toolkit tk = Toolkit.getDefaultToolkit(); //what is this even?
+		int boxwidth = (int) tk.getScreenSize().getWidth();
+		int boxheight = (int) tk.getScreenSize().getHeight();
+		
+		//Header panel
+		Header header = new Header(this);
+		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+		add(header);
+		
+		//Center panel begins here
+		OverviewPanel overviewPanel = new OverviewPanel(curComp);
+		
+		// set current screen string
+		current = "overview";
+		
+		//Center panel ends here
+		curPanel = overviewPanel;
+		add(curPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
+	public void loadOverView() {
+		if (!current.equals("overview")) {
+			current = "overview";
+			System.out.println("Current screen is: " + current);
+			
+			// Initialize new JPanel and remove current pane
+			OverviewPanel replOverview = new OverviewPanel(curComp);
+			remove(curPanel);
+			
+			// Refresh the view
+			add(replOverview, BorderLayout.CENTER, 1);
+			curPanel = replOverview;
+			revalidate();
+			repaint();
+		}
+	}
+	
+	public void loadStatisticsView() {
+		// Switch to statistics panel if not current
+		if (!current.equals("statistics")) {
+			current = "statistics";
+			System.out.println("Current screen is: " + current);
+			
+			// Initialize new JPanel and remove current pane
+			StatisticsPanel replStatview = new StatisticsPanel(curComp);
+			remove(curPanel);
+			
+			// Refresh the view
+			add(replStatview, BorderLayout.CENTER, 1);
+			curPanel = replStatview;
+			revalidate();
+			repaint();
+		}
+	}
+	
+	public void loadPositionsView() {
+		// Switch to positions panel if not current
+		if (!current.equals("positions")) {
+			current = "positions";
+			System.out.println("Current screen is: " + current);
+			
+			// Initialize new JPanel and remove current pane
+			PositionsPanel replPositsview = new PositionsPanel(curTeam);
+			remove(curPanel);
+			
+			// Refresh the view
+			add(replPositsview, BorderLayout.CENTER, 1);
+			curPanel = replPositsview;
+			revalidate();
+			repaint();
+		}
+	}
+	
+	public void loadTransfersView() {
+		// Switch to transfers panel if not current
+		if (!current.equals("transfers")) {
+			current = "transfers";
+			System.out.println("Current screen is: " + current);
+			
+			// Initialize new JPanel and remove current pane
+			TransfersPanel replTransfview = new TransfersPanel();
+			remove(curPanel);
+			
+			// Refresh the view
+			add(replTransfview, BorderLayout.CENTER, 1);
+			curPanel = replTransfview;
+			revalidate();
+			repaint();
+		}
 	}
 
 }

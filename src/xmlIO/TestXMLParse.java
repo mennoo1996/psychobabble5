@@ -1,8 +1,11 @@
 package xmlIO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import libraryClasses.Competition;
+import libraryClasses.Game;
+import libraryClasses.GameList;
 import libraryClasses.Player;
 import libraryClasses.Team;
 import gameLogic.*;
@@ -57,6 +60,14 @@ public class TestXMLParse {
 //			System.out.println(libraryArray.get(i).toString());
 //			System.out.println("\n\n");
 //		}
+		
+		GameList gl = new GameList();
+		Game g = gl.newgame("Menno", "Arsenal");
+		for (int i=0;i<10;i++) {g.getCompetition().playRound();}
+		g.save();
+		
+		
+		
 	}
 }
 
