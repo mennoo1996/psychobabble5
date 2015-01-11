@@ -27,6 +27,8 @@ public class Competition {
 	 * Method which simulates a round by playing all matches in the current Round
 	 */
 	public void playRound() {
+		
+		
 		Round currentRound = scheme.getRound(roundsPlayed + 1);
 		
 		for(Match match : currentRound.getMatches()) {
@@ -50,8 +52,12 @@ public class Competition {
 				team2.updateStandings("won", result[2], result[1]);
 			}
 			
+			
+			
 			ArrayList<FieldPlayer> goalMakerst1 = GameLogic.getGoals(team1, result[1]);
 			ArrayList<FieldPlayer> goalMakerst2 = GameLogic.getGoals(team2, result[2]);
+			match.setGoalMakerst1(goalMakerst1);
+			match.setGoalMakerst2(goalMakerst2);
 			for (Player a:goalMakerst1) {
 				a.madeGoal();
 			}
@@ -62,6 +68,8 @@ public class Competition {
 			
 			ArrayList<FieldPlayer> assistMakerst1 = GameLogic.getAssists(team1, result[1]);
 			ArrayList<FieldPlayer> assistMakerst2 = GameLogic.getAssists(team2, result[2]);
+			match.setAssistMakerst1(assistMakerst1);
+			match.setAssistMakerst2(assistMakerst2);
 			for (Player a:assistMakerst1) {
 				a.madeAssist();
 			}
@@ -74,6 +82,8 @@ public class Competition {
 			int amountyellowt2 = GameLogic.getAmountOfYellowCards(team2);
 			ArrayList<Player> yellowCardGetterst1 = GameLogic.getYellowCards(amountyellowt1, team1);
 			ArrayList<Player> yellowCardGetterst2 = GameLogic.getYellowCards(amountyellowt2, team2);
+			match.setYellowCardGetterst1(yellowCardGetterst1);
+			match.setYellowCardGetterst2(yellowCardGetterst2);
 			for (Player a:yellowCardGetterst1) {
 				a.gotYellow();
 			}
@@ -86,6 +96,8 @@ public class Competition {
 			int amountredt2 = GameLogic.getAmountOfRedCards(team2);
 			ArrayList<Player> redCardGetterst1 = GameLogic.getRedCards(amountredt1, team1);
 			ArrayList<Player> redCardGetterst2 = GameLogic.getRedCards(amountredt2, team2);
+			match.setRedCardGetterst1(redCardGetterst1);
+			match.setRedCardGetterst2(redCardGetterst2);
 			for (Player a:redCardGetterst1) {
 				a.gotRed();
 				a.gotSuspension(2);
@@ -98,8 +110,12 @@ public class Competition {
 			
 			ArrayList<Player> playersWithInjuriest1 = GameLogic.getInjuredPlayers(team1);
 			ArrayList<Player> playersWithInjuriest2 = GameLogic.getInjuredPlayers(team2);
+			match.setInjuredPlayerst1(playersWithInjuriest1);
+			match.setInjuredPlayerst2(playersWithInjuriest2);
 			int[] injurieslengthst1 = GameLogic.getInjuriesLength(playersWithInjuriest1);
 			int[] injurieslengthst2 = GameLogic.getInjuriesLength(playersWithInjuriest2);
+			match.setInjuriesLengthst1(injurieslengthst1);
+			match.setInjuriesLengthst2(injurieslengthst2);
 			for (int i=0;i<playersWithInjuriest1.size();i++) {
 				playersWithInjuriest1.get(i).gotInjury(injurieslengthst1[i]+1);
 			}
