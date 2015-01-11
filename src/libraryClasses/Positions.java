@@ -22,9 +22,9 @@ public class Positions {
 	}
 	
 	public boolean contains(Player p) {
-		for (int i=0;i<positionArray.length;i++) {
+		for (int i=0; i<positionArray.length; i++) {
 			Player p2 = positionArray[i];
-			if (p.equals(p2)); {
+			if (p.equals(p2)) {
 				return true;
 			}
 		}
