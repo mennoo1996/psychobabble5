@@ -52,6 +52,7 @@ public class XMLParser {
 	 */
 	public static void writeCompetition(String libraryFileName, String schemeFileName, Competition competition) {
 		writeLibrary(libraryFileName, competition.getLibrary(), competition.getRoundsPlayed());
+		writeScheme(schemeFileName, competition.getScheme());
 	}
 	
 	/**
@@ -335,6 +336,10 @@ public class XMLParser {
 		playerElement.appendChild(daysSuspendedElement);
 		daysSuspendedElement.appendChild(doc.createTextNode(String.format("%d", player.getDaysSuspended())));
 		
+		Element daysNotForSaleElement = doc.createElement("daysNotForSale");
+		playerElement.appendChild(daysNotForSaleElement);
+		daysNotForSaleElement.appendChild(doc.createTextNode(String.format("%d", player.getDaysNotForSale())));
+		
 		String eligible;
 		if(player.isEligible()) {
 			eligible = "1";
@@ -398,6 +403,7 @@ public class XMLParser {
 		int yellowCards = Integer.parseInt(getNodeValue(element, "yellowCards"));
 		int daysInjured = Integer.parseInt(getNodeValue(element, "daysInjured"));
 		int daysSuspended = Integer.parseInt(getNodeValue(element, "daysSuspended"));
+		int daysNotForSale = Integer.parseInt(getNodeValue(element, "daysNotForSale"));
 		
 		boolean eligible;
 		if(getNodeValue(element, "eligible").equals("1")) {
@@ -416,11 +422,11 @@ public class XMLParser {
 			int staminaValue = Integer.parseInt(getNodeValue(element, "staminaValue"));
 
 			if(playerType.equals("Attacker")) {
-				player = new Attacker(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
+				player = new Attacker(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue, daysNotForSale);
 			} else if(playerType.equals("Midfielder")) {
-				player = new Midfielder(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
+				player = new Midfielder(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue, daysNotForSale);
 			} else if(playerType.equals("Defender")) {
-				player = new Defender(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue);
+				player = new Defender(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, dribblingValue, finishingValue, defenseValue, staminaValue, daysNotForSale);
 			} else {
 				player = null;
 			}
@@ -428,7 +434,7 @@ public class XMLParser {
 		} else if (playerType.equals("Goalkeeper")){
 			// player is a goalkeeper
 			int goalkeeperValue = Integer.parseInt(getNodeValue(element, "goalkeeperValue"));
-			player = new Goalkeeper(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, goalkeeperValue);
+			player = new Goalkeeper(price, teamName, name, age, number, goals, assists, yellowCards, redCards, daysInjured, daysSuspended, eligible, goalkeeperValue, daysNotForSale);
 		} else {
 			player = null;
 		}
@@ -512,6 +518,52 @@ public class XMLParser {
 		
 		Match res = new Match(team1, team2);
 		return res;	
+	}
+	
+	public static void writeScheme(String fileName, CompetitionScheme scheme) {
+		try {
+			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = docBuilder.newDocument();
+			Element schemeElement = doc.createElement("competitionScheme");
+			doc.appendChild(schemeElement);
+			
+			for(Round round : scheme.getRounds()) {
+				schemeElement.appendChild(writeRound(round, doc));
+			}
+			
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File(fileName));
+			transformer.transform(source, result);
+			
+		} catch (ParserConfigurationException | TransformerException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static Element writeRound(Round round, Document doc) {
+		Element roundElement = doc.createElement("roundScheme");
+		roundElement.setAttribute("round", String.format("%d", round.getRoundNumber()));
+		
+		for(Match match : round.getMatches()) {
+			roundElement.appendChild(writeMatch(match, doc));
+		}
+		return roundElement;
+	}
+	
+	private static Element writeMatch(Match match, Document doc) {
+		Element matchElement = doc.createElement("match");
+		
+		Element team1Element = doc.createElement("team1");
+		matchElement.appendChild(team1Element);
+		team1Element.appendChild(doc.createTextNode(match.getTeam1()));
+		
+		Element team2Element = doc.createElement("team2");
+		matchElement.appendChild(team2Element);
+		team2Element.appendChild(doc.createTextNode(match.getTeam2()));
+		
+		return matchElement;
 	}
 	
 	public static GameList readGameList(String gameListFileName) {

@@ -32,7 +32,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetInjuredPlayers() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");		
 		
 		GameLogic.setTesting(true);
 		Team t = competition.getLibrary().getLibrary().get(0);
@@ -47,7 +47,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetInjuriesLength() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -71,7 +71,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetAmountOfRedCards() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -89,7 +89,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetRedCards() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -104,7 +104,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetAmountOfYellowCards() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -133,7 +133,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetYellowCards() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");		
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");		
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -149,7 +149,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetGoals() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -166,7 +166,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetAssists() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -183,7 +183,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetMatchResults() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -211,7 +211,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testTeam2WintLoserScore() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -277,7 +277,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testTeam2WintWinnerScore() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -347,7 +347,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testTeam1WintLoserScore() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -412,7 +412,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testTeam1WintWinnerScore() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -482,7 +482,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGelijkSpel() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
@@ -559,7 +559,7 @@ public class GameLogicTest {
 
 	@Test
 	public void testGetRandomNumberForTeam() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		for(Team t : competition.getLibrary().getLibrary()) {
 			t.setFirst11AsCurrentTeam();
 		}
