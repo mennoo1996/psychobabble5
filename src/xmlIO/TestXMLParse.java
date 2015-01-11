@@ -17,7 +17,7 @@ public class TestXMLParse {
 	public static void main(String[] args) {
 //		Competition competition = XMLParser.readCompetition("players Database by team with empty standings.xml", "competition-scheme.xml");
 		
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+//		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
 		
 		
 //		System.out.println(competition.toString());
@@ -27,14 +27,14 @@ public class TestXMLParse {
 //		}
 //		competition.playRound();
 //		
-		for(int i = 0; i < 37; i++) {
-			System.out.println("Round: " + i);
-			competition.playRound();
-		}
+//		for(int i = 0; i < 37; i++) {
+//			System.out.println("Round: " + i);
+//			competition.playRound();
+//		}
 //		
 //		System.out.println(competition.standingsToString());
 		
-		XMLParser.writeCompetition("files/competitionDatabase_v5.xml", competition);
+//		XMLParser.writeCompetition("files/competitionDatabase_v5.xml", competition);
 //		
 //		System.out.println(GameLogic.randomGenerator(1,50,5));
 //		System.out.println(GameLogic.randomGenerator(1,100,5));
@@ -62,66 +62,18 @@ public class TestXMLParse {
 //			System.out.println("\n\n");
 //		}
 		
-		Player[] res = competition.getTopScorers();
-		for (int i=0;i<res.length;i++) {
-			System.out.println(res[i]);
-		}
+
+//		GameList gl = new GameList();
+//		Game g = gl.newgame("Menno", "Arsenal");
+//		for (int i=0;i<10;i++) {g.getCompetition().playRound();}
+//		g.save();
+//		
+//		
+
 		
-		try {PrintWriter writer = new PrintWriter (new FileWriter ("test.txt"));
-		for (int i=0;i<res.length;i++) {
-			writer.println(res[i]);
-		}
-		writer.close();
-		
-		
-		
-		} catch (IOException e) {}
-		
-		res = competition.getMostAssists();
-		for (int i=0;i<res.length;i++) {
-			System.out.println(res[i]);
-		}
-		
-		try {PrintWriter writer = new PrintWriter (new FileWriter ("test2.txt"));
-		for (int i=0;i<res.length;i++) {
-			writer.println(res[i]);
-		}
-		writer.close();
-		
-		
-		
-		} catch (IOException e) {}
-		
-		res = competition.getMostYellow();
-		for (int i=0;i<res.length;i++) {
-			System.out.println(res[i]);
-		}
-		
-		try {PrintWriter writer = new PrintWriter (new FileWriter ("test3.txt"));
-		for (int i=0;i<res.length;i++) {
-			writer.println(res[i]);
-		}
-		writer.close();
-		
-		
-		
-		} catch (IOException e) {}
-		
-		res = competition.getMostRed();
-		for (int i=0;i<res.length;i++) {
-			System.out.println(res[i]);
-		}
-		
-		try {PrintWriter writer = new PrintWriter (new FileWriter ("test4.txt"));
-		for (int i=0;i<res.length;i++) {
-			writer.println(res[i]);
-		}
-		writer.close();
-		
-		
-		
-		} catch (IOException e) {}
-		
+		GameList gl = XMLParser.readGameList("files/saves_v2.xml");
+		System.out.println(gl.toString());
+		XMLParser.writeGameList("files/saves.xml", gl);
 		
 	}
 }

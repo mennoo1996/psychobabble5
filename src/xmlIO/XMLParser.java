@@ -1,6 +1,9 @@
 package xmlIO;
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -39,6 +42,16 @@ public class XMLParser {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * Method to write a competition to a xml file
+	 * 
+	 * @param libraryFileName	- The file to write to
+	 * @param competition		- The competition to write
+	 */
+	public static void writeCompetition(String libraryFileName, String schemeFileName, Competition competition) {
+		writeLibrary(libraryFileName, competition.getLibrary(), competition.getRoundsPlayed());
 	}
 	
 	/**
@@ -92,7 +105,20 @@ public class XMLParser {
 	 */
 	private static Team readTeam(Element teamElement) {
 		String teamName = teamElement.getAttribute("teamName");
-		double budget = Double.parseDouble(teamElement.getAttribute("budget"));
+		
+		double budget = 0;
+		try {
+			budget = Double.parseDouble(teamElement.getAttribute("budget"));
+		} catch(Exception e) {
+			NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+		    Number number = 0;
+			try {
+				number = format.parse(teamElement.getAttribute("budget"));
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		    budget = number.doubleValue();
+		}
 		
 		NodeList standingsList = teamElement.getElementsByTagName("standings");
 		Element standingsElement = (Element)standingsList.item(0);
@@ -486,5 +512,85 @@ public class XMLParser {
 		
 		Match res = new Match(team1, team2);
 		return res;	
+	}
+	
+	public static GameList readGameList(String gameListFileName) {
+		try {
+			File xmlFile = new File(gameListFileName);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(xmlFile);
+			doc.getDocumentElement().normalize();
+			
+			GameList res = new GameList();
+			
+			NodeList saveList = doc.getElementsByTagName("save");
+			for(int i = 0; i < saveList.getLength(); i++) {
+				Node save = saveList.item(i);
+				if(save.getNodeType() == Node.ELEMENT_NODE) {
+
+					Element saveElement = (Element)save;
+					res.add(readGame(saveElement));
+				}
+			}
+			return res;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private static Game readGame(Element saveElement) {
+		String name = getNodeValue(saveElement, "name");
+		String dataFile = getNodeValue(saveElement, "datafile");
+		String schemeFile = getNodeValue(saveElement, "schemefile");
+		String teamName = getNodeValue(saveElement, "teamname");
+		
+		return new Game(name, dataFile, schemeFile, teamName);
+	}
+	
+	public static void writeGameList(String fileName, GameList gameList) {
+		try {
+			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = docBuilder.newDocument();
+			Element saveListElement = doc.createElement("savelist");
+			doc.appendChild(saveListElement);
+			
+			for(Game game : gameList.getGames()) {
+				saveListElement.appendChild(writeGame(game, doc));
+			}
+			
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File(fileName));
+			transformer.transform(source, result);
+			
+		} catch (ParserConfigurationException | TransformerException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static Element writeGame(Game game, Document doc) {
+		Element gameElement = doc.createElement("save");
+		
+		Element nameElement = doc.createElement("name");
+		gameElement.appendChild(nameElement);
+		nameElement.appendChild(doc.createTextNode(game.getName()));
+		
+		Element dataFileElement = doc.createElement("datafile");
+		gameElement.appendChild(dataFileElement);
+		dataFileElement.appendChild(doc.createTextNode(game.getSavefileData()));
+		
+		Element schemeFileElement = doc.createElement("schemefile");
+		gameElement.appendChild(schemeFileElement);
+		schemeFileElement.appendChild(doc.createTextNode(game.getSavefileScheme()));
+		
+		Element teamNameElement = doc.createElement("teamname");
+		gameElement.appendChild(teamNameElement);
+		teamNameElement.appendChild(doc.createTextNode(game.getTeam().getTeamName()));
+		
+		return gameElement;
+		
 	}
 }
