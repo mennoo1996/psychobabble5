@@ -34,5 +34,13 @@ public class GameList {
 		return res;
 		
 	}
+	
+	public Game loadgame(String name) {
+		
+		for (int i=0;i<games.size(); i++) {
+			if (games.get(i).getName().equals(name)) {
+				return games.get(i);
+			}
+		} return null;
 
-}
+}}
