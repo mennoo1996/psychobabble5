@@ -17,7 +17,7 @@ public class TestXMLParse {
 //		Competition competition = XMLParser.readCompetition("players Database by team with empty standings.xml", "competition-scheme.xml");
 		
 		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
-		
+		XMLParser.writeCompetition("files/test_out.xml", "files/test_out.xml", competition);
 		
 //		System.out.println(competition.toString());
 //		
