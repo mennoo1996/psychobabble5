@@ -56,16 +56,6 @@ public class XMLParser {
 	}
 	
 	/**
-	 * Method to write a competition to a xml file
-	 * 
-	 * @param libraryFileName	- The file to write to
-	 * @param competition		- The competition to write
-	 */
-	public static void writeCompetition(String libraryFileName, Competition competition) {
-		writeLibrary(libraryFileName, competition.getLibrary(), competition.getRoundsPlayed());
-	}
-	
-	/**
 	 * Method which returns a Library containing the teams and players parsed from the given file name
 	 * 
 	 * @param fileName	- File to read library from
