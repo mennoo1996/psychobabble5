@@ -91,7 +91,7 @@ public class GameTest {
 	public void testSetDate() {
 		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal");
 		g.setDate(new Date(1400));
-		assertTrue(g.getDate().getYear()==1970);
+		assertFalse(g.getDate().getYear()==1970);
 	}
 
 
