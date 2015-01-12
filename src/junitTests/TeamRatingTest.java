@@ -3,8 +3,8 @@ package junitTests;
 import static org.junit.Assert.*;
 import libraryClasses.Library;
 import libraryClasses.Team;
-import libraryClasses.TeamRating;
 import game.Competition;
+import gameLogic.TeamRating;
 
 import org.junit.Test;
 

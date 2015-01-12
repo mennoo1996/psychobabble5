@@ -12,6 +12,7 @@ import libraryClasses.Library;
 import libraryClasses.Player;
 import libraryClasses.Standings;
 import libraryClasses.Team;
+import libraryClasses.sortStandingsByPoints;
 
 public class Competition {
 	
