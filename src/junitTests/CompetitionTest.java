@@ -4,11 +4,14 @@ import static org.junit.Assert.*;
 import libraryClasses.Competition;
 import libraryClasses.CompetitionScheme;
 import libraryClasses.Library;
+import libraryClasses.Player;
 import libraryClasses.Round;
 import libraryClasses.Standings;
 import libraryClasses.Team;
 
 import org.junit.Test;
+
+import xmlIO.XMLParser;
 
 public class CompetitionTest {
 
@@ -118,5 +121,62 @@ public class CompetitionTest {
 		assertFalse(com.equals(com2));
 		
 	}
+	
+		@Test
+		public void testGetTopScorers() {
+			Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
+			for (int i=0;i<38;i++) {
+				competition.playRound();
+			}
+			Player[] result = competition.getTopScorers();
+			for (int i=1;i<440;i++) {
+				assertTrue(result[i-1].getGoals()>=result[i].getGoals());
+				
+			}
+			
+			
+		}
+		@Test
+		public void testGetMostAssists() {
+			Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
+			for (int i=0;i<38;i++) {
+				competition.playRound();
+			}
+			Player[] result = competition.getMostAssists();
+			for (int i=1;i<440;i++) {
+				assertTrue(result[i-1].getAssists()>=result[i].getAssists());
+				
+			}
+			
+			
+		}
+		@Test
+		public void testGetMostYellow() {
+			Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
+			for (int i=0;i<38;i++) {
+				competition.playRound();
+			}
+			Player[] result = competition.getMostYellow();
+			for (int i=1;i<440;i++) {
+				assertTrue(result[i-1].getYellowcards()>=result[i].getYellowcards());
+				
+			}
+			
+			
+		}
+		@Test
+		public void testGetMostRed() {
+			Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
+			for (int i=0;i<38;i++) {
+				competition.playRound();
+			}
+			Player[] result = competition.getMostRed();
+			for (int i=1;i<440;i++) {
+				assertTrue(result[i-1].getRedcards()>=result[i].getRedcards());
+				
+			}
+			
+			
+		}
 
 }

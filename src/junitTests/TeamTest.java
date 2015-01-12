@@ -215,8 +215,7 @@ public class TeamTest {
 		}
 		t.add(attacker);
 		String expected = "team1 with budget: 10.0\n" + t.getStandings().toString() + "\n"+ t.getPositions().toString() + "\n" + attacker.toString();
-		System.out.println(t.toString());
-		System.out.println(expected);
+		
 		assertEquals(expected, t.toString());
 	}
 
@@ -370,6 +369,28 @@ public class TeamTest {
 		t2.setTeamName("1");
 		assertTrue(t.equals(t2));
 		
+	}
+	
+	@Test
+	public void testSetPositionsAsCurrentTeam() {
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
+		Team t = competition.getLibrary().getLibrary().get(0);
+		t.setPositionsAsCurrentTeam();
+		Player[] positions = t.getPositions().getPositionArray();
+		ArrayList<Player> positions2 = t.getCurrentTeam();
+		for (int i=0;i<positions.length;i++) {
+			assertEquals(positions[i], positions2.get(i));
+		}
+		Positions p = new Positions();
+		t.setPositions(p);
+		t.setPositionsAsCurrentTeam();
+	}
+	
+	@Test
+	public void testGetPlayerForNameAndAge() {
+		Standings s = new Standings(1, 2, 3, 4, 5, "team1");
+		Team t = new Team("team1", 10, s);
+		assertNull(t.getPlayerForNameAndAge("Menno", 18));
 	}
 
 }
