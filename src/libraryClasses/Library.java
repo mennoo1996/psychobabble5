@@ -62,4 +62,28 @@ public class Library {
 		this.library = library;
 	}
 
+	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Library other = (Library) obj;
+		if (library == null) {
+			if (other.library != null)
+				return false;
+		} else if (!library.equals(other.library))
+			return false;
+		return true;
+	}
+	
+	
+
 }
