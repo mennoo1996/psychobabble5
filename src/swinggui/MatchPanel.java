@@ -33,8 +33,8 @@ public class MatchPanel extends JPanel {
 	}
 	
 	public final void initUI() {
-		setName("Panel");
-		setLayout(new BorderLayout());
+		//setName("Panel");
+		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 				
 		// Fetch match information
 		CompetitionScheme curScheme = cComp.getScheme();
@@ -49,6 +49,7 @@ public class MatchPanel extends JPanel {
 		
 		// Left team
 		JPanel leftPanel = new JPanel();
+		leftPanel.setName("Panel");
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 		
 		JPanel namePanel1 = new JPanel();
@@ -75,11 +76,24 @@ public class MatchPanel extends JPanel {
 		// Each goal maker + assist in own content pane
 		JPanel goalPeeps = new JPanel();
 		goalPeeps.setLayout(new BoxLayout(goalPeeps, BoxLayout.Y_AXIS));
+		goalPeeps.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		goalPeeps.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200, 200, 200)));
+		JPanel goalTitlePanel1 = new JPanel();
+		JLabel goalTitleLabel = new JLabel("Goals");
+		goalTitleLabel.setPreferredSize(new Dimension(goalTitleLabel.getPreferredSize().width, 40));
+		goalTitleLabel.setMaximumSize(new Dimension(goalTitleLabel.getPreferredSize().width, 40));
+		goalTitleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
+		goalTitlePanel1.add(goalTitleLabel);
+		
+		goalTitlePanel1.setMinimumSize(new Dimension(100, 80));
+		goalTitlePanel1.setPreferredSize(new Dimension(100, 80));
+		goalTitlePanel1.setMaximumSize(new Dimension(550, 80));
+		
+		goalPeeps.add(goalTitlePanel1);
+				
 		Font scorerFont = new Font("Avenir", Font.ROMAN_BASELINE, 16);
-		Font assistFont = new Font("Avenir", Font.ROMAN_BASELINE, 14);
+		Font assistFont = new Font("Avenir", Font.ITALIC, 14);
 		
 		for(int i = 0; i < curMatch.getScoreTeam1(); i++) {
 			JLabel scoreStats = new JLabel();
@@ -88,9 +102,10 @@ public class MatchPanel extends JPanel {
 			// The goal scorer
 			System.out.println("Scorer: " + curMatch.getGoalMakerst1().get(i).getName());
 			JLabel goalScorerLabel = new JLabel(curMatch.getGoalMakerst1().get(i).getName());
-			goalScorerLabel.setMinimumSize(new Dimension(0,40));
-			goalScorerLabel.setPreferredSize(new Dimension(goalScorerLabel.getPreferredSize().width, 40));
-			goalScorerLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+			goalScorerLabel.setMinimumSize(new Dimension(100,40));
+			goalScorerLabel.setPreferredSize(new Dimension(100, 40));
+			goalScorerLabel.setMaximumSize(new Dimension(550, 40));
+			goalScorerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			goalScorerLabel.setFont(scorerFont);
 			
 			scoreStats.add(goalScorerLabel);
@@ -98,18 +113,24 @@ public class MatchPanel extends JPanel {
 			// The assist credit
 			System.out.println("Assist: " + curMatch.getAssistMakerst1().get(i).getName());
 			JLabel assistLabel = new JLabel(curMatch.getAssistMakerst1().get(i).getName());
-			assistLabel.setMinimumSize(new Dimension(0,40));
-			assistLabel.setPreferredSize(new Dimension(assistLabel.getPreferredSize().width, 40));
-			goalScorerLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+			assistLabel.setMinimumSize(new Dimension(100,40));
+			assistLabel.setPreferredSize(new Dimension(100, 40));
+			assistLabel.setMaximumSize(new Dimension(550, 100));
+			assistLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			assistLabel.setFont(assistFont);
 			
+			scoreStats.setMinimumSize(new Dimension(100, 80));
+			scoreStats.setPreferredSize(new Dimension(100, 80));
+			scoreStats.setMaximumSize(new Dimension(550, 80));
+			
 			scoreStats.add(assistLabel);
-						
 			goalPeeps.add(scoreStats);
+			
 		}
 		
 		goalPeeps.setMinimumSize(new Dimension(200,200));
-		goalPeeps.setPreferredSize(new Dimension(200,200));
+		goalPeeps.setPreferredSize(new Dimension(200,500));
+		goalPeeps.setMaximumSize(new Dimension(200,500));
 				
 		leftPanel.add(goalPeeps);
 		
@@ -158,11 +179,13 @@ public class MatchPanel extends JPanel {
 		
 		leftPanel.add(injury1);
 		
-		add(leftPanel, BorderLayout.WEST);
+		add(leftPanel);
+		
 		
 		// Center labels panel
 		
 		JPanel centerPanel = new JPanel();
+		centerPanel.setName("Panel");
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 		
 		JPanel teamDivider = new JPanel();
@@ -210,10 +233,11 @@ public class MatchPanel extends JPanel {
 		
 		centerPanel.add(injuryDiv);
 		
-		add(centerPanel, BorderLayout.CENTER);
+		add(centerPanel);
 		
 		// Right team
 		JPanel rightPanel = new JPanel();
+		rightPanel.setName("Panel");
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 		
 		JPanel namePanel2 = new JPanel();
@@ -223,7 +247,7 @@ public class MatchPanel extends JPanel {
 		teamLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
 		namePanel2.add(teamLabel2);
 		
-		//rightPanel.add(namePanel2);
+		rightPanel.add(namePanel2);
 		
 		JPanel scorePanel2 = new JPanel();
 		JLabel scoreLabel2 = new JLabel(String.valueOf(curMatch.getScoreTeam2()));
@@ -232,7 +256,7 @@ public class MatchPanel extends JPanel {
 		scoreLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
 		scorePanel2.add(scoreLabel2);
 		
-		//rightPanel.add(scorePanel2);
+		rightPanel.add(scorePanel2);
 		
 		// Goal makers and assists
 		
@@ -312,6 +336,6 @@ public class MatchPanel extends JPanel {
 		
 		rightPanel.add(injury2);
 		
-		add(rightPanel, BorderLayout.EAST);
+		add(rightPanel);
 	}
 }
