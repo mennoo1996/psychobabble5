@@ -1,11 +1,10 @@
 package junitTests;
 
 import static org.junit.Assert.*;
+import game.Game;
+import game.GameList;
 
 import java.util.ArrayList;
-
-import libraryClasses.Game;
-import libraryClasses.GameList;
 
 import org.junit.Test;
 

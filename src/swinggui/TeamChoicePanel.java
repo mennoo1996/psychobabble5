@@ -1,17 +1,17 @@
 package swinggui;
 
+import game.Competition;
+
 import java.awt.Dimension;
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
-import libraryClasses.Competition;
-
+@SuppressWarnings("serial")
 public class TeamChoicePanel extends JPanel implements MouseListener {
 	
 	private Competition currentComp;

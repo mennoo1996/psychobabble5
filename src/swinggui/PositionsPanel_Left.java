@@ -2,7 +2,6 @@ package swinggui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -15,36 +14,22 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetAdapter;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.TransferHandler;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 
-import libraryClasses.Competition;
 import libraryClasses.FieldPlayer;
 import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
+@SuppressWarnings("serial")
 public class PositionsPanel_Left extends JPanel implements DragGestureListener, Transferable {
 	
 	private Team currentTeam;
@@ -256,6 +241,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 
 
 //JPanel with attached Player Back Number
+@SuppressWarnings("serial")
 class ListPanel extends JPanel {
 	Player player;
 	public ListPanel(Player player){

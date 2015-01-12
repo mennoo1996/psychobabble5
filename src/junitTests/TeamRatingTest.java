@@ -1,6 +1,10 @@
-package libraryClasses;
+package junitTests;
 
 import static org.junit.Assert.*;
+import libraryClasses.Library;
+import libraryClasses.Team;
+import game.Competition;
+import gameLogic.TeamRating;
 
 import org.junit.Test;
 
