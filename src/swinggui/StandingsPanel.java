@@ -4,6 +4,8 @@
  */
 package swinggui;
 
+import game.Competition;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -16,9 +18,9 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import libraryClasses.Competition;
 import libraryClasses.Standings;
 
+@SuppressWarnings("serial")
 public class StandingsPanel extends JPanel {
 	
 	private Competition currentCompetition;

@@ -1,17 +1,17 @@
 package junitTests;
 
 import static org.junit.Assert.*;
-import libraryClasses.Competition;
-import libraryClasses.CompetitionScheme;
-import libraryClasses.Game;
 import libraryClasses.Library;
 import libraryClasses.Standings;
 import libraryClasses.Team;
+import game.Competition;
+import game.Game;
 
 import java.util.Date;
 
 import org.junit.Test;
 
+import schemeClasses.CompetitionScheme;
 import xmlIO.XMLParser;
 
 public class GameTest {

@@ -4,11 +4,11 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import game.Competition;
 import gameLogic.GameLogic;
 import gameLogic.TransferInProgress;
 import gameLogic.TransferList;
 import gameLogic.TransferLogic;
-import libraryClasses.Competition;
 import libraryClasses.Library;
 import libraryClasses.Player;
 import libraryClasses.Team;

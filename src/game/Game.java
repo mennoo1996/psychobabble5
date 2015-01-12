@@ -1,7 +1,8 @@
-package libraryClasses;
+package game;
 
 import java.util.Date;
 
+import libraryClasses.Team;
 import xmlIO.XMLParser;
 
 public class Game {

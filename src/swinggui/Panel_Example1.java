@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.TransferHandler;
 
+@SuppressWarnings("serial")
 public class Panel_Example1 extends JPanel {
 	
 	public Panel_Example1() {

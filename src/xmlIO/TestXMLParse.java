@@ -1,15 +1,7 @@
 package xmlIO;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import libraryClasses.Competition;
-import libraryClasses.Game;
-import libraryClasses.GameList;
-import libraryClasses.Player;
-import libraryClasses.Team;
-import gameLogic.*;
-import java.io.*;
+import game.Competition;
+import game.GameList;
 
 
 public class TestXMLParse {

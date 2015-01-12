@@ -1,4 +1,4 @@
-package xmlIO;
+package game;
 import java.util.Comparator;
 
 import libraryClasses.Standings;

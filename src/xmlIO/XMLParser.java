@@ -1,4 +1,8 @@
 package xmlIO;
+import game.Competition;
+import game.Game;
+import game.GameList;
+
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -20,6 +24,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import schemeClasses.CompetitionScheme;
+import schemeClasses.Match;
+import schemeClasses.Round;
 
 /**
  * Class containing a  method for parsing a xml file into a library of teamsw

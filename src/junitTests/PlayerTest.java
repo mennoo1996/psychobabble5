@@ -1,15 +1,15 @@
 package junitTests;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotEquals;
 
 import java.math.BigDecimal;
 
 import libraryClasses.Attacker;
-import libraryClasses.Match;
 import libraryClasses.Midfielder;
 
 import org.junit.Test;
+
+import schemeClasses.Match;
 
 public class PlayerTest {
 

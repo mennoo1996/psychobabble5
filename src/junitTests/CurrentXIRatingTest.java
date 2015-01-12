@@ -1,13 +1,13 @@
 package junitTests;
 
 import static org.junit.Assert.*;
-import libraryClasses.Competition;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
 import org.junit.Test;
 
 import xmlIO.XMLParser;
+import game.Competition;
 import gameLogic.*;
 public class CurrentXIRatingTest {
 

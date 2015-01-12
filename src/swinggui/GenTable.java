@@ -3,6 +3,7 @@ package swinggui;
 // Import player here
 import libraryClasses.*;
 import xmlIO.XMLParser;
+import game.Competition;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+@SuppressWarnings("serial")
 public class GenTable extends JPanel {
 	private JTable table;
 	

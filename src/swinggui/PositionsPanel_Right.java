@@ -1,6 +1,5 @@
 package swinggui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -34,6 +33,7 @@ import libraryClasses.Player;
 import libraryClasses.Positions;
 import libraryClasses.Team;
 
+@SuppressWarnings("serial")
 public class PositionsPanel_Right extends JPanel implements DragGestureListener, Transferable{
 	
 	private String panelTitle;
@@ -408,6 +408,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 }
 
 //JPanel with attached Player Back Number
+@SuppressWarnings("serial")
 class PlayerPanel extends JPanel {
 	Player player;
 	int position;

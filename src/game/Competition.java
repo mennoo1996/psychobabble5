@@ -1,10 +1,17 @@
-package libraryClasses;
+package game;
 import gameLogic.GameLogic;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import xmlIO.sortStandingsByPoints;
+import schemeClasses.CompetitionScheme;
+import schemeClasses.Match;
+import schemeClasses.Round;
+import libraryClasses.FieldPlayer;
+import libraryClasses.Library;
+import libraryClasses.Player;
+import libraryClasses.Standings;
+import libraryClasses.Team;
 
 public class Competition {
 	
