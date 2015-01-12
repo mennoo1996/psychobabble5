@@ -75,9 +75,8 @@ public class TestXMLParse {
 //		System.out.println(gl.toString());
 //		XMLParser.writeGameList("files/saves.xml", gl);
 		
-		GameList gl = XMLParser.readGameList("files/saves_v3.xml");
-		Game g = gl.loadgame("Menno");
-		System.out.println(g);
+		GameList gl =XMLParser.readGameList("files/saves.xml");
+		System.out.println(gl);
 	}
 }
 
