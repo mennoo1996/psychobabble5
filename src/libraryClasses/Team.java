@@ -280,6 +280,15 @@ public class Team {
 		return true;
 	}
 	
+	public void changePositions(Player playerout, Player playerin) {
+		Player[] array = positions.getPositionArray();
+		for (int i=0;i<array.length;i++) {
+			if (array[i].equals(playerout)) {
+				array[i]=playerin;
+			}
+		} System.out.println(positions.toString());
+	}
+	
 	
 	
 	
