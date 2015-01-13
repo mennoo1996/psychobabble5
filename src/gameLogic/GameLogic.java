@@ -770,18 +770,28 @@ public class GameLogic {
 				ratings[i]+=ratings[i-1];
 			}
 		}
+		boolean confirmed=true;
+		do {
+			
+			confirmed=true;
+			random = GameLogic.randomGenerator(1, ratingstotal);
 		
-		random = GameLogic.randomGenerator(1, ratingstotal);
+		
 		for (int i=0;i<ratings.length;i++) {
 			if (random<=ratings[i]) {
+				
+				if (!currentTeam.contains(sameType.get(i))) {
 				t.changePositions(p, sameType.get(i));
-				break;
+				break; } else {
+					confirmed=false;
+					break;
+				}
 			}
 		}
 		
 		
 		
-		
+		}while (!confirmed);
 		
 		
 		
