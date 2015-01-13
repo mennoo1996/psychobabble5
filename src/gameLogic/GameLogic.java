@@ -3,6 +3,7 @@ import java.util.*;
 import java.util.stream.DoubleStream;
 
 import libraryClasses.FieldPlayer;
+import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
@@ -712,7 +713,79 @@ public class GameLogic {
 		return GameLogic.randomGenerator(1, totalrating);
 	}
 	
-	
+	public static void changePositions(Team t) {
+		Player[] array = t.getPositions().getPositionArray();
+		
+		ArrayList<Player> currentTeam = new ArrayList<Player>();
+		for (int i=0;i<11;i++) {
+			currentTeam.add(array[i]);
+		}
+		int random = GameLogic.randomGenerator(0, 10);
+		Player p = currentTeam.get(random);
+		ArrayList<Player> sameType = new ArrayList<Player>();
+		ArrayList<Player> team = t.getTeam();
+		for (int i=0;i<team.size();i++) {
+			if (p.getPlayerType().equals(team.get(i).getPlayerType())) {
+				sameType.add(team.get(i));
+			}
+		}
+		
+		sameType.remove(p);
+		int [] ratings = new int[sameType.size()];
+		if (p.getPlayerType().equals("Attacker")) {
+			for (int i=0;i<sameType.size();i++) {
+				FieldPlayer player = (FieldPlayer)sameType.get(i);
+				ratings[i]=(int) (0.6*player.getFinishingValue() + 0.2*player.getDribblingValue() + 0.2*player.getStaminaValue());
+			}
+		} if (p.getPlayerType().equals("Midfielder")) {
+			for (int i=0;i<sameType.size();i++) {
+				FieldPlayer player = (FieldPlayer)sameType.get(i);
+				ratings[i]=(int) (0.15*player.getFinishingValue() + 0.4*player.getDribblingValue() + 0.3*player.getStaminaValue() + 0.15*player.getDefenseValue());
+			}
+		} if (p.getPlayerType().equals("Defender")) {
+			for (int i=0;i<sameType.size();i++) {
+				FieldPlayer player = (FieldPlayer)sameType.get(i);
+				ratings[i]=(int) (0.05*player.getDribblingValue() + 0.25*player.getStaminaValue() + 0.7*player.getDefenseValue());
+			}
+		} if (p.getPlayerType().equals("Goalkeeper")) {
+			for (int i=0;i<sameType.size();i++) {
+				Goalkeeper player = (Goalkeeper)sameType.get(i);
+				ratings[i]=player.getGoalkeeperValue();
+			}
+		}
+		
+		for (int i=0;i<ratings.length;i++) {
+			ratings[i]=(int) Math.pow(1.2, ratings[i]);
+		}
+		
+		int ratingstotal=0;
+		
+		for (int i=0;i<ratings.length;i++) {
+			ratingstotal+=ratings[i];
+			
+		}
+		
+		for (int i=0;i<ratings.length;i++) {
+			if (i>0) {
+				ratings[i]+=ratings[i-1];
+			}
+		}
+		
+		random = GameLogic.randomGenerator(1, ratingstotal);
+		for (int i=0;i<ratings.length;i++) {
+			if (random<=ratings[i]) {
+				t.changePositions(p, sameType.get(i));
+				break;
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+	}
 	
 	
 

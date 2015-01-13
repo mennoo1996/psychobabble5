@@ -55,9 +55,11 @@ public class Competition {
 			} else if(result[0] == 1) {
 				team1.updateStandings("won", result[1], result[2]);
 				team2.updateStandings("lost", result[2], result[1]);
+				GameLogic.changePositions(team2);
 			} else if(result[0] == 2) {
 				team1.updateStandings("lost", result[1], result[2]);
 				team2.updateStandings("won", result[2], result[1]);
+				GameLogic.changePositions(team1);
 			}
 			
 			boolean confirmed=true;
