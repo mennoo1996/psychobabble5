@@ -95,9 +95,17 @@ public class GameLogic {
 	 */
 	public static ArrayList<Player> getRedCards(int amount, Team t) {
 		ArrayList<Player> playersWithRed = new ArrayList<Player>();
+		ArrayList<Player> currentTeam = new ArrayList<Player>();
+		Player[] array = t.getPositions().getPositionArray();
+		for (int i=0;i<11;i++) {
+			currentTeam.add(array[i]);
+		}
 		for (int i=0;i<amount;i++) {
-			int random = GameLogic.randomGenerator(0, 10);
+			int randomcounter=10;
+			int random = GameLogic.randomGenerator(0, randomcounter);
 			playersWithRed.add(t.getPositions().getPositionArray()[random]);
+			currentTeam.remove(t.getPositions().getPositionArray()[random]);
+			randomcounter--;
 		}
 		return playersWithRed;
 	}
@@ -134,9 +142,19 @@ public class GameLogic {
 	public static ArrayList<Player> getYellowCards (int amount, Team t) {
 		int random =0;
 		ArrayList<Player> playersWithYellow = new ArrayList<Player>();
+		ArrayList<Player> currentTeam = new ArrayList<Player>();
+		Player[] array = t.getPositions().getPositionArray();
+		for (int i=0;i<11;i++) {
+			currentTeam.add(array[i]);
+		}
 		for (int i=0;i<amount;i++) {
-			random = GameLogic.randomGenerator(0, 10);
+			int randomcounter = 10;
+			random = GameLogic.randomGenerator(0,randomcounter);
+			
 			playersWithYellow.add(t.getPositions().getPositionArray()[random]);
+			currentTeam.remove(t.getPositions().getPositionArray()[random]);
+			randomcounter--;
+			
 		} return playersWithYellow;
 	}
 	/** This method returns the players that scored the goals
