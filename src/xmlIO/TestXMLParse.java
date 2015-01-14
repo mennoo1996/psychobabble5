@@ -2,6 +2,7 @@ package xmlIO;
 
 import game.Competition;
 import game.GameList;
+import gameLogic.GameLogic;
 
 
 public class TestXMLParse {
@@ -69,6 +70,18 @@ public class TestXMLParse {
 		
 		GameList gl =XMLParser.readGameList("files/saves.xml");
 		System.out.println(gl);
+		int nul=0, een=0;
+		for (int i=0;i<10000;i++) {
+		int res = GameLogic.randomGenerator(0, 1);
+		if (res==0) {
+			nul++;
+		} else {
+			een++;
+		}
+		
+			} 
+		System.out.println(nul);
+		System.out.println(een);
 	}
 }
 

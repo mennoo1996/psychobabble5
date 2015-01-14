@@ -1,5 +1,7 @@
 package game;
 
+import gameLogic.TransferList;
+
 import java.util.ArrayList;
 import java.io.*;
 
@@ -43,7 +45,7 @@ public class GameList {
 		} catch (IOException e) {
 			System.out.println("Something went wrong while copying the standard scheme file");
 		}
-		Game res = new Game(name, savefileData, savefileScheme, teamname);
+		Game res = new Game(name, savefileData, savefileScheme, teamname, new TransferList());
 		games.add(res);
 		
 		return res;

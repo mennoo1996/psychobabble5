@@ -1,5 +1,7 @@
 package game;
 
+import gameLogic.TransferList;
+
 import java.util.Date;
 
 import libraryClasses.Team;
@@ -13,12 +15,14 @@ public class Game {
 	private Team team;
 	private Competition competition;
 	private Date date;
+	private TransferList transferList;
 	
-	public Game (String name, String savefileData, String savefileScheme, String teamname) {
+	public Game (String name, String savefileData, String savefileScheme, String teamname, TransferList transferList) {
 		this.name=name;
 		this.savefileData=savefileData;
 		this.savefileScheme=savefileScheme;
 		this.date = new Date();
+		this.transferList = transferList;
 		competition=XMLParser.readCompetition(savefileData, savefileScheme);
 		team=competition.getLibrary().getTeamForName(teamname);
 	}
