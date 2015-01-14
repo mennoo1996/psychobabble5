@@ -22,7 +22,7 @@ public class Game {
 		this.savefileData=savefileData;
 		this.savefileScheme=savefileScheme;
 		this.date = new Date();
-		this.transferList = transferList;
+		this.setTransferList(transferList);
 		competition=XMLParser.readCompetition(savefileData, savefileScheme);
 		team=competition.getLibrary().getTeamForName(teamname);
 	}
@@ -177,6 +177,32 @@ public class Game {
 	 */
 	public void setSavefileScheme(String savefileScheme) {
 		this.savefileScheme = savefileScheme;
+	}
+
+
+
+
+
+
+
+	/**
+	 * @return the transferList
+	 */
+	public TransferList getTransferList() {
+		return transferList;
+	}
+
+
+
+
+
+
+
+	/**
+	 * @param transferList the transferList to set
+	 */
+	public void setTransferList(TransferList transferList) {
+		this.transferList = transferList;
 	}
 	
 	
