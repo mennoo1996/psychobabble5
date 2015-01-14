@@ -221,10 +221,10 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		
 	}
 	
-	public static void main(String[] args) {
-		Panel_Example2 thing = new Panel_Example2("Insert title here");
-		thing.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		PositionsPanel_Right thing = new PositionsPanel_Right();
+//		thing.setVisible(true);
+//	}
 	
 	
 	public ImageIcon createImageIcon(String path) {

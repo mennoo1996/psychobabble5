@@ -95,4 +95,5 @@ public class TeamListPanel extends JPanel {
 		selections.get(newIndex).toggleSelected();
 		oldSelection = newIndex;
 	}
+	
 }
