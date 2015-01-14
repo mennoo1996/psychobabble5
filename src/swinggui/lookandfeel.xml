@@ -30,6 +30,16 @@
 		</state>
   </style>
   
+  <style id="basictextfieldStyle">
+	  	<insets top="5" left="10" bottom="5" right="10"/>
+		<state>
+		   		<font name="Avenir" size="14"/>
+		   		<color value="#918f8f" type="TEXT_FOREGROUND"/>
+				<imagePainter method="textfieldBackground" path="images/textfield.png" sourceInsets="11 11 11 11"/>
+				<color value="#FFFFFF" type="FOREGROUND"/>
+		</state>
+  </style>
+  
   
   <style id="headerouter">
 	  	<insets top="15" left="70" bottom="50" right="55"/>
@@ -160,12 +170,14 @@
 	  	<opaque value="FALSE"/>
 	  	<imagePainter method="panelBackground" path="images/playerpanel.png" sourceInsets="10 10 30 10"/>
   </style> 
+
   
   <bind style="basicStyle" type="region" key=".*"/>
   <bind style="basiclabelStyle" type="region" key="Label"/>
   <bind style="basicpanelStyle" type="name" key="Panel"/>
   <bind style="playerpanelStyle" type="name" key="playerPanel"/>
   <bind style="basicbuttonStyle" type="name" key="Test"/>
+  <bind style="basictextfieldStyle" type="region" key="TextField"/>
   <bind style="shirtlabelStyle" type="name" key="shirtLabel"/>
   
   <bind style="ScrollBarThumbStyle" type="region" key="ScrollBarThumb"/>

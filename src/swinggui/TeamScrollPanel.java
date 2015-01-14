@@ -28,7 +28,7 @@ public class TeamScrollPanel extends JPanel {
 		if (isSelected) {
 			setBackground(Color.WHITE);
 		} else {
-			// Make this a nicer color
+			// Make this a nicer color how about this? :)
 			setBackground(new Color(135, 206, 250));
 		}
 		revalidate();

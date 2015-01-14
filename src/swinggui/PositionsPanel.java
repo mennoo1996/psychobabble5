@@ -25,7 +25,6 @@ public class PositionsPanel extends JPanel implements DragGestureListener{
 	}
 	
 	public final void initUI() {
-		SetTeamPositionsForTesting();
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		add(new Box.Filler(minSize, prefSize, null));
@@ -35,10 +34,6 @@ public class PositionsPanel extends JPanel implements DragGestureListener{
 		add(new PositionsPanel_Right(currentTeam));
 		
 		add(new Box.Filler(minSize, prefSize, null));
-	}
-	
-	public void SetTeamPositionsForTesting(){
-		
 	}
 
 	@Override

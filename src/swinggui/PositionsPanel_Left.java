@@ -209,10 +209,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 		//this.add(panel);
 	}
 	
-	public static void main(String[] args) {
-		Panel_Example1 thing = new Panel_Example1();
-		thing.setVisible(true);
-	}
+	
 	
 	//drag gesture start
 	public void dragGestureRecognized(DragGestureEvent event) {
@@ -251,19 +248,6 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 		}
 	}
 
-}
-
-
-
-//JPanel with attached Player Back Number
-class ListPanel extends JPanel {
-	Player player;
-	public ListPanel(Player player){
-		this.player = player;
-	}	
-	public Player getPlayer(){
-		return player;
-	}
 }
 
 

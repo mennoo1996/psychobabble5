@@ -61,6 +61,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Currently only supports one season
 		roundNum = 0;
 		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
+
 		//curTeam = curComp.getLibrary().getTeamForName("Manchester United");
 		
 	
@@ -279,7 +280,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			current = "transfers";
 			
 			// Initialize new JPanel and remove current pane
-			TransfersPanel replTransfview = new TransfersPanel();
+			TransfersPanel replTransfview = new TransfersPanel(curTeam, curComp, this);
 			remove(curPanel);
 			
 			// Refresh the view
