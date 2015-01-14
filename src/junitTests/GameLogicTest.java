@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import game.Competition;
 import gameLogic.CurrentXIRating;
 import gameLogic.GameLogic;
-import libraryClasses.Competition;
 import libraryClasses.FieldPlayer;
 import libraryClasses.Player;
 import libraryClasses.Team;

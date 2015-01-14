@@ -1,6 +1,10 @@
-package libraryClasses;
+package junitTests;
 
 import static org.junit.Assert.*;
+import libraryClasses.Library;
+import libraryClasses.Team;
+import game.Competition;
+import gameLogic.TeamRating;
 
 import org.junit.Test;
 
@@ -22,7 +26,7 @@ public class TeamRatingTest {
 
 	@Test
 	public void testCalculateTeamRating() {
-		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v4.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		Team t = competition.getLibrary().getLibrary().get(0);
 		TeamRating tr = TeamRating.calculateTeamRating(t);
 		TeamRating expected = new TeamRating(77, 67, 73, 75, 78, 370);

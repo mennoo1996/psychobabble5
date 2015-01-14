@@ -4,24 +4,24 @@
  */
 package swinggui;
 
+import game.Competition;
+
 import java.awt.Component;
 import java.awt.Dimension;
-
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import libraryClasses.Competition;
-import libraryClasses.CompetitionScheme;
-import libraryClasses.Round;
-import libraryClasses.Match;
+import schemeClasses.CompetitionScheme;
+import schemeClasses.Match;
 
+@SuppressWarnings("serial")
 public class RecentMatchesPanel extends JPanel {
 	
 	private Competition currentCompetition;

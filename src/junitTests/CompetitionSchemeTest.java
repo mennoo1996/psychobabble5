@@ -8,6 +8,9 @@ import libraryClasses.*;
 
 import org.junit.Test;
 
+import schemeClasses.CompetitionScheme;
+import schemeClasses.Round;
+
 public class CompetitionSchemeTest {
 
 	@Test

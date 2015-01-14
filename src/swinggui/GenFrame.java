@@ -1,21 +1,19 @@
 package swinggui;
 
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenEquations;
-import aurelienribon.tweenengine.TweenManager;
-import aurelienribon.tweenengine.TweenCallback;
-import aurelienribon.tweenengine.BaseTween;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenManager;
+
+@SuppressWarnings("serial")
 public class GenFrame extends JFrame implements ActionListener /*implements TweenAccessor<GenTable>*/ {
 	private GenTable currentTable;
 	private TweenManager animManager;

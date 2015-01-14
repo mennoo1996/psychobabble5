@@ -1,4 +1,4 @@
-package libraryClasses;
+package game;
 
 import java.util.ArrayList;
 import java.io.*;
@@ -17,7 +17,7 @@ public class GameList {
 		String savefileScheme = "savefiles/" + gamenumber + "-scheme.xml";
 		try {
 			PrintWriter writer = new PrintWriter (new FileWriter (savefileData));
-			BufferedReader reader = new BufferedReader (new FileReader("files/competitionDatabase_v4.xml"));
+			BufferedReader reader = new BufferedReader (new FileReader("files/competitionDatabase_v5.xml"));
 			String templine = reader.readLine();
 			while (templine!=null) {
 				writer.println(templine);

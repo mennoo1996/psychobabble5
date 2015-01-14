@@ -1,7 +1,5 @@
-package xmlIO;
+package libraryClasses;
 import java.util.Comparator;
-
-import libraryClasses.Standings;
 
 
 public class sortStandingsByPoints implements Comparator<Standings>{

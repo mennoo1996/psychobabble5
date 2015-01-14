@@ -1,15 +1,17 @@
 package junitTests;
 
 import static org.junit.Assert.*;
+import game.Competition;
 
 import java.util.ArrayList;
 
-import libraryClasses.Competition;
 import libraryClasses.Library;
+import libraryClasses.Standings;
 import libraryClasses.Team;
 
 import org.junit.Test;
 
+import schemeClasses.CompetitionScheme;
 import xmlIO.XMLParser;
 
 public class LibraryTest {
@@ -78,5 +80,24 @@ public class LibraryTest {
 		l.setLibrary(al);
 		assertEquals(al, l.getLibrary());
 	}
-
+	
+	@Test
+	public void testEquals() {
+		Library l = new Library();
+		assertTrue(l.equals(l));
+		assertFalse(l.equals(null));
+		assertFalse(l.equals(new CompetitionScheme()));
+		Library l2 = new Library();
+		l.setLibrary(null);
+		assertFalse(l.equals(l2));
+		l2.setLibrary(null);
+		assertTrue(l.equals(l2));
+		Library l3 = new Library();
+		Library l4 = new Library();
+		assertTrue(l3.equals(l4));
+		l3.add(new Team("", 1, new Standings(1, 2, 3, 4, 5, "team1")));
+		assertFalse(l3.equals(l4));
+	}
 }
+
+

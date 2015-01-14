@@ -1,6 +1,9 @@
-package libraryClasses;
+package schemeClasses;
 
 import java.util.ArrayList;
+
+import libraryClasses.FieldPlayer;
+import libraryClasses.Player;
 
 public class Match {
 

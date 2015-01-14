@@ -1,15 +1,7 @@
 package xmlIO;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import libraryClasses.Competition;
-import libraryClasses.Game;
-import libraryClasses.GameList;
-import libraryClasses.Player;
-import libraryClasses.Team;
-import gameLogic.*;
-import java.io.*;
+import game.Competition;
+import game.GameList;
 
 
 public class TestXMLParse {
@@ -74,7 +66,9 @@ public class TestXMLParse {
 //		GameList gl = XMLParser.readGameList("files/saves_v2.xml");
 //		System.out.println(gl.toString());
 //		XMLParser.writeGameList("files/saves.xml", gl);
-//		
+		
+		GameList gl =XMLParser.readGameList("files/saves.xml");
+		System.out.println(gl);
 	}
 }
 

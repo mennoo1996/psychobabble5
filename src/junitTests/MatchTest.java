@@ -2,9 +2,10 @@ package junitTests;
 
 import static org.junit.Assert.*;
 import gameLogic.TransferList;
-import libraryClasses.Match;
 
 import org.junit.Test;
+
+import schemeClasses.Match;
 
 public class MatchTest {
 

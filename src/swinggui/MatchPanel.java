@@ -1,5 +1,7 @@
 package swinggui;
 
+import game.Competition;
+
 import java.awt.Dimension;
 import java.awt.Component;
 import java.awt.Font;
@@ -13,9 +15,8 @@ import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 
-import libraryClasses.Competition;
-import libraryClasses.CompetitionScheme;
-import libraryClasses.Match;
+import schemeClasses.CompetitionScheme;
+import schemeClasses.Match;
 import libraryClasses.Team;
 import libraryClasses.Player;
 import libraryClasses.FieldPlayer;
