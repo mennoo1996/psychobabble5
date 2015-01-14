@@ -74,6 +74,8 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		
 		//text input JPanel here
 		JPanel TextInputBoxPanel = new JPanel();
+		TextInputBoxPanel.setOpaque(true);
+		TextInputBoxPanel.setBackground(new Color(240,240,240));
 		TextInputBoxPanel.setMinimumSize(new Dimension(TextInputBoxPanel.getWidth(), 41));
 		TextInputBoxPanel.setMaximumSize(new Dimension(20000, 41));
 		TextInputBoxPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));

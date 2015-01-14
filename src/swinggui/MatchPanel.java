@@ -92,6 +92,7 @@ public class MatchPanel extends JPanel {
 				// The goal scorer
 				System.out.println("Scorer: " + curMatch.getGoalMakerst1().get(i).getName());
 				JLabel goalScorerLabel = new JLabel(curMatch.getGoalMakerst1().get(i).getName());
+				goalScorerLabel.setBorder(BorderFactory.createLineBorder(new Color(0,0,0)));
 				goalScorerLabel.setMinimumSize(new Dimension(100,40));
 				goalScorerLabel.setPreferredSize(new Dimension(100, 40));
 				goalScorerLabel.setMaximumSize(new Dimension(550, 40));
