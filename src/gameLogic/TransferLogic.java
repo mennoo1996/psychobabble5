@@ -6,7 +6,7 @@ import java.util.*;
  * @author Menno
  *
  */
-public class TransferLogic {
+public abstract class TransferLogic {
 
 	/** This method returns the answer for a transfer request for a player that you have already bid for before
 	 * 
