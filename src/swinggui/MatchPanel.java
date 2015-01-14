@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import schemeClasses.CompetitionScheme;
 import schemeClasses.Match;
@@ -91,7 +92,7 @@ public class MatchPanel extends JPanel {
 				
 				// The goal scorer
 				System.out.println("Scorer: " + curMatch.getGoalMakerst1().get(i).getName());
-				JLabel goalScorerLabel = new JLabel(curMatch.getGoalMakerst1().get(i).getName());
+				JLabel goalScorerLabel = new JLabel(curMatch.getGoalMakerst1().get(i).getName(), SwingConstants.CENTER);
 				goalScorerLabel.setMinimumSize(new Dimension(100,40));
 				goalScorerLabel.setPreferredSize(new Dimension(100, 40));
 				goalScorerLabel.setMaximumSize(new Dimension(550, 40));
@@ -319,6 +320,15 @@ public class MatchPanel extends JPanel {
 		if (curMatch.getInjuredPlayerst2().size() > 0) {
 			JPanel injury2 = new JPanel();
 			injury2.setLayout(new BoxLayout(injury2, BoxLayout.Y_AXIS));
+			
+			JPanel injuryDiv2 = new JPanel();
+			JLabel injuryLabel2 = new JLabel("Injuries");
+			injuryLabel2.setMinimumSize(new Dimension(0,40));
+			injuryLabel2.setPreferredSize(new Dimension(injuryLabel2.getPreferredSize().width, 40));
+			injuryLabel2.setAlignmentX(Component.CENTER_ALIGNMENT);
+			injuryDiv2.add(injuryLabel2);
+			
+			rightPanel.add(injuryDiv2);
 			
 			for(int i = 0; i < curMatch.getInjuredPlayerst2().size(); i++) {
 				Player injuredP = curMatch.getInjuredPlayerst2().get(i);
