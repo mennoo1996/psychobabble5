@@ -92,7 +92,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 			//separator.setPreferredSize(new Dimension(separator.getWidth(), 25));
 			separator.setOpaque(true);
 			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(180,180,180)));
-			separator.setBackground(new Color(230,230,230));
+			separator.setBackground(new Color(240,240,240));
 			
 			//separator title
 			JLabel separatortitle = new JLabel(PlayerTypes[q] + "s");

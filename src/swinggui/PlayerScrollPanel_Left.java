@@ -109,7 +109,7 @@ class PlayerScrollPanel_Left extends JPanel{
 		} else {
 			// Make this a nicer color
 			System.out.println("coloring...");
-			setBackground(new Color(135, 206, 250));
+			setBackground(new Color(164, 225, 255));
 		}
 		revalidate();
 		repaint();

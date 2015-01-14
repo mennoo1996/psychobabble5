@@ -100,12 +100,8 @@ class PlayerScrollPanel_Right extends JPanel{
 	public void toggleSelected() {
 		if (isSelected) {
 			setBackground(Color.WHITE);
-			System.out.println("coloring...");
 		} else {
-			// Make this a nicer color
-			
-			System.out.println("coloring...");
-			setBackground(new Color(135, 206, 250));
+			setBackground(new Color(164, 225, 255));
 		}
 		revalidate();
 		repaint();
