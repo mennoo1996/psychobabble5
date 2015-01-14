@@ -12,7 +12,7 @@ import libraryClasses.Team;
  * @author Menno
  *
  */
-public class GameLogic {
+public abstract class GameLogic {
 	
 	private static int rngCounter = (int)System.currentTimeMillis();
 	private static boolean testing=false;
