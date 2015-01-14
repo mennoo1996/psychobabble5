@@ -1,8 +1,8 @@
 package junitTests;
 
 import static org.junit.Assert.*;
+import game.Competition;
 import gameLogic.TransferInProgress;
-import libraryClasses.Competition;
 import libraryClasses.Player;
 import libraryClasses.Team;
 

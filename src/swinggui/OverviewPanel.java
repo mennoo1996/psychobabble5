@@ -1,14 +1,14 @@
 package swinggui;
 
+import game.Competition;
+
 import java.awt.Dimension;
-import java.awt.BorderLayout;
 
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 
-import libraryClasses.Competition;
-
+@SuppressWarnings("serial")
 public class OverviewPanel extends JPanel {
 	
 	private Competition currentComp;

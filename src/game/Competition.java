@@ -1,10 +1,18 @@
-package libraryClasses;
+package game;
 import gameLogic.GameLogic;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import xmlIO.sortStandingsByPoints;
+import schemeClasses.CompetitionScheme;
+import schemeClasses.Match;
+import schemeClasses.Round;
+import libraryClasses.FieldPlayer;
+import libraryClasses.Library;
+import libraryClasses.Player;
+import libraryClasses.Standings;
+import libraryClasses.Team;
+import libraryClasses.sortStandingsByPoints;
 
 public class Competition {
 	
@@ -47,27 +55,39 @@ public class Competition {
 			} else if(result[0] == 1) {
 				team1.updateStandings("won", result[1], result[2]);
 				team2.updateStandings("lost", result[2], result[1]);
+				GameLogic.changePositions(team2);
 			} else if(result[0] == 2) {
 				team1.updateStandings("lost", result[1], result[2]);
 				team2.updateStandings("won", result[2], result[1]);
+				GameLogic.changePositions(team1);
 			}
 			
-			
-			
-			ArrayList<FieldPlayer> goalMakerst1 = GameLogic.getGoals(team1, result[1]);
-			ArrayList<FieldPlayer> goalMakerst2 = GameLogic.getGoals(team2, result[2]);
-			match.setGoalMakerst1(goalMakerst1);
-			match.setGoalMakerst2(goalMakerst2);
-			for (Player a:goalMakerst1) {
-				a.madeGoal();
-			}
-			
-			for (Player a:goalMakerst2) {
-				a.madeGoal();
-			}
-			
-			ArrayList<FieldPlayer> assistMakerst1 = GameLogic.getAssists(team1, result[1]);
-			ArrayList<FieldPlayer> assistMakerst2 = GameLogic.getAssists(team2, result[2]);
+			boolean confirmed=true;
+			ArrayList<FieldPlayer> goalMakerst1 = new ArrayList<FieldPlayer>();
+			ArrayList<FieldPlayer> goalMakerst2 = new ArrayList<FieldPlayer>();
+			ArrayList<FieldPlayer> assistMakerst1 = new ArrayList<FieldPlayer>();
+			ArrayList<FieldPlayer> assistMakerst2 = new ArrayList<FieldPlayer>();
+			do {
+				confirmed=true;
+				goalMakerst1 = GameLogic.getGoals(team1, result[1]);
+				goalMakerst2 = GameLogic.getGoals(team2, result[2]);
+				
+				
+				assistMakerst1 = GameLogic.getAssists(team1, result[1]);
+				assistMakerst2 = GameLogic.getAssists(team2, result[2]);
+				for (int i=0;i<goalMakerst1.size();i++) {
+					if (goalMakerst1.get(i).equals(assistMakerst1.get(i))) {
+						confirmed=false;
+					}
+				}
+				for (int i=0;i<goalMakerst2.size();i++) {
+					
+					if (goalMakerst2.get(i).equals(assistMakerst2.get(i))) {
+						confirmed=false;
+					}
+				}
+				
+			} while (!confirmed);
 			match.setAssistMakerst1(assistMakerst1);
 			match.setAssistMakerst2(assistMakerst2);
 			for (Player a:assistMakerst1) {
@@ -77,6 +97,18 @@ public class Competition {
 			for (Player a:assistMakerst2) {
 				a.madeAssist();
 			}
+			for (Player a:goalMakerst1) {
+				a.madeGoal();
+			}
+			
+			for (Player a:goalMakerst2) {
+				a.madeGoal();
+			}
+			match.setGoalMakerst1(goalMakerst1);
+			match.setGoalMakerst2(goalMakerst2);
+			match.setGoalMakerst1(goalMakerst1);
+			match.setGoalMakerst2(goalMakerst2);
+			
 			
 			int amountyellowt1 = GameLogic.getAmountOfYellowCards(team1);
 			int amountyellowt2 = GameLogic.getAmountOfYellowCards(team2);

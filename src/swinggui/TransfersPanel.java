@@ -1,21 +1,20 @@
 package swinggui;
 
+import game.Competition;
+
 import java.awt.Dimension;
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import libraryClasses.Competition;
 import libraryClasses.Player;
 import libraryClasses.Team;
-import swinggui.ListPanel;
-
+@SuppressWarnings("serial")
 public class TransfersPanel extends JPanel implements MouseListener {
 	
 	private Dimension minSize = new Dimension(20,20);
@@ -23,6 +22,8 @@ public class TransfersPanel extends JPanel implements MouseListener {
 	private TransfersPanel_Left left;
 	private TransfersPanel_Center center;
 	private TransfersPanel_Right right;
+
+
 	
 	private boolean isleft = true;
 	private int selectedIndex;

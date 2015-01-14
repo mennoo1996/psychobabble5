@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import libraryClasses.Match;
-import libraryClasses.Round;
-
 import org.junit.Test;
+
+import schemeClasses.Match;
+import schemeClasses.Round;
 
 public class RoundTest {
 

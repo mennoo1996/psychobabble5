@@ -5,6 +5,7 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class TeamScrollPanel extends JPanel {
 	private int teamIndex;
 	private MouseListener clickTrigger;

@@ -1,10 +1,11 @@
 package junitTests;
 
 import static org.junit.Assert.*;
-import libraryClasses.Match;
 import libraryClasses.Standings;
 
 import org.junit.Test;
+
+import schemeClasses.Match;
 
 public class StandingsTest {
 

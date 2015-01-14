@@ -1,30 +1,28 @@
 package swinggui;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.dnd.DnDConstants;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
-import javax.swing.Box;
-
-import java.util.ArrayList;
 
 import libraryClasses.FieldPlayer;
 import libraryClasses.Goalkeeper;
-import libraryClasses.Team;
 import libraryClasses.Player;
+import libraryClasses.Team;
 
+@SuppressWarnings("serial")
 public class TeamDetailPanel extends JPanel {
 	
 	Team detailTeam;

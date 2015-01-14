@@ -15,6 +15,7 @@ import javax.swing.BoxLayout;
 
 import libraryClasses.Team;
 
+@SuppressWarnings("serial")
 public class TeamListPanel extends JPanel {
 	
 	private ArrayList<Team> theTeams;

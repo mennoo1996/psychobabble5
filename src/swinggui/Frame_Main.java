@@ -1,34 +1,31 @@
 package swinggui;
 
+import game.Competition;
+
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.BoxLayout;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.SwingUtilities;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 
-import xmlIO.XMLParser;
-import libraryClasses.Competition;
-import libraryClasses.Player;
-import libraryClasses.Positions;
 import libraryClasses.Team;
+import xmlIO.XMLParser;
 
 //import aurelienribon.tweenengine.Tween;
 //import aurelienribon.tweenengine.TweenManager;
 
+@SuppressWarnings("serial")
 public class Frame_Main extends JFrame implements ActionListener{
 	
 	private JPanel curPanel;
@@ -79,7 +76,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	}
 	
 	public final void initUI(){
-		//set Look And Feel
+		//set Look And Feelsv
 		SynthLookAndFeel synth = new SynthLookAndFeel();
 		try {
 			synth.load(Frame_Main.class.getResourceAsStream("lookandfeel.xml"), Frame_Main.class);

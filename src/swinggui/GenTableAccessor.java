@@ -1,8 +1,5 @@
 package swinggui;
 
-import java.awt.Color;
-
-import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenAccessor;
 
 

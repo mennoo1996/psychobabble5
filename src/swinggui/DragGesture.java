@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
+@SuppressWarnings("serial")
 public class DragGesture extends JFrame implements 
     DragGestureListener, Transferable {
 

@@ -1,12 +1,12 @@
 package junitTests;
 
 import static org.junit.Assert.*;
+import game.Competition;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import libraryClasses.Attacker;
-import libraryClasses.Competition;
 import libraryClasses.Defender;
 import libraryClasses.Goalkeeper;
 import libraryClasses.Midfielder;

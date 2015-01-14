@@ -1,7 +1,5 @@
 package swinggui;
 
-import java.awt.event.MouseListener;
-
 import javax.swing.JPanel;
 
 import libraryClasses.Player;

@@ -1,6 +1,7 @@
 package swinggui;
 
-import java.awt.BorderLayout;
+import game.Competition;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,9 +17,6 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import org.junit.runners.ParentRunner;
-
-import libraryClasses.Competition;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
