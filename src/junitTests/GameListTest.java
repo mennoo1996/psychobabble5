@@ -3,6 +3,7 @@ package junitTests;
 import static org.junit.Assert.*;
 import game.Game;
 import game.GameList;
+import gameLogic.TransferList;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class GameListTest {
 
 	@Test
 	public void testAdd() {
-		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal");
+		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal", new TransferList());
 		GameList gl = new GameList();
 		gl.add(g);
 		assertTrue(gl.getGames().contains(g));
@@ -46,7 +47,7 @@ public class GameListTest {
 
 	@Test
 	public void testGet() {
-		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal");
+		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal", new TransferList());
 		GameList gl = new GameList();
 		gl.add(g);
 		assertEquals(g, gl.get(0));
@@ -57,7 +58,7 @@ public class GameListTest {
 
 	@Test
 	public void testGetGames() {
-		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal");
+		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal", new TransferList());
 		GameList gl = new GameList();
 		gl.add(g);
 		ArrayList<Game> expected = new ArrayList<Game>();
@@ -68,7 +69,7 @@ public class GameListTest {
 	@Test
 	public void testSetGames() {
 		ArrayList<Game> array = new ArrayList<Game>();
-		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal");
+		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal", new TransferList());
 		GameList gl = new GameList();
 		array.add(g);
 		gl.setGames(array);
@@ -78,7 +79,7 @@ public class GameListTest {
 
 	@Test
 	public void testToString() {
-		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal");
+		Game g = new Game("Menno", "files/competitionDatabase_v5.xml", "files/competition-scheme.xml", "Arsenal", new TransferList());
 		GameList gl = new GameList();
 		gl.add(g);
 		String expected = g.toString() + "\n";
