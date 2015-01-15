@@ -111,9 +111,11 @@ public class TestXMLParse {
 //			System.out.println(TeamRating.calculateTeamRating(competition.getLibrary().getLibrary().get(i)).toString());
 //		}'
 		
-		for (int i=0;i<20;i++) {
-			System.out.println(CurrentXIRating.getCurrentXIRating(competition.getLibrary().getLibrary().get(i)).toString());
+		for (int i=0;i<38;i++) {
+			competition.playRound();
 		}
+		
+		System.out.println(competition.getSortedStandings());
 	}
 }
 
