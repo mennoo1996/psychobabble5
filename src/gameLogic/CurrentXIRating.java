@@ -143,9 +143,9 @@ public class CurrentXIRating {
 			
 		}
 		for (int i=0;i<midfielders.size();i++) {
-			finishing+=7*((FieldPlayer) list[midfielders.get(i)]).getFinishingValue();
+			finishing+=2*((FieldPlayer) list[midfielders.get(i)]).getFinishingValue();
 		}
-		finishing = finishing/(10*attackers.size() + 7*midfielders.size());
+		finishing = finishing/(10*attackers.size() + 2*midfielders.size());
 		
 		dribbling=0;
 		for (int i=0;i<attackers.size();i++) {
