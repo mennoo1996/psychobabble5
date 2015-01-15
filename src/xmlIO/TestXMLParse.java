@@ -18,12 +18,13 @@ public class TestXMLParse {
 //		for(Team t : competition.getLibrary().getLibrary()) {
 //			t.setPositionsAsCurrentTeam();;
 //		}
-//		competition.playRound();
-//		
-//		for(int i = 0; i < 37; i++) {
-//			System.out.println("Round: " + i);
-//			competition.playRound();
-//		}
+		competition.playRound();
+		
+		for(int i = 0; i < 37; i++) {
+			System.out.println("Round: " + i);
+			competition.playRound();
+			System.out.println(competition.getLibrary().getLibrary().get(0).getBudget());
+		}
 //		
 //		System.out.println(competition.standingsToString());
 		
@@ -68,20 +69,22 @@ public class TestXMLParse {
 //		System.out.println(gl.toString());
 //		XMLParser.writeGameList("files/saves.xml", gl);
 		
-		GameList gl =XMLParser.readGameList("files/saves.xml");
-		System.out.println(gl);
-		int nul=0, een=0;
-		for (int i=0;i<10000;i++) {
-		int res = GameLogic.randomGenerator(0, 1);
-		if (res==0) {
-			nul++;
-		} else {
-			een++;
-		}
+//		GameList gl =XMLParser.readGameList("files/saves.xml");
+//		System.out.println(gl);
+//		int nul=0, een=0;
+//		for (int i=0;i<10000;i++) {
+//		int res = GameLogic.randomGenerator(0, 1);
+//		if (res==0) {
+//			nul++;
+//		} else {
+//			een++;
+//		}
+//		
+//			} 
+//		System.out.println(nul);
+//		System.out.println(een);
 		
-			} 
-		System.out.println(nul);
-		System.out.println(een);
+		
 	}
 }
 

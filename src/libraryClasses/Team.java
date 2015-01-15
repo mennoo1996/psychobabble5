@@ -55,6 +55,18 @@ public class Team {
 	
 	public void updateStandings(String result, int goalsFor, int goalsAgainst){
 		standings.updateStandings(result, goalsFor, goalsAgainst);
+		if (result.equals("won")) {
+			budget+=1000000;
+		} if (result.equals("draw")) {
+			budget+=500000;
+		} if (result.equals("lost")) {
+			budget+=100000;
+		} if (goalsAgainst==0) {
+			budget+=100000;
+		} if (goalsFor-goalsAgainst>=3) {
+			budget+=500000;
+		}
+		
 	}
 	
 	public Player getPlayerForNameAndAge(String name, int age) {
@@ -286,7 +298,7 @@ public class Team {
 			if (array[i].equals(playerout)) {
 				array[i]=playerin;
 			}
-		} System.out.println(positions.toString());
+		} 
 	}
 	
 	
