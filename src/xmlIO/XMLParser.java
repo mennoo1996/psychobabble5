@@ -2,11 +2,14 @@ package xmlIO;
 import game.Competition;
 import game.Game;
 import game.GameList;
+import gameLogic.TransferInProgress;
+import gameLogic.TransferList;
 
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,7 +21,16 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import libraryClasses.*;
+import libraryClasses.Attacker;
+import libraryClasses.Defender;
+import libraryClasses.FieldPlayer;
+import libraryClasses.Goalkeeper;
+import libraryClasses.Library;
+import libraryClasses.Midfielder;
+import libraryClasses.Player;
+import libraryClasses.Positions;
+import libraryClasses.Standings;
+import libraryClasses.Team;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -596,7 +608,59 @@ public class XMLParser {
 		String schemeFile = getNodeValue(saveElement, "schemefile");
 		String teamName = getNodeValue(saveElement, "teamname");
 		
-		return new Game(name, dataFile, schemeFile, teamName);
+		TransferList transferList;
+		
+		NodeList transferListNodeList = saveElement.getElementsByTagName("transferlist");
+		Node transferListNode = transferListNodeList.item(0);
+		if(transferListNode.getNodeType() == Node.ELEMENT_NODE) {
+			Element transferListElement = (Element)transferListNode;
+			transferList = readTransferList(transferListElement, dataFile);
+		} else {
+			transferList = new TransferList();
+		}
+	
+		return new Game(name, dataFile, schemeFile, teamName, transferList);
+	}
+	
+	private static TransferList readTransferList(Element transferListElement, String dataFile) {
+		TransferList transferList = new TransferList();
+		
+		NodeList transferNodeList = transferListElement.getElementsByTagName("transfer");
+		for(int i = 0; i < transferNodeList.getLength(); i++) {
+			Node transferNode = transferNodeList.item(i);
+			if(transferNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element transferElement = (Element)transferNode;
+				transferList.addTransfer(readTransfer(transferElement, dataFile));
+			}
+		}
+		
+		return transferList;
+	}
+	
+	private static TransferInProgress readTransfer(Element transferElement, String dataFile) {
+		String playerName = getNodeValue(transferElement, "playerName");
+		int playerAge = Integer.parseInt(getNodeValue(transferElement, "playerAge"));
+		double priceReturned = Double.parseDouble(getNodeValue(transferElement, "priceReturned"));
+		double bid = Double.parseDouble(getNodeValue(transferElement, "bid"));
+		
+		Library library = readLibrary(dataFile);
+		ArrayList<Player> Players = new ArrayList<Player>();
+		for (int i=0; i < library.getLibrary().size() ; i++) {
+			Team t = library.getLibrary().get(i);
+			for (int j=0 ; j < t.getTeam().size() ; j++) {
+				Players.add(t.getTeam().get(j));
+			}
+		}
+		
+		Player player = null;
+		
+		for(Player player2 : Players) {
+			if(player2.getName().equals(playerName) && player2.getAge() == playerAge) {
+				player = player2;
+			}
+		}
+		
+		return new TransferInProgress(player, priceReturned, bid);
 	}
 	
 	public static void writeGameList(String fileName, GameList gameList) {
@@ -640,7 +704,41 @@ public class XMLParser {
 		gameElement.appendChild(teamNameElement);
 		teamNameElement.appendChild(doc.createTextNode(game.getTeam().getTeamName()));
 		
+		gameElement.appendChild(writeTransferList(game.getTransferList(), doc));
+		
 		return gameElement;
 		
+	}
+	
+	private static Element writeTransferList(TransferList transferList, Document doc) {
+		Element transferListElement = doc.createElement("transferlist");
+		
+		for (TransferInProgress transfer : transferList.getTransfers()) {
+			transferListElement.appendChild(writeTransferInProgress(transfer, doc));
+		}
+		
+		return transferListElement;
+	}
+	
+	private static Element writeTransferInProgress(TransferInProgress transfer, Document doc) {
+		Element transferElement = doc.createElement("transfer");
+		
+		Element playerNameElement = doc.createElement("playerName");
+		transferElement.appendChild(playerNameElement);
+		playerNameElement.appendChild(doc.createTextNode(transfer.getPlayer().getName()));
+
+		Element playerAgeElement = doc.createElement("playerAge");
+		transferElement.appendChild(playerAgeElement);
+		playerAgeElement.appendChild(doc.createTextNode(String.format("%d", transfer.getPlayer().getAge())));
+		
+		Element priceReturnedElement = doc.createElement("priceReturned");
+		transferElement.appendChild(priceReturnedElement);
+		priceReturnedElement.appendChild(doc.createTextNode(String.format("%f", transfer.getPriceReturned())));
+		
+		Element bidElement = doc.createElement("bid");
+		transferElement.appendChild(bidElement);
+		bidElement.appendChild(doc.createTextNode(String.format("%f", transfer.getBid())));
+		
+		return transferElement;
 	}
 }
