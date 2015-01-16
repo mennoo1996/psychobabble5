@@ -101,15 +101,6 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		
 		//add stuff to ScrollPaneContent (make this function so you can recall the damned thing, lol)
 		for(int w=0;w<Players.size();w++){
-//			boolean add = false;
-//			for(int k=0;k<currentTeam.getTeam().size();k++){
-//					if(Players.get(w).equals(currentTeam.getTeam().get(k))){
-//						add=true;
-//				}
-//			}
-//			if(add==false){
-//				
-//			}
 			PlayerScrollPanel_Right panel = new PlayerScrollPanel_Right(Players.get(w), changeTeamListener, w);
 			selections.add(panel);
 			ScrollPaneContent.add(panel);

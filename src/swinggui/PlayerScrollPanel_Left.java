@@ -107,8 +107,6 @@ class PlayerScrollPanel_Left extends JPanel{
 		if (isSelected) {
 			setBackground(Color.WHITE);
 		} else {
-			// Make this a nicer color
-			System.out.println("coloring...");
 			setBackground(new Color(164, 225, 255));
 		}
 		revalidate();

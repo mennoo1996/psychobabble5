@@ -285,7 +285,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			current = "transfers";
 			
 			// Initialize new JPanel and remove current pane
-			TransfersPanel replTransfview = new TransfersPanel(curTeam, curComp, this);
+			TransfersPanel replTransfview = new TransfersPanel(curTeam, curComp);
 			remove(curPanel);
 			
 			// Refresh the view
