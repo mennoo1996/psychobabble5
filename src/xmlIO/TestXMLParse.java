@@ -115,8 +115,7 @@ public class TestXMLParse {
 //			competition.playRound();
 //		}
 		
-		TransferLogic.AutoTransferForTeam(competition.getLibrary().getLibrary().get(1), competition.getLibrary().getLibrary().get(2), competition.getLibrary());
-		
+		TransferLogic.AutoTransfer(competition.getLibrary().getLibrary().get(0), competition.getLibrary());
 	
 	}
 }
