@@ -177,6 +177,9 @@ public abstract class TransferLogic {
 	 * @return a String with a meaningful message (to show to the user), about the acceptance or denial of his/her bid for that player
 	 */
 	public static String requestTransfer(Player player, Team playersTeam, double bid, Library library, TransferList existingTransfers) {
+		if (playersTeam.isMax()) {
+			return "You already have 30 players in your team, this is the maximum. Sell some players before trying to buy any new!";
+		} else {
 		if (existingTransfers.getTransfer(player)==null) {
 			boolean answer = TransferLogic.getAnswer(player, bid, library, existingTransfers);
 			if (answer) {
@@ -312,7 +315,7 @@ public abstract class TransferLogic {
 			
 		}
 		
-	}
+	}}
 	/** With this method you can request selling a player from your team
 	 * 	
 	 * @param player the player you want to sell
@@ -384,6 +387,9 @@ public abstract class TransferLogic {
 			player.setTeam(buyingTeam.getTeamName());
 			playersTeam.getTeam().remove(player);
 			player.setNumber(buyingTeam.getTeam().size());
+			if (playersTeam.getPositions().contains(player)) {
+				playersTeam.getPositions().remove(player);
+			}
 			
 			
 			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + askingPrice;
@@ -412,7 +418,7 @@ public abstract class TransferLogic {
 			do {
 				team3=GameLogic.randomGenerator(0,19);
 				
-			} while (team3==team1 && team3==team2);
+			} while (team3==team1 && team3==team2); 
 		} while (!(playersteam!=team1 && playersteam!=team2 && playersteam!=team3));
 		
 		TransferLogic.AutoTransferForTeam(library.getLibrary().get(team1), playersTeam, library);

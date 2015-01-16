@@ -1,5 +1,7 @@
 package swinggui;
 
+import gameLogic.TransferList;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +9,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -39,7 +43,7 @@ import libraryClasses.Player;
 
 public class TransfersPanel_Center extends JPanel implements DocumentListener{
 
-	
+	private MouseListener buttonListener;
 	
 	private JPanel playerPanel;
 	private JPanel statPanel;
@@ -53,18 +57,19 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	private JLabel leftLabel;
 	private JLabel rightLabel;
 	private boolean isLeft;
+	private Player player;
 	
 	private Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
 	private Font fontSelected = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	
-	
-	public TransfersPanel_Center() {
+	public TransfersPanel_Center(MouseListener teamChoiceListener) {
+		buttonListener = teamChoiceListener;
 		initUI();
 	}
 	
 	public final void initUI(){
-
+		
 		setOpaque(false);
 		setName("Panel");
 		//setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(145,143,143)));
@@ -98,9 +103,8 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 	}
 	
-	
-	
-	public void showPlayer(boolean isleft, Player player){
+	public void showPlayer(boolean isleft, Player play){
+		player=play;
 		isLeft = isleft;
 		remove(buyPanel);
 		remove(sellPanel);
@@ -218,6 +222,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		else{
 			sellField.setEnabled(true);
 			sellButton.setEnabled(true);
+			sellButton.addMouseListener(buttonListener);
 		}
 		
 		sellPanel.add(sellPanel2, BorderLayout.CENTER);
@@ -261,6 +266,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		else{
 			buyField.setEnabled(true);
 			buyButton.setEnabled(true);
+			buyButton.addMouseListener(buttonListener);
 		}
 		
 		buyPanel.add(buyPanel2, BorderLayout.CENTER);
@@ -302,6 +308,9 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		}
 	}
 	
+	public Player getPlayer(){
+		return player;
+	}
 	
 	public void checkInt(){
 		JTextField input;

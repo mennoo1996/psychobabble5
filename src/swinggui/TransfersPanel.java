@@ -1,6 +1,7 @@
 package swinggui;
 
 import game.Competition;
+import gameLogic.TransferList;
 import gameLogic.TransferLogic;
 
 import java.awt.Dimension;
@@ -19,6 +20,8 @@ import libraryClasses.Team;
 @SuppressWarnings("serial")
 public class TransfersPanel extends JPanel implements MouseListener {
 	
+	private MouseListener buttonListener;
+	
 	private Dimension minSize = new Dimension(20,20);
 	private Dimension prefSize = new Dimension(40,20);
 	private TransfersPanel_Left left;
@@ -31,13 +34,18 @@ public class TransfersPanel extends JPanel implements MouseListener {
 	private Competition currentCompetition;
 	private Team currentTeam;
 	
-	public TransfersPanel(Team cTeam, Competition cComp, ActionListener teamChoiceListener) {
+	private TransferList transfers;
+	
+	public TransfersPanel(Team cTeam, Competition cComp) {
+		//buttonListener = detailRefresher;
 		currentCompetition = cComp;
 		currentTeam = cTeam;
 		initUI();
 	}
 	
 	public final void initUI() {
+
+		transfers = new TransferList();
 		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		add(new Box.Filler(minSize, prefSize, null));
@@ -45,7 +53,7 @@ public class TransfersPanel extends JPanel implements MouseListener {
 		// add the overview panels
 		left = new TransfersPanel_Left(currentTeam, this);
 		add(left);
-		center = new TransfersPanel_Center( );
+		center = new TransfersPanel_Center(this);
 		add(center);
 		right = new TransfersPanel_Right(currentCompetition, currentTeam, this);
 		add(right);
@@ -91,10 +99,10 @@ public class TransfersPanel extends JPanel implements MouseListener {
 		}
 		if(e.getSource() instanceof JButton){
 			if(isleft){
-				
+				TransferLogic.requestSell(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary());
 			}
 			else{
-				
+				TransferLogic.requestTransfer(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary(), transfers);
 			}
 		}
 	}

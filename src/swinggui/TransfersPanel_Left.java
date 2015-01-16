@@ -70,6 +70,8 @@ public class TransfersPanel_Left extends JPanel {
 				"Goalkeeper"
 		};
 		
+		int index = 0;
+		
 		//loop through player types
 		for(int q = 0; q < 4; q++){
 			
@@ -92,12 +94,12 @@ public class TransfersPanel_Left extends JPanel {
 			
 			//add all players of current type to Grid panel
 			for(int w = 0; w < Team.size(); w++){
-				if(Team.get(w).getPlayerType().toString() == PlayerTypes[q]){
+				if(Team.get(w).getPlayerType().toString().equals(PlayerTypes[q]) ){
 					
-					PlayerScrollPanel_Left panel = new PlayerScrollPanel_Left(Team.get(w), PlayerTypes[q], changeTeamListener,w);
+					PlayerScrollPanel_Left panel = new PlayerScrollPanel_Left(Team.get(w), PlayerTypes[q], changeTeamListener,index);
 					selections.add(panel);
 					ScrollPaneGrid.add(panel);
-					
+					index++;
 				}
 			}
 			
