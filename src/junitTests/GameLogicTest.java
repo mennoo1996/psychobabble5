@@ -159,7 +159,7 @@ public class GameLogicTest {
 		assertEquals(new ArrayList<FieldPlayer>(), result);
 		GameLogic.setSeed(0);
 		ArrayList<FieldPlayer> expected = new ArrayList<FieldPlayer>();
-		expected.add((FieldPlayer) t.getTeam().get(15));
+		expected.add((FieldPlayer) t.getTeam().get(3));
 		result=GameLogic.getGoals(t, 1);
 		assertEquals(expected, result);
 	}
@@ -176,7 +176,7 @@ public class GameLogicTest {
 		assertEquals(new ArrayList<FieldPlayer>(), result);
 		GameLogic.setSeed(0);
 		ArrayList<FieldPlayer> expected = new ArrayList<FieldPlayer>();
-		expected.add((FieldPlayer) t.getTeam().get(3));
+		expected.add((FieldPlayer) t.getTeam().get(15));
 		result=GameLogic.getAssists(t, 1);
 		assertEquals(expected, result);
 	}
@@ -193,19 +193,19 @@ public class GameLogicTest {
 		Team t2 = competition.getLibrary().getLibrary().get(1);
 		int[] result = GameLogic.getMatchResults(t1, t2);
 		assertEquals(1, result[0]);
-		assertEquals(2, result[1]);
-		assertEquals(0, result[2]);
+		assertEquals(3, result[1]);
+		assertEquals(1, result[2]);
 		
 		GameLogic.setSeed(80);
 		result = GameLogic.getMatchResults(t1, t2);
-		assertEquals(1, result[0]);
+		assertEquals(2, result[0]);
 		assertEquals(1, result[1]);
-		assertEquals(0, result[2]);
+		assertEquals(2, result[2]);
 		
 		GameLogic.setSeed(82);
 		result = GameLogic.getMatchResults(t1, t2);
-		assertEquals(1, result[0]);
-		assertEquals(2, result[1]);
+		assertEquals(0, result[0]);
+		assertEquals(0, result[1]);
 		assertEquals(0, result[2]);
 	}
 
@@ -241,7 +241,7 @@ public class GameLogicTest {
 		assertEquals(0, allresults[1]);
 		GameLogic.setSeed(16);
 		GameLogic.Team2WintLoserScore(allresults, r4, r1);
-		assertEquals(1, allresults[1]);
+		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(180);
 		GameLogic.Team2WintLoserScore(allresults, r4, r1);
 		assertEquals(2, allresults[1]);
@@ -250,25 +250,25 @@ public class GameLogicTest {
 		assertEquals(0, allresults[1]);
 		GameLogic.setSeed(16);
 		GameLogic.Team2WintLoserScore(allresults, r5, r1);
-		assertEquals(1, allresults[1]);
+		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(180);
 		GameLogic.Team2WintLoserScore(allresults, r5, r1);
 		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(20);
 		GameLogic.Team2WintLoserScore(allresults, r6, r1);
-		assertEquals(0, allresults[1]);
+		assertEquals(1, allresults[1]);
 		GameLogic.setSeed(16);
 		GameLogic.Team2WintLoserScore(allresults, r6, r1);
-		assertEquals(1, allresults[1]);
+		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(180);
 		GameLogic.Team2WintLoserScore(allresults, r6, r1);
 		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(20);
 		GameLogic.Team2WintLoserScore(allresults, r7, r1);
-		assertEquals(0, allresults[1]);
+		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(13);
 		GameLogic.Team2WintLoserScore(allresults, r7, r1);
-		assertEquals(1, allresults[1]);
+		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(180);
 		GameLogic.Team2WintLoserScore(allresults, r7, r1);
 		assertEquals(2, allresults[1]);
@@ -293,13 +293,13 @@ public class GameLogicTest {
 		CurrentXIRating r7 = new CurrentXIRating (34, 0,0,0,0,0);
 		GameLogic.setSeed(20);
 		GameLogic.Team2WintWinnerScore(allresults, r1, r7);
-		assertEquals(1, allresults[2]);
+		assertEquals(2, allresults[2]);
 		GameLogic.setSeed(12);
 		GameLogic.Team2WintWinnerScore(allresults, r1, r7);
 		assertEquals(2, allresults[2]);
 		GameLogic.setSeed(16);
 		GameLogic.Team2WintWinnerScore(allresults, r1, r7);
-		assertEquals(3, allresults[2]);
+		assertEquals(2, allresults[2]);
 		GameLogic.setSeed(180);
 		GameLogic.Team2WintWinnerScore(allresults, r1, r7);
 		assertEquals(4, allresults[2]);
@@ -320,7 +320,7 @@ public class GameLogicTest {
 		assertEquals(1, allresults[2]);
 		GameLogic.setSeed(16);
 		GameLogic.Team2WintWinnerScore(allresults, r1, r5);
-		assertEquals(2, allresults[2]);
+		assertEquals(3, allresults[2]);
 		GameLogic.setSeed(180);
 		GameLogic.Team2WintWinnerScore(allresults, r1, r5);
 		assertEquals(3, allresults[2]);
@@ -329,7 +329,7 @@ public class GameLogicTest {
 		assertEquals(1, allresults[2]);
 		GameLogic.setSeed(180);
 		GameLogic.Team2WintWinnerScore(allresults, r1, r4);
-		assertEquals(2, allresults[2]);
+		assertEquals(3, allresults[2]);
 		GameLogic.setSeed(20);
 		GameLogic.Team2WintWinnerScore(allresults, r1, r3);
 		assertEquals(1, allresults[2]);
@@ -386,25 +386,25 @@ public class GameLogicTest {
 		assertEquals(0, allresults[2]);
 		GameLogic.setSeed(16);
 		GameLogic.Team1WintLoserScore(allresults, r1, r5);
-		assertEquals(1, allresults[2]);
+		assertEquals(2, allresults[2]);
 		GameLogic.setSeed(180);
 		GameLogic.Team1WintLoserScore(allresults, r1, r5);
 		assertEquals(2, allresults[2]);
 		GameLogic.setSeed(20);
 		GameLogic.Team1WintLoserScore(allresults, r1, r6);
-		assertEquals(0, allresults[2]);
+		assertEquals(1, allresults[2]);
 		GameLogic.setSeed(16);
 		GameLogic.Team1WintLoserScore(allresults, r1, r6);
-		assertEquals(1, allresults[2]);
+		assertEquals(2, allresults[2]);
 		GameLogic.setSeed(180);
 		GameLogic.Team1WintLoserScore(allresults, r1, r6);
 		assertEquals(2, allresults[2]);
 		GameLogic.setSeed(20);
 		GameLogic.Team1WintLoserScore(allresults, r1, r7);
-		assertEquals(0, allresults[2]);
+		assertEquals(1, allresults[2]);
 		GameLogic.setSeed(13);
 		GameLogic.Team1WintLoserScore(allresults, r1, r7);
-		assertEquals(1, allresults[2]);
+		assertEquals(2, allresults[2]);
 		GameLogic.setSeed(180);
 		GameLogic.Team1WintLoserScore(allresults, r1, r7);
 		assertEquals(2, allresults[2]);
@@ -428,13 +428,13 @@ public class GameLogicTest {
 		CurrentXIRating r7 = new CurrentXIRating (34, 0,0,0,0,0);
 		GameLogic.setSeed(20);
 		GameLogic.Team1WintWinnerScore(allresults, r7, r1);
-		assertEquals(1, allresults[1]);
+		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(12);
 		GameLogic.Team1WintWinnerScore(allresults, r7, r1);
 		assertEquals(2, allresults[1]);
 		GameLogic.setSeed(16);
 		GameLogic.Team1WintWinnerScore(allresults, r7, r1);
-		assertEquals(3, allresults[1]);
+		assertEquals(4, allresults[1]);
 		GameLogic.setSeed(180);
 		GameLogic.Team1WintWinnerScore(allresults, r7, r1);
 		assertEquals(4, allresults[1]);
@@ -455,7 +455,7 @@ public class GameLogicTest {
 		assertEquals(1, allresults[1]);
 		GameLogic.setSeed(16);
 		GameLogic.Team1WintWinnerScore(allresults, r5, r1);
-		assertEquals(2, allresults[1]);
+		assertEquals(3, allresults[1]);
 		GameLogic.setSeed(180);
 		GameLogic.Team1WintWinnerScore(allresults, r5, r1);
 		assertEquals(3, allresults[1]);
@@ -464,7 +464,7 @@ public class GameLogicTest {
 		assertEquals(1, allresults[1]);
 		GameLogic.setSeed(180);
 		GameLogic.Team1WintWinnerScore(allresults, r4, r1);
-		assertEquals(2, allresults[1]);
+		assertEquals(3, allresults[1]);
 		GameLogic.setSeed(20);
 		GameLogic.Team1WintWinnerScore(allresults, r3, r1);
 		assertEquals(1, allresults[1]);
@@ -568,7 +568,7 @@ public class GameLogicTest {
 		Team t = competition.getLibrary().getLibrary().get(0);
 		CurrentXIRating r = CurrentXIRating.getCurrentXIRating(t);
 		int result = GameLogic.getRandomNumberForTeam(r, true);
-		assertEquals(36246, result);
+		assertEquals(82974, result);
 		
 	}
 
