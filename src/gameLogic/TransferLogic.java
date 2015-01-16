@@ -1,5 +1,6 @@
 package gameLogic;
 import libraryClasses.*;
+
 import java.util.*;
 /** This class contains all the logic for transfers
  * 
@@ -395,4 +396,73 @@ public abstract class TransferLogic {
 		
 		
 	}
+	
+	public static void AutoTransfer(Team playersTeam, Library library) {
+		int team1 = GameLogic.randomGenerator(0, 19);
+		int team2=team1;
+		while (team1==team2) {
+			team2=GameLogic.randomGenerator(0, 19);
+		}
+		
+		TransferLogic.AutoTransferForTeam(library.getLibrary().get(team1), playersTeam, library);
+		TransferLogic.AutoTransferForTeam(library.getLibrary().get(team2), playersTeam, library);
+		
+		
+		
+	}
+	
+	public static void AutoTransferForTeam(Team t, Team playersTeam, Library library) {
+		ArrayList<Player> allplayers = new ArrayList<Player>();
+		for (int i=0;i<library.getLibrary().size();i++) {
+			Team team = library.getLibrary().get(i);
+			for (int j=0;j<team.getTeam().size();j++) {
+				allplayers.add(team.getTeam().get(j));
+			}
+		}
+		
+		String type="";
+		TeamRating tr = TeamRating.calculateTeamRating(t);
+		if (tr.getFinishing()<=tr.getDribbling() && tr.getFinishing()<=tr.getDefending() && tr.getFinishing()<=tr.getStamina() && tr.getFinishing() <=tr.getGoalkeeping()) {
+			type="Attacker";
+		}
+		else if (tr.getDefending()<=tr.getFinishing() && tr.getDefending()<=tr.getStamina() && tr.getDefending()<=tr.getDribbling() && tr.getDefending()<=tr.getGoalkeeping()) {
+			type="Defender";
+		}
+		else if (tr.getGoalkeeping()<=tr.getFinishing() && tr.getGoalkeeping()<=tr.getDribbling() && tr.getGoalkeeping()<=tr.getStamina() && tr.getGoalkeeping()<=tr.getDefending()) {
+			type="Goalkeeper";
+		} else {
+			type = "Midfielder";
+		}
+		
+		ArrayList<Player> options = new ArrayList<Player>();
+		for (Player p:allplayers) {
+			if ((!(playersTeam.getTeam().contains(p) || t.getTeam().contains(p)) && p.getPlayerType().equals(type))) {
+				options.add(p);
+			}
+		}
+		
+		Player[] players = new Player[options.size()];
+		for (int i=0;i<players.length;i++) {
+			players[i]=options.get(i);
+		}
+		
+		Player temp;
+		for (int j=0;j<players.length;j++) {
+			for (int i=1;i<players.length;i++) {
+				if (players[i-1].getPrice().doubleValue()>players[i].getPrice().doubleValue())  {
+					temp=players[i];
+					players[i]=players[i-1];
+					players[i-1]=temp;
+				}
+			}
+		}
+		
+		Player[] players2 = new Player[players.length];
+		for (int i=0;i<players2.length;i++) {
+			players2[i]=players[players.length-1-i];
+		}
+		
+		
+	}
+	
 }
