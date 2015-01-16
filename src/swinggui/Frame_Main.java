@@ -153,6 +153,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 					
 					if (roundNum < 38) {
 						curComp.playRound();
+						TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
 						roundNum++;
 					} else {
 						// trigger an event signalling the start of the
