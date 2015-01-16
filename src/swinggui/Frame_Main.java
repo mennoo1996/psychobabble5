@@ -1,6 +1,7 @@
 package swinggui;
 
 import game.Competition;
+import gameLogic.TransferLogic;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -158,6 +159,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 					
 					if (roundNum < 38) {
 						curComp.playRound();
+						TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
 						roundNum++;
 					} else {
 						// trigger an event signalling the start of the
