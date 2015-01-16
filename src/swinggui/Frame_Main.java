@@ -57,20 +57,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 		// Currently only supports one season
 		roundNum = 0;
-		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
-
-		//curTeam = curComp.getLibrary().getTeamForName("Manchester United");
-		
-	
-		
-		
-//		 Initialize teams
-//		for(Team team : curComp.getLibrary().getLibrary()) {
-//			team.setPositionsAsCurrentTeam();
-//		}
-		
-		//System.out.println(curTeam.toString());
-		
+		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");	
 		
 		initUI();
 	}
@@ -95,13 +82,13 @@ public class Frame_Main extends JFrame implements ActionListener{
 		setMinimumSize(new Dimension(1024, 720));
 		setSize(1280, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		//toolkit
-		
-		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
-		curPanel = teamChoose;
+				
+//		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
+//		curPanel = teamChoose;
+//		add(curPanel, BorderLayout.CENTER);
+		SplashPanel splashChoice = new SplashPanel(this);
+		curPanel = splashChoice;
 		add(curPanel, BorderLayout.CENTER);
-
 		
 		//temporary, for the help text or something, I'll fix it later
 //		JPanel Helper = new JPanel();
@@ -138,6 +125,13 @@ public class Frame_Main extends JFrame implements ActionListener{
 			JButton possibleMenuB = (JButton) e.getSource();
 			
 			switch (possibleMenuB.getText()) {
+				case "Load Game":
+					System.out.println("Load game was pressed!");
+					break;
+				case "New Game":
+					loadNewGameScreen();
+					
+					break;
 				case "Play as this team":					
 					String teamName = (String)possibleMenuB.getClientProperty("teamName");
 										
@@ -194,12 +188,24 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 	}
 	
+	public void loadNewGameScreen() {
+		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
+		
+		remove(curPanel);
+		
+		curPanel = teamChoose;
+		add(curPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
 	public void loadMainScreen(String chosenTeam) {
 		curTeam = curComp.getLibrary().getTeamForName(chosenTeam);
 		
 		remove(curPanel);
 		// Start playing!
-		Toolkit tk = Toolkit.getDefaultToolkit(); //what is this even?
+		// Get screen sizes (for fullscreen)
+		Toolkit tk = Toolkit.getDefaultToolkit();
 		int boxwidth = (int) tk.getScreenSize().getWidth();
 		int boxheight = (int) tk.getScreenSize().getHeight();
 		
