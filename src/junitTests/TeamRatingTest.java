@@ -29,7 +29,7 @@ public class TeamRatingTest {
 		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		Team t = competition.getLibrary().getLibrary().get(0);
 		TeamRating tr = TeamRating.calculateTeamRating(t);
-		TeamRating expected = new TeamRating(77, 67, 73, 75, 78, 370);
+		TeamRating expected = new TeamRating(71, 77, 73, 75, 78, 374);
 		assertEquals(expected, tr);
 		
 		
