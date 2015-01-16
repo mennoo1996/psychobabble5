@@ -3,10 +3,12 @@ package xmlIO;
 import libraryClasses.Player;
 import libraryClasses.Team;
 import game.Competition;
+import game.Game;
 import game.GameList;
 import gameLogic.CurrentXIRating;
 import gameLogic.GameLogic;
 import gameLogic.TeamRating;
+import gameLogic.TransferInProgress;
 import gameLogic.TransferLogic;
 import libraryClasses.FieldPlayer;
 
@@ -88,9 +90,13 @@ public class TestXMLParse {
 //		
 
 		
+
 //		GameList gl = XMLParser.readGameList("files/saves_v4.xml");
 //		System.out.println(gl.toString());
 //		XMLParser.writeGameList("files/saves_v4.xml", gl);
+
+		
+
 //		XMLParser.writeGameList("files/saves.xml", gl);
 		
 //		GameList gl =XMLParser.readGameList("files/saves.xml");
@@ -118,8 +124,12 @@ public class TestXMLParse {
 		
 //		TransferLogic.AutoTransfer(competition.getLibrary().getLibrary().get(0), competition.getLibrary());
 		
+
 		System.out.println(TransferLogic.requestSell(competition.getLibrary().getLibrary().get(0).getTeam().get(0), competition.getLibrary().getLibrary().get(0), 20000000, competition.getLibrary()));
 		System.out.println(competition.getLibrary().getLibrary().get(0).getPositions());
+
+		
+
 	}
 }
 
