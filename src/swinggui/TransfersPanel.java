@@ -1,6 +1,7 @@
 package swinggui;
 
 import game.Competition;
+import gameLogic.TransferLogic;
 
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -22,8 +24,6 @@ public class TransfersPanel extends JPanel implements MouseListener {
 	private TransfersPanel_Left left;
 	private TransfersPanel_Center center;
 	private TransfersPanel_Right right;
-
-
 	
 	private boolean isleft = true;
 	private int selectedIndex;
@@ -88,6 +88,14 @@ public class TransfersPanel extends JPanel implements MouseListener {
 			isleft = false;
 			center.showPlayer(isleft, right.getPlayer(0));
 			left.noSelection();
+		}
+		if(e.getSource() instanceof JButton){
+			if(isleft){
+				
+			}
+			else{
+				
+			}
 		}
 	}
 

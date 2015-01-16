@@ -27,6 +27,7 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 	private int oldSelection;
 	private ArrayList<PlayerScrollPanel_Right> selections;
 	private ArrayList<Player> Players;
+	private ArrayList<Player> team;
 	private MouseListener changeTeamListener;
 	
 	//defined because I need them to be accessible from the outside
@@ -47,11 +48,21 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 
 	public final void initUI(){
 		
-		//massive player array filling here (dunno if its heavy, but maybe we should thread this?)
+		team = currentTeam.getTeam();
+		
+		//massive player array filling here (dunno if it's heavy, but maybe we should thread this?)
 		for (int i=0;i<currentCompetition.getLibrary().getLibrary().size();i++) {
 			Team t = currentCompetition.getLibrary().getLibrary().get(i);
-			for (int j=0;j<t.getTeam().size();j++) {				
-				Players.add(t.getTeam().get(j));
+			for (int j=0;j<t.getTeam().size();j++) {
+				boolean add = true;
+				for(int k=0;k<team.size();k++){
+					if(team.get(k).equals(t.getTeam().get(j))){
+						add = false;
+					}
+				}
+				if(add){
+					Players.add(t.getTeam().get(j));
+				}
 			}
 		}
 		
