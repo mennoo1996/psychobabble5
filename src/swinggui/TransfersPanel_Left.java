@@ -130,7 +130,7 @@ public class TransfersPanel_Left extends JPanel {
 	}
 	
 	public void noSelection(){
-		selections.get(oldSelection).toggleSelected();
+		selections.get(oldSelection).deselect();
 		oldSelection = 0;
 	}
 	

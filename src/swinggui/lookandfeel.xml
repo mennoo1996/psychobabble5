@@ -28,6 +28,11 @@
 				<color value="#A8D599" type="TEXT_FOREGROUND"/>
 				<imagePainter method="buttonBackground" path="images/button_mouseover.png" sourceInsets="30 35 35 35"/>
 		</state>
+		<state value="DISABLED">
+				<font name="Avenir" size="18"/>
+				<color value="#bdbbbb" type="TEXT_FOREGROUND"/>
+				<imagePainter method="buttonBackground" path="images/button_disabled.png" sourceInsets="30 35 35 35"/>
+		</state>
   </style>
   
   <style id="basictextfieldStyle">
@@ -38,8 +43,29 @@
 				<imagePainter method="textfieldBackground" path="images/textfield.png" sourceInsets="11 11 11 11"/>
 				<color value="#FFFFFF" type="FOREGROUND"/>
 		</state>
+		<state value="DISABLED">
+		   		<font name="Avenir" size="14"/>
+		   		<color value="#bdbbbb" type="TEXT_FOREGROUND"/>
+				<imagePainter method="textfieldBackground" path="images/textfield_disabled.png" sourceInsets="11 11 11 11"/>
+				<color value="#FFFFFF" type="FOREGROUND"/>
+		</state>
   </style>
   
+    <style id="basicformatStyle">
+	  	<insets top="5" left="10" bottom="5" right="10"/>
+		<state>
+		   		<font name="Avenir" size="14"/>
+		   		<color value="#918f8f" type="TEXT_FOREGROUND"/>
+				<imagePainter method="formattedtextfieldBackground" path="images/textfield.png" sourceInsets="11 11 11 11"/>
+				<color value="#FFFFFF" type="FOREGROUND"/>
+		</state>
+		<state value="DISABLED">
+		   		<font name="Avenir" size="14"/>
+		   		<color value="#bdbbbb" type="TEXT_FOREGROUND"/>
+				<imagePainter method="formattedtextfieldBackground" path="images/textfield_disabled.png" sourceInsets="11 11 11 11"/>
+				<color value="#FFFFFF" type="FOREGROUND"/>
+		</state>
+  </style>
   
   <style id="headerouter">
 	  	<insets top="15" left="70" bottom="50" right="55"/>

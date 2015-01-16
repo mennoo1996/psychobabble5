@@ -100,13 +100,13 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 			
 			new MyDropTargetListener(panels[i - 1]);
 			
-			//layout
+			//layout					insets go like this (y,x,y,x) or better (fromtop,fromleft,frombottom,fromrright)
 			GridBagConstraints c = new GridBagConstraints();
 			switch(i){
 				//row 1
 				case(11): //player 1
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,0,0,80);
+					c.insets = new Insets(30,0,0,80);
 					//c.weighty = 0.5;
 					c.gridx = 0;
 					c.gridy = 0;
@@ -114,7 +114,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					break;
 				case(10): //player 2
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(80,0,0,0);
+					c.insets = new Insets(0,0,0,0);
 					//c.weighty = 0.5;
 					c.gridx = 1;
 					c.gridy = 0;
@@ -122,7 +122,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					break;
 				case(9): //player 3
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,80,0,0);
+					c.insets = new Insets(30,80,0,0);
 					//c.weighty = 0.5;
 					c.gridx = 2;
 					c.gridy = 0;
@@ -131,7 +131,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 				//row 2
 				case(8): //player 4
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,0,0,60);
+					c.insets = new Insets(20,0,0,60);
 					c.weightx = 0.5;
 					c.weighty = 0.5;
 					c.gridx = 0;
@@ -140,7 +140,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					break;
 				case(7): //player 5
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(30,0,0,0);
+					c.insets = new Insets(50,0,0,0);
 					c.weightx = 0.5;
 					c.weighty = 0.5;
 					c.gridx = 1;
@@ -149,7 +149,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					break;
 				case(6): //player 6
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,60,0,0);
+					c.insets = new Insets(20,60,0,0);
 					c.weightx = 0.5;
 					c.weighty = 0.5;
 					c.gridx = 2;

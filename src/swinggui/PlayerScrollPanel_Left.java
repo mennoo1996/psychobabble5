@@ -115,6 +115,15 @@ class PlayerScrollPanel_Left extends JPanel{
 		repaint();
 		isSelected = !isSelected;
 	}
+	
+	public void deselect(){
+		if (isSelected) {
+			setBackground(Color.WHITE);
+		}
+		revalidate();
+		repaint();
+		isSelected = false;
+	}
 
 	public int getPlayerIndex(){
 		return playerIndex;
