@@ -111,11 +111,13 @@ public class TestXMLParse {
 //			System.out.println(TeamRating.calculateTeamRating(competition.getLibrary().getLibrary().get(i)).toString());
 //		}'
 		
-		for (int i=0;i<38;i++) {
-			competition.playRound();
-		}
+//		for (int i=0;i<38;i++) {
+//			competition.playRound();
+//		}
 		
-		System.out.println(competition.getSortedStandings());
+		TransferLogic.AutoTransferForTeam(competition.getLibrary().getLibrary().get(1), competition.getLibrary().getLibrary().get(2), competition.getLibrary());
+		
+	
 	}
 }
 

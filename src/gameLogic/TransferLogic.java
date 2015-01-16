@@ -436,7 +436,7 @@ public abstract class TransferLogic {
 		
 		ArrayList<Player> options = new ArrayList<Player>();
 		for (Player p:allplayers) {
-			if ((!(playersTeam.getTeam().contains(p) || t.getTeam().contains(p)) && p.getPlayerType().equals(type))) {
+			if ((!(playersTeam.getTeam().contains(p) || t.getTeam().contains(p)) && p.getPlayerType().equals(type) && p.getPrice().doubleValue()*1.1<=t.getBudget())) {
 				options.add(p);
 			}
 		}
@@ -461,6 +461,51 @@ public abstract class TransferLogic {
 		for (int i=0;i<players2.length;i++) {
 			players2[i]=players[players.length-1-i];
 		}
+		
+		Player theplayer = null;
+		int random = GameLogic.randomGenerator(1, 1000);
+		int random2=0;
+		if (random<=500) {
+			random2=GameLogic.randomGenerator(0,(int) (players2.length*0.2));
+			if (random2<0) {
+				random2=0;
+			}
+			if (random2>=players2.length){
+				random2=players2.length-1;
+			}
+			theplayer = players2[random2];
+		} if (random >500 && random <=750) {
+			random2=GameLogic.randomGenerator((int) (players2.length*0.2), (int) (players2.length*0.4));
+			if (random2<0) {
+				random2=0;
+			}
+			if (random2>=players2.length){
+				random2=players2.length-1;
+			}
+			theplayer=players2[random2-1];
+		} if (random>750 && random<=875) {
+			random2=GameLogic.randomGenerator((int) (players2.length*0.4), (int) (players2.length*0.7));
+			if (random2<0) {
+				random2=0;
+			}
+			if (random2>=players2.length){
+				random2=players2.length-1;
+			}
+			
+			theplayer=players2[random2];
+		} if (random>875) {
+			random2=GameLogic.randomGenerator((int) (players2.length*0.7), (int) (players2.length-1));
+			if (random2<0) {
+				random2=0;
+			}
+			if (random2>=players2.length){
+				random2=players2.length-1;
+			}
+			theplayer=players2[random2];
+		}
+		
+		Team t2 = library.getTeamForName(theplayer.getTeam());
+		System.out.println(TransferLogic.requestTransfer(theplayer, t, 1.1*theplayer.getPrice().doubleValue(), library, new TransferList()));
 		
 		
 	}
