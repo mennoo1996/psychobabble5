@@ -525,8 +525,10 @@ public class XMLParser {
 	private static Match readMatch(Element matchElement) {
 		String team1 = getNodeValue(matchElement, "team1");
 		String team2 = getNodeValue(matchElement, "team2");
+		int score1 = Integer.parseInt(getNodeValue(matchElement, "score1"));
+		int score2 = Integer.parseInt(getNodeValue(matchElement, "score2"));
 		
-		Match res = new Match(team1, team2);
+		Match res = new Match(team1, team2, score1, score2);
 		return res;	
 	}
 	
@@ -572,6 +574,14 @@ public class XMLParser {
 		Element team2Element = doc.createElement("team2");
 		matchElement.appendChild(team2Element);
 		team2Element.appendChild(doc.createTextNode(match.getTeam2()));
+		
+		Element score1Element = doc.createElement("score1");
+		matchElement.appendChild(score1Element);
+		score1Element.appendChild(doc.createTextNode(String.format("%d", match.getScore1())));
+		
+		Element score2Element = doc.createElement("score2");
+		matchElement.appendChild(score2Element);
+		score2Element.appendChild(doc.createTextNode(String.format("%d", match.getScore2())));
 		
 		return matchElement;
 	}
