@@ -37,6 +37,7 @@ public class Competition {
 	public void playRound() {
 		
 		
+		
 		Round currentRound = scheme.getRound(roundsPlayed + 1);
 		
 		for(Match match : currentRound.getMatches()) {
@@ -44,7 +45,7 @@ public class Competition {
 			Team team2 = library.getTeamForName(match.getTeam2());
 			
 			int[] result = GameLogic.getMatchResults(team1, team2);
-			
+		
 			// Set the scores
 			match.setScoreTeam1(result[1]);
 			match.setScoreTeam2(result[2]);
@@ -52,14 +53,17 @@ public class Competition {
 			if(result[0] == 0) {
 				team1.updateStandings("draw", result[1], result[2]);
 				team2.updateStandings("draw", result[1], result[2]);
+				
 			} else if(result[0] == 1) {
 				team1.updateStandings("won", result[1], result[2]);
 				team2.updateStandings("lost", result[2], result[1]);
 				GameLogic.changePositions(team2);
+				
 			} else if(result[0] == 2) {
 				team1.updateStandings("lost", result[1], result[2]);
 				team2.updateStandings("won", result[2], result[1]);
 				GameLogic.changePositions(team1);
+				
 			}
 			
 			boolean confirmed=true;
@@ -88,6 +92,7 @@ public class Competition {
 				}
 				
 			} while (!confirmed);
+			
 			match.setAssistMakerst1(assistMakerst1);
 			match.setAssistMakerst2(assistMakerst2);
 			for (Player a:assistMakerst1) {
@@ -165,7 +170,9 @@ public class Competition {
 		}
 		
 		
-
+		
+		
+		
 		this.roundsPlayed++;
 	}
 	

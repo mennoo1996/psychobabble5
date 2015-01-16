@@ -398,14 +398,27 @@ public abstract class TransferLogic {
 	}
 	
 	public static void AutoTransfer(Team playersTeam, Library library) {
-		int team1 = GameLogic.randomGenerator(0, 19);
-		int team2=team1;
-		while (team1==team2) {
-			team2=GameLogic.randomGenerator(0, 19);
-		}
+		
+		int playersteam = library.getLibrary().indexOf(playersTeam);
+		
+		int team1, team2, team3;
+		do {
+			team1 = GameLogic.randomGenerator(0, 19);
+			team2=team1;
+			while (team1==team2) {
+				team2=GameLogic.randomGenerator(0, 19);
+			}
+			team3=team1;
+			do {
+				team3=GameLogic.randomGenerator(0,19);
+				
+			} while (team3==team1 && team3==team2);
+		} while (!(playersteam!=team1 && playersteam!=team2 && playersteam!=team3));
 		
 		TransferLogic.AutoTransferForTeam(library.getLibrary().get(team1), playersTeam, library);
 		TransferLogic.AutoTransferForTeam(library.getLibrary().get(team2), playersTeam, library);
+		TransferLogic.AutoTransferForTeam(library.getLibrary().get(team3), playersTeam, library);
+		
 		
 		
 		
@@ -436,7 +449,7 @@ public abstract class TransferLogic {
 		
 		ArrayList<Player> options = new ArrayList<Player>();
 		for (Player p:allplayers) {
-			if ((!(playersTeam.getTeam().contains(p) || t.getTeam().contains(p)) && p.getPlayerType().equals(type))) {
+			if ((!(playersTeam.getTeam().contains(p) || t.getTeam().contains(p)) && p.getPlayerType().equals(type) && p.getPrice().doubleValue()*1.1<=t.getBudget())) {
 				options.add(p);
 			}
 		}
@@ -447,6 +460,9 @@ public abstract class TransferLogic {
 		}
 		
 		Player temp;
+		if(players.length==0) {
+			
+		}
 		for (int j=0;j<players.length;j++) {
 			for (int i=1;i<players.length;i++) {
 				if (players[i-1].getPrice().doubleValue()>players[i].getPrice().doubleValue())  {
@@ -462,7 +478,54 @@ public abstract class TransferLogic {
 			players2[i]=players[players.length-1-i];
 		}
 		
+		if (players2.length!=0) {
 		
+			Player theplayer = null;
+			int random = GameLogic.randomGenerator(1, 1000);
+			int random2=0;
+			if (random<=500) {
+				random2=GameLogic.randomGenerator(0,(int) (players2.length*0.2));
+				if (random2<0) {
+					random2=0;
+				}
+				if (random2>=players2.length){
+					random2=players2.length-1;
+				}
+				theplayer = players2[random2];
+			} if (random >500 && random <=750) {
+				random2=GameLogic.randomGenerator((int) (players2.length*0.2), (int) (players2.length*0.4));
+				if (random2<0) {
+					random2=0;
+				}
+				if (random2>=players2.length){
+					random2=players2.length-1;
+				}
+				theplayer=players2[random2];
+			} if (random>750 && random<=875) {
+				random2=GameLogic.randomGenerator((int) (players2.length*0.4), (int) (players2.length*0.7));
+				if (random2<0) {
+					random2=0;
+				}
+				if (random2>=players2.length){
+					random2=players2.length-1;
+				}
+				
+				theplayer=players2[random2];
+			} if (random>875) {
+				random2=GameLogic.randomGenerator((int) (players2.length*0.7), (int) (players2.length-1));
+				if (random2<0) {
+					random2=0;
+				}
+				if (random2>=players2.length){
+					random2=players2.length-1;
+				}
+				theplayer=players2[random2];
+			}
+			
+			Team t2 = library.getTeamForName(theplayer.getTeam());
+			
+			
+		}
 	}
 	
 }

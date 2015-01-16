@@ -719,12 +719,14 @@ public abstract class GameLogic {
 	}
 	
 	public static void changePositions(Team t) {
+		
 		Player[] array = t.getPositions().getPositionArray();
 		
 		ArrayList<Player> currentTeam = new ArrayList<Player>();
 		for (int i=0;i<11;i++) {
 			currentTeam.add(array[i]);
 		}
+		
 		int random = GameLogic.randomGenerator(0, 10);
 		Player p = currentTeam.get(random);
 		ArrayList<Player> sameType = new ArrayList<Player>();
@@ -734,6 +736,7 @@ public abstract class GameLogic {
 				sameType.add(team.get(i));
 			}
 		}
+		
 		
 		sameType.remove(p);
 		int [] ratings = new int[sameType.size()];
@@ -759,9 +762,11 @@ public abstract class GameLogic {
 			}
 		}
 		
+		
 		for (int i=0;i<ratings.length;i++) {
 			ratings[i]=(int) Math.pow(1.2, ratings[i]);
 		}
+		
 		
 		int ratingstotal=0;
 		
@@ -770,34 +775,42 @@ public abstract class GameLogic {
 			
 		}
 		
+		
 		for (int i=0;i<ratings.length;i++) {
 			if (i>0) {
 				ratings[i]+=ratings[i-1];
 			}
 		}
-		boolean confirmed=true;
-		do {
-			
-			confirmed=true;
-			random = GameLogic.randomGenerator(1, ratingstotal);
 		
-		
-		for (int i=0;i<ratings.length;i++) {
-			if (random<=ratings[i]) {
+		if (ratingstotal>0) {
+			if (!(sameType.size()==1 && currentTeam.contains(sameType.get(0)))) {
+			boolean confirmed=true;
+			do {
 				
-				if (!currentTeam.contains(sameType.get(i))) {
-				t.changePositions(p, sameType.get(i));
-				break; } else {
-					confirmed=false;
-					break;
+				
+				confirmed=true;
+				random = GameLogic.randomGenerator(1, ratingstotal);
+			
+			
+				for (int i=0;i<ratings.length;i++) {
+					
+					if (random<=ratings[i]) {
+						
+						if (!currentTeam.contains(sameType.get(i))) {
+						t.changePositions(p, sameType.get(i));
+						break;
+						} else {
+							confirmed=false;
+							break;
+						}
+					}
 				}
+			
+			
+			
+			}while (!confirmed);
 			}
-		}
-		
-		
-		
-		}while (!confirmed);
-		
+		} 
 		
 		
 	}
