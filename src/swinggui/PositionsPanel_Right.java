@@ -83,7 +83,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		//loop through team of 11 players
 		
 		for(int i = 11; i > 0; i--){
-			
+			//System.out.println(currentTeam.getPositions().getPositionArray()[i-1]);
 			panels[i - 1] = new PlayerPanel(null, i);
 			panels[i - 1].setName("playerPanel");
 			panels[i - 1].setLayout(new BoxLayout(panels[i - 1], BoxLayout.X_AXIS));
@@ -91,7 +91,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 			panels[i - 1].setMinimumSize(new Dimension(150,50));
 			
 			//panel content
-			if(currentTeam.getPositions() == null || currentTeam.getPositions().getPositionArray()[i - 1]== null){
+			if(currentTeam.getPositions() == null || currentTeam.getPositions().getPositionArray()[i - 1] == null){
 				setPlayerPanel(true,null,currentTeam,i, false);		
 			}
 			else{		
@@ -220,12 +220,6 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		setMaximumSize(new Dimension(900,600));
 		
 	}
-	
-//	public static void main(String[] args) {
-//		PositionsPanel_Right thing = new PositionsPanel_Right();
-//		thing.setVisible(true);
-//	}
-	
 	
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
