@@ -46,9 +46,12 @@ public class Positions {
 		String res = "Positions [";
 		
 		for(int i = 0; i < 11; i++) {
-			res += (i + 1) + "=" + positionArray[i].getName() + ",";
+			if (positionArray[i]!=null) {
+				res += (i + 1) + "=" + positionArray[i].getName() + ",";
+			} else {
+				res+= (i+1) + "=null,";
+			}
 		}
-		
 		res += "]";
 		
 		return res;
@@ -70,6 +73,14 @@ public class Positions {
 		if (!Arrays.equals(positionArray, other.positionArray))
 			return false;
 		return true;
+	}
+	
+	public void remove (Player p) {
+		for (int i=0;i<positionArray.length;i++) {
+			if (positionArray[i].equals(p)) {
+				positionArray[i]=null;
+			}
+		}
 	}
 	
 	

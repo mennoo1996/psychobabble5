@@ -16,7 +16,7 @@ public class TestXMLParse {
 	public static void main(String[] args) {
 //		Competition competition = XMLParser.readCompetition("players Database by team with empty standings.xml", "competition-scheme.xml");
 		
-//		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
+		Competition competition = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		
 //		System.out.println(competition.getLibrary().getLibrary().get(0).getTeam().get(0));
 //		for (int i=0;i<20;i++) {
@@ -88,9 +88,9 @@ public class TestXMLParse {
 //		
 
 		
-		GameList gl = XMLParser.readGameList("files/saves_v4.xml");
-		System.out.println(gl.toString());
-		XMLParser.writeGameList("files/saves_v4.xml", gl);
+//		GameList gl = XMLParser.readGameList("files/saves_v4.xml");
+//		System.out.println(gl.toString());
+//		XMLParser.writeGameList("files/saves_v4.xml", gl);
 //		XMLParser.writeGameList("files/saves.xml", gl);
 		
 //		GameList gl =XMLParser.readGameList("files/saves.xml");
@@ -117,7 +117,9 @@ public class TestXMLParse {
 //		}
 		
 //		TransferLogic.AutoTransfer(competition.getLibrary().getLibrary().get(0), competition.getLibrary());
-	
+		
+		System.out.println(TransferLogic.requestSell(competition.getLibrary().getLibrary().get(0).getTeam().get(0), competition.getLibrary().getLibrary().get(0), 20000000, competition.getLibrary()));
+		System.out.println(competition.getLibrary().getLibrary().get(0).getPositions());
 	}
 }
 

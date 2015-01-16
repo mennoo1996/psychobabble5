@@ -384,6 +384,9 @@ public abstract class TransferLogic {
 			player.setTeam(buyingTeam.getTeamName());
 			playersTeam.getTeam().remove(player);
 			player.setNumber(buyingTeam.getTeam().size());
+			if (playersTeam.getPositions().contains(player)) {
+				playersTeam.getPositions().remove(player);
+			}
 			
 			
 			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + askingPrice;
@@ -412,7 +415,7 @@ public abstract class TransferLogic {
 			do {
 				team3=GameLogic.randomGenerator(0,19);
 				
-			} while (team3==team1 && team3==team2);
+			} while (team3==team1 && team3==team2); 
 		} while (!(playersteam!=team1 && playersteam!=team2 && playersteam!=team3));
 		
 		TransferLogic.AutoTransferForTeam(library.getLibrary().get(team1), playersTeam, library);
