@@ -90,7 +90,13 @@ public class TestXMLParse {
 //		
 
 		
+
+//		GameList gl = XMLParser.readGameList("files/saves_v4.xml");
+//		System.out.println(gl.toString());
+//		XMLParser.writeGameList("files/saves_v4.xml", gl);
+
 		
+
 //		XMLParser.writeGameList("files/saves.xml", gl);
 		
 //		GameList gl =XMLParser.readGameList("files/saves.xml");
@@ -118,13 +124,12 @@ public class TestXMLParse {
 		
 //		TransferLogic.AutoTransfer(competition.getLibrary().getLibrary().get(0), competition.getLibrary());
 		
-		GameList gl = new GameList();
-		Game g1=gl.newgame("Menno", "Arsenal");
-		Game g2=gl.newgame("Bart", "Burnley");
-		g1.getTransferList().addTransfer(new TransferInProgress(competition.getLibrary().getLibrary().get(0).getTeam().get(0), 100000000, 100000000));
-		XMLParser.writeGameList("files/saves_v5.xml", gl);
-		GameList gl2 = XMLParser.readGameList("files/saves_v5.xml");
-		System.out.println(gl2.toString());
+
+		System.out.println(TransferLogic.requestSell(competition.getLibrary().getLibrary().get(0).getTeam().get(0), competition.getLibrary().getLibrary().get(0), 20000000, competition.getLibrary()));
+		System.out.println(competition.getLibrary().getLibrary().get(0).getPositions());
+
+		
+
 	}
 }
 
