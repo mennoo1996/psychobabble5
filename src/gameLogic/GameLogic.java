@@ -379,48 +379,48 @@ public abstract class GameLogic {
 				// A random number is generated between 0 and 100
 				
 				// If it is smaller than 95 (that is, in 95% of the cases), the loser gets a score of 0
-				if (random <=95) {
+				if (random <=75) {
 					allresults[1]=0;
 				// Otherwise the loser gets a score of 1 (5% chance)
 				} else {
 					allresults[1]=1;
 				}
 			} if (difference >5 && difference <=10) {
-				if (random <=90) {
+				if (random <=50) {
 					allresults[1]=0;
 				} else {
 					allresults[1]=1;
 				}
 			} if (difference >0 && difference <=5) {
-				if (random <=70) {
+				if (random <=25) {
 					allresults[1]=0;
-				} if (random >70 && random <=95) {
+				} if (random >25 && random <=60) {
 					allresults[1]=1;
-				} if (random>95) {
+				} if (random>60) {
 					allresults[1]=2;
 				}
 			} if (difference <=0 && difference >-5) {
-				if (random <= 55) {
+				if (random <= 5) {
 					allresults[1]=0;
-				} if (random >55 && random <=95) {
+				} if (random >5 && random <=35) {
 					allresults[1]=1;
-				} if (random>95) {
+				} if (random>35) {
 					allresults[1]=2;
 				}
 			} if (difference <=-5 && difference >-10) {
-				if (random <=40) {
+				if (random <=0) {
 					allresults[1]=0;
-				} if (random >40 && random <=90) {
+				} if (random >0 && random <=20) {
 					allresults[1]=1;
-				} if (random>90) {
+				} if (random>20) {
 					allresults[1]=2;
 				}
 			} if (difference<=-10) {
-				if (random <=25) {
+				if (random <=0) {
 					allresults[1]=0;
-				} if (random>25 && random <=80) {
+				} if (random>20 && random <=5) {
 					allresults[1]=1;
-				} if (random>80) {
+				} if (random>5) {
 					allresults[1]=2;
 				}
 			}
@@ -436,50 +436,52 @@ public abstract class GameLogic {
 		if (difference>10) {
 			// Generate a random number between 0 and 100 (100 to keep it simple, percentages)
 			// in 10 % of the cases the goal difference is 1
-			if (random <=10) {
+			if (random <=0) {
 				allresults[2]=allresults[1]+1;
 				// in 40 % of the cases the goal difference is 2
-			} if (random >10 && random <=50) {
+			} if (random >0 && random <=35) {
 				allresults[2]=allresults[1]+2;
 				// in 40% of the cases the goal difference is 3
-			} if (random > 50 && random <=90) {
+			} if (random > 35 && random <=75) {
 				allresults[2]=allresults[1]+3;
 				// in 10% of the cases the goal difference is 4
 			} if (random>90) {
 				allresults[2]=allresults[1]+4;
 			}
 		} if (difference >5 && difference <=10) {
-			if (random<=35) {
+			if (random<=20) {
 				allresults[2]=allresults[1]+1;
-			} if (random >35 && random <=80) {
+			} if (random >20 && random <=70) {
 				allresults[2]=allresults[1]+2;
-			} if (random >80 && random <=95) {
+			} if (random >70 && random <=90) {
 				allresults[2]=allresults[1]+3;
-			} if (random>95) {
+			} if (random>90) {
 				allresults[2]=allresults[1]+4;
 			}
 		} if (difference >0 && difference <=5) {
-			if (random <=55) {
+			if (random <=45) {
 				allresults[2]=allresults[1]+1;
-			} if (random >55 && random <=95) {
+			} if (random >45 && random <=80) {
 				allresults[2]=allresults[1]+2;
-			} if (random>95) {
+			} if (random>80) {
 				allresults[2]=allresults[1]+3;
 			}
 		} if (difference <=0 && difference >-5) {
 			if (random <=75) {
 				allresults[2]=allresults[1]+1;
-			} else {
+			} if (random>55 && random<=90) {
 				allresults[2]=allresults[1]+2;
+			} if (random>90) {
+				allresults[2]=allresults[1]+3;
 			}
 		} if (difference <=-5 && difference >-10) {
-			if (random <=90) {
+			if (random <=75) {
 				allresults[2]=allresults[1]+1;
 			} else {
 				allresults[2]=allresults[1]+2;
 			}
 		} if (difference<=-10) {
-			if (random <=95) {
+			if (random <=90) {
 				allresults[2]=allresults[1]+1;
 			} else {
 				allresults[2]=allresults[1]+2;
@@ -494,22 +496,23 @@ public abstract class GameLogic {
 	 */
 	public static void Team1WintLoserScore(int[] allresults, CurrentXIRating t1rating, CurrentXIRating t2rating) {
 		// This method follows the same structure as Team2Wint(), but then the other way around. Read the comments there to understand the way of calculating
+
 		int difference=t1rating.getDefending() - t2rating.getFinishing();
 		int random = GameLogic.randomGenerator(0, 100);
 		if (difference>10) {
-			if (random <=95) {
+			if (random <=75) {
 				allresults[2]=0;
 			} else {
 				allresults[2]=1;
 			}
 		} if (difference >5 && difference <=10) {
-			if (random <=90) {
+			if (random <=50) {
 				allresults[2]=0;
 			} else {
 				allresults[2]=1;
 			}
 		} if (difference >0 && difference <=5) {
-			if (random <=70) {
+			if (random <=25) {
 				allresults[2]=0;
 			} if (random >70 && random <=95) {
 				allresults[2]=1;
@@ -517,27 +520,27 @@ public abstract class GameLogic {
 				allresults[2]=2;
 			}
 		} if (difference <=0 && difference >-5) {
-			if (random <= 55) {
+			if (random <= 5) {
 				allresults[2]=0;
-			} if (random >55 && random <=95) {
+			} if (random >5 && random <=35) {
 				allresults[2]=1;
-			} if (random>95) {
+			} if (random>35) {
 				allresults[2]=2;
 			}
 		} if (difference <=-5 && difference >-10) {
-			if (random <=40) {
+			if (random <=0) {
 				allresults[2]=0;
-			} if (random >40 && random <=90) {
+			} if (random >0 && random <=20) {
 				allresults[2]=1;
-			} if (random>90) {
+			} if (random>20) {
 				allresults[2]=2;
 			}
 		} if (difference<=-10) {
-			if (random <=25) {
+			if (random <=0) {
 				allresults[2]=0;
-			} if (random>25 && random <=80) {
+			} if (random>0 && random <=5) {
 				allresults[2]=1;
-			} if (random>80) {
+			} if (random>5) {
 				allresults[2]=2;
 			}
 		}
@@ -549,47 +552,49 @@ public abstract class GameLogic {
 		int difference = t1rating.getFinishing() - t2rating.getDefending();
 		int random = GameLogic.randomGenerator(0, 100);
 		if (difference>10) {
-			if (random <=10) {
+			if (random <=0) {
 				allresults[1]=allresults[2]+1;
-			} if (random >10 && random <=50) {
+			} if (random >0 && random <=35) {
 				allresults[1]=allresults[2]+2;
-			} if (random > 50 && random <=90) {
+			} if (random > 35 && random <=75) {
+				allresults[1]=allresults[2]+3;
+			} if (random>75) {
+				allresults[1]=allresults[2]+4;
+			}
+		} if (difference >5 && difference <=10) {
+			if (random<=20) {
+				allresults[1]=allresults[2]+1;
+			} if (random >20 && random <=70) {
+				allresults[1]=allresults[2]+2;
+			} if (random >70 && random <=90) {
 				allresults[1]=allresults[2]+3;
 			} if (random>90) {
 				allresults[1]=allresults[2]+4;
 			}
-		} if (difference >5 && difference <=10) {
-			if (random<=35) {
-				allresults[1]=allresults[2]+1;
-			} if (random >35 && random <=80) {
-				allresults[1]=allresults[2]+2;
-			} if (random >80 && random <=95) {
-				allresults[1]=allresults[2]+3;
-			} if (random>95) {
-				allresults[1]=allresults[2]+4;
-			}
 		} if (difference >0 && difference <=5) {
-			if (random <=55) {
+			if (random <=45) {
 				allresults[1]=allresults[2]+1;
-			} if (random >55 && random <=95) {
+			} if (random >45 && random <=80) {
 				allresults[1]=allresults[2]+2;
-			} if (random>95) {
+			} if (random>80) {
 				allresults[1]=allresults[2]+3;
 			}
 		} if (difference <=0 && difference >-5) {
+			if (random <=55) {
+				allresults[1]=allresults[2]+1;
+			} if (random >55 && random<=90) {
+				allresults[1]=allresults[2]+2;
+			} if (random>90) {
+				allresults[1]=allresults[2]+3;
+			}
+		} if (difference <=-5 && difference >-10) {
 			if (random <=75) {
 				allresults[1]=allresults[2]+1;
 			} else {
 				allresults[1]=allresults[2]+2;
 			}
-		} if (difference <=-5 && difference >-10) {
-			if (random <=90) {
-				allresults[1]=allresults[2]+1;
-			} else {
-				allresults[1]=allresults[2]+2;
-			}
 		} if (difference<=-10) {
-			if (random <=95) {
+			if (random <=90) {
 				allresults[1]=allresults[2]+1;
 			} else {
 				allresults[1]=allresults[2]+2;
