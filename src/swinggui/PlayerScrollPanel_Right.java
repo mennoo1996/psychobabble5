@@ -77,9 +77,9 @@ class PlayerScrollPanel_Right extends JPanel{
 			label2.add(attr);
 		}
 		
-		JLabel label3 = new JLabel("	" + player.getTeam());
+		JLabel label3 = new JLabel("	" + player.getTeam() + "    ");
 		label3.setFont(fontPlayername);
-		JLabel label4 = new JLabel("	" + player.getPlayerType());
+		JLabel label4 = new JLabel("	" + player.getPlayerType() + "    ");
 		label4.setFont(fontPlayerattr);
 		
 		//splitters

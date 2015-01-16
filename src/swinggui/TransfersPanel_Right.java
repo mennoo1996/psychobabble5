@@ -50,7 +50,7 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		//massive player array filling here (dunno if its heavy, but maybe we should thread this?)
 		for (int i=0;i<currentCompetition.getLibrary().getLibrary().size();i++) {
 			Team t = currentCompetition.getLibrary().getLibrary().get(i);
-			for (int j=0;j<t.getTeam().size();j++) {
+			for (int j=0;j<t.getTeam().size();j++) {				
 				Players.add(t.getTeam().get(j));
 			}
 		}
@@ -90,6 +90,15 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		
 		//add stuff to ScrollPaneContent (make this function so you can recall the damned thing, lol)
 		for(int w=0;w<Players.size();w++){
+//			boolean add = false;
+//			for(int k=0;k<currentTeam.getTeam().size();k++){
+//					if(Players.get(w).equals(currentTeam.getTeam().get(k))){
+//						add=true;
+//				}
+//			}
+//			if(add==false){
+//				
+//			}
 			PlayerScrollPanel_Right panel = new PlayerScrollPanel_Right(Players.get(w), changeTeamListener, w);
 			selections.add(panel);
 			ScrollPaneContent.add(panel);
@@ -126,6 +135,15 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		int i = 0;
 		for(int w=0;w<Players.size();w++){
 			if(Players.get(w).getName().toLowerCase().contains(search) || Players.get(w).getTeam().toLowerCase().contains(search)){
+//				boolean add = false;
+//				for(int k=0;k<currentTeam.getTeam().size();k++){
+//						if(Players.get(w).equals(currentTeam.getTeam().get(k))){
+//							add=true;
+//					}
+//				}
+//				if(add==false){
+//					
+//				}
 				PlayerScrollPanel_Right panel = new PlayerScrollPanel_Right(Players.get(w), changeTeamListener, i);
 				ScrollPaneContent.add(panel);
 				selections.add(panel);

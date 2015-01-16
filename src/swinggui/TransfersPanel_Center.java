@@ -23,12 +23,20 @@ import libraryClasses.Player;
 
 public class TransfersPanel_Center extends JPanel{
 
+	
+	
 	private JPanel playerPanel;
-	private JPanel buttonPanel;
 	private JPanel statPanel;
-	private JTextField textField;
+	private JPanel sellPanel;
+	private JPanel buyPanel;
+	
+	private JTextField buyField;
+	private JTextField sellField;
+	
 	private Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 12);
+	private Font fontSelected = new Font("Avenir", Font.ROMAN_BASELINE, 12);
+	
 	
 	public TransfersPanel_Center() {
 		initUI();
@@ -53,17 +61,14 @@ public class TransfersPanel_Center extends JPanel{
 
 		//content begins here
 		playerPanel = new JPanel();
-		JLabel nothing = new JLabel("No player selected");
-		playerPanel.add(nothing);
 		statPanel = new JPanel();
-		buttonPanel = new JPanel(new BorderLayout());
-		JButton transferButton = new JButton("nothing");
-		buttonPanel.add(transferButton);
-
+		buyPanel = new JPanel();
+		sellPanel = new JPanel();
+		
 		add(playerPanel);
 		add(statPanel);
-		add(buttonPanel);
-		
+		add(sellPanel);
+		add(buyPanel);
 		//content ends here
 		
 		setMinimumSize(new Dimension(100,500));
@@ -76,8 +81,8 @@ public class TransfersPanel_Center extends JPanel{
 	
 	public void showPlayer(boolean isLeft, Player player){
 		
-
-		remove(buttonPanel);
+		remove(buyPanel);
+		remove(sellPanel);
 		remove(statPanel);
 		remove(playerPanel);
 		playerPanel = new JPanel(new BorderLayout());
@@ -96,6 +101,8 @@ public class TransfersPanel_Center extends JPanel{
 		label1.setOpaque(false);
 		playerPanel.add(label1, BorderLayout.WEST);
 		
+		//Player Name, T-Shirt Panel
+		
 		String name = player.getName();
 		String team = player.getTeam();
 		JPanel namePanel = new JPanel(); namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.Y_AXIS));
@@ -107,11 +114,13 @@ public class TransfersPanel_Center extends JPanel{
 		playerPanel.add(namePanel, BorderLayout.CENTER); 
 		playerPanel.setMaximumSize(new Dimension(2000, 250));
 		
+		//Player Stats Panel
+		
 		statPanel = new JPanel();
 		statPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
-		statPanel.setMinimumSize(new Dimension(0, 30));
-		statPanel.setPreferredSize(new Dimension(50, 30));
-		statPanel.setMaximumSize(new Dimension(2000, 30));
+		statPanel.setMinimumSize(new Dimension(0, 60));
+		statPanel.setPreferredSize(new Dimension(50, 60));
+		statPanel.setMaximumSize(new Dimension(2000, 60));
 		if(player.getPlayerType() != "Goalkeeper"){
 			//statPanel.setLayout(new GridLayout(1,4));
 			FieldPlayer player1 = (FieldPlayer) player;
@@ -139,20 +148,72 @@ public class TransfersPanel_Center extends JPanel{
 			statPanel.add(attr);
 		}
 		
-		JButton transferButton = new JButton("Transfer");
-		transferButton.setName("Test");
+		
+		//sellpanel with normal content when isLeft, or gray content when !isLeft
+		sellPanel = new JPanel(new BorderLayout());
+		JPanel sellPanel2 = new JPanel();
+		sellPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		
+		//selllabel
+		JLabel sellLabel = new JLabel("Suggested price: $" + player.getPrice());
+		sellLabel.setFont(fontSelected);
+		
+		//selltextfield
+		sellField = new JTextField(10);
+		sellField.setName("textField");
+		
+		//sellbutton
+		JButton sellButton = new JButton("Sell player");
+		sellButton.setName("Test");
+		
+		if(!isLeft){
+			sellLabel.setText("select a player from your team");
+			sellField.setEnabled(false);
+			sellButton.setEnabled(false);
+		}
 
-		textField = new JTextField(10);
-		textField.setName("textField");
-		buttonPanel = new JPanel(new FlowLayout());
+		sellPanel2.add(sellButton);
+		sellPanel2.add(sellField);
+		sellPanel2.add(sellLabel);
+		sellPanel.add(sellPanel2, BorderLayout.CENTER);
+		
+		//buypanel with normal content when !isLeft, or gray content when isLeft
+		
+		buyPanel = new JPanel(new BorderLayout());
+		JPanel buyPanel2 = new JPanel();
+		
+		//buylabel
+		JLabel buyLabel = new JLabel("Suggested price: $" + player.getPrice());
+		buyLabel.setFont(fontSelected);
+		
+		//buytextfield
+		buyField=  new JTextField(10);
+		buyField.setName("textField");
+		
+		//buybutton
+		JButton buyButton = new JButton("Buy player");
+		buyButton.setName("Test");
+		buyButton.setEnabled(false);
 
+		if(isLeft){
+			buyLabel.setText("select a player from other teams");
+			buyField.setEnabled(false);
+			buyButton.setEnabled(false);
+		}
+		else{
+			buyField.setEnabled(true);
+			buyButton.setEnabled(true);
+		}
 
-		buttonPanel.add(textField);
-		buttonPanel.add(transferButton);
+		buyPanel2.add(buyButton);
+		buyPanel2.add(buyField);
+		buyPanel2.add(buyLabel);
+		buyPanel.add(buyPanel2, BorderLayout.CENTER);
 		
 		add(playerPanel);
 		add(statPanel);
-		add(buttonPanel);
+		add(sellPanel);
+		add(buyPanel);
 		
 		revalidate();
 		repaint();
@@ -160,8 +221,19 @@ public class TransfersPanel_Center extends JPanel{
 		
 	}
 	
-	public void noPlayer(){
-		
+	public int getPrice(boolean isSell){
+		String stringPrice;
+		if(isSell){
+			stringPrice = sellField.getText();
+		}
+		else{
+			stringPrice = buyField.getText();
+		}
+		int Price = Integer.parseInt(stringPrice);
+		if(Price>100000000){
+			Price=100000000;
+		}
+		return Price;
 	}
 	
 	public ImageIcon createImageIcon(String path) {
