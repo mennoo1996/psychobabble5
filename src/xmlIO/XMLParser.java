@@ -733,11 +733,11 @@ public class XMLParser {
 		
 		Element priceReturnedElement = doc.createElement("priceReturned");
 		transferElement.appendChild(priceReturnedElement);
-		priceReturnedElement.appendChild(doc.createTextNode(String.format("%f", transfer.getPriceReturned())));
+		priceReturnedElement.appendChild(doc.createTextNode(Double.toString(transfer.getPriceReturned())));
 		
 		Element bidElement = doc.createElement("bid");
 		transferElement.appendChild(bidElement);
-		bidElement.appendChild(doc.createTextNode(String.format("%f", transfer.getBid())));
+		bidElement.appendChild(doc.createTextNode(Double.toString(transfer.getBid())));
 		
 		return transferElement;
 	}
