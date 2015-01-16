@@ -14,6 +14,7 @@ public class Team {
 	private double budget;
 	private Standings standings;
 	private Positions positions;
+	private boolean isMax;
 	
 	/**
 	 * Constructor which initialises an empty team with the given team name
@@ -26,6 +27,7 @@ public class Team {
 		this.budget = budget;
 		this.standings = standings;
 		this.positions=new Positions();
+		isMax=false;
 	}
 	
 	/**
@@ -156,7 +158,14 @@ public class Team {
 	 * @param player - player to add
 	 */
 	public void add(Player player) {
-		team.add(player);
+		if (!isMax) {
+		
+			team.add(player);
+			if (team.size()==30) {
+				
+				isMax=true;
+			}
+		}
 	}
 	
 	public void addToCurrentTeam(Player player) {
@@ -205,7 +214,14 @@ public class Team {
 	 * @param team - the team to set
 	 */
 	public void setTeam(ArrayList<Player> team) {
-		this.team = team;
+		if (team.size()<=30) {
+			this.team = team;
+			if (team.size()==30) {
+				isMax=true;
+			} else {
+				isMax=false;
+			}
+		}
 	}
 
 	/**
@@ -300,6 +316,22 @@ public class Team {
 			}
 		} 
 	}
+
+	/**
+	 * @return the isMax
+	 */
+	public boolean isMax() {
+		return isMax;
+	}
+
+	/**
+	 * @param isMax the isMax to set
+	 */
+	public void setMax(boolean isMax) {
+		this.isMax = isMax;
+	}
+	
+	
 	
 	
 	
