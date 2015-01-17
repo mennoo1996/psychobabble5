@@ -25,6 +25,18 @@ public class Match {
 		this.score2 = -1;
 	}
 	
+	/**
+	 * Constructor which initializes a match with the two given team names
+	 * @param team1	- The first team name
+	 * @param team2	- the second team name
+	 */
+	public Match(String team1, String team2, int score1, int score2) {
+		this.team1 = team1;
+		this.team2 = team2;
+		this.score1 = score1;
+		this.score2 = score2;
+	}
+	
 	
 
 	
