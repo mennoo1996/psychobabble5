@@ -49,6 +49,8 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	private JPanel statPanel;
 	private JPanel sellPanel;
 	private JPanel buyPanel;
+	private JPanel messagePanel;
+	private JLabel messagePanel2;
 	
 	private JTextField buyField;
 	private JTextField sellField;
@@ -90,11 +92,13 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		statPanel = new JPanel();
 		buyPanel = new JPanel();
 		sellPanel = new JPanel();
+		messagePanel = new JPanel();
 		
 		add(playerPanel);
 		add(statPanel);
 		add(sellPanel);
 		add(buyPanel);
+		add(messagePanel);
 		//content ends here
 		
 		setMinimumSize(new Dimension(100,500));
@@ -106,6 +110,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	public void showPlayer(boolean isleft, Player play){
 		player=play;
 		isLeft = isleft;
+		remove(messagePanel);
 		remove(buyPanel);
 		remove(sellPanel);
 		remove(statPanel);
@@ -231,6 +236,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 		buyPanel = new JPanel(new BorderLayout());
 		JPanel buyPanel2 = new JPanel();
+		buyPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
 		
 		//buylabel
 		JLabel buyLabel = new JLabel("Suggested price: $" + priceString);
@@ -271,10 +277,18 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 		buyPanel.add(buyPanel2, BorderLayout.CENTER);
 		
+		//messagepanel
+		messagePanel = new JPanel();
+		messagePanel.setOpaque(true);
+		messagePanel2 = new JLabel("Transfer players here");
+		messagePanel2.setFont(fontPlayerattr);
+		messagePanel.add(messagePanel2);
+		
 		add(playerPanel);
 		add(statPanel);
 		add(sellPanel);
 		add(buyPanel);
+		add(messagePanel);
 		
 		revalidate();
 		repaint();
@@ -312,6 +326,11 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		return player;
 	}
 	
+	public void setMessage(String message, Color color){
+		messagePanel.setBackground(color);
+		messagePanel2.setText(message);
+	}
+	
 	public void checkInt(){
 		JTextField input;
 		JLabel output;
@@ -327,6 +346,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 			button = buyButton;
 		}
 		output.setText("");
+		setMessage("Transfer players here", new Color(255,255,255));
 		try{
 			int Price = Integer.parseInt(input.getText());
 			button.setEnabled(true);
@@ -334,10 +354,12 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		catch(NumberFormatException e){
 			if(input.getText().equals("")){
 				output.setText("");
+				setMessage("Transfer players here", new Color(255,255,255));
 				button.setEnabled(true);
 			}
 			else{
 				output.setText("Please enter a number!");
+				setMessage("", new Color(245,245,245));
 				button.setEnabled(false);
 			}
 		}
