@@ -20,6 +20,48 @@ public class PositionsTest {
 		Player[] result = p.getPositionArray();
 		assertEquals(expected, result);
 	}
+	
+	@Test
+	public void testContains() {
+		Positions p = new Positions();
+		Player[] array1 = new Player[11];
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		array1[0]=attacker;
+		Attacker attacker2 = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, true, 88, 96, 45, 80);
+		p.setPositionArray(array1);
+		assertTrue(p.contains(attacker));
+		assertFalse(p.contains(attacker2));
+	}
+	
+	@Test
+	public void testToString() {
+		Positions p = new Positions();
+		Player[] array1 = new Player[11];
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		array1[0]=attacker;
+		for (int i=1;i<11;i++) {
+			array1[i]=null;
+		}
+		p.setPositionArray(array1);
+		String expected = "Positions [1=OOPBoy,2=null,3=null,4=null,5=null,6=null,7=null,8=null,9=null,10=null,11=null,]";
+		assertEquals(expected, p.toString());
+	}
+	
+	@Test
+	public void testRemove() {
+		Positions p = new Positions();
+		Player[] array1 = new Player[11];
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		array1[1]=attacker;
+		Attacker attacker2 = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, true, 88, 96, 45, 80);
+
+		array1[0]=null;
+		array1[2]=attacker2;
+		p.setPositionArray(array1);
+		p.remove(attacker2);
+		assertTrue(p.contains(attacker));
+		assertFalse(p.contains(attacker2));
+	}
 
 	@Test
 	public void testPositionsPlayerArray() {

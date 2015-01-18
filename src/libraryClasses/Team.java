@@ -214,13 +214,17 @@ public class Team {
 	 * @param team - the team to set
 	 */
 	public void setTeam(ArrayList<Player> team) {
-		if (team.size()<=30) {
-			this.team = team;
-			if (team.size()==30) {
-				isMax=true;
+		if (team!=null) {
+			if (team.size()<=30) {
+				this.team = team;
+					if (team.size()==30) {
+						isMax=true;
+					} else {
+						isMax=false;
+					}
+				}
 			} else {
-				isMax=false;
-			}
+			this.team=null;
 		}
 	}
 
@@ -311,9 +315,10 @@ public class Team {
 	public void changePositions(Player playerout, Player playerin) {
 		Player[] array = positions.getPositionArray();
 		for (int i=0;i<array.length;i++) {
+			if (array[i]!=null) {
 			if (array[i].equals(playerout)) {
 				array[i]=playerin;
-			}
+			}}
 		} 
 	}
 

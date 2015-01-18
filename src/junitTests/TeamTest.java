@@ -68,6 +68,17 @@ public class TeamTest {
 		assertEquals(t.getStandings().getWon(), 2);
 		assertEquals(t.getStandings().getGoalsFor(), 5);
 		assertEquals(t.getStandings().getGoalsAgainst(), 7);
+		assertEquals(t.getBudget(), 1000010, 0);
+		t.updateStandings("draw", 1, 1);
+		assertEquals(t.getStandings().getDraw(), 3);
+		assertEquals(t.getBudget(), 1500010, 0);
+		t.updateStandings("lost", 1, 1);
+		assertEquals(t.getStandings().getLost(), 4);
+		assertEquals(t.getBudget(), 1600010, 0);
+		t.updateStandings("won", 4, 1);
+		assertEquals(t.getBudget(), 3100010, 0);
+		t.updateStandings("won", 2, 0);
+		assertEquals(t.getBudget(), 4200010, 0);
 	}
 
 	@Test
@@ -190,6 +201,15 @@ public class TeamTest {
 		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 13, 5, true, 88, 96, 45, 80);
 		t.add(attacker);
 		assertTrue(t.getTeam().contains(attacker));
+		t.setMax(true);
+		Attacker attacker2 = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 43, 7, 3, 2, 1, 13, 5, true, 88, 96, 45, 80);
+		t.add(attacker2);
+		assertFalse(t.getTeam().contains(attacker2));
+		t.setMax(false);
+		for(int i=0;i<29;i++) {
+			t.add(attacker);
+		}
+		assertTrue(t.isMax());
 	}
 	
 	@Test
@@ -257,6 +277,17 @@ public class TeamTest {
 		array.add(attacker);
 		t.setTeam(array);
 		assertEquals(t.getTeam(), array);
+		t.setTeam(null);
+		assertNull(t.getTeam());
+		ArrayList<Player> array2 = new ArrayList<Player>();
+		for (int i=0;i<30;i++) {
+			array2.add(attacker);
+		}
+		t.setTeam(array2);
+		assertTrue(t.isMax());
+		array2.add(attacker);
+		t.setTeam(array2);
+		
 	}
 
 	@Test
@@ -391,6 +422,26 @@ public class TeamTest {
 		Standings s = new Standings(1, 2, 3, 4, 5, "team1");
 		Team t = new Team("team1", 10, s);
 		assertNull(t.getPlayerForNameAndAge("Menno", 18));
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 13, 5, true, 88, 96, 45, 80);
+		Attacker attacker2 = new Attacker(new BigDecimal(2), "j", "4", 1, 1, 1, 1, 1, 1, 1, 1, true, 1, 1, 1, 1);
+		t.add(attacker2);
+		t.add(attacker);
+		assertEquals(attacker, t.getPlayerForNameAndAge("OOPBoy", 18));
+	}
+	
+	@Test
+	public void testChangePositions() {
+		Standings s = new Standings(1, 2, 3, 4, 5, "team1");
+		Team t = new Team("team1", 10, s);
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 13, 5, true, 88, 96, 45, 80);
+		Attacker attacker2 = new Attacker(new BigDecimal(2), "j", "4", 1, 1, 1, 1, 1, 1, 1, 1, true, 1, 1, 1, 1);
+		Player[] array = new Player[11];
+		array[0]=null;
+		array[1]=attacker2;
+		array[2]=attacker;
+		t.getPositions().setPositionArray(array);
+		t.changePositions(attacker, attacker2);
+		assertEquals(attacker2, t.getPositions().getPositionArray()[2]);
 	}
 
 }
