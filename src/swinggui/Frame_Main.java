@@ -4,12 +4,15 @@ import game.Competition;
 import gameLogic.TransferLogic;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -91,23 +94,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 		curPanel = splashChoice;
 		add(curPanel, BorderLayout.CENTER);
 		
-		//temporary, for the help text or something, I'll fix it later
-//		JPanel Helper = new JPanel();
-//		Helper.setLayout(new BoxLayout(Helper, BoxLayout.X_AXIS));
-//		Helper.add(new Box.Filler(minSize, prefSize, null));
-//		JPanel HelperBox = new JPanel();
-//		HelperBox.setName("Panel"); HelperBox.setOpaque(false);
-//		HelperBox.setMinimumSize(new Dimension(200,40));
-//		HelperBox.setPreferredSize(new Dimension(1200,40));
-//		HelperBox.setMaximumSize(new Dimension(1800,100));
-//		Helper.add(HelperBox);
-//		Helper.add(new Box.Filler(minSize, prefSize, null));
-//		add(Helper);
 		
-		//southern space
-//		Component test = Box.createRigidArea(new Dimension(boxwidth, 108));
-//		test.setBackground(new Color(0,0,0,200));
-//		add(test);
+		
+		
+		
 	}
 	
 	public static void main(String[] args){
@@ -291,6 +281,27 @@ public class Frame_Main extends JFrame implements ActionListener{
 			// Refresh the view
 			add(replTransfview, BorderLayout.CENTER, 1);
 			curPanel = replTransfview;
+			
+//			//temporary, for the help text or something, I'll fix it later
+//			JPanel Helper = new JPanel();
+//			Helper.setLayout(new BoxLayout(Helper, BoxLayout.X_AXIS));
+//			Helper.add(new Box.Filler(minSize, prefSize, null));
+//			JPanel HelperBox = new JPanel();
+//			HelperBox.setName("Panel"); HelperBox.setOpaque(false);
+//			HelperBox.setMinimumSize(new Dimension(200,130));
+//			HelperBox.setPreferredSize(new Dimension(1200,130));
+//			HelperBox.setMaximumSize(new Dimension(2000,130));
+//			Helper.add(HelperBox);
+//			Helper.add(new Box.Filler(minSize, prefSize, null));
+//			add(Helper);
+			
+//			//southern space
+//			Component test = Box.createRigidArea(new Dimension(this.getWidth(), 108));
+//			test.setBackground(new Color(0,0,0,200));
+//			add(test);
+			
+			
+			
 			revalidate();
 			repaint();
 		}

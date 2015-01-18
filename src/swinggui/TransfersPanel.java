@@ -4,6 +4,7 @@ import game.Competition;
 import gameLogic.TransferList;
 import gameLogic.TransferLogic;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,7 @@ import java.awt.event.MouseListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -24,9 +26,11 @@ public class TransfersPanel extends JPanel implements MouseListener {
 	
 	private Dimension minSize = new Dimension(20,20);
 	private Dimension prefSize = new Dimension(40,20);
+	private JComponent fillLeft;
 	private TransfersPanel_Left left;
 	private TransfersPanel_Center center;
 	private TransfersPanel_Right right;
+	private JComponent fillRight;
 	
 	private boolean isleft = true;
 	private int selectedIndex;
@@ -46,9 +50,11 @@ public class TransfersPanel extends JPanel implements MouseListener {
 	public final void initUI() {
 
 		transfers = new TransferList();
-		
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		add(new Box.Filler(minSize, prefSize, null));
+		
+		//left filler
+		fillLeft = new Box.Filler(minSize, prefSize, null);
+		add(fillLeft);
 		
 		// add the overview panels
 		left = new TransfersPanel_Left(currentTeam, this);
@@ -59,12 +65,14 @@ public class TransfersPanel extends JPanel implements MouseListener {
 		add(right);
 		right.noSelection();
 		center.showPlayer(isleft, left.getPlayer(0));
-		add(new Box.Filler(minSize, prefSize, null));
+		
+		//right filler
+		fillRight = new Box.Filler(minSize, prefSize, null);
+		add(fillRight);
 		
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseDetect(MouseEvent e) {
 		if(e.getSource() instanceof PlayerScrollPanel_Right){
 			PlayerScrollPanel_Right panel = (PlayerScrollPanel_Right) e.getSource();
 			selectedIndex = panel.getPlayerIndex();
@@ -98,15 +106,66 @@ public class TransfersPanel extends JPanel implements MouseListener {
 			left.noSelection();
 		}
 		if(e.getSource() instanceof JButton){
+			String Answer;
+			Player transferPlayer = center.getPlayer();
 			if(isleft){
-				TransferLogic.requestSell(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary());
+				Answer = TransferLogic.requestSell(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary());
+				Answer = Answer.substring(0, 15); 
+				System.out.println(Answer);
+				if(Answer.equals("Congratulations")){
+					reload("Succes! Sold " + transferPlayer.getName(), new Color(197,253,179));
+				} else if(Answer.equals("Unfortunately y")){
+					center.setMessage("Sadly, the offer was not accepted", new Color(253, 176, 176));
+				} else if(Answer.equals("You can't try t")){
+					center.setMessage("Can't sell " + transferPlayer.getName() + " right now", new Color(253, 176, 176));
+				}
 			}
 			else{
-				TransferLogic.requestTransfer(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary(), transfers);
+				Answer = TransferLogic.requestTransfer(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary(), transfers);
+				Answer = Answer.substring(0, 15); 
+				System.out.println(Answer);
+				if(Answer.equals("Congratulations")){
+					reload("Succes! Bought " + transferPlayer.getName(), new Color(197,253,179));
+				} else {
+					center.setMessage("Sadly, the offer was not accepted", new Color(253, 176, 176));
+				}
 			}
 		}
 	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		mouseDetect(e);
+	}
 
+	public void reload(String message, Color color){
+		
+		remove(fillRight); 
+		remove(right); remove(center); remove(left);
+		remove(fillLeft);
+		
+		//left filler
+		fillLeft = new Box.Filler(minSize, prefSize, null);
+		add(fillLeft);
+		
+		// add the overview panels
+		left = new TransfersPanel_Left(currentTeam, this);
+		add(left);
+		center = new TransfersPanel_Center(this);
+		add(center);
+		right = new TransfersPanel_Right(currentCompetition, currentTeam, this);
+		add(right);
+		right.noSelection();
+		center.showPlayer(isleft, left.getPlayer(0));
+		center.setMessage(message, color);
+		
+		//right filler
+		fillRight = new Box.Filler(minSize, prefSize, null);
+		add(fillRight);
+		
+		
+	}
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -115,8 +174,7 @@ public class TransfersPanel extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		mouseDetect(e);
 	}
 
 	@Override
