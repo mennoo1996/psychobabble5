@@ -214,13 +214,17 @@ public class Team {
 	 * @param team - the team to set
 	 */
 	public void setTeam(ArrayList<Player> team) {
-		if (team.size()<=30) {
-			this.team = team;
-			if (team.size()==30) {
-				isMax=true;
+		if (team!=null) {
+			if (team.size()<=30) {
+				this.team = team;
+					if (team.size()==30) {
+						isMax=true;
+					} else {
+						isMax=false;
+					}
+				}
 			} else {
-				isMax=false;
-			}
+			this.team=null;
 		}
 	}
 
