@@ -62,6 +62,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	public Frame_Main() {
 		current = "nada";
 		
+		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		roundNum = 0;
 		
 		// Currently only supports one season
