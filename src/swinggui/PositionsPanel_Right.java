@@ -168,7 +168,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					break;
 				case(4): //player 8
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(10,0,0,0);
+					c.insets = new Insets(20,0,0,0);
 					c.weightx = 0.5;
 					c.weighty = 0.5;
 					c.gridx = 1;
@@ -177,7 +177,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 					break;
 				case(3): //player 9
 					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(10,0,0,0);
+					c.insets = new Insets(20,0,0,0);
 					c.weightx = 0.5;
 					c.weighty = 0.5;
 					c.gridx = 2;
