@@ -144,7 +144,14 @@ public class Frame_Main extends JFrame implements ActionListener{
 				case "Play as this team":					
 					String teamName = (String)possibleMenuB.getClientProperty("teamName");
 										
-					loadMainScreen(teamName);
+					loadMainScreenNewGame(teamName);
+					
+					break;
+				case "Load This Game":
+					
+					int gameIndex = (int)possibleMenuB.getClientProperty("gameIndex");
+					
+					loadMainScreenLoadedGame(gameIndex);
 					
 					break;
 				case "overview ":					
@@ -170,6 +177,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 										
 					// Then display statistics page showcasing the results of the season
 					current = "match";
+					
+					currentGame.save();
+					XMLParser.writeGameList("files/saves_v6.xml", games);
 					
 					// Initialize new JPanel and remove current pane
 					MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
@@ -199,7 +209,14 @@ public class Frame_Main extends JFrame implements ActionListener{
 	}
 	
 	public void loadLoadScreen() {
+		LoadPanel loadYaGame = new LoadPanel(games, this);
 		
+		remove(curPanel);
+		
+		curPanel = loadYaGame;
+		add(curPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
 	}
 	
 	public void loadNameChoiceScreen() {
@@ -227,12 +244,48 @@ public class Frame_Main extends JFrame implements ActionListener{
 		repaint();
 	}
 	
-	public void loadMainScreen(String chosenTeam) {
+	public void loadMainScreenLoadedGame(int gameIndex) {
+		// Create the new game
+		currentGame = games.get(gameIndex);
+		
+		curComp = currentGame.getCompetition();
+		curTeam = currentGame.getTeam();
+		
+		currentGame.save();
+		XMLParser.writeGameList("files/saves_v6.xml", games);
+		
+		remove(curPanel);
+		// Start playing!
+		// Get screen sizes (for fullscreen)
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int boxwidth = (int) tk.getScreenSize().getWidth();
+		int boxheight = (int) tk.getScreenSize().getHeight();
+		
+		//Header panel
+		Header header = new Header(this);
+		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+		add(header);
+		
+		//Center panel begins here
+		OverviewPanel overviewPanel = new OverviewPanel(curComp);
+		
+		// set current screen string
+		current = "overview";
+		
+		//Center panel ends here
+		curPanel = overviewPanel;
+		add(curPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
+	public void loadMainScreenNewGame(String chosenTeam) {
 		curTeam = curComp.getLibrary().getTeamForName(chosenTeam);
 		
 		// Create the new game
 		currentGame = games.newgame(playerName, chosenTeam);
 		currentGame.save();
+		XMLParser.writeGameList("files/saves_v6.xml", games);
 		
 		remove(curPanel);
 		// Start playing!
@@ -263,6 +316,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		if (!current.equals("overview")) {
 			current = "overview";
 			
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
+			
 			// Initialize new JPanel and remove current pane
 			OverviewPanel replOverview = new OverviewPanel(curComp);
 			remove(curPanel);
@@ -279,6 +335,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to statistics panel if not current
 		if (!current.equals("statistics")) {
 			current = "statistics";
+			
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			StatisticsPanel replStatview = new StatisticsPanel(curComp);
@@ -297,6 +356,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		if (!current.equals("positions")) {
 			current = "positions";
 			
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
+			
 			// Initialize new JPanel and remove current pane
 			PositionsPanel replPositsview = new PositionsPanel(curTeam);
 			remove(curPanel);
@@ -313,6 +375,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to transfers panel if not current
 		if (!current.equals("transfers")) {
 			current = "transfers";
+			
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			TransfersPanel replTransfview = new TransfersPanel(curTeam, curComp);

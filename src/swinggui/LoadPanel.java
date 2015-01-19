@@ -81,7 +81,11 @@ public class LoadPanel extends JPanel implements MouseListener {
 		JScrollPane scrollPane = new JScrollPane(saveGameContentPane, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(17);
 		
-		add(scrollPane);
+		scrollPane.setMinimumSize(new Dimension(100,500));
+		scrollPane.setPreferredSize(new Dimension(450,550));
+		scrollPane.setMaximumSize(new Dimension(900,612));
+		
+		gameChoicePanel.add(scrollPane);
 		
 		// Add the load game button
 		loadButton = new JButton("Load This Game");
@@ -90,7 +94,11 @@ public class LoadPanel extends JPanel implements MouseListener {
 		loadButton.putClientProperty("gameIndex", 0);
 		loadButton.addActionListener(gameChoiceListener);
 		
-		add(loadButton);
+		gameChoicePanel.add(loadButton);
+		
+		add(gameChoicePanel);
+		
+		add(new Box.Filler(minSize, prefSize, null));
 	}
 	
 	public void mouseClicked(MouseEvent e) {
