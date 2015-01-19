@@ -35,7 +35,7 @@ public class SplashPanel extends JPanel {
 		// MARK: LOGO HERE?
 		
 		// Add title
-		JLabel titleLabel = new JLabel("Soccer Manager", JLabel.CENTER);
+		JLabel titleLabel = new JLabel("Football Manager", JLabel.CENTER);
 		titleLabel.setMinimumSize(new Dimension(0, 40));
 		titleLabel.setPreferredSize(new Dimension(titleLabel.getPreferredSize().width, 40));
 		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);

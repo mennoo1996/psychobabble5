@@ -37,6 +37,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	private Competition curComp;
 	private Team curTeam;
 	private int roundNum;
+	private String playerName;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
@@ -120,6 +121,15 @@ public class Frame_Main extends JFrame implements ActionListener{
 					System.out.println("Load game was pressed!");
 					break;
 				case "New Game":
+					
+					loadNameChoiceScreen();
+					
+					break;
+				case "Pick your team":
+					
+					// grab name from NamePanel, then on to choosing team
+					playerName = (String)possibleMenuB.getClientProperty("playerName");
+					
 					loadNewGameScreen();
 					
 					break;
@@ -180,7 +190,21 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 	}
 	
+	public void loadNameChoiceScreen() {
+		NamePanel nameSelection = new NamePanel(this);
+		
+		remove(curPanel);
+		
+		curPanel = nameSelection;
+		add(curPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
 	public void loadNewGameScreen() {
+		
+		// grab name from current 
+		
 		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
 		
 		remove(curPanel);
