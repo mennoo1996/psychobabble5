@@ -30,6 +30,14 @@ public class Team {
 		isMax=false;
 	}
 	
+	public void printPlayersNotEligible() {
+		for (int i=0;i<team.size();i++) {
+			if (!team.get(i).isEligible()) {
+				System.out.println(team.get(i));
+			}
+		}
+	}
+	
 	/**
 	 * Method which checks if a Team has got a CurrentTeam that is allowed to play
 	 * 
@@ -53,6 +61,51 @@ public class Team {
 			}
 		}
 		return false;
+	}
+	
+	public void deleteIfInCurrentTeam(Player player) {
+		if (positions.contains(player)) {
+			boolean itsdone=false;
+			for (int i=0;i<team.size();i++) {
+				if (!itsdone) {
+					
+					Player p = team.get(i);
+					if (p.getPlayerType().equals(player.getPlayerType()) && !(positions.contains(p)) && p.isEligible()) {
+						this.replacePlayerInCurrentTeam(player, p);
+						itsdone=true;
+					}
+				}
+			}
+			if (!itsdone) {
+				for (int i=0;i<team.size();i++) {
+					if (!itsdone) {
+						Player p = team.get(i);
+						if(((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(positions.contains(p)) && p.isEligible()) {
+							this.replacePlayerInCurrentTeam(player, p);
+							itsdone=true;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	
+	public boolean isEligible() {
+		int goalkeepers=0;
+		for (int i=0;i<11;i++) {
+			if (positions.getPositionArray()[i]==null) {
+				return false;
+			} else if (!positions.getPositionArray()[i].isEligible()) {
+				return false;
+			}
+			if (positions.getPositionArray()[i] instanceof Goalkeeper) {
+				goalkeepers++;
+			}
+		}
+		if (goalkeepers!=1) {
+			return false;
+		} return true;
 	}
 	
 	public void updateStandings(String result, int goalsFor, int goalsAgainst){

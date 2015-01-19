@@ -34,7 +34,7 @@ public abstract class GameLogic {
 		Player[] tCurrentTeam = t.getPositions().getPositionArray();
 		ArrayList<Player> injuredPlayers = new ArrayList<Player>();
 		
-		for (int i=0;i<tCurrentTeam.length;i++) {
+		for (int i=1;i<tCurrentTeam.length;i++) {
 			int random = GameLogic.randomGenerator(1, 100);
 			if (random<=3) {
 				injuredPlayers.add(tCurrentTeam[i]);
@@ -103,7 +103,7 @@ public abstract class GameLogic {
 		}
 		for (int i=0;i<amount;i++) {
 			int randomcounter=10;
-			int random = GameLogic.randomGenerator(0, randomcounter);
+			int random = GameLogic.randomGenerator(1, randomcounter);
 			playersWithRed.add(t.getPositions().getPositionArray()[random]);
 			currentTeam.remove(t.getPositions().getPositionArray()[random]);
 			randomcounter--;
@@ -732,7 +732,7 @@ public abstract class GameLogic {
 		ArrayList<Player> sameType = new ArrayList<Player>();
 		ArrayList<Player> team = t.getTeam();
 		for (int i=0;i<team.size();i++) {
-			if (p.getPlayerType().equals(team.get(i).getPlayerType())) {
+			if (p.getPlayerType().equals(team.get(i).getPlayerType()) && team.get(i).isEligible()) {
 				sameType.add(team.get(i));
 			}
 		}
@@ -783,9 +783,18 @@ public abstract class GameLogic {
 		}
 		
 		if (ratingstotal>0) {
+			
 			if (!(sameType.size()==1 && currentTeam.contains(sameType.get(0)))) {
+				boolean someoneEligibleAndNotInCurrentTeam=false;
+				for (int i=0;i<sameType.size();i++) {
+					if (!(currentTeam.contains(sameType.get(i))) && sameType.get(i).isEligible()) {
+						someoneEligibleAndNotInCurrentTeam=true;
+					}
+				}
+				if (someoneEligibleAndNotInCurrentTeam) {
 			boolean confirmed=true;
 			do {
+				System.out.println("do loop initiated");
 				
 				
 				confirmed=true;
@@ -796,7 +805,7 @@ public abstract class GameLogic {
 					
 					if (random<=ratings[i]) {
 						
-						if (!currentTeam.contains(sameType.get(i))) {
+						if (!(currentTeam.contains(sameType.get(i))) && sameType.get(i).isEligible()) {
 						t.changePositions(p, sameType.get(i));
 						break;
 						} else {
@@ -809,6 +818,7 @@ public abstract class GameLogic {
 			
 			
 			}while (!confirmed);
+			}
 			}
 		} 
 		

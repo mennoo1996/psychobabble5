@@ -34,11 +34,24 @@ public class Competition {
 	/**
 	 * Method which simulates a round by playing all matches in the current Round
 	 */
-	public void playRound() {
+	public boolean playRound() {
 		
 		
 		
 		Round currentRound = scheme.getRound(roundsPlayed + 1);
+		
+		for (Match match:currentRound.getMatches()) {
+			Team team1 = library.getTeamForName(match.getTeam1());
+			Team team2 = library.getTeamForName(match.getTeam2());
+			if (!team1.isEligible() || !team2.isEligible()) {
+				System.out.println(team1.getPositions());
+				team1.printPlayersNotEligible();
+				System.out.println(team2.getPositions());
+				team2.printPlayersNotEligible();
+				System.out.println(team1.getTeamName() + " " + team2.getTeamName());
+				return false;
+			}
+		}
 		
 		for(Match match : currentRound.getMatches()) {
 			Team team1 = library.getTeamForName(match.getTeam1());
@@ -138,11 +151,14 @@ public class Competition {
 			for (Player a:redCardGetterst1) {
 				a.gotRed();
 				a.gotSuspension(2);
+				team1.deleteIfInCurrentTeam(a);
 			}
+			
 			
 			for (Player a:redCardGetterst2) {
 				a.gotRed();
 				a.gotSuspension(2);
+				team2.deleteIfInCurrentTeam(a);
 			}
 			
 			ArrayList<Player> playersWithInjuriest1 = GameLogic.getInjuredPlayers(team1);
@@ -155,10 +171,13 @@ public class Competition {
 			match.setInjuriesLengthst2(injurieslengthst2);
 			for (int i=0;i<playersWithInjuriest1.size();i++) {
 				playersWithInjuriest1.get(i).gotInjury(injurieslengthst1[i]+1);
+				team1.deleteIfInCurrentTeam(playersWithInjuriest1.get(i));
+				
 			}
 			
 			for (int i=0;i<playersWithInjuriest2.size();i++) {
 				playersWithInjuriest2.get(i).gotInjury(injurieslengthst2[i]+1);
+				team2.deleteIfInCurrentTeam(playersWithInjuriest2.get(i));
 			}
 		}
 		
@@ -174,6 +193,7 @@ public class Competition {
 		
 		
 		this.roundsPlayed++;
+		return true;
 	}
 	
 	/**

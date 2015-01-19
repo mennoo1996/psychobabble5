@@ -182,7 +182,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 					// For the demo this runs through the entire season (round by round)
 					
 					if (roundNum < 38) {
-						curComp.playRound();
+						System.out.println(curComp.playRound());
 						TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
 						roundNum++;
 					} else {
