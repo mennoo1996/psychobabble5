@@ -14,6 +14,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -35,6 +36,7 @@ import xmlIO.XMLParser;
 public class Frame_Main extends JFrame implements ActionListener{
 	
 	private JPanel curPanel;
+	private BottomBar bottomBar;
 	private String current;
 	private Competition curComp;
 	private Team curTeam;
@@ -91,7 +93,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		//initialize some stuff
 		setTitle("Football Manager 2015");
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-		setMinimumSize(new Dimension(1024, 720));
+		setMinimumSize(new Dimension(1024, 768));
 		setSize(1280, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
@@ -117,7 +119,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Autosave on game exit
 		currentGame.save();
 		XMLParser.writeGameList("files/saves_v6.xml", games);
-		
 		dispose();
 		System.exit(0);
 	}
@@ -198,11 +199,18 @@ public class Frame_Main extends JFrame implements ActionListener{
 					
 					// Initialize new JPanel and remove current pane
 					MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
-					remove(curPanel);
+					remove(curPanel); remove(bottomBar);
 					
 					// Refresh the view
 					add(replPlayView, BorderLayout.CENTER, 1);
 					curPanel = replPlayView;
+					
+
+					//Bottom bar here
+					bottomBar = new BottomBar(curComp, curTeam);
+					bottomBar.showStats();
+					add(bottomBar);
+					
 					revalidate();
 					repaint();
 					
@@ -309,6 +317,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int boxwidth = (int) tk.getScreenSize().getWidth();
 		int boxheight = (int) tk.getScreenSize().getHeight();
+
+		bottomBar = new BottomBar(curComp, curTeam);
 		
 		//Header panel
 		Header header = new Header(this);
@@ -324,6 +334,11 @@ public class Frame_Main extends JFrame implements ActionListener{
 		//Center panel ends here
 		curPanel = overviewPanel;
 		add(curPanel, BorderLayout.CENTER);
+		
+		//Bottom bar here
+		add(bottomBar);
+		bottomBar.showStats();
+		
 		revalidate();
 		repaint();
 	}
@@ -331,17 +346,26 @@ public class Frame_Main extends JFrame implements ActionListener{
 	public void loadOverView() {
 		if (!current.equals("overview")) {
 			current = "overview";
+
+			remove(bottomBar);
+			bottomBar = new BottomBar(curComp, curTeam);
 			
 			currentGame.save();
 			XMLParser.writeGameList("files/saves_v6.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			OverviewPanel replOverview = new OverviewPanel(curComp);
-			remove(curPanel);
+			remove(curPanel); 
 			
 			// Refresh the view
 			add(replOverview, BorderLayout.CENTER, 1);
 			curPanel = replOverview;
+			
+			//Bottom bar here
+			add(bottomBar);
+			bottomBar.showStats();
+			
+			
 			revalidate();
 			repaint();
 		}
@@ -351,17 +375,25 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to statistics panel if not current
 		if (!current.equals("statistics")) {
 			current = "statistics";
+
+			remove(bottomBar);
+			bottomBar = new BottomBar(curComp, curTeam);
 			
 			currentGame.save();
 			XMLParser.writeGameList("files/saves_v6.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			StatisticsPanel replStatview = new StatisticsPanel(curComp);
-			remove(curPanel);
+			remove(curPanel); 
 			
 			// Refresh the view
 			add(replStatview, BorderLayout.CENTER, 1);
 			curPanel = replStatview;
+			
+			//Bottom bar here
+			add(bottomBar);
+			bottomBar.showStats();
+			
 			revalidate();
 			repaint();
 		}
@@ -371,17 +403,24 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to positions panel if not current
 		if (!current.equals("positions")) {
 			current = "positions";
-			
+			remove(bottomBar);
+			bottomBar = new BottomBar(curComp, curTeam);
 			currentGame.save();
 			XMLParser.writeGameList("files/saves_v6.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			PositionsPanel replPositsview = new PositionsPanel(curTeam);
-			remove(curPanel);
+			remove(curPanel); 
 			
 			// Refresh the view
 			add(replPositsview, BorderLayout.CENTER, 1);
 			curPanel = replPositsview;
+			
+			//Bottom bar here
+			add(bottomBar);
+			bottomBar.showStats();
+			
+			
 			revalidate();
 			repaint();
 		}
@@ -391,37 +430,21 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to transfers panel if not current
 		if (!current.equals("transfers")) {
 			current = "transfers";
-			
+			remove(bottomBar);
+			bottomBar = new BottomBar(curComp, curTeam);
 			currentGame.save();
 			XMLParser.writeGameList("files/saves_v6.xml", games);
 			
 			// Initialize new JPanel and remove current pane
-			TransfersPanel replTransfview = new TransfersPanel(curTeam, curComp);
-			remove(curPanel);
+			TransfersPanel replTransfview = new TransfersPanel(curTeam, curComp, bottomBar);
+			remove(curPanel); 
 			
 			// Refresh the view
 			add(replTransfview, BorderLayout.CENTER, 1);
 			curPanel = replTransfview;
 			
-//			//temporary, for the help text or something, I'll fix it later
-//			JPanel Helper = new JPanel();
-//			Helper.setLayout(new BoxLayout(Helper, BoxLayout.X_AXIS));
-//			Helper.add(new Box.Filler(minSize, prefSize, null));
-//			JPanel HelperBox = new JPanel();
-//			HelperBox.setName("Panel"); HelperBox.setOpaque(false);
-//			HelperBox.setMinimumSize(new Dimension(200,130));
-//			HelperBox.setPreferredSize(new Dimension(1200,130));
-//			HelperBox.setMaximumSize(new Dimension(2000,130));
-//			Helper.add(HelperBox);
-//			Helper.add(new Box.Filler(minSize, prefSize, null));
-//			add(Helper);
-			
-//			//southern space
-//			Component test = Box.createRigidArea(new Dimension(this.getWidth(), 108));
-//			test.setBackground(new Color(0,0,0,200));
-//			add(test);
-			
-			
+			add(bottomBar);
+			bottomBar.showStats();
 			
 			revalidate();
 			repaint();

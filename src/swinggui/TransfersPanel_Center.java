@@ -42,8 +42,8 @@ import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 
 public class TransfersPanel_Center extends JPanel implements DocumentListener{
-
-	private MouseListener buttonListener;
+	
+	private ActionListener buttonListener;
 	
 	private JPanel playerPanel;
 	private JPanel statPanel;
@@ -65,8 +65,8 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
 	private Font fontSelected = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	
-	public TransfersPanel_Center(MouseListener teamChoiceListener) {
-		buttonListener = teamChoiceListener;
+	public TransfersPanel_Center(ActionListener teamActionListener) {
+		buttonListener = teamActionListener;
 		initUI();
 	}
 	
@@ -101,8 +101,8 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		add(messagePanel);
 		//content ends here
 		
-		setMinimumSize(new Dimension(100,500));
-		setPreferredSize(new Dimension(350,550));
+		setMinimumSize(new Dimension(100,600));
+		setPreferredSize(new Dimension(350,600));
 		setMaximumSize(new Dimension(900,600));
 		
 	}
@@ -220,15 +220,13 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 		if(!isLeft){
 			sellPanel.setOpaque(true);
-			sellPanel.setBackground(new Color(250,250,250));
+			sellPanel.setBackground(new Color(240,240,240));
 			sellLabel.setText("select a player from your team");
 			sellField.setEnabled(false);
-			//sellButton.setEnabled(false);
 		}
 		else{
 			sellField.setEnabled(true);
-			//sellButton.setEnabled(true);
-			sellButton.addMouseListener(buttonListener);
+			sellButton.addActionListener(buttonListener);
 		}
 		
 		sellPanel.add(sellPanel2, BorderLayout.CENTER);
@@ -266,14 +264,14 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		if(isLeft){
 			buyLabel.setText("select a player from other teams");
 			buyPanel.setOpaque(true);
-			buyPanel.setBackground(new Color(250,250,250));
+			buyPanel.setBackground(new Color(240,240,240));
 			buyField.setEnabled(false);
 			buyButton.setEnabled(false);
 		}
 		else{
 			buyField.setEnabled(true);
 			buyButton.setEnabled(false);
-			buyButton.addMouseListener(buttonListener);
+			buyButton.addActionListener(buttonListener);
 		}
 		buyPanel.add(buyPanel2, BorderLayout.CENTER);
 		

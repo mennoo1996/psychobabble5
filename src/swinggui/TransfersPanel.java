@@ -6,6 +6,7 @@ import gameLogic.TransferLogic;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -20,7 +21,7 @@ import javax.swing.JTextField;
 import libraryClasses.Player;
 import libraryClasses.Team;
 @SuppressWarnings("serial")
-public class TransfersPanel extends JPanel implements MouseListener {
+public class TransfersPanel extends JPanel implements MouseListener, ActionListener {
 	
 	private MouseListener buttonListener;
 	
@@ -31,6 +32,7 @@ public class TransfersPanel extends JPanel implements MouseListener {
 	private TransfersPanel_Center center;
 	private TransfersPanel_Right right;
 	private JComponent fillRight;
+	private BottomBar bottomBar;
 	
 	private boolean isleft = true;
 	private int selectedIndex;
@@ -40,8 +42,8 @@ public class TransfersPanel extends JPanel implements MouseListener {
 	
 	private TransferList transfers;
 	
-	public TransfersPanel(Team cTeam, Competition cComp) {
-		//buttonListener = detailRefresher;
+	public TransfersPanel(Team cTeam, Competition cComp, BottomBar bar) {
+		bottomBar = bar;
 		currentCompetition = cComp;
 		currentTeam = cTeam;
 		initUI();
@@ -76,7 +78,7 @@ public class TransfersPanel extends JPanel implements MouseListener {
 		if(e.getSource() instanceof PlayerScrollPanel_Right){
 			PlayerScrollPanel_Right panel = (PlayerScrollPanel_Right) e.getSource();
 			selectedIndex = panel.getPlayerIndex();
-			
+			bottomBar.showStats();
 			if(isleft){
 				left.noSelection();
 				right.firstSelection(selectedIndex);
@@ -90,6 +92,7 @@ public class TransfersPanel extends JPanel implements MouseListener {
 		if(e.getSource() instanceof PlayerScrollPanel_Left){
 			PlayerScrollPanel_Left panel = (PlayerScrollPanel_Left) e.getSource();
 			selectedIndex = panel.getPlayerIndex();
+			bottomBar.showStats();
 			if(!isleft){
 				right.noSelection();
 				left.firstSelection(selectedIndex);
@@ -105,32 +108,7 @@ public class TransfersPanel extends JPanel implements MouseListener {
 			center.showPlayer(isleft, right.getPlayer(0));
 			left.noSelection();
 		}
-		if(e.getSource() instanceof JButton){
-			String Answer;
-			Player transferPlayer = center.getPlayer();
-			if(isleft){
-				Answer = TransferLogic.requestSell(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary());
-				Answer = Answer.substring(0, 15); 
-				System.out.println(Answer);
-				if(Answer.equals("Congratulations")){
-					reload("Succes! Sold " + transferPlayer.getName(), new Color(197,253,179));
-				} else if(Answer.equals("Unfortunately y")){
-					center.setMessage("Sadly, the offer was not accepted", new Color(253, 176, 176));
-				} else if(Answer.equals("You can't try t")){
-					center.setMessage("Can't sell " + transferPlayer.getName() + " right now", new Color(253, 176, 176));
-				}
-			}
-			else{
-				Answer = TransferLogic.requestTransfer(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary(), transfers);
-				Answer = Answer.substring(0, 15); 
-				System.out.println(Answer);
-				if(Answer.equals("Congratulations")){
-					reload("Succes! Bought " + transferPlayer.getName(), new Color(197,253,179));
-				} else {
-					center.setMessage("Sadly, the offer was not accepted", new Color(253, 176, 176));
-				}
-			}
-		}
+		
 	}
 	
 	@Override
@@ -138,7 +116,7 @@ public class TransfersPanel extends JPanel implements MouseListener {
 		mouseDetect(e);
 	}
 
-	public void reload(String message, Color color){
+	public void reload(){
 		
 		remove(fillRight); 
 		remove(right); remove(center); remove(left);
@@ -157,7 +135,6 @@ public class TransfersPanel extends JPanel implements MouseListener {
 		add(right);
 		right.noSelection();
 		center.showPlayer(isleft, left.getPlayer(0));
-		center.setMessage(message, color);
 		
 		//right filler
 		fillRight = new Box.Filler(minSize, prefSize, null);
@@ -186,6 +163,47 @@ public class TransfersPanel extends JPanel implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() instanceof JButton){
+			String Answer;
+			String Answer2;
+			Player transferPlayer = center.getPlayer();
+			if(isleft){
+				Answer = TransferLogic.requestSell(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary());
+				Answer2 = Answer;
+				Answer = Answer.substring(0, 15); 
+				System.out.println(Answer);
+				if(Answer.equals("Congratulations")){
+					reload();
+					bottomBar.showString(Answer2, new Color(139,228,111));
+					//reload("Succes! Sold " + transferPlayer.getName(), new Color(197,253,179));
+				} else if(Answer.equals("Unfortunately y")){
+					bottomBar.showString(Answer2, new Color(253, 176, 176));
+					//center.setMessage("Sadly, the offer was not accepted", new Color(253, 176, 176));
+				} else if(Answer.equals("You can't try t")){
+					bottomBar.showString(Answer2, new Color(253, 176, 176));
+					//center.setMessage("Can't sell " + transferPlayer.getName() + " right now", new Color(253, 176, 176));
+				}
+			}
+			else{
+				Answer = TransferLogic.requestTransfer(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary(), transfers);
+				Answer2 = Answer;
+				Answer = Answer.substring(0, 15); 
+				System.out.println(Answer);
+				if(Answer.equals("Congratulations")){
+					reload();
+					bottomBar.showString(Answer2, new Color(139,228,111));
+					//reload("Succes! Bought " + transferPlayer.getName(), new Color(197,253,179));
+				} else {
+					bottomBar.showString(Answer2, new Color(253, 176, 176));
+					//center.setMessage("Sadly, the offer was not accepted", new Color(253, 176, 176));
+				}
+			}
+		}
 		
 	}
 }

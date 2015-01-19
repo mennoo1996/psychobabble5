@@ -188,8 +188,8 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 		//content ends here
 		
 		//add panel
-		setMinimumSize(new Dimension(100,500));
-		setPreferredSize(new Dimension(450,550));
+		setMinimumSize(new Dimension(100,600));
+		setPreferredSize(new Dimension(450,600));
 		setMaximumSize(new Dimension(900,600));
 		//this.add(panel);
 	}
