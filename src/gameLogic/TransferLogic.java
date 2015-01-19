@@ -184,32 +184,33 @@ public abstract class TransferLogic {
 			boolean answer = TransferLogic.getAnswer(player, bid, library, existingTransfers);
 			if (answer) {
 				Team opponentsTeam = library.getTeamForName(player.getTeam());
-				if (opponentsTeam.getPositions().contains(player)) {
-					
-					boolean itsdone=false;
-					for (int i=0;i<opponentsTeam.getTeam().size();i++) {
-						if (!itsdone) {
-							Player p = opponentsTeam.getTeam().get(i);
-							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getPositions().contains(p))) {
-								opponentsTeam.replacePlayerInCurrentTeam(player, p);
-								itsdone=true;
-							}
-						}
-					}
-					if (!itsdone) {
-						for (int i=0;i<opponentsTeam.getTeam().size();i++) {
-							if (!itsdone) {
-								Player p = opponentsTeam.getTeam().get(i);
-								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getPositions().contains(p))) {
-									opponentsTeam.replacePlayerInCurrentTeam(player, p);
-									itsdone=true;
-								}
-							}
-						}
-					}
-					
-					
-				}
+				opponentsTeam.deleteIfInCurrentTeam(player);
+//				if (opponentsTeam.getPositions().contains(player)) {
+//					
+//					boolean itsdone=false;
+//					for (int i=0;i<opponentsTeam.getTeam().size();i++) {
+//						if (!itsdone) {
+//							Player p = opponentsTeam.getTeam().get(i);
+//							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getPositions().contains(p))) {
+//								opponentsTeam.replacePlayerInCurrentTeam(player, p);
+//								itsdone=true;
+//							}
+//						}
+//					}
+//					if (!itsdone) {
+//						for (int i=0;i<opponentsTeam.getTeam().size();i++) {
+//							if (!itsdone) {
+//								Player p = opponentsTeam.getTeam().get(i);
+//								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getPositions().contains(p))) {
+//									opponentsTeam.replacePlayerInCurrentTeam(player, p);
+//									itsdone=true;
+//								}
+//							}
+//						}
+//					}
+//					
+//					
+//				}
 				
 				playersTeam.add(player);
 				opponentsTeam.getTeam().remove(player);
@@ -250,31 +251,32 @@ public abstract class TransferLogic {
 			boolean answer = TransferLogic.getAnswerForExistingTransfer(player, bid, library, existingTransfers, tp.getPriceReturned());
 			if (answer) {
 				Team opponentsTeam = library.getTeamForName(player.getTeam());
-				if (opponentsTeam.getPositions().contains(player)) {
-					boolean itsdone=false;
-					for (int i=0;i<opponentsTeam.getTeam().size();i++) {
-						if (!itsdone) {
-							Player p = opponentsTeam.getTeam().get(i);
-							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getPositions().contains(p))) {
-								opponentsTeam.replacePlayerInCurrentTeam(player, p);
-								itsdone=true;
-							}
-						}
-					}
-					if (!itsdone) {
-						for (int i=0;i<opponentsTeam.getTeam().size();i++) {
-							if (!itsdone) {
-								Player p = opponentsTeam.getTeam().get(i);
-								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getPositions().contains(p))) {
-									opponentsTeam.replacePlayerInCurrentTeam(player, p);
-									itsdone=true;
-								}
-							}
-						}
-					}
-					
-					
-				}
+				opponentsTeam.deleteIfInCurrentTeam(player);
+//				if (opponentsTeam.getPositions().contains(player)) {
+//					boolean itsdone=false;
+//					for (int i=0;i<opponentsTeam.getTeam().size();i++) {
+//						if (!itsdone) {
+//							Player p = opponentsTeam.getTeam().get(i);
+//							if (p.getPlayerType().equals(player.getPlayerType()) && !(opponentsTeam.getPositions().contains(p))) {
+//								opponentsTeam.replacePlayerInCurrentTeam(player, p);
+//								itsdone=true;
+//							}
+//						}
+//					}
+//					if (!itsdone) {
+//						for (int i=0;i<opponentsTeam.getTeam().size();i++) {
+//							if (!itsdone) {
+//								Player p = opponentsTeam.getTeam().get(i);
+//								if (((p instanceof FieldPlayer && player instanceof FieldPlayer) || (p instanceof Goalkeeper && player instanceof Goalkeeper)) && !(opponentsTeam.getPositions().contains(p))) {
+//									opponentsTeam.replacePlayerInCurrentTeam(player, p);
+//									itsdone=true;
+//								}
+//							}
+//						}
+//					}
+//					
+//					
+//				}
 				
 				playersTeam.add(player);
 				opponentsTeam.getTeam().remove(player);
@@ -431,6 +433,7 @@ public abstract class TransferLogic {
 	}
 	
 	public static void AutoTransferForTeam(Team t, Team playersTeam, Library library) {
+		
 		ArrayList<Player> allplayers = new ArrayList<Player>();
 		for (int i=0;i<library.getLibrary().size();i++) {
 			Team team = library.getLibrary().get(i);
@@ -529,7 +532,7 @@ public abstract class TransferLogic {
 			}
 			
 			Team t2 = library.getTeamForName(theplayer.getTeam());
-			
+			System.out.println(TransferLogic.requestTransfer(theplayer, t, 1.1*theplayer.getPrice().doubleValue(), library, new TransferList()));
 			
 		}
 	}
