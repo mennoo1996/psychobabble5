@@ -32,6 +32,7 @@ import libraryClasses.Positions;
 import libraryClasses.Standings;
 import libraryClasses.Team;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -279,13 +280,27 @@ public class XMLParser {
 			String playerString = "player" + (i+1);
 			Element playerElement = doc.createElement(playerString);
 			
-			Element ageElement = doc.createElement("age");
-			playerElement.appendChild(ageElement);
-			ageElement.appendChild(doc.createTextNode(String.format("%d", positionsArray[i].getAge())));
+			try {
+				Element ageElement = doc.createElement("age");
+				ageElement.appendChild(doc.createTextNode(String.format("%d", positionsArray[i].getAge())));
+				playerElement.appendChild(ageElement);
+			} catch (Exception e) {
+				System.out.println("age exception caught, age = 0");
+				Element ageElement = doc.createElement("age");
+				ageElement.appendChild(doc.createTextNode(String.format("%d", 0)));
+				playerElement.appendChild(ageElement);
+			}
 			
-			Element nameElement = doc.createElement("name");
-			playerElement.appendChild(nameElement);
-			nameElement.appendChild(doc.createTextNode(positionsArray[i].getName()));
+			try {
+				Element nameElement = doc.createElement("name");
+				nameElement.appendChild(doc.createTextNode(positionsArray[i].getName()));
+				playerElement.appendChild(nameElement);
+			} catch (Exception e) {
+				System.out.println("name exception caught, name = leeg");
+				Element nameElement = doc.createElement("name");
+				nameElement.appendChild(doc.createTextNode("leeg"));
+				playerElement.appendChild(nameElement);
+			}
 			
 			positionsElement.appendChild(playerElement);
 		}
