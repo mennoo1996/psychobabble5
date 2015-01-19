@@ -1,6 +1,6 @@
 package swinggui;
 
-import game.Competition;
+import game.*;
 import gameLogic.TransferLogic;
 
 import java.awt.BorderLayout;
@@ -38,6 +38,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 	private Team curTeam;
 	private int roundNum;
 	private String playerName;
+	private GameList games;
+	private Game currentGame;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
@@ -60,9 +62,14 @@ public class Frame_Main extends JFrame implements ActionListener{
 	public Frame_Main() {
 		current = "nada";
 		
+
+		
 		// Currently only supports one season
 		roundNum = 0;
 		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");	
+		
+		games = XMLParser.readGameList("files/saves_v6.xml");
+		
 		
 		initUI();
 	}
@@ -91,14 +98,13 @@ public class Frame_Main extends JFrame implements ActionListener{
 //		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
 //		curPanel = teamChoose;
 //		add(curPanel, BorderLayout.CENTER);
-		SplashPanel splashChoice = new SplashPanel(this);
+
+		boolean showLoadedGames = games.getGames().size() > 0;
+		
+		SplashPanel splashChoice = new SplashPanel(this, showLoadedGames);
 		curPanel = splashChoice;
 		add(curPanel, BorderLayout.CENTER);
-		
-		
-		
-		
-		
+			
 	}
 	
 	public static void main(String[] args){
@@ -118,7 +124,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 			
 			switch (possibleMenuB.getText()) {
 				case "Load Game":
-					System.out.println("Load game was pressed!");
+
+					loadLoadScreen();
+					
 					break;
 				case "New Game":
 					
@@ -190,6 +198,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 	}
 	
+	public void loadLoadScreen() {
+		
+	}
+	
 	public void loadNameChoiceScreen() {
 		NamePanel nameSelection = new NamePanel(this);
 		
@@ -217,6 +229,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 	
 	public void loadMainScreen(String chosenTeam) {
 		curTeam = curComp.getLibrary().getTeamForName(chosenTeam);
+		
+		// Create the new game
+		currentGame = games.newgame(playerName, chosenTeam);
+		currentGame.save();
 		
 		remove(curPanel);
 		// Start playing!
