@@ -6,10 +6,14 @@ package swinggui;
 
 import game.Competition;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -44,11 +48,20 @@ public class RecentMatchesPanel extends JPanel {
 		setOpaque(false);
 		setName("Panel");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		add(new Box.Filler(new Dimension(1,5), new Dimension(1,5), new Dimension(1,5)));
 		
-		JLabel agendaTitle = new JLabel("Recent and Upcoming Fixtures");
-		agendaTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
-		add(agendaTitle);
+		//panel title
+		JPanel titlepanel = new JPanel();
+		JLabel title = new JLabel("Recent and Upcoming Fixtures");
+		title.setMinimumSize(new Dimension(0,40));
+		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
+		titlepanel.setMaximumSize(new Dimension(2000, 40));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.add(title);
+		add(titlepanel);
+
+		//fonts here
+		Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
+		Font fontHeader = new Font("Avenir", Font.ROMAN_BASELINE, 14);
 		
 		// Fetch scheme and then populate table data
 		CompetitionScheme curScheme = currentCompetition.getScheme();
@@ -77,6 +90,33 @@ public class RecentMatchesPanel extends JPanel {
 					"Score"
 			};
 			
+			//table header
+			JPanel headerPanel = new JPanel(); headerPanel.setLayout(new BorderLayout());
+			DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
+			centerRender.setHorizontalAlignment(JLabel.CENTER);
+			Object headerData[][] = new Object[1][2]; headerData[0][0] = "Match"; headerData[0][1] = "Score";
+			JTable headertable = new JTable(headerData, columnNamesPrev){
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			};
+			headertable.getColumnModel().getColumn(0).setCellRenderer(centerRender);
+			headertable.getColumnModel().getColumn(0).setMinWidth(120);
+			headertable.getColumnModel().getColumn(1).setCellRenderer(centerRender);
+			headertable.setGridColor(new Color(255,255,255,0));
+			headertable.setRowHeight(25);
+			//headertable.setMaximumSize(new Dimension(2000,25));
+			headertable.setFont(fontHeader);
+			headerPanel.add(headertable);
+			headerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
+			headerPanel.setOpaque(true);
+			//headerPanel.setMaximumSize(new Dimension(2000,20));
+			headerPanel.setBackground(new Color(230,230,230));
+			headertable.setBackground(new Color(230,230,230));
+			add(headerPanel);
+			
+			
 			JTable resultsTable = new JTable(previousMatches, columnNamesPrev) {
 				@Override
 				public boolean isCellEditable(int row, int column) {
@@ -85,21 +125,21 @@ public class RecentMatchesPanel extends JPanel {
 			};
 			
 			// center table items
-			DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
-			centerRender.setHorizontalAlignment(JLabel.CENTER);
 	        resultsTable.getColumnModel().getColumn(1).setCellRenderer( centerRender );
-		    
+		    resultsTable.setGridColor(new Color(150,150,150));
 			
 			// Always display team name properly
 			resultsTable.getColumnModel().getColumn(0).setMinWidth(120);
-
+			resultsTable.setRowHeight(20);
 			// Disable editing
 			resultsTable.getTableHeader().setReorderingAllowed(false);
-			JScrollPane scrollPane = new JScrollPane(resultsTable);
-			
-			add(scrollPane);
+			resultsTable.setTableHeader(null);
+			//JScrollPane scrollPane = new JScrollPane(resultsTable);
+			add(resultsTable);
+			//add(scrollPane);
 		}
 		if (curRound < 38) {
+			
 			// Upcoming matches table array
 			Object upcomingMatches[][] = new Object[10][1];
 			
@@ -118,6 +158,30 @@ public class RecentMatchesPanel extends JPanel {
 					"Upcoming"
 			};
 			
+			//table header
+			JPanel headerPanel = new JPanel(); //headerPanel.setLayout(new BorderLayout());
+			DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
+			centerRender.setHorizontalAlignment(JLabel.CENTER);
+			Object headerData[][] = new Object[1][1]; headerData[0][0] = "Upcoming";
+			JTable headertable = new JTable(headerData, columnNamesNext){
+				@Override
+				public boolean isCellEditable(int row, int column) {
+					return false;
+				}
+			};
+			headertable.getColumnModel().getColumn(0).setCellRenderer(centerRender);
+			headertable.setGridColor(new Color(255,255,255,0));
+			headertable.setRowHeight(15);
+			headertable.setFont(fontHeader);
+			headerPanel.add(headertable);
+			headerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
+			headerPanel.setOpaque(true);
+			headerPanel.setMaximumSize(new Dimension(2000,20));
+			headerPanel.setBackground(new Color(230,230,230));
+			headertable.setBackground(new Color(230,230,230));
+			add(headerPanel);
+			
+			
 			// Initialize tables
 	
 			
@@ -130,9 +194,12 @@ public class RecentMatchesPanel extends JPanel {
 			
 			// Always display team name properly
 			upcomingTable.getColumnModel().getColumn(0).setMinWidth(120);
-	
+			upcomingTable.getColumnModel().getColumn(0).setCellRenderer( centerRender );
+			upcomingTable.setGridColor(new Color(150,150,150));
+			upcomingTable.setRowHeight(20);
 			// Disable editing
 			upcomingTable.getTableHeader().setReorderingAllowed(false);
+			upcomingTable.setTableHeader(null);
 			JScrollPane scrollPaneUp = new JScrollPane(upcomingTable);
 			
 			add(scrollPaneUp);
@@ -140,7 +207,7 @@ public class RecentMatchesPanel extends JPanel {
 		
 		// Adjust dimensions
 		setMinimumSize(new Dimension(100,500));
-		setPreferredSize(new Dimension(800,500));
-		setMaximumSize(new Dimension(900,500));
+		setPreferredSize(new Dimension(800,550));
+		setMaximumSize(new Dimension(900,600));
 	}
 }
