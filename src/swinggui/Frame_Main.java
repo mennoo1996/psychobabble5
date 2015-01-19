@@ -1,6 +1,6 @@
 package swinggui;
 
-import game.Competition;
+import game.*;
 import gameLogic.TransferLogic;
 
 import java.awt.BorderLayout;
@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.ParseException;
 
 import javax.swing.BorderFactory;
@@ -39,6 +41,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 	private Competition curComp;
 	private Team curTeam;
 	private int roundNum;
+	private String playerName;
+	private GameList games;
+	private Game currentGame;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
@@ -61,9 +66,12 @@ public class Frame_Main extends JFrame implements ActionListener{
 	public Frame_Main() {
 		current = "nada";
 		
-		// Currently only supports one season
+		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
 		roundNum = 0;
-		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");	
+		
+		// Currently only supports one season
+		games = XMLParser.readGameList("files/saves_v6.xml");
+		
 		
 		initUI();
 	}
@@ -88,17 +96,31 @@ public class Frame_Main extends JFrame implements ActionListener{
 		setMinimumSize(new Dimension(1024, 768));
 		setSize(1280, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				exitProcedure();
+			}
+		});
 				
 //		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
 //		curPanel = teamChoose;
 //		add(curPanel, BorderLayout.CENTER);
-		SplashPanel splashChoice = new SplashPanel(this);
+
+		boolean showLoadedGames = games.getGames().size() > 0;
+		
+		SplashPanel splashChoice = new SplashPanel(this, showLoadedGames);
 		curPanel = splashChoice;
 		add(curPanel, BorderLayout.CENTER);
-		
-		
-		
-		
+			
+	}
+	
+	public void exitProcedure() {
+		// Autosave on game exit
+		currentGame.save();
+		XMLParser.writeGameList("files/saves_v6.xml", games);
+		dispose();
+		System.exit(0);
 	}
 	
 	public static void main(String[] args){
@@ -118,16 +140,34 @@ public class Frame_Main extends JFrame implements ActionListener{
 			
 			switch (possibleMenuB.getText()) {
 				case "Load Game":
-					System.out.println("Load game was pressed!");
+
+					loadLoadScreen();
+					
 					break;
 				case "New Game":
+					
+					loadNameChoiceScreen();
+					
+					break;
+				case "Pick your team":
+					
+					// grab name from NamePanel, then on to choosing team
+					playerName = (String)possibleMenuB.getClientProperty("playerName");
+					
 					loadNewGameScreen();
 					
 					break;
 				case "Play as this team":					
 					String teamName = (String)possibleMenuB.getClientProperty("teamName");
 										
-					loadMainScreen(teamName);
+					loadMainScreenNewGame(teamName);
+					
+					break;
+				case "Load This Game":
+					
+					int gameIndex = (int)possibleMenuB.getClientProperty("gameIndex");
+					
+					loadMainScreenLoadedGame(gameIndex);
 					
 					break;
 				case "overview ":					
@@ -143,7 +183,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 					// For the demo this runs through the entire season (round by round)
 					
 					if (roundNum < 38) {
-						curComp.playRound();
+						System.out.println(curComp.playRound());
 						TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
 						roundNum++;
 					} else {
@@ -153,6 +193,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 										
 					// Then display statistics page showcasing the results of the season
 					current = "match";
+					
+					currentGame.save();
+					XMLParser.writeGameList("files/saves_v6.xml", games);
 					
 					// Initialize new JPanel and remove current pane
 					MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
@@ -188,7 +231,32 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 	}
 	
+	public void loadLoadScreen() {
+		LoadPanel loadYaGame = new LoadPanel(games, this);
+		
+		remove(curPanel);
+		
+		curPanel = loadYaGame;
+		add(curPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
+	public void loadNameChoiceScreen() {
+		NamePanel nameSelection = new NamePanel(this);
+		
+		remove(curPanel);
+		
+		curPanel = nameSelection;
+		add(curPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
 	public void loadNewGameScreen() {
+		
+		// grab name from current 
+		
 		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
 		
 		remove(curPanel);
@@ -199,8 +267,49 @@ public class Frame_Main extends JFrame implements ActionListener{
 		repaint();
 	}
 	
-	public void loadMainScreen(String chosenTeam) {
+	public void loadMainScreenLoadedGame(int gameIndex) {
+		// Create the new game
+		currentGame = games.get(gameIndex);
+		
+		curComp = currentGame.getCompetition();
+		curTeam = currentGame.getTeam();
+		
+		currentGame.save();
+		XMLParser.writeGameList("files/saves_v6.xml", games);
+		roundNum = curComp.getRoundsPlayed();
+		
+		remove(curPanel);
+		// Start playing!
+		// Get screen sizes (for fullscreen)
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int boxwidth = (int) tk.getScreenSize().getWidth();
+		int boxheight = (int) tk.getScreenSize().getHeight();
+		
+		//Header panel
+		Header header = new Header(this);
+		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
+		add(header);
+		
+		//Center panel begins here
+		OverviewPanel overviewPanel = new OverviewPanel(curComp);
+		
+		// set current screen string
+		current = "overview";
+		
+		//Center panel ends here
+		curPanel = overviewPanel;
+		add(curPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+	}
+	
+	public void loadMainScreenNewGame(String chosenTeam) {
 		curTeam = curComp.getLibrary().getTeamForName(chosenTeam);
+		
+		// Create the new game
+		currentGame = games.newgame(playerName, chosenTeam);
+		currentGame.save();
+		XMLParser.writeGameList("files/saves_v6.xml", games);
 		
 		remove(curPanel);
 		// Start playing!
@@ -241,6 +350,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 			remove(bottomBar);
 			bottomBar = new BottomBar(curComp, curTeam);
 			
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
+			
 			// Initialize new JPanel and remove current pane
 			OverviewPanel replOverview = new OverviewPanel(curComp);
 			remove(curPanel); 
@@ -267,6 +379,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 			remove(bottomBar);
 			bottomBar = new BottomBar(curComp, curTeam);
 			
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
+			
 			// Initialize new JPanel and remove current pane
 			StatisticsPanel replStatview = new StatisticsPanel(curComp);
 			remove(curPanel); 
@@ -288,9 +403,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to positions panel if not current
 		if (!current.equals("positions")) {
 			current = "positions";
-			
 			remove(bottomBar);
 			bottomBar = new BottomBar(curComp, curTeam);
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			PositionsPanel replPositsview = new PositionsPanel(curTeam);
@@ -314,9 +430,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Switch to transfers panel if not current
 		if (!current.equals("transfers")) {
 			current = "transfers";
-			
 			remove(bottomBar);
 			bottomBar = new BottomBar(curComp, curTeam);
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			TransfersPanel replTransfview = new TransfersPanel(curTeam, curComp, bottomBar);

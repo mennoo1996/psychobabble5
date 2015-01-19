@@ -15,9 +15,11 @@ public class SplashPanel extends JPanel {
 	private ActionListener gameChoice;
 	private Dimension minSize = new Dimension(20, 20);
 	private Dimension prefSize = new Dimension(40, 20);
+	private boolean showLoadButton;
 	
-	public SplashPanel(ActionListener frame) {
+	public SplashPanel(ActionListener frame, boolean hasSaveGames) {
 		gameChoice = frame;
+		showLoadButton = hasSaveGames;
 		
 		initUI();
 	}
@@ -35,19 +37,20 @@ public class SplashPanel extends JPanel {
 		// MARK: LOGO HERE?
 		
 		// Add title
-		JLabel titleLabel = new JLabel("Soccer Manager", JLabel.CENTER);
+		JLabel titleLabel = new JLabel("Football Manager", JLabel.CENTER);
 		titleLabel.setMinimumSize(new Dimension(0, 40));
 		titleLabel.setPreferredSize(new Dimension(titleLabel.getPreferredSize().width, 40));
 		titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		selectionPanel.add(titleLabel);
 		
 		// Load game button 
-		// TODO: implement load functionality/screen
-		JButton loadGameButton = new JButton("Load Game");
-		loadGameButton.setName("Test");
-		loadGameButton.addActionListener(gameChoice);
-		loadGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		selectionPanel.add(loadGameButton);
+		if (showLoadButton) {
+			JButton loadGameButton = new JButton("Load Game");
+			loadGameButton.setName("Test");
+			loadGameButton.addActionListener(gameChoice);
+			loadGameButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+			selectionPanel.add(loadGameButton);
+		}
 		
 		// New game button
 		JButton newGameButton = new JButton("New Game");

@@ -1,5 +1,6 @@
 package gameLogic;
 import java.util.*;
+
 import libraryClasses.*;
 /** This class represents a list of transfers in progress
  * 
@@ -28,10 +29,10 @@ public class TransferList {
 	 * @return the transfer at index index, or null if the index is too large
 	 */
 	public TransferInProgress getTransfer(int index) {
-		if (index<transfers.size()) {
+		if (index<transfers.size() && index>=0) {
 			
 			return transfers.get(index);
-		} else return null;
+		} return null;
 	}
 	/** Get the transfer for a player called name
 	 * 
@@ -78,6 +79,32 @@ public class TransferList {
 			}
 		} return false;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TransferList other = (TransferList) obj;
+		if (transfers == null) {
+			if (other.transfers != null)
+				return false;
+		} else if (!transfers.equals(other.transfers))
+			return false;
+		return true;
+	}
+	
+	public void setTransfers(ArrayList<TransferInProgress> transfers) {
+		this.transfers=transfers;
+	}
+	
+	
 	
 
 }

@@ -1,6 +1,13 @@
 package junitTests;
 
 import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+
+import libraryClasses.Attacker;
+import libraryClasses.FieldPlayer;
+import libraryClasses.Player;
 import gameLogic.TransferList;
 
 import org.junit.Test;
@@ -102,6 +109,379 @@ public class MatchTest {
 	}
 	
 	@Test
+	public void testMatch2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertEquals(m.getTeam1(), "team1");
+		assertEquals(m.getTeam2(), "team2");
+		assertEquals(m.getScore1(), 1);
+		assertEquals(m.getScore2(), 2);
+	}
+	
+	@Test
+	public void testGetScore1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertEquals(m.getScore1(), 1);
+		m.setScore1(4);
+		assertEquals(m.getScore1(), 4);
+	}
+	
+	@Test
+	public void testSetScore1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertEquals(m.getScore1(), 1);
+		m.setScore1(5);
+		assertEquals(m.getScore1(), 5);
+	}
+	
+	@Test
+	public void testGetScore2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertEquals(m.getScore2(), 2);
+		m.setScore2(6);
+		assertEquals(m.getScore2(), 6);
+	}
+	
+	@Test
+	public void testSetScore2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertEquals(m.getScore2(), 2);
+		m.setScore2(19);
+		assertEquals(m.getScore2(), 19);
+	}
+	
+	@Test
+	public void testGetGoalMakerst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getGoalMakerst1());
+		ArrayList<FieldPlayer> res = new ArrayList<FieldPlayer>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setGoalMakerst1(res);
+		assertEquals(res, m.getGoalMakerst1());
+		
+		
+	}
+	
+	public void testSetGoalMakerst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getGoalMakerst1());
+		ArrayList<FieldPlayer> res = new ArrayList<FieldPlayer>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setGoalMakerst1(res);
+		assertEquals(res, m.getGoalMakerst1());
+		res.add(attacker);
+		res.add(attacker);
+		m.setGoalMakerst1(res);
+		assertEquals(res, m.getGoalMakerst1());
+		
+	}
+	
+	@Test
+	public void testGetGoalMakerst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getGoalMakerst2());
+		ArrayList<FieldPlayer> res = new ArrayList<FieldPlayer>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setGoalMakerst2(res);
+		assertEquals(res, m.getGoalMakerst2());
+		
+		
+	}
+	
+	public void testSetGoalMakerst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getGoalMakerst2());
+		ArrayList<FieldPlayer> res = new ArrayList<FieldPlayer>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setGoalMakerst2(res);
+		assertEquals(res, m.getGoalMakerst2());
+		res.add(attacker);
+		res.add(attacker);
+		m.setGoalMakerst2(res);
+		assertEquals(res, m.getGoalMakerst2());
+		
+	}
+	
+	@Test
+	public void testGetAssistMakerst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getAssistMakerst1());
+		ArrayList<FieldPlayer> res = new ArrayList<FieldPlayer>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setAssistMakerst1(res);
+		assertEquals(res, m.getAssistMakerst1());
+		
+		
+	}
+	
+	public void testSetAssistMakerst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getAssistMakerst1());
+		ArrayList<FieldPlayer> res = new ArrayList<FieldPlayer>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setAssistMakerst1(res);
+		assertEquals(res, m.getAssistMakerst1());
+		res.add(attacker);
+		res.add(attacker);
+		m.setAssistMakerst1(res);
+		assertEquals(res, m.getAssistMakerst1());
+		
+	}
+	
+	@Test
+	public void testGetAssistMakerst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getAssistMakerst2());
+		ArrayList<FieldPlayer> res = new ArrayList<FieldPlayer>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setAssistMakerst2(res);
+		assertEquals(res, m.getAssistMakerst2());
+		
+		
+	}
+	
+	public void testSetAssistMakerst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getAssistMakerst2());
+		ArrayList<FieldPlayer> res = new ArrayList<FieldPlayer>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setAssistMakerst2(res);
+		assertEquals(res, m.getAssistMakerst2());
+		res.add(attacker);
+		res.add(attacker);
+		m.setAssistMakerst2(res);
+		assertEquals(res, m.getAssistMakerst2());
+		
+	}
+	
+	@Test
+	public void testGetYellowCardGetterst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getYellowCardGetterst1());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setYellowCardGetterst1(res);
+		assertEquals(res, m.getYellowCardGetterst1());
+		
+		
+	}
+	
+	public void testSetYellowCardGetterst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getYellowCardGetterst1());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setYellowCardGetterst1(res);
+		assertEquals(res, m.getYellowCardGetterst1());
+		res.add(attacker);
+		res.add(attacker);
+		m.setYellowCardGetterst1(res);
+		assertEquals(res, m.getYellowCardGetterst1());
+		
+	}
+	
+	@Test
+	public void testGetYellowCardGetterst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getYellowCardGetterst2());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setYellowCardGetterst2(res);
+		assertEquals(res, m.getYellowCardGetterst2());
+		
+		
+	}
+	
+	public void testSetYellowCardGetterst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getYellowCardGetterst2());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setYellowCardGetterst2(res);
+		assertEquals(res, m.getYellowCardGetterst2());
+		res.add(attacker);
+		res.add(attacker);
+		m.setYellowCardGetterst2(res);
+		assertEquals(res, m.getYellowCardGetterst2());
+		
+	}
+	
+	@Test
+	public void testGetRedCardGetterst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getRedCardGetterst1());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setRedCardGetterst1(res);
+		assertEquals(res, m.getRedCardGetterst1());
+		
+		
+	}
+	
+	public void testSetRedCardGetterst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getRedCardGetterst1());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setRedCardGetterst1(res);
+		assertEquals(res, m.getRedCardGetterst1());
+		res.add(attacker);
+		res.add(attacker);
+		m.setRedCardGetterst1(res);
+		assertEquals(res, m.getRedCardGetterst1());
+		
+	}
+	
+	@Test
+	public void testGetRedCardGetterst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getRedCardGetterst2());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setRedCardGetterst2(res);
+		assertEquals(res, m.getRedCardGetterst2());
+		
+		
+	}
+	
+	public void testSetRedCardGetterst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getRedCardGetterst2());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setRedCardGetterst2(res);
+		assertEquals(res, m.getRedCardGetterst2());
+		res.add(attacker);
+		res.add(attacker);
+		m.setRedCardGetterst2(res);
+		assertEquals(res, m.getRedCardGetterst2());
+		
+	}
+	
+	@Test
+	public void testGetInjuredPlayerst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getInjuredPlayerst1());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setInjuredPlayerst1(res);
+		assertEquals(res, m.getInjuredPlayerst1());
+		
+		
+	}
+	
+	public void testSetInjuredPlayerst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getInjuredPlayerst1());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setInjuredPlayerst1(res);
+		assertEquals(res, m.getInjuredPlayerst1());
+		res.add(attacker);
+		res.add(attacker);
+		m.setInjuredPlayerst1(res);
+		assertEquals(res, m.getInjuredPlayerst1());
+		
+	}
+	
+	@Test
+	public void testGetInjuredPlayerst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getInjuredPlayerst2());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setInjuredPlayerst2(res);
+		assertEquals(res, m.getInjuredPlayerst2());
+		
+		
+	}
+	
+	public void testSetInjuredPlayerst2() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getInjuredPlayerst2());
+		ArrayList<Player> res = new ArrayList<Player>();
+		Attacker attacker = new Attacker(new BigDecimal(250000), "Arsenal", "OOPBoy", 18, 42, 7, 3, 2, 1, 2, 1, false, 88, 96, 45, 80);
+		res.add(attacker);
+		m.setInjuredPlayerst2(res);
+		assertEquals(res, m.getInjuredPlayerst2());
+		res.add(attacker);
+		res.add(attacker);
+		m.setInjuredPlayerst2(res);
+		assertEquals(res, m.getInjuredPlayerst2());
+		
+	}
+	
+	@Test
+	public void testGetInjuriesLengthst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getInjuriesLengthst1());
+		int[] res = new int[5];
+		res[0]=3;
+		res[4]=1;
+		m.setInjuriesLengthst1(res);
+		assertEquals(res, m.getInjuriesLengthst1());
+		
+	}
+	
+	@Test
+	public void testSetInjuriesLengthst1() {
+		Match m = new Match("team1", "team2", 1, 2);
+		assertNull(m.getInjuriesLengthst1());
+		int[] res = new int[5];
+		res[0]=3;
+		res[4]=1;
+		m.setInjuriesLengthst1(res);
+		assertEquals(res, m.getInjuriesLengthst1());
+		res[2]=5;
+		m.setInjuriesLengthst1(res);
+		assertEquals(res, m.getInjuriesLengthst1());
+	}
+	
+	@Test
+	public void testGetInjuriesLengthst2() {
+		Match m = new Match("team2", "team2", 2, 2);
+		assertNull(m.getInjuriesLengthst2());
+		int[] res = new int[5];
+		res[0]=3;
+		res[4]=2;
+		m.setInjuriesLengthst2(res);
+		assertEquals(res, m.getInjuriesLengthst2());
+		
+	}
+	
+	@Test
+	public void testSetInjuriesLengthst2() {
+		Match m = new Match("team2", "team2", 2, 2);
+		assertNull(m.getInjuriesLengthst2());
+		int[] res = new int[5];
+		res[0]=3;
+		res[4]=2;
+		m.setInjuriesLengthst2(res);
+		assertEquals(res, m.getInjuriesLengthst2());
+		res[2]=5;
+		m.setInjuriesLengthst2(res);
+		assertEquals(res, m.getInjuriesLengthst2());
+	}
+	
+	@Test
 	public void testEquals() {
 		Match m = new Match ("team1", "team2");
 		assertTrue(m.equals(m));
@@ -133,5 +513,6 @@ public class MatchTest {
 		Match m9 = new Match ("a", "c");
 		assertFalse(m8.equals(m9));
 	}
+	
 
 }
