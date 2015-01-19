@@ -150,6 +150,12 @@
 	  	<imagePainter method="panelBackground" path="images/panel.png" sourceInsets="60 60 62 60"/>
   </style>
   
+    <style id = "bottompanelStyle">
+    	<insets top="26" left="47" bottom="0" right="47"/>
+	  	<opaque value="FALSE"/>
+	  	<imagePainter method="panelBackground" path="images/southpanel.png" sourceInsets="60 60 0 60"/>
+  </style>
+  
   
   <style id = "basiclabelStyle">
 		<state>
@@ -201,6 +207,7 @@
   <bind style="basicStyle" type="region" key=".*"/>
   <bind style="basiclabelStyle" type="region" key="Label"/>
   <bind style="basicpanelStyle" type="name" key="Panel"/>
+  <bind style="bottompanelStyle" type="name" key="Southpanel"/>
   <bind style="playerpanelStyle" type="name" key="playerPanel"/>
   <bind style="basicbuttonStyle" type="name" key="Test"/>
   <bind style="basictextfieldStyle" type="region" key="TextField"/>

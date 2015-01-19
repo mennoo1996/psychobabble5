@@ -206,8 +206,8 @@ public class RecentMatchesPanel extends JPanel {
 		}
 		
 		// Adjust dimensions
-		setMinimumSize(new Dimension(100,500));
-		setPreferredSize(new Dimension(800,550));
+		setMinimumSize(new Dimension(100,600));
+		setPreferredSize(new Dimension(800,600));
 		setMaximumSize(new Dimension(900,600));
 	}
 }
