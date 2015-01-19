@@ -62,12 +62,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 	public Frame_Main() {
 		current = "nada";
 		
-
+		roundNum = 0;
 		
 		// Currently only supports one season
-		roundNum = 0;
-		curComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");	
-		
 		games = XMLParser.readGameList("files/saves_v6.xml");
 		
 		
@@ -253,6 +250,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 		currentGame.save();
 		XMLParser.writeGameList("files/saves_v6.xml", games);
+		roundNum = curComp.getRoundsPlayed();
 		
 		remove(curPanel);
 		// Start playing!
