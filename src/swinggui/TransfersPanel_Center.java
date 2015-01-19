@@ -275,7 +275,6 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 			buyButton.setEnabled(false);
 			buyButton.addMouseListener(buttonListener);
 		}
-		
 		buyPanel.add(buyPanel2, BorderLayout.CENTER);
 		
 		//messagepanel
