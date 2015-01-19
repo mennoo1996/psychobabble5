@@ -10,6 +10,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.ParseException;
 
 import javax.swing.Box;
@@ -92,6 +94,12 @@ public class Frame_Main extends JFrame implements ActionListener{
 		setMinimumSize(new Dimension(1024, 720));
 		setSize(1280, 800);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				exitProcedure();
+			}
+		});
 				
 //		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
 //		curPanel = teamChoose;
@@ -103,6 +111,15 @@ public class Frame_Main extends JFrame implements ActionListener{
 		curPanel = splashChoice;
 		add(curPanel, BorderLayout.CENTER);
 			
+	}
+	
+	public void exitProcedure() {
+		// Autosave on game exit
+		currentGame.save();
+		XMLParser.writeGameList("files/saves_v6.xml", games);
+		
+		dispose();
+		System.exit(0);
 	}
 	
 	public static void main(String[] args){
