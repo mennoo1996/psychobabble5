@@ -206,6 +206,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		//sellbutton
 		sellButton = new JButton("Sell player");
 		sellButton.setName("Test");
+		sellButton.setEnabled(false);
 		
 		//leftwarning
 		leftLabel = new JLabel();
@@ -222,11 +223,11 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 			sellPanel.setBackground(new Color(250,250,250));
 			sellLabel.setText("select a player from your team");
 			sellField.setEnabled(false);
-			sellButton.setEnabled(false);
+			//sellButton.setEnabled(false);
 		}
 		else{
 			sellField.setEnabled(true);
-			sellButton.setEnabled(true);
+			//sellButton.setEnabled(true);
 			sellButton.addMouseListener(buttonListener);
 		}
 		
@@ -271,7 +272,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		}
 		else{
 			buyField.setEnabled(true);
-			buyButton.setEnabled(true);
+			buyButton.setEnabled(false);
 			buyButton.addMouseListener(buttonListener);
 		}
 		
@@ -346,6 +347,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 			button = buyButton;
 		}
 		output.setText("");
+		button.setEnabled(true);
 		setMessage("Transfer players here", new Color(255,255,255));
 		try{
 			int Price = Integer.parseInt(input.getText());
@@ -355,7 +357,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 			if(input.getText().equals("")){
 				output.setText("");
 				setMessage("Transfer players here", new Color(255,255,255));
-				button.setEnabled(true);
+				button.setEnabled(false);
 			}
 			else{
 				output.setText("Please enter a number!");
