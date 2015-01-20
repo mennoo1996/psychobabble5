@@ -151,7 +151,7 @@
   </style>
   
     <style id = "bottompanelStyle">
-    	<insets top="26" left="47" bottom="0" right="47"/>
+    	<insets top="13" left="47" bottom="0" right="47"/>
 	  	<opaque value="FALSE"/>
 	  	<imagePainter method="panelBackground" path="images/southpanel.png" sourceInsets="60 60 0 60"/>
   </style>

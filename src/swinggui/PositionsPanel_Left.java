@@ -118,7 +118,7 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 					if(Team.get(w).getDaysInjured() > 0) {
 						//injury sticker
 						myImageIcon = createImageIcon("images/red-cross.png");
-					} else if(Team.get(w).getDaysSuspended() > 0 || Team.get(w).getRedcards() > 0) {
+					} else if(Team.get(w).getDaysSuspended() > 0) {
 						//suspension sticker
 						myImageIcon = createImageIcon("images/red-card.png");
 					} else {
@@ -143,6 +143,10 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 					label2.setPreferredSize(new Dimension(90, 50));
 					label2.setMaximumSize(new Dimension(100,50));
 					
+					if(Team.get(w).getDaysInjured()>0 || Team.get(w).getDaysSuspended()>0) {
+						Playerpanel.setBackground(new Color(255,141,104)); Playerpanel.setOpaque(true);
+						label2.setForeground(new Color(255,255,255));
+					}
 					
 					//attributes
 					JPanel label3 = new JPanel();
@@ -167,6 +171,9 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 						for(int e = 0; e < 4; e++){
 							AttrLabel[e].setFont(fontPlayerattr);
 							label3.add(AttrLabel[e]);
+							if(Team.get(w).getDaysInjured()>0 || Team.get(w).getDaysSuspended()>0) {
+								AttrLabel[e].setForeground(new Color(255,255,255));
+							}
 						}
 					}
 					else{
@@ -175,6 +182,9 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 						JLabel attr = new JLabel("Stat: " + player.getGoalkeeperValue());
 						attr.setFont(fontPlayerattr);
 						label3.add(attr);
+						if(Team.get(w).getDaysInjured()>0 || Team.get(w).getDaysSuspended()>0) {
+							attr.setForeground(new Color(255,255,255));
+						}
 					}
 					
 					
@@ -185,8 +195,10 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 					Playerpanel.add(label3, BorderLayout.EAST);
 					ScrollPaneGrid.add(Playerpanel);
 					
+					if(Team.get(w).getDaysInjured()==0 && Team.get(w).getDaysSuspended()==0) {
+						ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, this);
+					}
 					
-					ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, this);
 					
 				}
 			}

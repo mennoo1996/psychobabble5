@@ -204,16 +204,19 @@ public class Frame_Main extends JFrame implements ActionListener{
 					// For the demo this runs through the entire season (round by round)
 					
 					if (roundNum < 38) {
-						System.out.println(curComp.playRound());
-						TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
-						roundNum++;
+						if(curComp.playRound()) {
+							TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
+							roundNum++;
+							loadPlayView();
+						} else {
+							bottomBar.showString("Your team is not currently eligible for playing", new Color(255,0,0));
+						}
 						
-						loadPlayView();
 					} else {
 						// trigger an event signalling the start of the
 						// next season?
 						loadSeasonOverview();
-					}					
+					}		
 					
 					break;
 				case "positions ":
@@ -477,8 +480,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 
 		//Bottom bar here
 		bottomBar = new BottomBar(curComp, curTeam);
-		bottomBar.showStats();
 		add(bottomBar, BorderLayout.SOUTH);
+		bottomBar.showStats();
 		
 		revalidate();
 		repaint();

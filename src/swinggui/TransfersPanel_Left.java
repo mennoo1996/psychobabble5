@@ -104,8 +104,6 @@ public class TransfersPanel_Left extends JPanel {
 			}
 			
 			ScrollPaneContent.add(ScrollPaneGrid);
-			
-			
 		}
 		
 		selections.get(0).toggleSelected();

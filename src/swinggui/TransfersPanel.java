@@ -61,7 +61,7 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 		// add the overview panels
 		left = new TransfersPanel_Left(currentTeam, this);
 		add(left);
-		center = new TransfersPanel_Center(this);
+		center = new TransfersPanel_Center(this, currentTeam);
 		add(center);
 		right = new TransfersPanel_Right(currentCompetition, currentTeam, this);
 		add(right);
@@ -129,7 +129,7 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 		// add the overview panels
 		left = new TransfersPanel_Left(currentTeam, this);
 		add(left);
-		center = new TransfersPanel_Center(this);
+		center = new TransfersPanel_Center(this, currentTeam);
 		add(center);
 		right = new TransfersPanel_Right(currentCompetition, currentTeam, this);
 		add(right);

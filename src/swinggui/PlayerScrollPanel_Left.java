@@ -45,7 +45,18 @@ class PlayerScrollPanel_Left extends JPanel{
 		setOpaque(true);
 		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200,200,200)));
 		
-		ImageIcon myImageIcon = createImageIcon("images/Shirts/" +	Integer.toString(player.getNumber()) + ".png");
+		//shirt
+		ImageIcon myImageIcon;
+		if(player.getDaysInjured() > 0) {
+			//injury sticker
+			myImageIcon = createImageIcon("images/red-cross.png");
+		} else if(player.getDaysSuspended() > 0) {
+			//suspension sticker
+			myImageIcon = createImageIcon("images/red-card.png");
+		} else {
+			//t-shirt
+			myImageIcon = createImageIcon("images/Shirts/" +	Integer.toString(player.getNumber()) + ".png");
+		}
 		JLabel label1 = new JLabel ("") {
 		    @Override
 		    public void paintComponent (Graphics g) {
