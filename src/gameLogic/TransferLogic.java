@@ -429,6 +429,9 @@ public abstract class TransferLogic {
 		}
 		
 		if (sell) {
+			if (playersTeam.isMax()) {
+				playersTeam.setMax(false);
+			}
 			Team buyingTeam = teamswithbudget.get(GameLogic.randomGenerator(0, teamswithbudget.size()-1));
 			playersTeam.setBudget(playersTeam.getBudget()+askingPrice);
 			System.out.println(playersTeam.getBudget());
