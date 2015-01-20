@@ -282,6 +282,9 @@ public abstract class TransferLogic {
 				opponentsTeam.getTeam().remove(player);
 				player.setTeam(playersTeam.getTeamName());
 				existingTransfers.getTransfers().remove(tp);
+				playersTeam.setBudget(playersTeam.getBudget()-bid);
+				opponentsTeam.setBudget(opponentsTeam.getBudget()+bid);
+				
 				return "Congratulations! Your bid of " + bid + " got accepted and " + player.getName() + " is now part of your team";
 				
 			} else {
@@ -384,6 +387,7 @@ public abstract class TransferLogic {
 		if (sell) {
 			Team buyingTeam = teamswithbudget.get(GameLogic.randomGenerator(0, teamswithbudget.size()-1));
 			playersTeam.setBudget(playersTeam.getBudget()+askingPrice);
+			System.out.println(playersTeam.getBudget());
 			buyingTeam.setBudget(buyingTeam.getBudget()-askingPrice);
 			buyingTeam.add(player);
 			player.setTeam(buyingTeam.getTeamName());
