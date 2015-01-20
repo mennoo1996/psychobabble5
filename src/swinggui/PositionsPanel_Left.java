@@ -114,7 +114,18 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 					Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200,200,200)));
 					
 					//shirt
-					ImageIcon myImageIcon = createImageIcon("images/Shirts/" +	Integer.toString(Team.get(w).getNumber()) + ".png");
+					ImageIcon myImageIcon;
+					if(Team.get(w).getDaysInjured() > 0) {
+						//injury sticker
+						myImageIcon = createImageIcon("images/red-cross.png");
+					} else if(Team.get(w).getDaysSuspended() > 0 || Team.get(w).getRedcards() > 0) {
+						//suspension sticker
+						myImageIcon = createImageIcon("images/red-card.png");
+					} else {
+						//t-shirt
+						myImageIcon = createImageIcon("images/Shirts/" +	Integer.toString(Team.get(w).getNumber()) + ".png");
+					}
+					
 					JLabel label1 = new JLabel ("") {
 					    @Override
 					    public void paintComponent (Graphics g) {
@@ -131,6 +142,8 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 					label2.setMinimumSize(new Dimension(20,50));
 					label2.setPreferredSize(new Dimension(90, 50));
 					label2.setMaximumSize(new Dimension(100,50));
+					
+					
 					//attributes
 					JPanel label3 = new JPanel();
 					label3.setMinimumSize(new Dimension(75, label3.getSize().height));
@@ -164,12 +177,15 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 						label3.add(attr);
 					}
 					
+					
 					//finish up
 					Playerpanel.add(label1, BorderLayout.WEST);
 					JPanel fill = new JPanel();
 					Playerpanel.add(label2, BorderLayout.CENTER);
 					Playerpanel.add(label3, BorderLayout.EAST);
 					ScrollPaneGrid.add(Playerpanel);
+					
+					
 					ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, this);
 					
 				}
