@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -25,6 +26,10 @@ import libraryClasses.FieldPlayer;
 public class MatchPanel extends JPanel {
 	
 	private Competition cComp;
+	
+	public Dimension minSize = new Dimension(20,20);
+	public Dimension prefSize = new Dimension(40,20);
+	
 	private Team cTeam;
 	
 	public MatchPanel(Competition currentCompetition, Team currentTeam) {
@@ -38,6 +43,8 @@ public class MatchPanel extends JPanel {
 		//setName("Panel");
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 				
+		add(new Box.Filler(minSize, prefSize, null));
+		
 		// Fetch match information
 		CompetitionScheme curScheme = cComp.getScheme();
 		ArrayList<Match> roundMatches = curScheme.getRound(cComp.getRoundsPlayed()).getMatches();
@@ -360,5 +367,8 @@ public class MatchPanel extends JPanel {
 		rightPanel.add(scrollPaneRight);
 		
 		add(rightPanel);
+		
+		add(new Box.Filler(minSize, prefSize, null));
+		
 	}
 }

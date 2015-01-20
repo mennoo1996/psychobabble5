@@ -197,9 +197,12 @@ public class Frame_Main extends JFrame implements ActionListener{
 					currentGame.save();
 					XMLParser.writeGameList("files/saves_v6.xml", games);
 					
+					remove(bottomBar);
+					bottomBar = new BottomBar(curComp, curTeam);
+					
 					// Initialize new JPanel and remove current pane
 					MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
-					remove(curPanel); remove(bottomBar);
+					remove(curPanel);
 					
 					// Refresh the view
 					add(replPlayView, BorderLayout.CENTER, 1);
@@ -207,9 +210,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 					
 
 					//Bottom bar here
-					bottomBar = new BottomBar(curComp, curTeam);
+					add(bottomBar, BorderLayout.SOUTH);
 					bottomBar.showStats();
-					add(bottomBar);
 					
 					revalidate();
 					repaint();
@@ -285,6 +287,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 		int boxwidth = (int) tk.getScreenSize().getWidth();
 		int boxheight = (int) tk.getScreenSize().getHeight();
 		
+		bottomBar = new BottomBar(curComp, curTeam);
+		
 		//Header panel
 		Header header = new Header(this);
 		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
@@ -299,6 +303,11 @@ public class Frame_Main extends JFrame implements ActionListener{
 		//Center panel ends here
 		curPanel = overviewPanel;
 		add(curPanel, BorderLayout.CENTER);
+		
+		//Bottom bar here
+		add(bottomBar);
+		bottomBar.showStats();
+		
 		revalidate();
 		repaint();
 	}
@@ -364,7 +373,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 			//Bottom bar here
 			add(bottomBar);
 			bottomBar.showStats();
-			
 			
 			revalidate();
 			repaint();
