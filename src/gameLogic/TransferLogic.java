@@ -4,6 +4,8 @@ import libraryClasses.*;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 /** This class contains all the logic for transfers
  * 
@@ -221,9 +223,17 @@ public abstract class TransferLogic {
 				playersTeam.setBudget(playersTeam.getBudget()-bid);
 				opponentsTeam.setBudget(opponentsTeam.getBudget()+bid);
 				BigDecimal bbid = new BigDecimal(bid);
-				String[] bbbid = bbid.toString().split("\\.");
-				System.out.println(bbid);
-				return "Congratulations! Your bid of " + bbbid[0] + " got accepted and " + player.getName() + " is now part of your team";
+				
+				//price string
+				
+				DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+				bbid = bbid.setScale(2, BigDecimal.ROUND_DOWN);
+				DecimalFormat df = new DecimalFormat();
+				df.setGroupingUsed(false);		
+				String priceString = formatter.format(bbid.longValue());
+				
+				
+				return "Congratulations! Your bid of " + priceString + " got accepted and " + player.getName() + " is now part of your team";
 			} else {
 				double percentage = bid/player.getPrice().doubleValue()*100-100;
 				double returnedprice=0;
@@ -250,9 +260,16 @@ public abstract class TransferLogic {
 				existingTransfers.addTransfer(tp);
 				BigDecimal bbid = new BigDecimal(bid);
 				BigDecimal breturnedprice = new BigDecimal(returnedprice);
-				String[] bbbid = bbid.toString().split("\\.");
-				String[] bbreturnedprice = breturnedprice.toString().split("\\.");
-				return player.getTeam() + " did not accept your offer of " + bbbid[0] + " for " + player.getName() + ". They have indicated they want at least " + bbreturnedprice[0] + " for this player";
+				//price string
+				
+				DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+				bbid = bbid.setScale(2, BigDecimal.ROUND_DOWN);
+				breturnedprice = breturnedprice.setScale(2, BigDecimal.ROUND_DOWN);
+				DecimalFormat df = new DecimalFormat();
+				df.setGroupingUsed(false);		
+				String priceString = formatter.format(bbid.longValue());
+				String priceString2 = formatter.format(breturnedprice.longValue());
+				return player.getTeam() + " did not accept your offer of " + priceString + " for " + player.getName() + ". They have indicated they want at least " + priceString2 + " for this player";
 				
 			}
 		} else {
@@ -294,8 +311,14 @@ public abstract class TransferLogic {
 				playersTeam.setBudget(playersTeam.getBudget()-bid);
 				opponentsTeam.setBudget(opponentsTeam.getBudget()+bid);
 				BigDecimal bbid = new BigDecimal(bid);
-				String[] bbbid = bbid.toString().split("\\.");
-				return "Congratulations! Your bid of " + bbbid[0] + " got accepted and " + player.getName() + " is now part of your team";
+				//price string
+				
+				DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+				bbid = bbid.setScale(2, BigDecimal.ROUND_DOWN);
+				DecimalFormat df = new DecimalFormat();
+				df.setGroupingUsed(false);		
+				String priceString = formatter.format(bbid.longValue());
+				return "Congratulations! Your bid of " + priceString + " got accepted and " + player.getName() + " is now part of your team";
 				
 			} else {
 				double pricereturned = existingTransfers.getTransfer(player).getPriceReturned();
@@ -327,9 +350,16 @@ public abstract class TransferLogic {
 				existingTransfers.getTransfer(player).setBid(bid);
 				BigDecimal bbid = new BigDecimal (bid);
 				BigDecimal bpriceReturned = new BigDecimal(existingTransfers.getTransfer(player).getPriceReturned());
-				String[] bbbid = bbid.toString().split("\\.");
-				String[] bbpriceReturned = bpriceReturned.toString().split("\\.");
-				return player.getTeam() + " did not accept your offer of " + bbbid[0] + " for " + player.getName() + ". They have indicated they want at least " + bbpriceReturned[0] + " for this player";
+				//price string
+				
+				DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+				bbid = bbid.setScale(2, BigDecimal.ROUND_DOWN);
+				bpriceReturned = bpriceReturned.setScale(2, BigDecimal.ROUND_DOWN);
+				DecimalFormat df = new DecimalFormat();
+				df.setGroupingUsed(false);		
+				String priceString = formatter.format(bbid.longValue());
+				String priceString2 = formatter.format(bpriceReturned.longValue());
+				return player.getTeam() + " did not accept your offer of " + priceString + " for " + player.getName() + ". They have indicated they want at least " + priceString2 + " for this player";
 			}
 			
 		}
@@ -411,9 +441,15 @@ public abstract class TransferLogic {
 				playersTeam.getPositions().remove(player);
 			}
 			BigDecimal baskingPrice = new BigDecimal(askingPrice);
-			String[] bbaskingPrice = baskingPrice.toString().split("\\.");
+			//price string
 			
-			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + bbaskingPrice[0];
+			DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+			baskingPrice = baskingPrice.setScale(2, BigDecimal.ROUND_DOWN);
+			DecimalFormat df = new DecimalFormat();
+			df.setGroupingUsed(false);		
+			String priceString = formatter.format(baskingPrice.longValue());
+			
+			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + priceString;
 		} else {
 			player.triedToSell();
 			return "Unfortunately your player didn't get bought. Lowering the asking price might increase the chances for a team buying your player.";
