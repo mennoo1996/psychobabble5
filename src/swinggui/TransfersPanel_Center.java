@@ -40,10 +40,13 @@ import javax.swing.text.PlainDocument;
 import libraryClasses.FieldPlayer;
 import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
+import libraryClasses.Team;
 
 public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	
 	private ActionListener buttonListener;
+	
+	private Team currentTeam;
 	
 	private JPanel playerPanel;
 	private JPanel statPanel;
@@ -65,7 +68,8 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
 	private Font fontSelected = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	
-	public TransfersPanel_Center(ActionListener teamActionListener) {
+	public TransfersPanel_Center(ActionListener teamActionListener, Team cTeam) {
+		currentTeam = cTeam;
 		buttonListener = teamActionListener;
 		initUI();
 	}
@@ -108,7 +112,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	}
 	
 	public void showPlayer(boolean isleft, Player play){
-		player=play;
+		player = play;
 		isLeft = isleft;
 		remove(messagePanel);
 		remove(buyPanel);
@@ -119,7 +123,18 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 		
 		//shirt
-		ImageIcon myImageIcon = createImageIcon("images/Shirts/T-Shirt.png");
+		ImageIcon myImageIcon;// = createImageIcon("images/Shirts/T-Shirt.png");
+		if(player.getDaysInjured() > 0) {
+			//injury sticker
+			myImageIcon = createImageIcon("images/red-cross.png");
+		} else if(player.getDaysSuspended() > 0) {
+			//suspension sticker
+			myImageIcon = createImageIcon("images/red-card.png");
+		} else {
+			//t-shirt
+			myImageIcon = createImageIcon("images/Shirts/T-Shirt.png");
+		}
+		
 		JLabel label1 = new JLabel ("") {
 		    @Override
 		    public void paintComponent (Graphics g) {
@@ -348,7 +363,13 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		setMessage("Transfer players here", new Color(255,255,255));
 		try{
 			int Price = Integer.parseInt(input.getText());
-			button.setEnabled(true);
+			if(Price > currentTeam.getBudget() && !isLeft) {
+				output.setText("Current budget too small!");
+				setMessage("", new Color(245,245,245));
+				button.setEnabled(false);
+			} else {
+				button.setEnabled(true);
+			}
 		}
 		catch(NumberFormatException e){
 			if(input.getText().equals("")){

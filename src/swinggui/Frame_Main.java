@@ -183,38 +183,41 @@ public class Frame_Main extends JFrame implements ActionListener{
 					// For the demo this runs through the entire season (round by round)
 					
 					if (roundNum < 38) {
-						System.out.println(curComp.playRound());
-						TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
-						roundNum++;
+						if(curComp.playRound()) {
+							TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
+							roundNum++;
+							// Then display statistics page showcasing the results of the season
+							current = "match";
+							
+							currentGame.save();
+							XMLParser.writeGameList("files/saves_v6.xml", games);
+							
+							remove(bottomBar);
+							bottomBar = new BottomBar(curComp, curTeam);
+							
+							// Initialize new JPanel and remove current pane
+							MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
+							remove(curPanel);
+							
+							// Refresh the view
+							add(replPlayView, BorderLayout.CENTER, 1);
+							curPanel = replPlayView;
+							
+
+							//Bottom bar here
+							add(bottomBar, BorderLayout.SOUTH);
+							bottomBar.showStats();
+							
+							revalidate();
+							repaint();
+						} else {
+							bottomBar.showString("Your team is not currently eligible for playing", new Color(255,0,0));
+						}
+						
 					} else {
 						// trigger an event signalling the start of the
 						// next season?
 					}
-										
-					// Then display statistics page showcasing the results of the season
-					current = "match";
-					
-					currentGame.save();
-					XMLParser.writeGameList("files/saves_v6.xml", games);
-					
-					remove(bottomBar);
-					bottomBar = new BottomBar(curComp, curTeam);
-					
-					// Initialize new JPanel and remove current pane
-					MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
-					remove(curPanel);
-					
-					// Refresh the view
-					add(replPlayView, BorderLayout.CENTER, 1);
-					curPanel = replPlayView;
-					
-
-					//Bottom bar here
-					add(bottomBar, BorderLayout.SOUTH);
-					bottomBar.showStats();
-					
-					revalidate();
-					repaint();
 					
 					break;
 				case "positions ":
