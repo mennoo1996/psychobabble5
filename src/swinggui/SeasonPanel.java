@@ -47,7 +47,7 @@ public class SeasonPanel extends JPanel{
 		
 		JPanel seasonOverviewPanel = new JPanel();
 		seasonOverviewPanel.setName("Panel");
-		seasonOverviewPanel.setLayout(new BoxLayout(seasonOverviewPanel, BoxLayout.X_AXIS));
+		seasonOverviewPanel.setLayout(new BoxLayout(seasonOverviewPanel, BoxLayout.Y_AXIS));
 		
 		// Add Congratulations Label
 		JPanel title = new JPanel();
@@ -73,7 +73,17 @@ public class SeasonPanel extends JPanel{
 			}
 		}
 		
-		JLabel finalPosition = new JLabel("As " + cTeam.getTeamName() + " you finished in " + place + " place", JLabel.CENTER);
+		String suffix = "th";
+		
+		if (place == 1) {
+			suffix = "st";
+		} else if (place == 2) {
+			suffix = "nd";
+		} else if (place == 3) {
+			suffix = "rd";
+		}
+		
+		JLabel finalPosition = new JLabel("As " + cTeam.getTeamName() + " you finished in " + place + suffix + " place", JLabel.CENTER);
 		finalPosition.setMinimumSize(new Dimension(0, 40));
 		finalPosition.setPreferredSize(new Dimension(finalPosition.getPreferredSize().width, 40));
 		yourTeamData.add(finalPosition, BorderLayout.NORTH);
@@ -118,8 +128,10 @@ public class SeasonPanel extends JPanel{
 			
 			nextScorer.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200, 200, 200)));
 			
+			Player beast = topScorers[i];
+			
 			// Add game name label
-			JLabel scorerLabel = new JLabel(topScorers[i].getName(), JLabel.CENTER);
+			JLabel scorerLabel = new JLabel(beast.getName() + ", " + beast.getTeam() + ": " + beast.getGoals() + " goals", JLabel.CENTER);
 			scorerLabel.setFont(new Font("Avenir", Font.ROMAN_BASELINE, 16));
 			scorerLabel.setMinimumSize(new Dimension(20, 50));
 			scorerLabel.setPreferredSize(new Dimension(90, 50));
@@ -150,7 +162,7 @@ public class SeasonPanel extends JPanel{
 		quitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		quitButton.addActionListener(nextChoiceListener);
 		
-		choicePanel.add(newSeasonButton);
+		choicePanel.add(quitButton);
 		
 		seasonOverviewPanel.add(choicePanel);
 		

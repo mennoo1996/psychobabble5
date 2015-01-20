@@ -278,6 +278,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		currentGame.save();
 		XMLParser.writeGameList("files/saves_v6.xml", games);
 		roundNum = curComp.getRoundsPlayed();
+		playerName = currentGame.getName();
 		
 		remove(curPanel);
 		// Start playing!
