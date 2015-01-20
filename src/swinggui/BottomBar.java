@@ -164,15 +164,17 @@ public class BottomBar extends JPanel {
 		
 		//round
 		Round nextRound = currentComp.getScheme().getRound(currentComp.getRoundsPlayed() + 1);
-		ArrayList<Match> matches = nextRound.getMatches();
 		String opponentName = null;
-		for(int i=0; i<matches.size(); i++) {
-			if(matches.get(i).getTeam1().equals(currentTeam.getTeamName())) {
-				opponentName = matches.get(i).getTeam2();
-				break;
-			} else if(matches.get(i).getTeam2().equals(currentTeam.getTeamName())){
-				opponentName = matches.get(i).getTeam1();
-				break;
+		if(currentComp.getRoundsPlayed() < 38) {
+			ArrayList<Match> matches = nextRound.getMatches();
+			for(int i=0; i<matches.size(); i++) {
+				if(matches.get(i).getTeam1().equals(currentTeam.getTeamName())) {
+					opponentName = matches.get(i).getTeam2();
+					break;
+				} else if(matches.get(i).getTeam2().equals(currentTeam.getTeamName())){
+					opponentName = matches.get(i).getTeam1();
+					break;
+				}
 			}
 		}
 		roundLabel = new JLabel("Round: " + currentComp.getRoundsPlayed() + ", next: " + opponentName);

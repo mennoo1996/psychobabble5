@@ -64,7 +64,7 @@ public class TeamDetailPanel extends JPanel {
 		// List budget
 		JLabel budgetLabel = new JLabel("Budget:", JLabel.CENTER);
 		budgetLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		JLabel actualBudget = new JLabel("£" + (int)detailTeam.getBudget(), JLabel.CENTER);
+		JLabel actualBudget = new JLabel("$" + (int)detailTeam.getBudget(), JLabel.CENTER);
 		actualBudget.setAlignmentX(Component.CENTER_ALIGNMENT);
 		statsPanel.add(budgetLabel);
 		statsPanel.add(actualBudget, BorderLayout.CENTER);
