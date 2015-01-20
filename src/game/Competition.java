@@ -7,6 +7,7 @@ import java.util.Collections;
 import schemeClasses.CompetitionScheme;
 import schemeClasses.Match;
 import schemeClasses.Round;
+import xmlIO.XMLParser;
 import libraryClasses.FieldPlayer;
 import libraryClasses.Library;
 import libraryClasses.Player;
@@ -29,6 +30,44 @@ public class Competition {
 		this.library = library;
 		this.scheme = scheme;
 		this.roundsPlayed = roundsPlayed;
+	}
+	
+	public void newSeason() {
+		roundsPlayed=0;
+		for (int i=0;i<20;i++) {
+			library.getLibrary().get(i).setStandings(new Standings(0, 0, 0, 0, 0, library.getLibrary().get(i).getTeamName()));
+		}
+		Competition sComp = XMLParser.readCompetition("files/competitionDatabase_v5.xml", "files/competition-scheme.xml");
+		for (int i=0;i<20;i++) {
+			library.getLibrary().get(i).setBudget(library.getLibrary().get(i).getBudget() + sComp.getLibrary().getLibrary().get(i).getBudget());
+		}
+		
+		for (int i=0;i<20;i++) {
+			Team t = library.getLibrary().get(i);
+			for (int j=0;j<t.getTeam().size();j++) {
+				Player p = t.getTeam().get(j);
+				p.setAge(p.getAge() + 1);
+				p.setAssists(0);
+				p.setGoals(0);
+				p.setYellowcards(0);
+				p.setRedcards(0);
+				p.setEligible(true);
+				p.setDaysInjured(0);
+				p.setDaysSuspended(0);
+				p.setDaysNotForSale(0);
+				
+			}
+		}
+		
+		for (int i=0;i<38;i++) {
+			Round r = scheme.getRound(i+1);
+			for (Match m:r.getMatches()) {
+				m.setScore1(-1);
+				m.setScore2(-1);
+				m.setScoreTeam1(-1);
+				m.setScoreTeam2(-1);
+			}
+		}
 	}
 	
 	/**
