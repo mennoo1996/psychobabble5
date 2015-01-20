@@ -1,5 +1,7 @@
 package xmlIO;
 
+import java.math.BigDecimal;
+
 import game.Competition;
 import schemeClasses.CompetitionScheme;
 
@@ -19,6 +21,12 @@ public class TestXMLParse {
 		System.out.println(competition.getLibrary().getLibrary().get(0).getBudget());
 		competition.newSeason();
 		System.out.println(competition.getLibrary().getLibrary().get(0).getBudget());
+		
+		BigDecimal b = new BigDecimal (new Double(123.45));
+		System.out.println(b.toString());
+		String a = "hallo,hallo";
+		String[] c = a.split(",");
+		System.out.println(c.length);
 
 		
 	}
