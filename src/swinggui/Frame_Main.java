@@ -180,6 +180,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 				case "New Season":
 					curComp.newSeason();
 					roundNum = 0;
+					
+					currentGame.save();
+					XMLParser.writeGameList("files/saves_v6.xml", games);
+					
 					loadMainScreenNewGame(curTeam.getTeamName());
 					
 					break;
