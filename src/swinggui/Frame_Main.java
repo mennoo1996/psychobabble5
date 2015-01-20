@@ -209,9 +209,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 						// trigger an event signalling the start of the
 						// next season?
 						loadSeasonOverview();
-					}
-										
-					
+					}					
 					
 					break;
 				case "positions ":
@@ -284,6 +282,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 		int boxwidth = (int) tk.getScreenSize().getWidth();
 		int boxheight = (int) tk.getScreenSize().getHeight();
 		
+		bottomBar = new BottomBar(curComp, curTeam);
+		
 		//Header panel
 		headerBar = new Header(this);
 		headerBar.setLayout(new BoxLayout(headerBar, BoxLayout.X_AXIS));
@@ -298,6 +298,11 @@ public class Frame_Main extends JFrame implements ActionListener{
 		//Center panel ends here
 		curPanel = overviewPanel;
 		add(curPanel, BorderLayout.CENTER);
+		
+		//Bottom bar here
+		add(bottomBar);
+		bottomBar.showStats();
+		
 		revalidate();
 		repaint();
 	}
@@ -363,7 +368,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 			//Bottom bar here
 			add(bottomBar);
 			bottomBar.showStats();
-			
 			
 			revalidate();
 			repaint();
@@ -469,7 +473,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		//Bottom bar here
 		bottomBar = new BottomBar(curComp, curTeam);
 		bottomBar.showStats();
-		add(bottomBar);
+		add(bottomBar, BorderLayout.SOUTH);
 		
 		revalidate();
 		repaint();

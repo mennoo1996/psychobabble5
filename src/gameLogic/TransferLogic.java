@@ -1,6 +1,9 @@
 package gameLogic;
 import libraryClasses.*;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.*;
 /** This class contains all the logic for transfers
  * 
@@ -217,7 +220,10 @@ public abstract class TransferLogic {
 				player.setTeam(playersTeam.getTeamName());
 				playersTeam.setBudget(playersTeam.getBudget()-bid);
 				opponentsTeam.setBudget(opponentsTeam.getBudget()+bid);
-				return "Congratulations! Your bid of " + bid + " got accepted and " + player.getName() + " is now part of your team";
+				BigDecimal bbid = new BigDecimal(bid);
+				String[] bbbid = bbid.toString().split("\\.");
+				System.out.println(bbid);
+				return "Congratulations! Your bid of " + bbbid[0] + " got accepted and " + player.getName() + " is now part of your team";
 			} else {
 				double percentage = bid/player.getPrice().doubleValue()*100-100;
 				double returnedprice=0;
@@ -242,8 +248,11 @@ public abstract class TransferLogic {
 				
 				TransferInProgress tp = new TransferInProgress(player, returnedprice, bid);
 				existingTransfers.addTransfer(tp);
-				
-				return player.getTeam() + " did not accept your offer of " + bid + " for " + player.getName() + ". They have indicated they want at least " + returnedprice + " for this player";
+				BigDecimal bbid = new BigDecimal(bid);
+				BigDecimal breturnedprice = new BigDecimal(returnedprice);
+				String[] bbbid = bbid.toString().split("\\.");
+				String[] bbreturnedprice = breturnedprice.toString().split("\\.");
+				return player.getTeam() + " did not accept your offer of " + bbbid[0] + " for " + player.getName() + ". They have indicated they want at least " + bbreturnedprice[0] + " for this player";
 				
 			}
 		} else {
@@ -284,8 +293,9 @@ public abstract class TransferLogic {
 				existingTransfers.getTransfers().remove(tp);
 				playersTeam.setBudget(playersTeam.getBudget()-bid);
 				opponentsTeam.setBudget(opponentsTeam.getBudget()+bid);
-				
-				return "Congratulations! Your bid of " + bid + " got accepted and " + player.getName() + " is now part of your team";
+				BigDecimal bbid = new BigDecimal(bid);
+				String[] bbbid = bbid.toString().split("\\.");
+				return "Congratulations! Your bid of " + bbbid[0] + " got accepted and " + player.getName() + " is now part of your team";
 				
 			} else {
 				double pricereturned = existingTransfers.getTransfer(player).getPriceReturned();
@@ -315,7 +325,11 @@ public abstract class TransferLogic {
 				}
 				
 				existingTransfers.getTransfer(player).setBid(bid);
-				return player.getTeam() + " did not accept your offer of " + bid + " for " + player.getName() + ". They have indicated they want at least " + existingTransfers.getTransfer(player).getPriceReturned() + " for this player";
+				BigDecimal bbid = new BigDecimal (bid);
+				BigDecimal bpriceReturned = new BigDecimal(existingTransfers.getTransfer(player).getPriceReturned());
+				String[] bbbid = bbid.toString().split("\\.");
+				String[] bbpriceReturned = bpriceReturned.toString().split("\\.");
+				return player.getTeam() + " did not accept your offer of " + bbbid[0] + " for " + player.getName() + ". They have indicated they want at least " + bbpriceReturned[0] + " for this player";
 			}
 			
 		}
@@ -396,9 +410,10 @@ public abstract class TransferLogic {
 			if (playersTeam.getPositions().contains(player)) {
 				playersTeam.getPositions().remove(player);
 			}
+			BigDecimal baskingPrice = new BigDecimal(askingPrice);
+			String[] bbaskingPrice = baskingPrice.toString().split("\\.");
 			
-			
-			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + askingPrice;
+			return "Congratulations! " + player.getName() + " got bought by " + buyingTeam.getTeamName() + " for the price of " + bbaskingPrice[0];
 		} else {
 			player.triedToSell();
 			return "Unfortunately your player didn't get bought. Lowering the asking price might increase the chances for a team buying your player.";
