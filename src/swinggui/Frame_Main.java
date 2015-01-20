@@ -37,6 +37,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	
 	private JPanel curPanel;
 	private BottomBar bottomBar;
+	private Header headerBar;
 	private String current;
 	private Competition curComp;
 	private Team curTeam;
@@ -44,6 +45,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	private String playerName;
 	private GameList games;
 	private Game currentGame;
+	private boolean shouldSave;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
@@ -72,6 +74,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Currently only supports one season
 		games = XMLParser.readGameList("files/saves_v6.xml");
 		
+		shouldSave = false;
 		
 		initUI();
 	}
@@ -117,8 +120,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 	
 	public void exitProcedure() {
 		// Autosave on game exit
-		currentGame.save();
-		XMLParser.writeGameList("files/saves_v6.xml", games);
+		if (shouldSave) {
+			currentGame.save();
+			XMLParser.writeGameList("files/saves_v6.xml", games);
+		}
 		dispose();
 		System.exit(0);
 	}
@@ -159,7 +164,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 					break;
 				case "Play as this team":					
 					String teamName = (String)possibleMenuB.getClientProperty("teamName");
-										
+					
+					shouldSave = true;
 					loadMainScreenNewGame(teamName);
 					
 					break;
@@ -167,7 +173,18 @@ public class Frame_Main extends JFrame implements ActionListener{
 					
 					int gameIndex = (int)possibleMenuB.getClientProperty("gameIndex");
 					
+					shouldSave = true;
 					loadMainScreenLoadedGame(gameIndex);
+					
+					break;
+				case "New Season":
+					curComp.newSeason();
+					roundNum = 0;
+					loadMainScreenNewGame(curTeam.getTeamName());
+					
+					break;
+				case "Quit":
+					exitProcedure();
 					
 					break;
 				case "overview ":					
@@ -186,33 +203,15 @@ public class Frame_Main extends JFrame implements ActionListener{
 						System.out.println(curComp.playRound());
 						TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
 						roundNum++;
+						
+						loadPlayView();
 					} else {
 						// trigger an event signalling the start of the
 						// next season?
+						loadSeasonOverview();
 					}
 										
-					// Then display statistics page showcasing the results of the season
-					current = "match";
 					
-					currentGame.save();
-					XMLParser.writeGameList("files/saves_v6.xml", games);
-					
-					// Initialize new JPanel and remove current pane
-					MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
-					remove(curPanel); remove(bottomBar);
-					
-					// Refresh the view
-					add(replPlayView, BorderLayout.CENTER, 1);
-					curPanel = replPlayView;
-					
-
-					//Bottom bar here
-					bottomBar = new BottomBar(curComp, curTeam);
-					bottomBar.showStats();
-					add(bottomBar);
-					
-					revalidate();
-					repaint();
 					
 					break;
 				case "positions ":
@@ -286,9 +285,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		int boxheight = (int) tk.getScreenSize().getHeight();
 		
 		//Header panel
-		Header header = new Header(this);
-		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
-		add(header);
+		headerBar = new Header(this);
+		headerBar.setLayout(new BoxLayout(headerBar, BoxLayout.X_AXIS));
+		add(headerBar);
 		
 		//Center panel begins here
 		OverviewPanel overviewPanel = new OverviewPanel(curComp);
@@ -321,9 +320,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		bottomBar = new BottomBar(curComp, curTeam);
 		
 		//Header panel
-		Header header = new Header(this);
-		header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
-		add(header);
+		headerBar = new Header(this);
+		headerBar.setLayout(new BoxLayout(headerBar, BoxLayout.X_AXIS));
+		add(headerBar);
 		
 		//Center panel begins here
 		OverviewPanel overviewPanel = new OverviewPanel(curComp);
@@ -449,6 +448,46 @@ public class Frame_Main extends JFrame implements ActionListener{
 			revalidate();
 			repaint();
 		}
+	}
+	
+	public void loadPlayView() {
+		// Then display statistics page showcasing the results of the season
+		current = "match";
+		
+		currentGame.save();
+		XMLParser.writeGameList("files/saves_v6.xml", games);
+		
+		// Initialize new JPanel and remove current pane
+		MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
+		remove(curPanel); remove(bottomBar);
+		
+		// Refresh the view
+		add(replPlayView, BorderLayout.CENTER, 1);
+		curPanel = replPlayView;
+		
+
+		//Bottom bar here
+		bottomBar = new BottomBar(curComp, curTeam);
+		bottomBar.showStats();
+		add(bottomBar);
+		
+		revalidate();
+		repaint();
+	}
+	
+	public void loadSeasonOverview() {
+		current = "season";
+		
+		SeasonPanel seasonSummary = new SeasonPanel(curComp, curTeam, this, playerName);
+		remove(curPanel);
+		remove(bottomBar);
+		remove(headerBar);
+		
+		add(seasonSummary, BorderLayout.CENTER);
+		curPanel = seasonSummary;
+		
+		revalidate();
+		repaint();		
 	}
 
 }
