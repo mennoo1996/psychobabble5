@@ -105,9 +105,9 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		add(messagePanel);
 		//content ends here
 		
-		setMinimumSize(new Dimension(100,600));
-		setPreferredSize(new Dimension(350,600));
-		setMaximumSize(new Dimension(900,600));
+		setMinimumSize(new Dimension(100,580));
+		setPreferredSize(new Dimension(350,580));
+		setMaximumSize(new Dimension(900,580));
 		
 	}
 	

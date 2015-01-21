@@ -180,9 +180,9 @@ public class TeamDetailPanel extends JPanel {
 		//ScrollPane.setPreferredSize(new Dimension(400,500));
 		
 		detailsPanel.add(ScrollPane);
-		setMinimumSize(new Dimension(400,600));
-		setPreferredSize(new Dimension(600,600));
-		setMaximumSize(new Dimension(900,600));
+		setMinimumSize(new Dimension(400,580));
+		setPreferredSize(new Dimension(600,580));
+		setMaximumSize(new Dimension(900,580));
 		
 		add(detailsPanel);
 		

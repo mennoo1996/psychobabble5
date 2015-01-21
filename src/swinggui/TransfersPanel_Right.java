@@ -115,9 +115,9 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		
 		//content ends here
 		
-		setMinimumSize(new Dimension(100,600));
-		setPreferredSize(new Dimension(450,600));
-		setMaximumSize(new Dimension(900,600));
+		setMinimumSize(new Dimension(100,580));
+		setPreferredSize(new Dimension(450,580));
+		setMaximumSize(new Dimension(900,580));
 	}
 	
 	public void Search(String Search){
