@@ -20,6 +20,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -92,6 +93,13 @@ public class Frame_Main extends JFrame implements ActionListener{
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+		
+		ImageIcon bgimage = createImageIcon("images/background.png");
+		BackgroundPanel contentPane = new BackgroundPanel(bgimage.getImage(), BackgroundPanel.SCALED, 0.5f, 0.5f);
+		//JLabel contentPane = new JLabel();
+		//contentPane.setIcon( createImageIcon("images/background.png") );
+		contentPane.setLayout( new BorderLayout() );
+		setContentPane( contentPane );
 		
 		//initialize some stuff
 		setTitle("Football Manager 2015");
@@ -204,19 +212,16 @@ public class Frame_Main extends JFrame implements ActionListener{
 					// For the demo this runs through the entire season (round by round)
 					
 					if (roundNum < 38) {
-						if(curComp.playRound()) {
-							TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
-							roundNum++;
-							loadPlayView();
-						} else {
-							bottomBar.showString("Your team is not currently eligible for playing", new Color(255,0,0));
-						}
+						System.out.println(curComp.playRound());
+						TransferLogic.AutoTransfer(curTeam, curComp.getLibrary());
+						roundNum++;
 						
+						loadPlayView();
 					} else {
 						// trigger an event signalling the start of the
 						// next season?
 						loadSeasonOverview();
-					}		
+					}					
 					
 					break;
 				case "positions ":
@@ -480,8 +485,8 @@ public class Frame_Main extends JFrame implements ActionListener{
 
 		//Bottom bar here
 		bottomBar = new BottomBar(curComp, curTeam);
-		add(bottomBar, BorderLayout.SOUTH);
 		bottomBar.showStats();
+		add(bottomBar, BorderLayout.SOUTH);
 		
 		revalidate();
 		repaint();
