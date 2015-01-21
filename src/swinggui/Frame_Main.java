@@ -80,7 +80,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 	}
 	
 	public final void initUI(){
-		//set Look And Feelsv
+		//set Look And Feel
 		SynthLookAndFeel synth = new SynthLookAndFeel();
 		try {
 			synth.load(Frame_Main.class.getResourceAsStream("lookandfeel.xml"), Frame_Main.class);
@@ -92,6 +92,11 @@ public class Frame_Main extends JFrame implements ActionListener{
 		} catch (UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+		
+		ImageIcon bgImage = createImageIcon("images/background.png");
+		BackgroundPanel bg = new BackgroundPanel(bgImage.getImage(), BackgroundPanel.SCALED, 0.5f,0.5f);
+		bg.setLayout(new BorderLayout());
+		setContentPane(bg);
 		
 		//initialize some stuff
 		setTitle("Football Manager 2015");
@@ -105,7 +110,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 				exitProcedure();
 			}
 		});
-				
+		
 //		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
 //		curPanel = teamChoose;
 //		add(curPanel, BorderLayout.CENTER);
