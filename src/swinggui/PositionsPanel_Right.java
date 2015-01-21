@@ -296,7 +296,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		if(empty){
 			//content
 			((PlayerPanel) panels[position - 1]).setPlayer(player);
-			myImageIcon = createImageIcon("images/Shirts/T-Shirt.png");
+			myImageIcon = createImageIcon("images/Shirts/T-Shirt-orange.png");
 			label2 = new JLabel("Select player");
 			box = Box.createRigidArea(new Dimension(0,0));
 			setPosition(position, null, team);
