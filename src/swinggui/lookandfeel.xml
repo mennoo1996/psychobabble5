@@ -145,9 +145,9 @@
   
   
   <style id = "basicpanelStyle">
-	  	<insets top="32" left="47" bottom="62" right="47"/>
+	  	<insets top="32" left="47" bottom="50" right="47"/>
 	  	<opaque value="FALSE"/>
-	  	<imagePainter method="panelBackground" path="images/panel.png" sourceInsets="60 60 62 60"/>
+	  	<imagePainter method="panelBackground" path="images/panel.png" sourceInsets="60 60 50 60"/>
   </style>
   
     <style id = "bottompanelStyle">

@@ -136,9 +136,9 @@ public class MatchPanel extends JPanel {
 			}
 		}
 		
-		leftPanel.setMinimumSize(new Dimension(100,600));
-		leftPanel.setPreferredSize(new Dimension(450,600));
-		leftPanel.setMaximumSize(new Dimension(900,600));
+		leftPanel.setMinimumSize(new Dimension(100,580));
+		leftPanel.setPreferredSize(new Dimension(450,580));
+		leftPanel.setMaximumSize(new Dimension(900,580));
 		
 		// Cards
 		if (curMatch.getYellowCardGetterst1().size() > 0 || curMatch.getRedCardGetterst1().size() > 0) {

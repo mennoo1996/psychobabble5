@@ -270,8 +270,8 @@ public class StandingsPanel extends JPanel {
 		
 		
 		// Adjust dimensions
-		setMinimumSize(new Dimension(100, 600));
-		setPreferredSize(new Dimension(900, 600));
-		setMaximumSize(new Dimension(1000, 600));
+		setMinimumSize(new Dimension(100, 580));
+		setPreferredSize(new Dimension(900, 580));
+		setMaximumSize(new Dimension(1000, 580));
 	}
 }

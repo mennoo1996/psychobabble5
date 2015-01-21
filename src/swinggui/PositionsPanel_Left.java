@@ -30,31 +30,39 @@ import libraryClasses.Player;
 import libraryClasses.Team;
 
 @SuppressWarnings("serial")
-public class PositionsPanel_Left extends JPanel implements DragGestureListener, Transferable {
+public class PositionsPanel_Left extends JPanel {
 	
+	private DragGestureListener dragGestureListener;
 	private Team currentTeam;
 	private ArrayList<Player> Team;
+	private JPanel ScrollPaneContent;
+	private String[] PlayerTypes = {
+			"Attacker",
+			"Midfielder",
+			"Defender",
+			"Goalkeeper"
+	};
+	private DragSource ds;
 	
-	public PositionsPanel_Left(Team cTeam) {
+	private Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
+	private Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 16);
+	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
+	
+	public PositionsPanel_Left(Team cTeam, DragGestureListener listener) {
+		dragGestureListener = listener;
 		currentTeam = cTeam;
 		Team = cTeam.getTeam();
 		initUI();
 	}
 	
-	
 	/**
-	 * Initialize an example panel
+	 * Initialize left positions panel, containing all of your team's players
 	 */
 	public final void initUI() {
-		//new panel
-		//JPanel panel = new JPanel();
+
 		setOpaque(false);
 		setName("Panel");
-		//setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(145,143,143)));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		//dragsource
-		DragSource ds = new DragSource();
 		
 		//panel title
 		JPanel titlepanel = new JPanel();
@@ -67,35 +75,38 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 
 		//content begins here
 		
-		//Fonts here
-		Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
-		Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 16);
-		Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
+		//top level JPanel holds all scrollable content
+		ScrollPaneContent = new JPanel(); 
+		ScrollPaneContent.setLayout(new BoxLayout(ScrollPaneContent, BoxLayout.Y_AXIS));
+		loadContent();
+		JScrollPane ScrollPane = new JScrollPane(ScrollPaneContent, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+		ScrollPane.getVerticalScrollBar().setUnitIncrement(10);
 		
-		//top level JPanel holds all content for the scrollable.
-		JPanel ScrollPaneContent = new JPanel(); ScrollPaneContent.setLayout(new BoxLayout(ScrollPaneContent, BoxLayout.Y_AXIS));
+		add(ScrollPane);
+		//content ends here
+
+		//Panel Size Declarations
+		setMinimumSize(new Dimension(100,580));
+		setPreferredSize(new Dimension(450,580));
+		setMaximumSize(new Dimension(900,580));
+	}
+	
+	public void loadContent(){
+		ScrollPaneContent.removeAll();
 		
-		//player types
-		String[] PlayerTypes = {
-				"Attacker",
-				"Midfielder",
-				"Defender",
-				"Goalkeeper"
-		};
+		//dragsource
+		ds = new DragSource();
 		
 		//loop through player types
 		for(int q = 0; q < 4; q++){
 			
 			//add a separator
 			JPanel separator = new JPanel(); 
+			JLabel separatortitle = new JLabel(PlayerTypes[q] + "s");
 			separator.setMinimumSize(new Dimension(0,25));
-			//separator.setPreferredSize(new Dimension(separator.getWidth(), 25));
 			separator.setOpaque(true);
 			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(180,180,180)));
 			separator.setBackground(new Color(240,240,240));
-			
-			//separator title
-			JLabel separatortitle = new JLabel(PlayerTypes[q] + "s");
 			separatortitle.setFont(fontSeparator);
 			separator.add(separatortitle);
 			ScrollPaneContent.add(separator);
@@ -108,12 +119,12 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 			for(int w = 0; w < Team.size(); w++){
 				if(Team.get(w).getPlayerType().toString() == PlayerTypes[q]){
 					
-					//panel to hold player information. Also draggable element
-					ListPanel Playerpanel = new ListPanel(Team.get(w));
+					//panel to hold player information. Also the draggable element
+					PlayerPanel Playerpanel = new PlayerPanel(Team.get(w), 0);
 					Playerpanel.setLayout(new BorderLayout());
 					Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200,200,200)));
 					
-					//shirt
+					//Player Image Label
 					ImageIcon myImageIcon;
 					if(Team.get(w).getDaysInjured() > 0) {
 						//injury sticker
@@ -125,7 +136,6 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 						//t-shirt
 						myImageIcon = createImageIcon("images/Shirts/" +	Integer.toString(Team.get(w).getNumber()) + ".png");
 					}
-					
 					JLabel label1 = new JLabel ("") {
 					    @Override
 					    public void paintComponent (Graphics g) {
@@ -136,19 +146,14 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 					};
 					label1.setPreferredSize(new Dimension(65,55));
 					
-					//name label
+					//Player Name Label
 					JLabel label2 = new JLabel(Team.get(w).getName());
 					label2.setFont(fontPlayername);
 					label2.setMinimumSize(new Dimension(20,50));
 					label2.setPreferredSize(new Dimension(90, 50));
 					label2.setMaximumSize(new Dimension(100,50));
 					
-					if(Team.get(w).getDaysInjured()>0 || Team.get(w).getDaysSuspended()>0) {
-						Playerpanel.setBackground(new Color(255,141,104)); Playerpanel.setOpaque(true);
-						label2.setForeground(new Color(255,255,255));
-					}
-					
-					//attributes
+					//Player Attributes Label
 					JPanel label3 = new JPanel();
 					label3.setMinimumSize(new Dimension(75, label3.getSize().height));
 					label3.setPreferredSize(new Dimension(80, label3.getSize().height));
@@ -186,68 +191,27 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 							attr.setForeground(new Color(255,255,255));
 						}
 					}
-					
-					
-					//finish up
+
+					//finish up					
 					Playerpanel.add(label1, BorderLayout.WEST);
-					JPanel fill = new JPanel();
 					Playerpanel.add(label2, BorderLayout.CENTER);
 					Playerpanel.add(label3, BorderLayout.EAST);
 					ScrollPaneGrid.add(Playerpanel);
-					
-					if(Team.get(w).getDaysInjured()==0 && Team.get(w).getDaysSuspended()==0) {
-						ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, this);
+					if(Team.get(w).getDaysInjured()>0 || Team.get(w).getDaysSuspended()>0) {
+						Playerpanel.setBackground(new Color(255,182,158)); Playerpanel.setOpaque(true);
+						label2.setForeground(new Color(255,255,255));
+					} else if(currentTeam.getPositions().contains(Team.get(w))) {
+						Playerpanel.setBackground(new Color(221,244,255)); Playerpanel.setOpaque(true);
+						//System.out.println(Team.get(w).getName());
+						ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, dragGestureListener);
+					} else {
+						ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, dragGestureListener);
 					}
-					
-					
+
 				}
 			}
-			
 			ScrollPaneContent.add(ScrollPaneGrid);
-			
 		}
-		
-		JScrollPane ScrollPane = new JScrollPane(ScrollPaneContent, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
-		ScrollPane.getVerticalScrollBar().setUnitIncrement(10);
-		//ScrollPane.setMinimumSize(new Dimension(100,300));
-		//ScrollPane.setPreferredSize(new Dimension(400,500));
-		
-		add(ScrollPane);
-		//content ends here
-		
-		//add panel
-		setMinimumSize(new Dimension(100,600));
-		setPreferredSize(new Dimension(450,600));
-		setMaximumSize(new Dimension(900,600));
-		//this.add(panel);
-	}
-	
-	
-	
-	//drag gesture start
-	public void dragGestureRecognized(DragGestureEvent event) {
-        Cursor cursor = null;
-        ListPanel panel = (ListPanel) event.getComponent();
-        Player player = panel.getPlayer();
-        if (event.getDragAction() == DnDConstants.ACTION_COPY) {
-            cursor = DragSource.DefaultCopyDrop;
-        }
-        event.startDrag(cursor, new TransferablePlayer(player, 0));
-    }
-
-	@Override
-	public DataFlavor[] getTransferDataFlavors() {
-		return null;
-	}
-
-	@Override
-	public boolean isDataFlavorSupported(DataFlavor flavor) {
-		return false;
-	}
-
-	@Override
-	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
-		return null;
 	}
 	
 	public ImageIcon createImageIcon(String path) {
@@ -263,51 +227,4 @@ public class PositionsPanel_Left extends JPanel implements DragGestureListener, 
 
 }
 
-////JPanel with attached Player Back Number
-//@SuppressWarnings("serial")
-//class ListPanel extends JPanel {
-//	Player player;
-//	public ListPanel(Player player){
-//		this.player = player;
-//	}	
-//	public Player getPlayer(){
-//		return player;
-//	}
-//}
 
-//Transferable	
-class TransferablePlayer implements Transferable {
-    protected static DataFlavor playerFlavor = new DataFlavor(Player.class, "A Player Object");
-    protected static DataFlavor intFlavor = new DataFlavor(int.class, "An Integer Object");
-    protected static DataFlavor[] supportedFlavors = {
-        playerFlavor,
-        intFlavor,
-    };
-    
-    Player player;
-    int position;
-    public TransferablePlayer(Player player, int position) {
-    	this.player = player;
-    	this.position = position;
-    }
-    public DataFlavor[] getTransferDataFlavors() {
-    	return supportedFlavors;
-    }
-    public boolean isDataFlavorSupported(DataFlavor flavor) {
-	    if (flavor.equals(playerFlavor)) {
-	    	return true;
-	    }
-	    return false;
-    }
-   public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
-     if (flavor.equals(playerFlavor)){
-         return player;
-     }
-     else if(flavor.equals(intFlavor)){
-    	 return position;
-     }
-     else{
-    	 throw new UnsupportedFlavorException(flavor);
-     }  
-   }  
-}

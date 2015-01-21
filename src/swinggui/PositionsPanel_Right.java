@@ -34,14 +34,21 @@ import libraryClasses.Positions;
 import libraryClasses.Team;
 
 @SuppressWarnings("serial")
-public class PositionsPanel_Right extends JPanel implements DragGestureListener, Transferable{
+public class PositionsPanel_Right extends JPanel {
 	
+	private DragGestureListener dragGestureListener;
 	private String panelTitle;
 	private Team currentTeam;
 	private Font fontTitle = new Font("Avenir", Font.ROMAN_BASELINE, 15);
-	PlayerPanel[] panels = new PlayerPanel[11];
+	private PlayerPanel[] panels = new PlayerPanel[11];
+	private JPanel ContentPanel;
+	private DragSource ds;
+	private PositionsPanel_Left Left;
+	private Component box = null;
 	
-	public PositionsPanel_Right(Team cTeam) {
+	public PositionsPanel_Right(Team cTeam, DragGestureListener listener, PositionsPanel_Left left) {
+		Left = left;
+		dragGestureListener = listener;
 		currentTeam = cTeam;
 		initUI();
 	}
@@ -55,9 +62,6 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		setName("Panel");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		//dragsource
-		DragSource ds = new DragSource();
-		
 		//panel title
 		JPanel titlepanel = new JPanel();
 		JLabel title = new JLabel("Positions");
@@ -69,7 +73,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		//content begins here
 		
 		//New content pane using GridBagLayout
-		JPanel ContentPanel = new JPanel(new GridBagLayout()){
+		ContentPanel = new JPanel(new GridBagLayout()){
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
 				ImageIcon myImageIcon = createImageIcon("images/field.png");
@@ -79,11 +83,27 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 				g.drawImage(myImageIcon.getImage(), (getWidth() - imgx)/2, getHeight() - imgy,imgx,imgy, null);
 			}	
 		};
+		loadContent();
+		add(ContentPanel);
+		add(new Box.Filler(new Dimension(1,20), new Dimension(1,20), new Dimension(1,20)));
+		
+		//content ends here
+				
+		//add panel
+		setMinimumSize(new Dimension(100,580));
+		setPreferredSize(new Dimension(800,580));
+		setMaximumSize(new Dimension(900,580));
+		
+	}
+	
+	public void loadContent(){
+		ContentPanel.removeAll();
+		
+		//dragsource
+		ds = new DragSource();
 		
 		//loop through team of 11 players
-		
 		for(int i = 11; i > 0; i--){
-			//System.out.println(currentTeam.getPositions().getPositionArray()[i-1]);
 			panels[i - 1] = new PlayerPanel(null, i);
 			panels[i - 1].setName("playerPanel");
 			panels[i - 1].setLayout(new BoxLayout(panels[i - 1], BoxLayout.X_AXIS));
@@ -91,158 +111,80 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 			panels[i - 1].setMinimumSize(new Dimension(150,50));
 			
 			//panel content
-			if(currentTeam.getPositions() == null || currentTeam.getPositions().getPositionArray()[i - 1] == null){
-				setPlayerPanel(true,null,currentTeam,i, false);		
+			if(currentTeam.getPositions().getPositionArray()[i - 1] == null){
+				setPlayerPanel(null,currentTeam,i);		
 			}
 			else{		
-				setPlayerPanel(false, currentTeam.getPositions().getPositionArray()[i-1],currentTeam, i, false);	
+				setPlayerPanel(currentTeam.getPositions().getPositionArray()[i-1],currentTeam, i);	
 			}
 			
-			new MyDropTargetListener(panels[i - 1]);
-			
-			//layout					insets go like this (y,x,y,x) or better (fromtop,fromleft,frombottom,fromrright)
+			new MyDropTargetListener(panels[i - 1], Left);
 			GridBagConstraints c = new GridBagConstraints();
+			//layout insets go like (y,x,y,x) or (fromtop,fromleft,frombottom,fromrright)
 			switch(i){
-				//row 1
+				//row 1	------------
 				case(11): //player 1
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(30,0,0,80);
-					//c.weighty = 0.5;
-					c.gridx = 0;
-					c.gridy = 0;
-					c.gridwidth = 2;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(40,0,0,80);
+					c.gridx = 0; c.gridy = 0; c.gridwidth = 2;
 					break;
 				case(10): //player 2
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,0,0,0);
-					//c.weighty = 0.5;
-					c.gridx = 1;
-					c.gridy = 0;
-					c.gridwidth = 2;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(0,0,0,0);
+					c.gridx = 1; c.gridy = 0; c.gridwidth = 2;
 					break;
 				case(9): //player 3
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(30,80,0,0);
-					//c.weighty = 0.5;
-					c.gridx = 2;
-					c.gridy = 0;
-					c.gridwidth = 2;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(40,80,0,0);
+					c.gridx = 2; c.gridy = 0; c.gridwidth = 2;
 					break;
-				//row 2
+				//row 2	------------
 				case(8): //player 4
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(20,0,0,60);
-					c.weightx = 0.5;
-					c.weighty = 0.5;
-					c.gridx = 0;
-					c.gridy = 1;
-					c.gridwidth = 2;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(20,0,0,60);
+					c.weightx = 0.5; c.weighty = 0.5;
+					c.gridx = 0; c.gridy = 1; c.gridwidth = 2;
 					break;
 				case(7): //player 5
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(50,0,0,0);
-					c.weightx = 0.5;
-					c.weighty = 0.5;
-					c.gridx = 1;
-					c.gridy = 1;
-					c.gridwidth = 2;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(50,0,0,0);
+					c.weightx = 0.5; c.weighty = 0.5;
+					c.gridx = 1; c.gridy = 1; c.gridwidth = 2;
 					break;
 				case(6): //player 6
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(20,60,0,0);
-					c.weightx = 0.5;
-					c.weighty = 0.5;
-					c.gridx = 2;
-					c.gridy = 1;
-					c.gridwidth = 2;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(20,60,0,0);
+					c.weightx = 0.5; c.weighty = 0.5;
+					c.gridx = 2; c.gridy = 1; c.gridwidth = 2;
 					break;
-				//row 3
+				//row 3	------------
 				case(5): //player 7
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,0,30,0);
-					c.weightx = 0.5;
-					c.weighty = 0.5;
-					c.gridx = 0;
-					c.gridy = 2;
-					c.gridwidth = 1;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(0,0,30,0);
+					c.weightx = 0.5; c.weighty = 0.5;
+					c.gridx = 0; c.gridy = 2; c.gridwidth = 1;
 					break;
 				case(4): //player 8
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(20,0,0,0);
-					c.weightx = 0.5;
-					c.weighty = 0.5;
-					c.gridx = 1;
-					c.gridy = 2;
-					c.gridwidth = 1;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(20,0,0,0);
+					c.weightx = 0.5; c.weighty = 0.5;
+					c.gridx = 1; c.gridy = 2; c.gridwidth = 1;
 					break;
 				case(3): //player 9
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(20,0,0,0);
-					c.weightx = 0.5;
-					c.weighty = 0.5;
-					c.gridx = 2;
-					c.gridy = 2;
-					c.gridwidth = 1;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(20,0,0,0);
+					c.weightx = 0.5; c.weighty = 0.5;
+					c.gridx = 2; c.gridy = 2; c.gridwidth = 1;
 					break;
 				case(2): //player 10
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,0,30,0);
-					c.weightx = 0.5;
-					c.weighty = 0.5;
-					c.gridx = 3;
-					c.gridy = 2;
-					c.gridwidth = 1;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(0,0,30,0);
+					c.weightx = 0.5; c.weighty = 0.5;
+					c.gridx = 3; c.gridy = 2; c.gridwidth = 1;
 					break;
-				//row 4
+				//row 4	------------
 				case(1): //player 11
-					c.fill = GridBagConstraints.NONE;
-					c.insets = new Insets(0,0,20,0);
-					c.ipady = 0;
-					c.weightx = 0.5;
-					c.weighty = 0.0;
-					c.gridx = 1;
-					c.gridy = 3;
-					c.gridwidth = 2;
+					c.fill = GridBagConstraints.NONE; c.insets = new Insets(0,0,20,0); c.ipady = 0;
+					c.weightx = 0.5; c.weighty = 0.0;
+					c.gridx = 1; c.gridy = 3; c.gridwidth = 2;
 					break;
 			}
-			ds.createDefaultDragGestureRecognizer(panels[i - 1], DnDConstants.ACTION_COPY, this);
+			ds.createDefaultDragGestureRecognizer(panels[i - 1], DnDConstants.ACTION_COPY, dragGestureListener);
 			ContentPanel.add(panels[i - 1], c);
 		}
-		
-		add(ContentPanel);
-		add(new Box.Filler(new Dimension(1,20), new Dimension(1,20), new Dimension(1,20)));
-		
-		//content ends here
-				
-		//add panel
-		setMinimumSize(new Dimension(100,500));
-		setPreferredSize(new Dimension(800,550));
-		setMaximumSize(new Dimension(900,600));
-		
 	}
 	
-	public ImageIcon createImageIcon(String path) {
-		java.net.URL imgURL = getClass().getResource(path);
-		if (imgURL != null) {
-			return new ImageIcon(imgURL, null);
-		}
-		else {
-			System.err.println("Couldn't find file: " + path);
-			return null;
-		}
-	}	
 	
-	//drag gesture start
-	public void dragGestureRecognized(DragGestureEvent event) {
-        Cursor cursor = null;
-        PlayerPanel panel = (PlayerPanel) event.getComponent();
-        Player player = panel.getPlayer();
-        int position = panel.getPosition();
-        if (event.getDragAction() == DnDConstants.ACTION_COPY) {
-            cursor = DragSource.DefaultCopyDrop;
-        }
-        event.startDrag(cursor, new TransferablePlayer(player, position));
-    }
 	
 	//DropTarget Action
 	class MyDropTargetListener extends DropTargetAdapter {
@@ -250,7 +192,7 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
         private DropTarget dropTarget;
         private JPanel panel;
 
-		public MyDropTargetListener(JPanel panel) {
+		public MyDropTargetListener(JPanel panel, PositionsPanel_Left Left) {
 			this.panel = panel;
 		    dropTarget = new DropTarget(panel, DnDConstants.ACTION_COPY, this, true, null);
 		}
@@ -258,18 +200,26 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		public void drop(DropTargetDropEvent event) {
 		    try{
 		      Transferable tr = event.getTransferable();
-		      Player player = (Player) tr.getTransferData(TransferablePlayer.playerFlavor);
-		      Player switchPlayer = ((PlayerPanel) panel).getPlayer();
-		      int oldPosition = (int) tr.getTransferData(TransferablePlayer.intFlavor);
+		      
 		      if (event.isDataFlavorSupported(TransferablePlayer.playerFlavor)) {
 		          
 		    	  event.acceptDrop(DnDConstants.ACTION_COPY);
 		          
-		          setPlayerPanel(false, player,currentTeam, ((PlayerPanel) panel).getPosition(), false);
+		    	  //player to place
+			      Player player = (Player) tr.getTransferData(TransferablePlayer.playerFlavor);
+			      //player to replace
+			      Player switchPlayer = ((PlayerPanel) panel).getPlayer();
+			      //old position of player
+			      int position = ((PlayerPanel) panel).getPosition();
+			      int oldPosition = (int) tr.getTransferData(TransferablePlayer.intFlavor);
+			      
+			      setPlayerPanel(player, currentTeam, position);
+			      
+			      if(oldPosition != 0){
+			        	 setPlayerPanel(switchPlayer, currentTeam, oldPosition);
+			      }
 		          
-		          if(oldPosition != 0){
-		        	 setPlayerPanel(false, switchPlayer, currentTeam, oldPosition, false);
-		          }
+		          Left.loadContent();
 		          
 		          event.dropComplete(true);
 		          
@@ -284,66 +234,55 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		}
     }
 	
-	
-	public void setPlayerPanel(boolean empty, Player player, Team team, int position, boolean keeper){
+	public void setPlayerPanel(Player player, Team team, int position){
 		
 		panels[position - 1].removeAll();
 		
-		JLabel label2 = new JLabel();
-		ImageIcon myImageIcon;
-		Component box;
-
-		if(empty){
-			//content
-			((PlayerPanel) panels[position - 1]).setPlayer(player);
-			myImageIcon = createImageIcon("images/Shirts/T-Shirt-orange.png");
-			label2 = new JLabel("Select player");
-			box = Box.createRigidArea(new Dimension(0,0));
-			setPosition(position, null, team);
-		}
-		else if(keeper){
-			//content
-			((PlayerPanel) panels[position - 1]).setPlayer(player);
-			myImageIcon = createImageIcon("images/Shirts/T-Shirt-orange.png");
-			label2 = new JLabel("Select keeper");
-			box = Box.createRigidArea(new Dimension(0,0));
-			setPosition(position, null, team);
-		}
-		else if(player == null){
-			//content
-			((PlayerPanel) panels[position - 1]).setPlayer(player);
-			myImageIcon = createImageIcon("images/Shirts/T-Shirt.png");
-			label2 = new JLabel("Select player");
-			box = Box.createRigidArea(new Dimension(0,0));
-			setPosition(position, null, team);
-		}
-		else{
-			//loop through players to check for doubles
-			for(int i = 0; i < 11; i++){
-				if(
-						i != (position - 1) &&
-						panels[i] != null &&
-						panels[i].getPlayer() != null &&
-						((PlayerPanel) panels[i]).getPlayer().equals(player)
-						){
-					setPlayerPanel(true, null,team, i + 1, false);
-				}
-			}
-			//content
-			((PlayerPanel) panels[position - 1]).setPlayer(player);
-			myImageIcon = createImageIcon("images/Shirts/" + Integer.toString(player.getNumber()) + ".png");
-			label2 = new JLabel(player.getName());
-			box = Box.createRigidArea(new Dimension(10,0));
-		}
+		JLabel label1;
+		JLabel label2;
 		
-		//shirt override paint component to scale image
-   	 	JLabel label1 = new JLabel ("  	   ") {
+		if(player == null) {
+			if(position==1) {
+				label2 = new JLabel("Select keeper");
+			} else {
+				label2 = new JLabel("Select player");
+			}
+			//System.out.println(player);
+			((PlayerPanel) panels[position - 1]).setPlayer(player);
+			label1 = new JLabel ("  	   ") {
 	  		    @Override
 	  		    public void paintComponent (Graphics g) {
 	  		        super.paintComponent (g);
-	  		        g.drawImage (myImageIcon.getImage(), 0, 0, 38, 38, null);
+	  		        g.drawImage (createImageIcon("images/Shirts/T-Shirt-orange.png").getImage(), 0, 0, 38, 38, null);
 	  		    }
-	  	};
+			};
+			box = Box.createRigidArea(new Dimension(0,0));
+			setPosition(position, null, team);
+		} else {
+			//System.out.println(player);
+			((PlayerPanel) panels[position - 1]).setPlayer(player);
+			label1 = new JLabel ("  	   ") {
+	  		    @Override
+	  		    public void paintComponent (Graphics g) {
+	  		        super.paintComponent (g);
+	  		        g.drawImage (createImageIcon("images/Shirts/" + Integer.toString(player.getNumber()) + ".png").getImage(), 0, 0, 38, 38, null);
+	  		    }
+			};
+			
+			label2 = new JLabel(player.getName());
+			box = Box.createRigidArea(new Dimension(10,0));
+			if((position==1 && player.getPlayerType().equals("Goalkeeper")==false)
+					|| (position!=1 && player.getPlayerType().equals("Goalkeeper"))==true) {
+					setPlayerPanel(null, team, position);
+					return;
+				} else {
+					System.out.println(player);
+					setPosition(position, player, team);
+			}
+		}
+
+		//shirt override paint component to scale image
+   	 	
 	  	
   		label2.setFont(fontTitle);
   		
@@ -356,69 +295,25 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
   		panels[position - 1].revalidate();
   		panels[position - 1].repaint();
   		
-  		//final check
-  		if(player != null && position == 1 && player.getPlayerType().toString() != "Goalkeeper"){
-  			setPlayerPanel(false, null,team, 1, true);
-  		}
-  		else if(player != null && position != 1 && player.getPlayerType().toString() == "Goalkeeper"){
-  			setPlayerPanel(true, null,team, position, false);
-  		}
-  		
-  		//set position
-  		setPosition(position, player, team);
 	}
 	
 	public static void setPosition(int position, Player player, Team team){
-//		if(team.getPositions().getPositionArray() != null){
-//			
-//		}
 		Player[] positions = team.getPositions().getPositionArray();
 		positions[position - 1] = player;
 		team.setPositions(new Positions(positions));
-		
 	}
 	
-	@Override
-	public DataFlavor[] getTransferDataFlavors() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isDataFlavorSupported(DataFlavor flavor) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Object getTransferData(DataFlavor flavor)
-			throws UnsupportedFlavorException, IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-}
-
-//JPanel with attached Player Back Number
-@SuppressWarnings("serial")
-class PlayerPanel extends JPanel {
-	Player player;
-	int position;
-	
-	public PlayerPanel(Player player, int position){
-		this.player = player;
-		this.position = position;
+	public ImageIcon createImageIcon(String path) {
+		java.net.URL imgURL = getClass().getResource(path);
+		if (imgURL != null) {
+			return new ImageIcon(imgURL, null);
+		}
+		else {
+			System.err.println("Couldn't find file: " + path);
+			return null;
+		}
 	}	
 	
-	public void setPlayer(Player player){
-		this.player = player;
-	}
-	
-	public Player getPlayer(){
-		return player;
-	}
-	
-	public int getPosition(){
-		return position;
-	}
 }
+
+

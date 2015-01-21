@@ -177,9 +177,9 @@ public class AgendaPanel extends JPanel {
 		add(ScrollPane);
 		
 		// Adjust dimensions
-		setMinimumSize(new Dimension(100,600));
-		setPreferredSize(new Dimension(700,600));
-		setMaximumSize(new Dimension(800,600));
+		setMinimumSize(new Dimension(100,580));
+		setPreferredSize(new Dimension(700,580));
+		setMaximumSize(new Dimension(800,580));
 	}
 }
 
