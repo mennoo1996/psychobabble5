@@ -3,6 +3,7 @@ package xmlIO;
 import java.math.BigDecimal;
 
 import game.Competition;
+import game.GameList;
 import schemeClasses.CompetitionScheme;
 
 
@@ -27,6 +28,9 @@ public class TestXMLParse {
 		String a = "hallo,hallo";
 		String[] c = a.split(",");
 		System.out.println(c.length);
+		
+		GameList g = new GameList();
+		XMLParser.writeGameList("files/saves_v7.xml", g);
 
 		
 	}

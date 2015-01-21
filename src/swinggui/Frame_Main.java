@@ -72,7 +72,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		roundNum = 0;
 		
 		// Currently only supports one season
-		games = XMLParser.readGameList("files/saves_v6.xml");
+		games = XMLParser.readGameList("files/saves_v7.xml");
 		
 		shouldSave = false;
 		
@@ -127,7 +127,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Autosave on game exit
 		if (shouldSave) {
 			currentGame.save();
-			XMLParser.writeGameList("files/saves_v6.xml", games);
+			XMLParser.writeGameList("files/saves_v7.xml", games);
 		}
 		dispose();
 		System.exit(0);
@@ -187,7 +187,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 					roundNum = 0;
 					
 					currentGame.save();
-					XMLParser.writeGameList("files/saves_v6.xml", games);
+					XMLParser.writeGameList("files/saves_v7.xml", games);
 					
 					loadMainScreenNewGame(curTeam.getTeamName());
 					
@@ -284,7 +284,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		curTeam = currentGame.getTeam();
 		
 		currentGame.save();
-		XMLParser.writeGameList("files/saves_v6.xml", games);
+		XMLParser.writeGameList("files/saves_v7.xml", games);
 		roundNum = curComp.getRoundsPlayed();
 		playerName = currentGame.getName();
 		
@@ -326,7 +326,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Create the new game
 		currentGame = games.newgame(playerName, chosenTeam);
 		currentGame.save();
-		XMLParser.writeGameList("files/saves_v6.xml", games);
+		XMLParser.writeGameList("files/saves_v7.xml", games);
 		
 		remove(curPanel);
 		// Start playing!
@@ -368,7 +368,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			bottomBar = new BottomBar(curComp, curTeam);
 			
 			currentGame.save();
-			XMLParser.writeGameList("files/saves_v6.xml", games);
+			XMLParser.writeGameList("files/saves_v7.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			OverviewPanel replOverview = new OverviewPanel(curComp);
@@ -396,7 +396,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			bottomBar = new BottomBar(curComp, curTeam);
 			
 			currentGame.save();
-			XMLParser.writeGameList("files/saves_v6.xml", games);
+			XMLParser.writeGameList("files/saves_v7.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			StatisticsPanel replStatview = new StatisticsPanel(curComp);
@@ -422,7 +422,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			remove(bottomBar);
 			bottomBar = new BottomBar(curComp, curTeam);
 			currentGame.save();
-			XMLParser.writeGameList("files/saves_v6.xml", games);
+			XMLParser.writeGameList("files/saves_v7.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			PositionsPanel replPositsview = new PositionsPanel(curTeam);
@@ -449,7 +449,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			remove(bottomBar);
 			bottomBar = new BottomBar(curComp, curTeam);
 			currentGame.save();
-			XMLParser.writeGameList("files/saves_v6.xml", games);
+			XMLParser.writeGameList("files/saves_v7.xml", games);
 			
 			// Initialize new JPanel and remove current pane
 			TransfersPanel replTransfview = new TransfersPanel(curTeam, curComp, bottomBar);
@@ -472,7 +472,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		current = "match";
 		
 		currentGame.save();
-		XMLParser.writeGameList("files/saves_v6.xml", games);
+		XMLParser.writeGameList("files/saves_v7.xml", games);
 		
 		// Initialize new JPanel and remove current pane
 		MatchPanel replPlayView = new MatchPanel(curComp, curTeam);
