@@ -376,8 +376,6 @@ public class PositionsPanel_Right extends JPanel implements DragGestureListener,
 		positions[position - 1] = player;
 		team.setPositions(new Positions(positions));
 		
-		//System.out.println(team.getPositions().getPositionArray()[10]);
-		
 	}
 	
 	@Override
