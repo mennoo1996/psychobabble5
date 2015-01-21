@@ -25,7 +25,7 @@
 		</state>
 		<state value="MOUSE_OVER and PRESSED">
 				<font name="Avenir" size="18"/>
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 				<imagePainter method="buttonBackground" path="images/button_mouseover.png" sourceInsets="30 35 35 35"/>
 		</state>
 		<state value="DISABLED">
@@ -78,13 +78,13 @@
 				<color value="#747272" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="MOUSE_OVER and PRESSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="FOCUSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="MOUSE_OVER and FOCUSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
   </style>
   
@@ -100,13 +100,13 @@
 				<color value="#747272" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="MOUSE_OVER and PRESSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="FOCUSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="MOUSE_OVER and FOCUSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
   </style>
   
@@ -122,13 +122,13 @@
 				<color value="#747272" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="MOUSE_OVER and PRESSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="FOCUSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
 		<state value="MOUSE_OVER and FOCUSED">
-				<color value="#A8D599" type="TEXT_FOREGROUND"/>
+				<color value="#73d0ff" type="TEXT_FOREGROUND"/>
 		</state>
   </style>
   

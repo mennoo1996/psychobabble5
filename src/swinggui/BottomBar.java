@@ -32,8 +32,8 @@ public class BottomBar extends JPanel {
 	private Competition currentComp;
 	private Team currentTeam;
 	
-	public Dimension minSize = new Dimension(20,20);
-	public Dimension prefSize = new Dimension(40,20);
+	public Dimension minSize = new Dimension(20,0);
+	public Dimension prefSize = new Dimension(40,0);
 	
 	JPanel BarHolder;
 	
@@ -113,6 +113,7 @@ public class BottomBar extends JPanel {
 		BarHolder.setAlignmentY(BOTTOM_ALIGNMENT);
 		
 		BarHolder.setLayout(new BoxLayout(BarHolder, BoxLayout.X_AXIS));
+		
 		
 		//left filler
 		BarHolder.add(new Box.Filler(minSize, prefSize, null));
