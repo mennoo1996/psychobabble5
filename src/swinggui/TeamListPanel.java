@@ -85,9 +85,9 @@ public class TeamListPanel extends JPanel {
 		add(scrollPane);
 		
 		// Specify panel dimensions
-		setMinimumSize(new Dimension(100,500));
-		setPreferredSize(new Dimension(450,550));
-		setMaximumSize(new Dimension(900,612));
+		setMinimumSize(new Dimension(100,600));
+		setPreferredSize(new Dimension(300,600));
+		setMaximumSize(new Dimension(300,600));
 	}
 	
 	public void newSelection(int newIndex) {

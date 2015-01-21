@@ -48,6 +48,7 @@ public class TeamDetailPanel extends JPanel {
 		JLabel titleLabel = new JLabel(detailTeam.getTeamName());
 		titleLabel.setMinimumSize(new Dimension(0, 40));
 		titleLabel.setPreferredSize(new Dimension(titleLabel.getPreferredSize().width, 40));
+		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
 		title.add(titleLabel);
 		add(title);
 		
@@ -67,11 +68,10 @@ public class TeamDetailPanel extends JPanel {
 		JLabel actualBudget = new JLabel("$" + (int)detailTeam.getBudget(), JLabel.CENTER);
 		actualBudget.setAlignmentX(Component.CENTER_ALIGNMENT);
 		statsPanel.add(budgetLabel);
-		statsPanel.add(actualBudget, BorderLayout.CENTER);
+		statsPanel.add(actualBudget);
 		
-		statsPanel.setMinimumSize(new Dimension(200, 50));
-		statsPanel.setPreferredSize(new Dimension(200, 50));
-		
+		statsPanel.setMinimumSize(new Dimension(150, 50));
+		statsPanel.setPreferredSize(new Dimension(150, 50));
 		detailsPanel.add(statsPanel);
 		detailsPanel.add(new Box.Filler(new Dimension(20, 20), null, null));
 		
@@ -123,7 +123,7 @@ public class TeamDetailPanel extends JPanel {
 					Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200,200,200)));
 					
 					//name label
-					JLabel label2 = new JLabel(players.get(w).getName());
+					JLabel label2 = new JLabel("  " + players.get(w).getName());
 					label2.setFont(fontPlayername);
 					label2.setMinimumSize(new Dimension(20,50));
 					label2.setPreferredSize(new Dimension(90, 50));
@@ -175,13 +175,14 @@ public class TeamDetailPanel extends JPanel {
 		
 		JScrollPane ScrollPane = new JScrollPane(ScrollPaneContent, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		ScrollPane.getVerticalScrollBar().setUnitIncrement(10);
+		ScrollPane.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, new Color(160,160,160)));
 		//ScrollPane.setMinimumSize(new Dimension(100,300));
 		//ScrollPane.setPreferredSize(new Dimension(400,500));
 		
 		detailsPanel.add(ScrollPane);
-		detailsPanel.setMinimumSize(new Dimension(200,450));
-		detailsPanel.setPreferredSize(new Dimension(450,550));
-		detailsPanel.setMaximumSize(new Dimension(900,600));
+		setMinimumSize(new Dimension(400,600));
+		setPreferredSize(new Dimension(600,600));
+		setMaximumSize(new Dimension(900,600));
 		
 		add(detailsPanel);
 		
@@ -189,7 +190,7 @@ public class TeamDetailPanel extends JPanel {
 		// Finalize selection panel
 		//
 		JPanel finishPanel = new JPanel();
-		
+		finishPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(160,160,160)));
 		JButton finalizeSelection = new JButton("Play as this team");
 		finalizeSelection.setName("Test");
 		finalizeSelection.setAlignmentX(Component.CENTER_ALIGNMENT);
