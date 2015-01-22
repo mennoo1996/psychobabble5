@@ -55,7 +55,7 @@ public class RecentMatchesPanel extends JPanel {
 		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
 		titlepanel.setMaximumSize(new Dimension(2000, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		titlepanel.add(title);
 		add(titlepanel);
 
@@ -126,7 +126,7 @@ public class RecentMatchesPanel extends JPanel {
 			
 			// center table items
 	        resultsTable.getColumnModel().getColumn(1).setCellRenderer( centerRender );
-		    resultsTable.setGridColor(new Color(150,150,150));
+		    resultsTable.setGridColor(new Color(200,200,200));
 			
 			// Always display team name properly
 			resultsTable.getColumnModel().getColumn(0).setMinWidth(120);
@@ -195,7 +195,7 @@ public class RecentMatchesPanel extends JPanel {
 			// Always display team name properly
 			upcomingTable.getColumnModel().getColumn(0).setMinWidth(120);
 			upcomingTable.getColumnModel().getColumn(0).setCellRenderer( centerRender );
-			upcomingTable.setGridColor(new Color(150,150,150));
+			upcomingTable.setGridColor(new Color(200,200,200));
 			upcomingTable.setRowHeight(20);
 			// Disable editing
 			upcomingTable.getTableHeader().setReorderingAllowed(false);

@@ -86,7 +86,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		JLabel title = new JLabel("Selected");
 		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		titlepanel.add(title);
 		titlepanel.setMaximumSize(new Dimension(2000, 100));
 		add(titlepanel);
@@ -161,7 +161,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 		//Player Stats Panel
 		statPanel = new JPanel();
-		statPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		statPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		statPanel.setMinimumSize(new Dimension(0, 60));
 		statPanel.setPreferredSize(new Dimension(50, 60));
 		statPanel.setMaximumSize(new Dimension(2000, 60));
@@ -207,7 +207,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		//sellpanel with normal content when isLeft, or gray content when !isLeft
 		sellPanel = new JPanel(new BorderLayout());
 		JPanel sellPanel2 = new JPanel();
-		sellPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		sellPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		
 		//selllabel
 		JLabel sellLabel = new JLabel("Suggested price: $" + priceString);
@@ -250,7 +250,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 		buyPanel = new JPanel(new BorderLayout());
 		JPanel buyPanel2 = new JPanel();
-		buyPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		buyPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		
 		//buylabel
 		JLabel buyLabel = new JLabel("Suggested price: $" + priceString);

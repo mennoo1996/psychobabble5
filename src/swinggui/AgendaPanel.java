@@ -55,7 +55,7 @@ public class AgendaPanel extends JPanel {
 		JLabel title = new JLabel("Fixtures");
 		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		titlepanel.add(title);
 		add(titlepanel);
 		
@@ -133,14 +133,18 @@ public class AgendaPanel extends JPanel {
 			table.getColumnModel().getColumn(1).setCellRenderer(centRender);
 			table.getColumnModel().getColumn(0).setCellRenderer(centRender);
 			table.getColumnModel().getColumn(1).setMaxWidth(150);
-			table.setGridColor(new Color(150,150,150));
+			table.setGridColor(new Color(200,200,200));
 
 			//add a separator
 			JPanel separator = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
 			separator.setOpaque(true);
-			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(180,180,180)));
+			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200,200,200)));
 			separator.setBackground(new Color(240,240,240));
 
+			if(i == currentCompetition.getRoundsPlayed()) {
+				separator.setBackground(new Color(221,244,255));
+			}
+			
 			//separator title
 			JLabel separatortitle = new JLabel("Round " + i); separatortitle.setMinimumSize(new Dimension(0,10));
 			separatortitle.setFont(fontSeparator);

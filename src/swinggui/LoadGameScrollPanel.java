@@ -41,7 +41,7 @@ public class LoadGameScrollPanel extends JPanel {
 		if (isSelected) {
 			setBackground(Color.WHITE);
 		} else {
-			setBackground(new Color(135, 206, 250));
+			setBackground(new Color(221,244,255));
 		}
 		revalidate();
 		repaint();
@@ -50,7 +50,7 @@ public class LoadGameScrollPanel extends JPanel {
 	
 	public final void initUI() {
 		setLayout(new BorderLayout());
-		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200, 200, 200)));
+		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
 		
 		// Add game name label
 		JLabel gameLabel = new JLabel((gameIndex+1) + ": " + loadGame.getName() + ", " + loadGame.getTeam().getTeamName(), JLabel.CENTER);

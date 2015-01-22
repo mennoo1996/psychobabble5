@@ -57,7 +57,7 @@ public class StandingsPanel extends JPanel {
 		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
 		titlepanel.setMaximumSize(new Dimension(2000, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		titlepanel.add(title);
 		add(titlepanel);
 
@@ -227,7 +227,7 @@ public class StandingsPanel extends JPanel {
 			
 			// Always display team name properly
 			resultsTable.getColumnModel().getColumn(0).setMinWidth(120);
-			resultsTable.setGridColor(new Color(150,150,150));
+			resultsTable.setGridColor(new Color(200,200,200));
 
 			// Disable editing
 			resultsTable.getTableHeader().setReorderingAllowed(false);
@@ -239,7 +239,7 @@ public class StandingsPanel extends JPanel {
 				add(scrollPane);
 			} else {
 				JPanel scrollPane = new JPanel(new BorderLayout()); 
-				resultsTable.setRowHeight(20);
+				resultsTable.setRowHeight(19);
 				scrollPane.setMaximumSize(new Dimension(2000,2000));
 				scrollPane.add(resultsTable);
 				add(scrollPane);
@@ -247,7 +247,7 @@ public class StandingsPanel extends JPanel {
 				JLabel content = new JLabel();
 				int roundsleft = 38 - currentCompetition.getRoundsPlayed();
 				content = new JLabel("Rounds left: " + roundsleft);
-				content.setFont(fontSeparator);
+				content.setFont(new Font("Avenir", Font.ROMAN_BASELINE, 20));
 				stretchPane.add(content);
 				stretchPane.setBackground(new Color(240,240,240));
 				stretchPane.setOpaque(true);
