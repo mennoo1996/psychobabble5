@@ -55,7 +55,7 @@ public class LoadPanel extends JPanel implements MouseListener {
 		JLabel titleLabel = new JLabel("Choose your saved game:");
 		titleLabel.setMinimumSize(new Dimension(0, 40));
 		titleLabel.setPreferredSize(new Dimension(titleLabel.getPreferredSize().width, 40));
-		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160, 160, 160)));
+		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180, 180, 180)));
 		title.add(titleLabel);
 		gameChoicePanel.add(title);
 		
@@ -81,10 +81,10 @@ public class LoadPanel extends JPanel implements MouseListener {
 		JScrollPane scrollPane = new JScrollPane(saveGameContentPane, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(17);
 		
-		scrollPane.setMinimumSize(new Dimension(100,500));
-		scrollPane.setPreferredSize(new Dimension(450,550));
-		scrollPane.setMaximumSize(new Dimension(900,612));
-		
+		scrollPane.setMinimumSize(new Dimension(100,580));
+		scrollPane.setPreferredSize(new Dimension(450,580));
+		scrollPane.setMaximumSize(new Dimension(900,580));
+
 		gameChoicePanel.add(scrollPane);
 		
 		// Add the load game button

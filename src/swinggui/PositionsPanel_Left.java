@@ -69,7 +69,7 @@ public class PositionsPanel_Left extends JPanel {
 		JLabel title = new JLabel("Players");
 		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		titlepanel.add(title);
 		add(titlepanel);
 
@@ -105,7 +105,7 @@ public class PositionsPanel_Left extends JPanel {
 			JLabel separatortitle = new JLabel(PlayerTypes[q] + "s");
 			separator.setMinimumSize(new Dimension(0,25));
 			separator.setOpaque(true);
-			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(180,180,180)));
+			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 			separator.setBackground(new Color(240,240,240));
 			separatortitle.setFont(fontSeparator);
 			separator.add(separatortitle);
@@ -122,7 +122,7 @@ public class PositionsPanel_Left extends JPanel {
 					//panel to hold player information. Also the draggable element
 					PlayerPanel Playerpanel = new PlayerPanel(Team.get(w), 0);
 					Playerpanel.setLayout(new BorderLayout());
-					Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200,200,200)));
+					Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200,200,200)));
 					
 					//Player Image Label
 					ImageIcon myImageIcon;
@@ -199,10 +199,10 @@ public class PositionsPanel_Left extends JPanel {
 					ScrollPaneGrid.add(Playerpanel);
 					if(Team.get(w).getDaysInjured()>0 || Team.get(w).getDaysSuspended()>0) {
 						Playerpanel.setBackground(new Color(255,182,158)); Playerpanel.setOpaque(true);
+						Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(255,255,255)));
 						label2.setForeground(new Color(255,255,255));
 					} else if(currentTeam.getPositions().contains(Team.get(w))) {
 						Playerpanel.setBackground(new Color(221,244,255)); Playerpanel.setOpaque(true);
-						//System.out.println(Team.get(w).getName());
 						ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, dragGestureListener);
 					} else {
 						ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, dragGestureListener);

@@ -68,7 +68,6 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		
 		setOpaque(false);
 		setName("Panel");
-		//setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(145,143,143)));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		//panel title
@@ -76,7 +75,7 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		JLabel title = new JLabel("All Players");
 		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		titlepanel.add(title);
 		titlepanel.setMaximumSize(new Dimension(2000, 100));
 		add(titlepanel);
@@ -89,7 +88,7 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		TextInputBoxPanel.setBackground(new Color(240,240,240));
 		TextInputBoxPanel.setMinimumSize(new Dimension(TextInputBoxPanel.getWidth(), 41));
 		TextInputBoxPanel.setMaximumSize(new Dimension(20000, 41));
-		TextInputBoxPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		TextInputBoxPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		textField = new JTextField(18); textField.addMouseListener(changeTeamListener);
 		TextEmpty = true;
 		textField.getDocument().addDocumentListener(this);

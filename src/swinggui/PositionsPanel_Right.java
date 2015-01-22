@@ -66,7 +66,7 @@ public class PositionsPanel_Right extends JPanel {
 		JPanel titlepanel = new JPanel();
 		JLabel title = new JLabel("Positions");
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		titlepanel.add(title);
 		add(titlepanel);
 				
@@ -247,7 +247,6 @@ public class PositionsPanel_Right extends JPanel {
 			} else {
 				label2 = new JLabel("Select player");
 			}
-			//System.out.println(player);
 			((PlayerPanel) panels[position - 1]).setPlayer(player);
 			label1 = new JLabel ("  	   ") {
 	  		    @Override
@@ -259,7 +258,6 @@ public class PositionsPanel_Right extends JPanel {
 			box = Box.createRigidArea(new Dimension(0,0));
 			setPosition(position, null, team);
 		} else {
-			//System.out.println(player);
 			((PlayerPanel) panels[position - 1]).setPlayer(player);
 			label1 = new JLabel ("  	   ") {
 	  		    @Override
@@ -276,13 +274,9 @@ public class PositionsPanel_Right extends JPanel {
 					setPlayerPanel(null, team, position);
 					return;
 				} else {
-					System.out.println(player);
 					setPosition(position, player, team);
 			}
 		}
-
-		//shirt override paint component to scale image
-   	 	
 	  	
   		label2.setFont(fontTitle);
   		

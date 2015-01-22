@@ -40,7 +40,7 @@ class PlayerScrollPanel_Right extends JPanel{
 		//setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		setLayout(new BorderLayout(0,0));
 		setOpaque(true);
-		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200,200,200)));
+		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200,200,200)));
 		
 
 		//name label
@@ -101,7 +101,7 @@ class PlayerScrollPanel_Right extends JPanel{
 		if (isSelected) {
 			setBackground(Color.WHITE);
 		} else {
-			setBackground(new Color(164, 225, 255));
+			setBackground(new Color(221,244,255));
 		}
 		revalidate();
 		repaint();

@@ -43,7 +43,7 @@ class PlayerScrollPanel_Left extends JPanel{
 	public final void initUI(){
 		setLayout(new BorderLayout());
 		setOpaque(true);
-		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200,200,200)));
+		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200,200,200)));
 		
 		//shirt
 		ImageIcon myImageIcon;
@@ -118,7 +118,7 @@ class PlayerScrollPanel_Left extends JPanel{
 		if (isSelected) {
 			setBackground(Color.WHITE);
 		} else {
-			setBackground(new Color(164, 225, 255));
+			setBackground(new Color(221,244,255));
 		}
 		revalidate();
 		repaint();

@@ -48,7 +48,7 @@ public class TeamDetailPanel extends JPanel {
 		JLabel titleLabel = new JLabel(detailTeam.getTeamName());
 		titleLabel.setMinimumSize(new Dimension(0, 40));
 		titleLabel.setPreferredSize(new Dimension(titleLabel.getPreferredSize().width, 40));
-		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		title.add(titleLabel);
 		add(title);
 		
@@ -61,7 +61,6 @@ public class TeamDetailPanel extends JPanel {
 		// Statistics view
 		JPanel statsPanel = new JPanel();
 		statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
-		
 		// List budget
 		JLabel budgetLabel = new JLabel("Budget:", JLabel.CENTER);
 		budgetLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -72,8 +71,9 @@ public class TeamDetailPanel extends JPanel {
 		
 		statsPanel.setMinimumSize(new Dimension(150, 50));
 		statsPanel.setPreferredSize(new Dimension(150, 50));
+		detailsPanel.add(new Box.Filler(new Dimension(10, 20), null, null));
 		detailsPanel.add(statsPanel);
-		detailsPanel.add(new Box.Filler(new Dimension(20, 20), null, null));
+		detailsPanel.add(new Box.Filler(new Dimension(10, 20), null, null));
 		
 		// Player list view
 		Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
@@ -100,7 +100,7 @@ public class TeamDetailPanel extends JPanel {
 			separator.setMinimumSize(new Dimension(0,25));
 			//separator.setPreferredSize(new Dimension(separator.getWidth(), 25));
 			separator.setOpaque(true);
-			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(180,180,180)));
+			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 			separator.setBackground(new Color(230,230,230));
 			
 			//separator title
@@ -120,18 +120,18 @@ public class TeamDetailPanel extends JPanel {
 					//panel to hold player information. Also draggable element
 					ListPanel Playerpanel = new ListPanel(players.get(w));
 					Playerpanel.setLayout(new BorderLayout());
-					Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200,200,200)));
+					Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200,200,200)));
 					
 					//name label
 					JLabel label2 = new JLabel("  " + players.get(w).getName());
 					label2.setFont(fontPlayername);
-					label2.setMinimumSize(new Dimension(20,50));
-					label2.setPreferredSize(new Dimension(90, 50));
+					label2.setMinimumSize(new Dimension(100,50));
+					label2.setPreferredSize(new Dimension(100, 50));
 					label2.setMaximumSize(new Dimension(100,50));
 					//attributes
 					JPanel label3 = new JPanel();
-					label3.setMinimumSize(new Dimension(75, label3.getSize().height));
-					label3.setPreferredSize(new Dimension(80, label3.getSize().height));
+					label3.setMinimumSize(new Dimension(100, label3.getSize().height));
+					label3.setPreferredSize(new Dimension(100, label3.getSize().height));
 					label3.setMaximumSize(new Dimension(100, label3.getSize().height));
 					if(PlayerTypes[q] != "Goalkeeper"){
 						FieldPlayer player = (FieldPlayer) players.get(w);
@@ -175,7 +175,7 @@ public class TeamDetailPanel extends JPanel {
 		
 		JScrollPane ScrollPane = new JScrollPane(ScrollPaneContent, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		ScrollPane.getVerticalScrollBar().setUnitIncrement(10);
-		ScrollPane.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, new Color(160,160,160)));
+		ScrollPane.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, new Color(180,180,180)));
 		//ScrollPane.setMinimumSize(new Dimension(100,300));
 		//ScrollPane.setPreferredSize(new Dimension(400,500));
 		
@@ -190,7 +190,7 @@ public class TeamDetailPanel extends JPanel {
 		// Finalize selection panel
 		//
 		JPanel finishPanel = new JPanel();
-		finishPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(160,160,160)));
+		finishPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(180,180,180)));
 		JButton finalizeSelection = new JButton("Play as this team");
 		finalizeSelection.setName("Test");
 		finalizeSelection.setAlignmentX(Component.CENTER_ALIGNMENT);

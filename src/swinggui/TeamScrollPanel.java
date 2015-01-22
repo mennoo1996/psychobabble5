@@ -30,7 +30,7 @@ public class TeamScrollPanel extends JPanel {
 			setBackground(Color.WHITE);
 		} else {
 			// Make this a nicer color how about this? :)
-			setBackground(new Color(135, 206, 250));
+			setBackground(new Color(221,244,255));
 		}
 		revalidate();
 		repaint();

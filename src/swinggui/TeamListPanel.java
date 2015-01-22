@@ -43,7 +43,7 @@ public class TeamListPanel extends JPanel {
 		JLabel titleLabel = new JLabel("Teams");
 		titleLabel.setMinimumSize(new Dimension(0, 40));
 		titleLabel.setPreferredSize(new Dimension(titleLabel.getPreferredSize().width, 40));
-		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		title.add(titleLabel);
 		add(title);
 		
@@ -60,7 +60,7 @@ public class TeamListPanel extends JPanel {
 			TeamScrollPanel nextTeam = new TeamScrollPanel(i, changeTeamListener);
 			selections.add(nextTeam);
 			nextTeam.setLayout(new BorderLayout());
-			nextTeam.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200, 200, 200)));
+			nextTeam.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
 			
 			// Team name
 			JLabel teamNameLabel = new JLabel(theTeams.get(i).getTeamName(), JLabel.CENTER);

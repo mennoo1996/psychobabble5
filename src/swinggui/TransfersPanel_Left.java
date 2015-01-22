@@ -50,7 +50,7 @@ public class TransfersPanel_Left extends JPanel {
 		JLabel title = new JLabel("Team");
 		title.setMinimumSize(new Dimension(0,40));
 		title.setPreferredSize(new Dimension(title.getPreferredSize().width, 40));
-		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160,160,160)));
+		titlepanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		titlepanel.add(title);
 		add(titlepanel);
 
@@ -79,7 +79,7 @@ public class TransfersPanel_Left extends JPanel {
 			JPanel separator = new JPanel(); 
 			separator.setMinimumSize(new Dimension(0,25));
 			separator.setOpaque(true);
-			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(180,180,180)));
+			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 			separator.setBackground(new Color(240,240,240));
 			
 			//separator title
