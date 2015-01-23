@@ -1,3 +1,6 @@
+/**
+ * GUI Class that displays the splash screen for the game, with logo and choice of game type (i.e. new or saved)
+ */
 package swinggui;
 
 import java.awt.Color;
@@ -21,6 +24,11 @@ public class SplashPanel extends JPanel {
 	private Dimension prefSize = new Dimension(40, 20);
 	private boolean showLoadButton;
 	
+	/**
+	 * Create and initialize a SplashPanel
+	 * @param frame Event listener (the frame) which processes the game type choice
+	 * @param hasSaveGames Whether or not there is/are saved game(s)
+	 */
 	public SplashPanel(ActionListener frame, boolean hasSaveGames) {
 		gameChoice = frame;
 		showLoadButton = hasSaveGames;
@@ -28,6 +36,9 @@ public class SplashPanel extends JPanel {
 		initUI();
 	}
 	
+	/**
+	 * Initialize GUI elements contained in the SplashPanel
+	 */
 	public final void initUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -82,6 +93,10 @@ public class SplashPanel extends JPanel {
 		add(new Box.Filler(minSize, prefSize, null));		
 	}
 	
+	/**
+	 * @param path the path to the image
+	 * @return the located image, null if invalid file path
+	 */
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
 		if (imgURL != null) {

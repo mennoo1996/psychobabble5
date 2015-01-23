@@ -1,3 +1,6 @@
+/**
+ * GUI Class that displays the last match's result & details for the player's team
+ */
 package swinggui;
 
 import game.Competition;
@@ -41,6 +44,11 @@ public class MatchPanel extends JPanel {
 	private Font scorerFont = new Font("Avenir", Font.ROMAN_BASELINE, 16);
 	private Font assistFont = new Font("Avenir", Font.ITALIC, 14);
 	
+	/**
+	 * Create and initialize a MatchPanel
+	 * @param currentCompetition Current Competition
+	 * @param currentTeam Player's team
+	 */
 	public MatchPanel(Competition currentCompetition, Team currentTeam) {
 		cComp = currentCompetition;
 		cTeam = currentTeam;
@@ -48,6 +56,9 @@ public class MatchPanel extends JPanel {
 		initUI();
 	}
 	
+	/**
+	 * Initialize GUI elements contained in the MatchPanel
+	 */
 	public final void initUI() {
 
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));

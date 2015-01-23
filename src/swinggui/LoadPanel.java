@@ -1,3 +1,6 @@
+/**
+ * GUI Class that allows the player to choose which save game to load
+ */
 package swinggui;
 
 import java.util.ArrayList;
@@ -33,6 +36,11 @@ public class LoadPanel extends JPanel implements MouseListener {
 	private Dimension minSize = new Dimension(20,20);
 	private Dimension prefSize = new Dimension(40, 20);
 	
+	/**
+	 * Create and initialize a LoadPanel
+	 * @param yourGames List of save games
+	 * @param choiceListener Event listener for the load game choice
+	 */
 	public LoadPanel(GameList yourGames, ActionListener choiceListener) {
 		theList = yourGames;
 		gameChoiceListener = choiceListener;
@@ -41,6 +49,9 @@ public class LoadPanel extends JPanel implements MouseListener {
 		initUI();
 	}
 	
+	/**
+	 * Initialize the GUI elements contained within the LoadPanel
+	 */
 	public final void initUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -102,6 +113,10 @@ public class LoadPanel extends JPanel implements MouseListener {
 		add(new Box.Filler(minSize, prefSize, null));
 	}
 	
+	/**
+	 * Mouse click event which changes the selected save game
+	 * @param e MouseEvent
+	 */
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() instanceof LoadGameScrollPanel) {
 			LoadGameScrollPanel selectedGame = (LoadGameScrollPanel)e.getSource();
@@ -117,22 +132,42 @@ public class LoadPanel extends JPanel implements MouseListener {
 	
 	
 	// The rest of the "required" MouseListener interface methods
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mouseDragged(MouseEvent e) {
 		
 	}
 	
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mouseEntered(MouseEvent e) {
 		
 	}
 	
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mouseExited(MouseEvent e) {
 		
 	}
 	
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mousePressed(MouseEvent e) {
 		
 	}
 	
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mouseReleased(MouseEvent e) {
 		
 	}

@@ -1,3 +1,6 @@
+/**
+ * GUI Class that allows the player to select his/her team when creating a new game
+ */
 package swinggui;
 
 import game.Competition;
@@ -22,6 +25,11 @@ public class TeamChoicePanel extends JPanel implements MouseListener {
 	private Dimension minSize = new Dimension(20,20);
 	private Dimension prefSize = new Dimension(40,20);
 	
+	/**
+	 * Create and initialize a TeamChoicePanel
+	 * @param cComp
+	 * @param teamChoiceListener
+	 */
 	public TeamChoicePanel(Competition cComp, ActionListener teamChoiceListener) {
 		currentComp = cComp;
 		chooseTeamListener = teamChoiceListener;
@@ -30,6 +38,9 @@ public class TeamChoicePanel extends JPanel implements MouseListener {
 		initUI();
 	}
 	
+	/**
+	 * Initialize GUI elements contained in the TeamChoicePanel
+	 */
 	public final void initUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
@@ -66,26 +77,43 @@ public class TeamChoicePanel extends JPanel implements MouseListener {
 	}
 	
 	// The rest of the (unnecessary) mouselistener methods
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mouseDragged(MouseEvent e) {
 		
 	}
 	
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mouseEntered(MouseEvent e) {
 		
 	}
 	
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mouseExited(MouseEvent e) {
 		
 	}
 	
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mousePressed(MouseEvent e) {
 		
 	}
 	
+	/**
+	 * nothing happens (required interface method)
+	 * @param e Mouse event
+	 */
 	public void mouseReleased(MouseEvent e) {
 		
 	}
-	
-	
-
 }

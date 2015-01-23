@@ -1,3 +1,6 @@
+/**
+ * GUI Class that displays a team's rating, players, and budget, and allows the player to select said team
+ */
 package swinggui;
 
 import java.awt.BorderLayout;
@@ -22,6 +25,8 @@ import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
+import gameLogic.TeamRating;
+
 @SuppressWarnings("serial")
 public class TeamDetailPanel extends JPanel {
 	
@@ -29,6 +34,11 @@ public class TeamDetailPanel extends JPanel {
 	ActionListener playListener;
 	ArrayList<Player> players;
 	
+	/**
+	 * Create and initialize a TeamDetailPanel
+	 * @param selTeam the selected team
+	 * @param getPlayingListener Event listener for if the player decides to create a new game with this team
+	 */
 	public TeamDetailPanel(Team selTeam, ActionListener getPlayingListener) {
 		detailTeam = selTeam;
 		playListener = getPlayingListener;
@@ -37,6 +47,9 @@ public class TeamDetailPanel extends JPanel {
 		initUI();
 	}
 	
+	/**
+	 * Initialize GUI elements contained in the TeamDetailPanel
+	 */
 	public final void initUI() {
 		
 		setBackground(Color.WHITE);
@@ -61,11 +74,17 @@ public class TeamDetailPanel extends JPanel {
 		// Statistics view
 		JPanel statsPanel = new JPanel();
 		statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
-		// List budget
+		// List budget and team rating
+		JLabel ratingLabel = new JLabel("Rating:", JLabel.CENTER);
+		ratingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		JLabel actualRating = new JLabel("" + TeamRating.calculateTeamRating(detailTeam).getTotal(), JLabel.CENTER);
+		actualRating.setAlignmentX(Component.CENTER_ALIGNMENT);
 		JLabel budgetLabel = new JLabel("Budget:", JLabel.CENTER);
 		budgetLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		JLabel actualBudget = new JLabel("$" + (int)detailTeam.getBudget(), JLabel.CENTER);
 		actualBudget.setAlignmentX(Component.CENTER_ALIGNMENT);
+		statsPanel.add(ratingLabel);
+		statsPanel.add(actualRating);
 		statsPanel.add(budgetLabel);
 		statsPanel.add(actualBudget);
 		
