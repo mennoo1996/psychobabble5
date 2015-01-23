@@ -67,7 +67,7 @@ public class SeasonPanel extends JPanel{
 		
 		// Add Congratulations Label
 		JPanel title = new JPanel();
-		JLabel titleLabel = new JLabel("Congratulations, " + playerName + " on completing the season", JLabel.CENTER);
+		JLabel titleLabel = new JLabel("Congratulations, " + playerName + ", on completing the season", JLabel.CENTER);
 		titleLabel.setMinimumSize(new Dimension(0, 40));
 		titleLabel.setPreferredSize(new Dimension(titleLabel.getPreferredSize().width, 40));
 		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160, 160, 160)));
