@@ -16,18 +16,27 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
 import libraryClasses.Standings;
+import libraryClasses.Team;
 
 @SuppressWarnings("serial")
 public class StandingsPanel extends JPanel {
 	
 	private Competition currentCompetition;
+	private Team currentTeam;
+	private int isTeam = 0;
 	private boolean detailedLayout;
 	
 	/**
@@ -35,7 +44,8 @@ public class StandingsPanel extends JPanel {
 	 * @param curComp current competition
 	 * @param hasDetail show detailed statistics or just the points
 	 */
-	public StandingsPanel(Competition curComp, boolean hasDetail) {
+	public StandingsPanel(Competition curComp, Team curTeam, boolean hasDetail) {
+		currentTeam = curTeam;
 		currentCompetition = curComp;
 		detailedLayout = hasDetail;
 		
@@ -156,9 +166,12 @@ public class StandingsPanel extends JPanel {
 			// Fetch standings and then populate table data
 			ArrayList<Standings> sortedRes = currentCompetition.getSortedStandings();
 			
+			
 			for (int k = 0; k < numTeams; k++) {
 				Standings standing = sortedRes.get(k);
-				
+				if(standing.getTeamName().equals(currentTeam.getTeamName())) {
+					isTeam = k;
+				}
 				// Detailed or simple layout
 				if (detailedLayout) { 
 					if(i==1) {
@@ -198,13 +211,30 @@ public class StandingsPanel extends JPanel {
 				teamData = teamData1;
 			}
 			
+			
+			
 			// Initialize table
 			JTable resultsTable = new JTable(teamData, columnNames) {
 				@Override
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
+
+				 public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+			        Component c = super.prepareRenderer(renderer, row, column);
+			        c.setBackground(row % 2 == 0 ? getBackground() : new Color(245,245,245));
+			        JComponent jc = (JComponent)c;
+			        
+			        if (row==isTeam){
+			        	jc.setBackground(new Color(221,244,255));
+			        }
+
+			        return c;
+				 }
 			};
+			
+			//resultsTable.changeSelection(0, 0, false, false);
+			resultsTable.changeSelection(0, 0, false, false);
 			
 			// center table items
 			DefaultTableCellRenderer centerRender = new DefaultTableCellRenderer();
@@ -236,6 +266,7 @@ public class StandingsPanel extends JPanel {
 			
 			if(detailedLayout) {
 				JScrollPane scrollPane = new JScrollPane(resultsTable);
+				resultsTable.setRowHeight(19);
 				add(scrollPane);
 			} else {
 				JPanel scrollPane = new JPanel(new BorderLayout()); 

@@ -202,7 +202,7 @@ public class PositionsPanel_Left extends JPanel {
 						Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(255,255,255)));
 						label2.setForeground(new Color(255,255,255));
 					} else if(currentTeam.getPositions().contains(Team.get(w))) {
-						Playerpanel.setBackground(new Color(240,240,240)); Playerpanel.setOpaque(true);
+						Playerpanel.setBackground(new Color(221,244,255)); Playerpanel.setOpaque(true);
 						ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, dragGestureListener);
 					} else {
 						ds.createDefaultDragGestureRecognizer(Playerpanel, DnDConstants.ACTION_COPY, dragGestureListener);

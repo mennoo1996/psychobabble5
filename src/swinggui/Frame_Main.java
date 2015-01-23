@@ -335,7 +335,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		add(headerBar);
 		
 		//Center panel begins here
-		OverviewPanel overviewPanel = new OverviewPanel(curComp);
+		OverviewPanel overviewPanel = new OverviewPanel(curComp, curTeam);
 		
 		// set current screen string
 		current = "overview";
@@ -379,7 +379,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 		add(headerBar);
 		
 		//Center panel begins here
-		OverviewPanel overviewPanel = new OverviewPanel(curComp);
+		OverviewPanel overviewPanel = new OverviewPanel(curComp, curTeam);
 		
 		// set current screen string
 		current = "overview";
@@ -410,7 +410,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			XMLParser.writeGameList("files/saves_v7.xml", games);
 			
 			// Initialize new JPanel and remove current pane
-			OverviewPanel replOverview = new OverviewPanel(curComp);
+			OverviewPanel replOverview = new OverviewPanel(curComp, curTeam);
 			remove(curPanel); 
 			
 			// Refresh the view
@@ -441,7 +441,7 @@ public class Frame_Main extends JFrame implements ActionListener{
 			XMLParser.writeGameList("files/saves_v7.xml", games);
 			
 			// Initialize new JPanel and remove current pane
-			StatisticsPanel replStatview = new StatisticsPanel(curComp);
+			StatisticsPanel replStatview = new StatisticsPanel(curComp, curTeam);
 			remove(curPanel); 
 			
 			// Refresh the view

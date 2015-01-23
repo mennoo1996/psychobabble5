@@ -195,6 +195,10 @@
     			<color value="BLACK" type="BACKGROUND"/>
       			<imagePainter method="scrollBarThumbBackground" direction="vertical" path="images/scrollbar.png" sourceInsets="15 0 15 0" />
     	</state>
+    	<state value="MOUSE_OVER">
+				<color value="BLACK" type="BACKGROUND"/>
+      			<imagePainter method="scrollBarThumbBackground" direction="vertical" path="images/scrollbar_over.png" sourceInsets="15 0 15 0" />
+		</state>
   </style>
   
   <style id = "playerpanelStyle">
