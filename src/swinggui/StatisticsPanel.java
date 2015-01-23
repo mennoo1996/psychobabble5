@@ -8,16 +8,20 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import libraryClasses.Team;
+
 @SuppressWarnings("serial")
 public class StatisticsPanel extends JPanel {
 	
 	private Competition currentCompetition;
+	private Team currentTeam;
 	
 	public Dimension minSize = new Dimension(20,20);
 	public Dimension prefSize = new Dimension(40,20);
 	
-	public StatisticsPanel(Competition curComp) {
+	public StatisticsPanel(Competition curComp, Team curTeam) {
 		currentCompetition = curComp;
+		currentTeam = curTeam;
 		
 		initUI();
 	}
@@ -27,7 +31,7 @@ public class StatisticsPanel extends JPanel {
 		add(new Box.Filler(minSize, prefSize, null));
 		
 		// add the overview panels
-		add(new StandingsPanel(currentCompetition, true));
+		add(new StandingsPanel(currentCompetition, currentTeam, true));
 		add(new AgendaPanel(currentCompetition));
 		
 		add(new Box.Filler(minSize, prefSize, null));
