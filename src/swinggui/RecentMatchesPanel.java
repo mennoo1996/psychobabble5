@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 
 import schemeClasses.CompetitionScheme;
 import schemeClasses.Match;
@@ -101,6 +102,11 @@ public class RecentMatchesPanel extends JPanel {
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
+				public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+			        Component c = super.prepareRenderer(renderer, row, column);
+			        c.setBackground(row % 2 == 0 ? getBackground() : new Color(230,230,230));
+			        return c;
+				 }
 			};
 			headertable.getColumnModel().getColumn(0).setCellRenderer(centerRender);
 			headertable.getColumnModel().getColumn(0).setMinWidth(120);
@@ -121,6 +127,11 @@ public class RecentMatchesPanel extends JPanel {
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
+				public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+			        Component c = super.prepareRenderer(renderer, row, column);
+			        c.setBackground(row % 2 == 0 ? getBackground() : new Color(245,245,245));
+			        return c;
+				 }
 			};
 			
 			// center table items
@@ -180,6 +191,11 @@ public class RecentMatchesPanel extends JPanel {
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
+				public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+			        Component c = super.prepareRenderer(renderer, row, column);
+			        c.setBackground(row % 2 == 0 ? getBackground() : new Color(230,230,230));
+			        return c;
+				 }
 			};
 			headertable.getColumnModel().getColumn(0).setCellRenderer(centerRender);
 			headertable.setGridColor(new Color(255,255,255,0));
@@ -206,6 +222,11 @@ public class RecentMatchesPanel extends JPanel {
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
+				public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+			        Component c = super.prepareRenderer(renderer, row, column);
+			        c.setBackground(row % 2 == 0 ? getBackground() : new Color(245,245,245));
+			        return c;
+				 }
 			};
 			
 			// Always display team name properly
@@ -220,7 +241,16 @@ public class RecentMatchesPanel extends JPanel {
 			
 			add(scrollPaneUp);
 		} else {
-			
+			add(new Box.Filler(new Dimension(0,185),null,null));
+			JPanel textHolder = new JPanel();
+			JLabel text = new JLabel("No upcoming matches available...");
+			text.setFont(new Font("Avenir", Font.ROMAN_BASELINE, 18));
+			text.setAlignmentX(CENTER_ALIGNMENT);
+			text.setAlignmentY(CENTER_ALIGNMENT);
+			textHolder.add(text);
+			textHolder.setAlignmentX(CENTER_ALIGNMENT);
+			textHolder.setPreferredSize(new Dimension(2000,215));
+			add(textHolder);
 		}
 		
 		// Adjust dimensions

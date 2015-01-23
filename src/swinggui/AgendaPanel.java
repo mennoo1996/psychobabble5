@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -88,6 +89,11 @@ public class AgendaPanel extends JPanel {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
+			public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+		        Component c = super.prepareRenderer(renderer, row, column);
+		        c.setBackground(row % 2 == 0 ? getBackground() : new Color(180,180,180));
+		        return c;
+			 }
 		};
 		headertable.getColumnModel().getColumn(1).setCellRenderer(centRender);
 		headertable.getColumnModel().getColumn(0).setCellRenderer(centRender);
@@ -128,6 +134,13 @@ public class AgendaPanel extends JPanel {
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
+				
+				public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+			        Component c = super.prepareRenderer(renderer, row, column);
+			        c.setBackground(row % 2 == 0 ? getBackground() : new Color(245,245,245));
+			        return c;
+				 }
+				
 			};
 			
 			table.getColumnModel().getColumn(1).setCellRenderer(centRender);
@@ -139,7 +152,7 @@ public class AgendaPanel extends JPanel {
 			JPanel separator = new JPanel(new FlowLayout(FlowLayout.CENTER,0,0));
 			separator.setOpaque(true);
 			separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200,200,200)));
-			separator.setBackground(new Color(240,240,240));
+			separator.setBackground(new Color(235,235,235));
 
 			if(i == currentCompetition.getRoundsPlayed()) {
 				separator.setBackground(new Color(221,244,255));

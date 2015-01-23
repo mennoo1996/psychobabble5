@@ -219,23 +219,18 @@ public class StandingsPanel extends JPanel {
 				public boolean isCellEditable(int row, int column) {
 					return false;
 				}
-				
-				private Border outside = new MatteBorder(1, 0, 1, 0, Color.RED);
-				private Border inside = new EmptyBorder(0, 1, 0, 1);
-				private Border highlight = new CompoundBorder(outside, inside);
-				 public Component prepareRenderer(
-					        TableCellRenderer renderer, int row, int column)
-					    {
-					        Component c = super.prepareRenderer(renderer, row, column);
-					        c.setBackground(row % 2 == 0 ? getBackground() : new Color(245,245,245));
-					        JComponent jc = (JComponent)c;
-					        
-					        if (row==isTeam){
-					        	jc.setBackground(new Color(221,244,255));
-					        }
 
-					        return c;
-					    }
+				 public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+			        Component c = super.prepareRenderer(renderer, row, column);
+			        c.setBackground(row % 2 == 0 ? getBackground() : new Color(245,245,245));
+			        JComponent jc = (JComponent)c;
+			        
+			        if (row==isTeam){
+			        	jc.setBackground(new Color(221,244,255));
+			        }
+
+			        return c;
+				 }
 			};
 			
 			//resultsTable.changeSelection(0, 0, false, false);

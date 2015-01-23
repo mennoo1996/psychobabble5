@@ -8,9 +8,11 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -138,6 +140,32 @@ public class MatchPanel extends JPanel {
 					//initialize panel
 					JPanel scoreStats = new JPanel();
 					scoreStats.setLayout(new BorderLayout());
+					
+//					//shirt
+//					ImageIcon myImageIcon;
+//					if(player.getDaysInjured() > 0) {
+//						//injury sticker
+//						myImageIcon = createImageIcon("images/red-cross.png");
+//					} else if(player.getDaysSuspended() > 0) {
+//						//suspension sticker
+//						myImageIcon = createImageIcon("images/red-card.png");
+//					} else {
+//						//t-shirt
+//						myImageIcon = createImageIcon("images/Shirts/" +	Integer.toString(player.getNumber()) + ".png");
+//					}
+//					JLabel label1 = new JLabel ("") {
+//					    @Override
+//					    public void paintComponent (Graphics g) {
+//					        super.paintComponent (g);
+//					        g.drawImage (myImageIcon.getImage(), 0, 0, 55, 55, null);
+//					    }
+//					};
+//					label1.setPreferredSize(new Dimension(65,55));
+//					label1.setOpaque(false);
+					
+//					JPanel Playerpanel = new JPanel();
+//					Playerpanel.setLayout(new BorderLayout());
+//					Playerpanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200,200,200)));
 					
 					// The goal scorer
 					JLabel goalScorerLabel = new JLabel("Scorer: " + goalMakers.get(j).getName(), JLabel.CENTER);
