@@ -85,6 +85,7 @@ public class RecentMatchesPanel extends JPanel {
 				previousMatches[i] = matchRow;
 			}
 			
+			//column names
 			Object columnNamesPrev[] = { 
 					"Match",
 					"Score"
@@ -106,17 +107,15 @@ public class RecentMatchesPanel extends JPanel {
 			headertable.getColumnModel().getColumn(1).setCellRenderer(centerRender);
 			headertable.setGridColor(new Color(255,255,255,0));
 			headertable.setRowHeight(25);
-			//headertable.setMaximumSize(new Dimension(2000,25));
 			headertable.setFont(fontHeader);
 			headerPanel.add(headertable);
 			headerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 			headerPanel.setOpaque(true);
-			//headerPanel.setMaximumSize(new Dimension(2000,20));
 			headerPanel.setBackground(new Color(230,230,230));
 			headertable.setBackground(new Color(230,230,230));
 			add(headerPanel);
 			
-			
+			//data table
 			JTable resultsTable = new JTable(previousMatches, columnNamesPrev) {
 				@Override
 				public boolean isCellEditable(int row, int column) {
@@ -131,13 +130,26 @@ public class RecentMatchesPanel extends JPanel {
 			// Always display team name properly
 			resultsTable.getColumnModel().getColumn(0).setMinWidth(120);
 			resultsTable.setRowHeight(20);
+			
 			// Disable editing
 			resultsTable.getTableHeader().setReorderingAllowed(false);
 			resultsTable.setTableHeader(null);
-			//JScrollPane scrollPane = new JScrollPane(resultsTable);
+			
 			add(resultsTable);
-			//add(scrollPane);
+		} else {
+			add(new Box.Filler(new Dimension(0,185),null,null));
+			JPanel textHolder = new JPanel();
+			JLabel text = new JLabel("No recent matches available...");
+			text.setFont(new Font("Avenir", Font.ROMAN_BASELINE, 18));
+			text.setAlignmentX(CENTER_ALIGNMENT);
+			text.setAlignmentY(CENTER_ALIGNMENT);
+			textHolder.add(text);
+			textHolder.setAlignmentX(CENTER_ALIGNMENT);
+			textHolder.setPreferredSize(new Dimension(2000,215));
+			add(textHolder);
 		}
+		
+		
 		if (curRound < 38) {
 			
 			// Upcoming matches table array
@@ -174,7 +186,11 @@ public class RecentMatchesPanel extends JPanel {
 			headertable.setRowHeight(15);
 			headertable.setFont(fontHeader);
 			headerPanel.add(headertable);
-			headerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
+			if(curRound == 0) {
+				headerPanel.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, new Color(180,180,180)));
+			} else {
+				headerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
+			}
 			headerPanel.setOpaque(true);
 			headerPanel.setMaximumSize(new Dimension(2000,20));
 			headerPanel.setBackground(new Color(230,230,230));
@@ -203,6 +219,8 @@ public class RecentMatchesPanel extends JPanel {
 			JScrollPane scrollPaneUp = new JScrollPane(upcomingTable);
 			
 			add(scrollPaneUp);
+		} else {
+			
 		}
 		
 		// Adjust dimensions
