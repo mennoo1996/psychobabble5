@@ -1,3 +1,6 @@
+/**
+ * GUI Class that displays a clickable list of the teams for the player to select
+ */
 package swinggui;
 
 import java.util.ArrayList;
@@ -23,6 +26,11 @@ public class TeamListPanel extends JPanel {
 	private ArrayList<TeamScrollPanel> selections;
 	private int oldSelection;
 	
+	/**
+	 * Create and initialize a TeamListPanel
+	 * @param teamList List of teams to display
+	 * @param detailRefresher Event listener to notify of change in selected team
+	 */
 	public TeamListPanel(ArrayList<Team> teamList, MouseListener detailRefresher) {
 		theTeams = teamList;
 		changeTeamListener = detailRefresher;
@@ -32,6 +40,9 @@ public class TeamListPanel extends JPanel {
 		initUI();
 	}
 	
+	/**
+	 * Initialize GUI elements contained in the TeamListPanel
+	 */
 	public final void initUI() {
 		
 		setOpaque(false);
@@ -90,6 +101,10 @@ public class TeamListPanel extends JPanel {
 		setMaximumSize(new Dimension(300,580));
 	}
 	
+	/**
+	 * Change the selected team index
+	 * @param newIndex Index of the newly selected team
+	 */
 	public void newSelection(int newIndex) {
 		selections.get(oldSelection).toggleSelected();
 		selections.get(newIndex).toggleSelected();

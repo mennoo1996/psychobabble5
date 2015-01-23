@@ -1,3 +1,6 @@
+/**
+ * GUI Class that display's a completed season's results
+ */
 package swinggui;
 
 import java.util.ArrayList;
@@ -34,6 +37,13 @@ public class SeasonPanel extends JPanel{
 	private Font fontLarge = new Font("Avenir", Font.ROMAN_BASELINE, 20);
 	private Font fontSmall = new Font("Avenir", Font.ROMAN_BASELINE, 16);
 	
+	/**
+	 * Create and initialize a SeasonPanel
+	 * @param currentComp Current (completed) competition
+	 * @param currentTeam Player's team
+	 * @param choiceListener Event listener for continuation choice
+	 * @param yourName Player's name
+	 */
 	public SeasonPanel(Competition currentComp, Team currentTeam, ActionListener choiceListener, String yourName) {
 		cComp = currentComp;
 		cTeam = currentTeam;
@@ -43,6 +53,9 @@ public class SeasonPanel extends JPanel{
 		initUI();
 	}
 	
+	/**
+	 * Initialize GUI elements contained in the SeasonPanel
+	 */
 	public final void initUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		

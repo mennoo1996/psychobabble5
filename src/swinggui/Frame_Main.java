@@ -1,3 +1,6 @@
+/**
+ * GUI Class that contains the game's frame and manages the game's progression
+ */
 package swinggui;
 
 import game.*;
@@ -65,6 +68,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Create and initialize Frame_Main JFrame
+	 */
 	public Frame_Main() {
 		current = "nada";
 		
@@ -79,6 +85,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		initUI();
 	}
 	
+	/**
+	 * Initialize the first GUI elements
+	 */
 	public final void initUI(){
 		//set Look And Feel
 		SynthLookAndFeel synth = new SynthLookAndFeel();
@@ -123,6 +132,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 			
 	}
 	
+	/**
+	 * Exit procedure for the game, which saves current game before close if the current game exists
+	 */
 	public void exitProcedure() {
 		// Autosave on game exit
 		if (shouldSave) {
@@ -133,6 +145,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 		System.exit(0);
 	}
 	
+	/**
+	 * Main runtime method for Football Manager
+	 * @param args
+	 */
 	public static void main(String[] args){
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override 
@@ -143,6 +159,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		});
 	}
 
+	/**
+	 * ActionListener method override: switches between game screens based on button clicks
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
@@ -240,6 +259,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * Initialize and display load game screen
+	 */
 	public void loadLoadScreen() {
 		LoadPanel loadYaGame = new LoadPanel(games, this);
 		
@@ -251,6 +273,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		repaint();
 	}
 	
+	/**
+	 * Initialize and display name choice screen for a new game
+	 */
 	public void loadNameChoiceScreen() {
 		NamePanel nameSelection = new NamePanel(this);
 		
@@ -262,6 +287,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		repaint();
 	}
 	
+	/**
+	 * Initialize and display team choice screen for a new game
+	 */
 	public void loadNewGameScreen() {
 		
 		// grab name from current 
@@ -276,6 +304,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 		repaint();
 	}
 	
+	/**
+	 * Load the overview screen and game from a save file
+	 * @param gameIndex Index of loaded game in current GameList object
+	 */
 	public void loadMainScreenLoadedGame(int gameIndex) {
 		// Create the new game
 		currentGame = games.get(gameIndex);
@@ -320,6 +352,10 @@ public class Frame_Main extends JFrame implements ActionListener{
 		repaint();
 	}
 	
+	/**
+	 * Create a new game and display overview screen of said game
+	 * @param chosenTeam Chosen team name for new game
+	 */
 	public void loadMainScreenNewGame(String chosenTeam) {
 		curTeam = curComp.getLibrary().getTeamForName(chosenTeam);
 		
@@ -360,6 +396,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		repaint();
 	}
 	
+	/**
+	 * Initialize and display the overview screen if it isn't already the current screen
+	 */
 	public void loadOverView() {
 		if (!current.equals("overview")) {
 			current = "overview";
@@ -387,6 +426,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Initialize and display the statistics screen if it isn't already the current screen
+	 */
 	public void loadStatisticsView() {
 		// Switch to statistics panel if not current
 		if (!current.equals("statistics")) {
@@ -415,6 +457,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Initialize and display the positions screen if it isn't already the current screen
+	 */
 	public void loadPositionsView() {
 		// Switch to positions panel if not current
 		if (!current.equals("positions")) {
@@ -442,6 +487,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Initialize and display the transfers screen if it isn't already the current screen
+	 */
 	public void loadTransfersView() {
 		// Switch to transfers panel if not current
 		if (!current.equals("transfers")) {
@@ -467,6 +515,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Initialize and display the match overview screen
+	 */
 	public void loadPlayView() {
 		// Then display statistics page showcasing the results of the season
 		current = "match";
@@ -492,6 +543,9 @@ public class Frame_Main extends JFrame implements ActionListener{
 		repaint();
 	}
 	
+	/**
+	 * Initialize and display the season overview screen
+	 */
 	public void loadSeasonOverview() {
 		current = "season";
 		

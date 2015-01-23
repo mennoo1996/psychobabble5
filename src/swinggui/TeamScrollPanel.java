@@ -1,3 +1,6 @@
+/**
+ * GUI Class that shows the team name
+ */
 package swinggui;
 
 import java.awt.event.MouseListener;
@@ -11,6 +14,11 @@ public class TeamScrollPanel extends JPanel {
 	private MouseListener clickTrigger;
 	private boolean isSelected;
 	
+	/**
+	 * Create and initialize a TeamScrollPanel
+	 * @param index Index of the selected team
+	 * @param changeTeamListener Event listener to notify if the TeamScrollPanel has been clicked
+	 */
 	public TeamScrollPanel(int index, MouseListener changeTeamListener) {
 		teamIndex = index;
 		clickTrigger = changeTeamListener;
@@ -21,10 +29,16 @@ public class TeamScrollPanel extends JPanel {
 		this.addMouseListener(clickTrigger);
 	}
 	
+	/**
+	 * @return the index of the displayed team
+	 */
 	public int getTeamIndex() {
 		return teamIndex;
 	}
 	
+	/**
+	 * Toggles whether or not the current TeamScrollPanel is selected (changes the background color)
+	 */
 	public void toggleSelected() {
 		if (isSelected) {
 			setBackground(Color.WHITE);
