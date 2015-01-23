@@ -25,6 +25,8 @@ import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
+import gameLogic.TeamRating;
+
 @SuppressWarnings("serial")
 public class TeamDetailPanel extends JPanel {
 	
@@ -73,10 +75,16 @@ public class TeamDetailPanel extends JPanel {
 		JPanel statsPanel = new JPanel();
 		statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
 		// List budget and team rating
+		JLabel ratingLabel = new JLabel("Rating:", JLabel.CENTER);
+		ratingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		JLabel actualRating = new JLabel("" + TeamRating.calculateTeamRating(detailTeam).getTotal(), JLabel.CENTER);
+		actualRating.setAlignmentX(Component.CENTER_ALIGNMENT);
 		JLabel budgetLabel = new JLabel("Budget:", JLabel.CENTER);
 		budgetLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		JLabel actualBudget = new JLabel("$" + (int)detailTeam.getBudget(), JLabel.CENTER);
 		actualBudget.setAlignmentX(Component.CENTER_ALIGNMENT);
+		statsPanel.add(ratingLabel);
+		statsPanel.add(actualRating);
 		statsPanel.add(budgetLabel);
 		statsPanel.add(actualBudget);
 		
