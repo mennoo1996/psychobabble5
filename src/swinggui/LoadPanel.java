@@ -82,6 +82,7 @@ public class LoadPanel extends JPanel implements MouseListener {
 		// Iterate through the save games
 		for (int i = 0; i < theGames.size(); i++) {
 			LoadGameScrollPanel nextGame = new LoadGameScrollPanel(i, theGames.get(i), this);
+			nextGame.setMaximumSize(new Dimension(2000,50));
 			gamePanels.add(nextGame);
 			
 			saveGameContentPane.add(nextGame);

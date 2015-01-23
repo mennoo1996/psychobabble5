@@ -71,7 +71,7 @@ public class LoadGameScrollPanel extends JPanel {
 		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
 		
 		// Add game name label
-		JLabel gameLabel = new JLabel((gameIndex+1) + ": " + loadGame.getName() + ", " + loadGame.getTeam().getTeamName(), JLabel.CENTER);
+		JLabel gameLabel = new JLabel((gameIndex+1) + ": " + loadGame.getName() + ", " + loadGame.getTeam().getTeamName() + ", round: " + loadGame.getCompetition().getRoundsPlayed(), JLabel.CENTER);
 		gameLabel.setFont(new Font("Avenir", Font.ROMAN_BASELINE, 16));
 		gameLabel.setMinimumSize(new Dimension(20, 50));
 		gameLabel.setPreferredSize(new Dimension(90, 50));
