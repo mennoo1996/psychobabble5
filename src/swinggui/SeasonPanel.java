@@ -31,6 +31,9 @@ public class SeasonPanel extends JPanel{
 	private Dimension minSize = new Dimension(20,20);
 	private Dimension prefSize = new Dimension(40, 20); 
 	
+	private Font fontLarge = new Font("Avenir", Font.ROMAN_BASELINE, 20);
+	private Font fontSmall = new Font("Avenir", Font.ROMAN_BASELINE, 16);
+	
 	public SeasonPanel(Competition currentComp, Team currentTeam, ActionListener choiceListener, String yourName) {
 		cComp = currentComp;
 		cTeam = currentTeam;
@@ -51,7 +54,7 @@ public class SeasonPanel extends JPanel{
 		
 		// Add Congratulations Label
 		JPanel title = new JPanel();
-		JLabel titleLabel = new JLabel("Congratulations " + playerName + " on completing the season", JLabel.CENTER);
+		JLabel titleLabel = new JLabel("Congratulations, " + playerName + " on completing the season", JLabel.CENTER);
 		titleLabel.setMinimumSize(new Dimension(0, 40));
 		titleLabel.setPreferredSize(new Dimension(titleLabel.getPreferredSize().width, 40));
 		title.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(160, 160, 160)));
@@ -63,6 +66,8 @@ public class SeasonPanel extends JPanel{
 		
 		JPanel yourTeamData = new JPanel();
 		yourTeamData.setLayout(new BorderLayout());
+
+		yourTeamData.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(180,180,180)));
 		
 		// Add final position
 		ArrayList<Standings> sortedStandings = cComp.getSortedStandings();
@@ -84,41 +89,56 @@ public class SeasonPanel extends JPanel{
 		}
 		
 		JLabel finalPosition = new JLabel("As " + cTeam.getTeamName() + " you finished in " + place + suffix + " place", JLabel.CENTER);
-		finalPosition.setMinimumSize(new Dimension(0, 40));
-		finalPosition.setPreferredSize(new Dimension(finalPosition.getPreferredSize().width, 40));
+		finalPosition.setFont(fontSmall);
+		finalPosition.setMinimumSize(new Dimension(0, 125));
+		finalPosition.setPreferredSize(new Dimension(finalPosition.getPreferredSize().width, 125));
+		finalPosition.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(220,220,220)));
 		yourTeamData.add(finalPosition, BorderLayout.NORTH);
 		
 		// Add final points
 		JLabel finalPoints = new JLabel("You finished the season with " + cTeam.getStandings().getPoints() + " points", JLabel.CENTER);
+		finalPoints.setFont(fontSmall);
 		finalPoints.setMinimumSize(new Dimension(0, 40));
 		finalPoints.setPreferredSize(new Dimension(finalPoints.getPreferredSize().width, 40));
+		finalPoints.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(220,220,220)));
 		yourTeamData.add(finalPoints, BorderLayout.CENTER);
 		
 		// Add current budget
 		JLabel finalBudget = new JLabel("Your remaining budget is: $" + (int)cTeam.getBudget(), JLabel.CENTER);
-		finalBudget.setMinimumSize(new Dimension(0, 40));
-		finalBudget.setPreferredSize(new Dimension(finalBudget.getPreferredSize().width, 40));
+		finalBudget.setFont(fontSmall);
+		finalBudget.setMinimumSize(new Dimension(0, 125));
+		finalBudget.setPreferredSize(new Dimension(finalBudget.getPreferredSize().width, 125));
 		yourTeamData.add(finalBudget, BorderLayout.SOUTH);
 		
 		dataPanel.add(yourTeamData);
 		
 		JPanel seasonStats = new JPanel();
 		seasonStats.setLayout(new BorderLayout());
+		seasonStats.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		
 		// Show the winning team
 		JLabel winningTeam = new JLabel("This season's winning team was " + sortedStandings.get(0).getTeamName(), JLabel.CENTER);
+		winningTeam.setFont(fontSmall);
 		winningTeam.setMinimumSize(new Dimension(0, 40));
 		winningTeam.setPreferredSize(new Dimension(winningTeam.getPreferredSize().width, 40));
+		winningTeam.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		seasonStats.add(winningTeam, BorderLayout.NORTH);
 		
 		// Show the season's topscorers
 		JPanel topScorersPanel = new JPanel();
 		topScorersPanel.setLayout(new BoxLayout(topScorersPanel, BoxLayout.Y_AXIS));
 		
+		JPanel topScorer = new JPanel(new BorderLayout());
 		JLabel topScorersLabel = new JLabel("Top Scorers", JLabel.CENTER);
-		topScorersLabel.setMinimumSize(new Dimension(0, 40));
-		topScorersLabel.setPreferredSize(new Dimension(topScorersLabel.getPreferredSize().width, 40));
-		topScorersPanel.add(topScorersLabel);
+		topScorer.setMinimumSize(new Dimension(0,30));
+		topScorer.setPreferredSize(new Dimension(200, 30));
+		topScorer.setMaximumSize(new Dimension(2000,30));
+		topScorersLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
+		topScorersLabel.setFont(fontSmall);
+		topScorersLabel.setOpaque(true);
+		topScorersLabel.setBackground(new Color(240,240,240));
+		topScorer.add(topScorersLabel, BorderLayout.CENTER);
+		topScorersPanel.add(topScorer);
 		
 		// Only show top 3 scorers
 		Player[] topScorers = cComp.getTopScorers();
@@ -126,16 +146,16 @@ public class SeasonPanel extends JPanel{
 			JPanel nextScorer = new JPanel();
 			nextScorer.setLayout(new BorderLayout());
 			
-			nextScorer.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 1, new Color(200, 200, 200)));
+			nextScorer.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(220, 220, 220)));
 			
 			Player beast = topScorers[i];
 			
 			// Add game name label
 			JLabel scorerLabel = new JLabel(beast.getName() + ", " + beast.getTeam() + ": " + beast.getGoals() + " goals", JLabel.CENTER);
 			scorerLabel.setFont(new Font("Avenir", Font.ROMAN_BASELINE, 16));
-			scorerLabel.setMinimumSize(new Dimension(20, 50));
-			scorerLabel.setPreferredSize(new Dimension(90, 50));
-			scorerLabel.setMaximumSize(new Dimension(100, 50));
+			scorerLabel.setMinimumSize(new Dimension(20, 30));
+			scorerLabel.setPreferredSize(new Dimension(90, 30));
+			scorerLabel.setMaximumSize(new Dimension(100, 30));
 			
 			nextScorer.add(scorerLabel, BorderLayout.CENTER);
 			topScorersPanel.add(nextScorer);
@@ -148,6 +168,7 @@ public class SeasonPanel extends JPanel{
 		
 		// Add buttons for new season and quit
 		JPanel choicePanel = new JPanel();
+		//choicePanel.setPreferredSize(new Dimension(2000,choicePanel.getMaximumSize().height));
 		choicePanel.setLayout(new BoxLayout(choicePanel, BoxLayout.X_AXIS));
 		
 		JButton newSeasonButton = new JButton("New Season");
@@ -166,6 +187,9 @@ public class SeasonPanel extends JPanel{
 		
 		seasonOverviewPanel.add(choicePanel);
 		
+		seasonOverviewPanel.setMinimumSize(new Dimension(900,580));
+		seasonOverviewPanel.setPreferredSize(new Dimension(900,580));
+		seasonOverviewPanel.setMaximumSize(new Dimension(900,580));
 		add(seasonOverviewPanel);
 		
 		add(new Box.Filler(minSize, prefSize, null));

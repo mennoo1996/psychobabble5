@@ -50,7 +50,9 @@ public class NamePanel extends JPanel implements DocumentListener {
 		nameField.setName("textField");
 		nameField.getDocument().addDocumentListener(this);
 		
-		nameField.setMaximumSize(new Dimension(1000, 50));
+
+		nameField.setMinimumSize(new Dimension(nameField.getWidth(), 41));
+		nameField.setMaximumSize(new Dimension(250, 41));
 		
 		nameChoicePanel.add(nameField);
 		
@@ -68,6 +70,8 @@ public class NamePanel extends JPanel implements DocumentListener {
 		add(nameChoicePanel);
 		
 		add(new Box.Filler(minSize, prefSize, null));
+		nameChoicePanel.setMinimumSize(new Dimension(400,240));
+		nameChoicePanel.setPreferredSize(new Dimension(400,240));
 	}
 	
 	public void validateNameField() {

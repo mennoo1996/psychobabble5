@@ -34,7 +34,7 @@ public class MatchPanel extends JPanel {
 	private Team cTeam;
 	
 	//fonts
-	private Font fontSmall = new Font("Avenir", Font.ROMAN_BASELINE, 14);
+	private Font fontSmall = new Font("Avenir", Font.ROMAN_BASELINE, 16);
 	private Font fontTitle = new Font("Avenir", Font.ROMAN_BASELINE, 18);
 	private Font scorerFont = new Font("Avenir", Font.ROMAN_BASELINE, 16);
 	private Font assistFont = new Font("Avenir", Font.ITALIC, 14);
@@ -121,12 +121,13 @@ public class MatchPanel extends JPanel {
 			scorePanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 			scorePanel.setBackground(new Color(240,240,240));
 			scorePanel.setOpaque(true);
-			scoreLabel.setFont(fontTitle);
-			scoreLabel.setMinimumSize(new Dimension(0,40));
-			scoreLabel.setMaximumSize(new Dimension(2000,40));
+			scoreLabel.setFont(fontSmall);
+			scoreLabel.setMinimumSize(new Dimension(0,30));
+			scoreLabel.setMaximumSize(new Dimension(2000,30));
 			scorePanel.add(scoreLabel);
-			scorePanel.setMinimumSize(new Dimension(0,40));
-			scorePanel.setMaximumSize(new Dimension(2000, 40));
+			scorePanel.setMinimumSize(new Dimension(0,30));
+			scorePanel.setPreferredSize(new Dimension(200,30));
+			scorePanel.setMaximumSize(new Dimension(2000, 30));
 			scrollContent.add(scorePanel);
 			
 			//Goal makers and assists
@@ -174,9 +175,10 @@ public class MatchPanel extends JPanel {
 				JLabel cardsLabel = new JLabel("Cards");
 				cardsLabel.setMinimumSize(new Dimension(0,30));
 				cardsLabel.setMaximumSize(new Dimension(100,30));
-				cardsLabel.setFont(fontTitle);
+				cardsLabel.setFont(fontSmall);
 				cardsDiv.add(cardsLabel);
 				cardsDiv.setMinimumSize(new Dimension(0, 30));
+				cardsDiv.setPreferredSize(new Dimension(200,30));
 				cardsDiv.setMaximumSize(new Dimension(2000, 30));
 				scrollContent.add(cardsDiv);
 				
@@ -223,11 +225,12 @@ public class MatchPanel extends JPanel {
 				injuryDiv.setBackground(new Color(240,240,240));
 				injuryDiv.setOpaque(true);
 				JLabel injuryLabel = new JLabel("Injuries");
-				injuryLabel.setFont(fontTitle);
+				injuryLabel.setFont(fontSmall);
 				injuryLabel.setMinimumSize(new Dimension(0,30));
 				injuryLabel.setMaximumSize(new Dimension(100,30));
 				injuryDiv.add(injuryLabel);
 				injuryDiv.setMinimumSize(new Dimension(0,30));
+				injuryDiv.setPreferredSize(new Dimension(200,30));
 				injuryDiv.setMaximumSize(new Dimension(2000, 30));
 				scrollContent.add(injuryDiv);
 				
