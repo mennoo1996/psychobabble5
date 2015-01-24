@@ -6,7 +6,6 @@ package swinggui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Component;
-import java.awt.Graphics;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;

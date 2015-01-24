@@ -7,21 +7,17 @@ import game.Competition;
 
 import java.awt.Dimension;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.util.ArrayList;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
 
 import schemeClasses.CompetitionScheme;
 import schemeClasses.Match;
@@ -29,6 +25,7 @@ import libraryClasses.Team;
 import libraryClasses.Player;
 import libraryClasses.FieldPlayer;
 
+@SuppressWarnings("serial")
 public class MatchPanel extends JPanel {
 	
 	private Competition cComp;
@@ -40,8 +37,6 @@ public class MatchPanel extends JPanel {
 	
 	//fonts
 	private Font fontSmall = new Font("Avenir", Font.ROMAN_BASELINE, 16);
-	private Font fontTitle = new Font("Avenir", Font.ROMAN_BASELINE, 18);
-	private Font scorerFont = new Font("Avenir", Font.ROMAN_BASELINE, 16);
 	private Font assistFont = new Font("Avenir", Font.ITALIC, 14);
 	
 	/**
@@ -157,7 +152,7 @@ public class MatchPanel extends JPanel {
 					goalScorerLabel.setMinimumSize(new Dimension(0,40));
 					goalScorerLabel.setPreferredSize(new Dimension(goalScorerLabel.getPreferredSize().width, 40));
 					goalScorerLabel.setMaximumSize(new Dimension(550, 50));
-					goalScorerLabel.setFont(scorerFont);
+					goalScorerLabel.setFont(fontSmall);
 					goalScorerLabel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(240,240,240)));
 					scoreStats.add(goalScorerLabel, BorderLayout.NORTH);
 					
@@ -204,7 +199,7 @@ public class MatchPanel extends JPanel {
 					redLabel.setMinimumSize(new Dimension(100,40));
 					redLabel.setPreferredSize(new Dimension(redLabel.getPreferredSize().width, 40));
 					redLabel.setMaximumSize(new Dimension(550, 50));
-					redLabel.setFont(scorerFont);
+					redLabel.setFont(fontSmall);
 					redLabel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(240,240,240)));
 					cards.add(redLabel, BorderLayout.CENTER);
 					cards.setMaximumSize(new Dimension(550, 50));
@@ -220,7 +215,7 @@ public class MatchPanel extends JPanel {
 					yellowLabel.setPreferredSize(new Dimension(yellowLabel.getPreferredSize().width, 40));
 					yellowLabel.setMaximumSize(new Dimension(550, 50));
 					yellowLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-					yellowLabel.setFont(scorerFont);
+					yellowLabel.setFont(fontSmall);
 					yellowLabel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(240,240,240)));
 					cards.add(yellowLabel, BorderLayout.CENTER);
 					cards.setMaximumSize(new Dimension(550, 50));
@@ -259,7 +254,7 @@ public class MatchPanel extends JPanel {
 					injuredLabel.setPreferredSize(new Dimension(injuredLabel.getPreferredSize().width, 40));
 					injuredLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 					injuredLabel.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(240,240,240)));
-					injuredLabel.setFont(scorerFont);
+					injuredLabel.setFont(fontSmall);
 					injury1.add(injuredLabel, BorderLayout.CENTER);
 					injury1.setMaximumSize(new Dimension(550, 50));
 					scrollContent.add(injury1);

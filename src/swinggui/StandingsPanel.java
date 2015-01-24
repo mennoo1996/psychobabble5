@@ -14,17 +14,12 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
@@ -72,7 +67,6 @@ public class StandingsPanel extends JPanel {
 		add(titlepanel);
 
 		//fonts here
-		Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 		Font fontHeader = new Font("Avenir", Font.ROMAN_BASELINE, 14);
 		
 		// Preallocate row array
@@ -296,9 +290,6 @@ public class StandingsPanel extends JPanel {
 			}
 			
 		}
-		
-		
-		
 		
 		// Adjust dimensions
 		setMinimumSize(new Dimension(100, 580));

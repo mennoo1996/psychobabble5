@@ -1,3 +1,6 @@
+/**
+ * GUI Class that displays the rightmost Transfers panel
+ */
 package swinggui;
 
 import game.Competition;
@@ -20,6 +23,7 @@ import javax.swing.event.DocumentListener;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
+@SuppressWarnings("serial")
 public class TransfersPanel_Right extends JPanel implements DocumentListener{
 
 	private Competition currentCompetition;
@@ -29,13 +33,17 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 	private ArrayList<Player> Players;
 	private ArrayList<Player> team;
 	private MouseListener changeTeamListener;
-	
-	//defined because I need them to be accessible from the outside
+
 	private JPanel ScrollPaneContent;
 	private JTextField textField;
 	private JScrollPane ScrollPane;
-	private Boolean TextEmpty;
 	
+	/**
+	 * Create and initialize a TransfersPanel_Right
+	 * @param cComp - current Competition
+	 * @param cTeam - Currently selected team of which to display players\
+	 * @param detailRefresher - MouseListener to use for selections
+	 */
 	public TransfersPanel_Right(Competition cComp, Team cTeam, MouseListener detailRefresher) {
 		oldSelection = 0;
 		Players = new ArrayList<Player>();
@@ -46,11 +54,14 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		initUI();
 	}
 
+	/**
+	 * Initialize the GUI elements contained in the TransfersPanel_Left
+	 */
 	public final void initUI(){
 		
 		team = currentTeam.getTeam();
 		
-		//massive player array filling here (dunno if it's heavy, but maybe we should thread this?)
+		//massive player array filling here
 		for (int i=0;i<currentCompetition.getLibrary().getLibrary().size();i++) {
 			Team t = currentCompetition.getLibrary().getLibrary().get(i);
 			for (int j=0;j<t.getTeam().size();j++) {
@@ -90,7 +101,6 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		TextInputBoxPanel.setMaximumSize(new Dimension(20000, 41));
 		TextInputBoxPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(180,180,180)));
 		textField = new JTextField(18); textField.addMouseListener(changeTeamListener);
-		TextEmpty = true;
 		textField.getDocument().addDocumentListener(this);
 		TextInputBoxPanel.add(textField);
 		
@@ -104,7 +114,6 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 			selections.add(panel);
 			ScrollPaneContent.add(panel);
 		}
-		
 		ScrollPane = new JScrollPane(ScrollPaneContent, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		ScrollPane.getVerticalScrollBar().setUnitIncrement(10);
 
@@ -136,15 +145,6 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		int i = 0;
 		for(int w=0;w<Players.size();w++){
 			if(Players.get(w).getName().toLowerCase().contains(search) || Players.get(w).getTeam().toLowerCase().contains(search)){
-//				boolean add = false;
-//				for(int k=0;k<currentTeam.getTeam().size();k++){
-//						if(Players.get(w).equals(currentTeam.getTeam().get(k))){
-//							add=true;
-//					}
-//				}
-//				if(add==false){
-//					
-//				}
 				PlayerScrollPanel_Right panel = new PlayerScrollPanel_Right(Players.get(w), changeTeamListener, i);
 				ScrollPaneContent.add(panel);
 				selections.add(panel);
@@ -174,36 +174,60 @@ public class TransfersPanel_Right extends JPanel implements DocumentListener{
 		repaint();
 	}
 	
+	/**
+	 * Return selected Player object
+	 * @return player - selected Player object
+	 */
 	public Player getPlayer(int index){
 		return selections.get(index).getPlayer();
 	}
 	
+	/**
+	 * Set new selection at index, if an old one already exists
+	 * @param newIndex - index at which to set selection
+	 */
 	public void newSelection(int newIndex) {
 		selections.get(oldSelection).toggleSelected();
 		selections.get(newIndex).toggleSelected();
 		oldSelection = newIndex;
 	}
 	
+	/**
+	 * Turn off all selections
+	 */
 	public void noSelection(){
 		selections.get(oldSelection).toggleSelected();
 		oldSelection = 0;
 	}
 	
+	/**
+	 * Set new selection at index, if an old one does not yet exist
+	 * @param newIndex - index at which to set selection
+	 */
 	public void firstSelection(int newIndex){
 		selections.get(newIndex).toggleSelected();
 		oldSelection = newIndex;
 	}
 	
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		Search(textField.getText());
 	}
 
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		Search(textField.getText());
 	}
 
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void changedUpdate(DocumentEvent e) {
 	}

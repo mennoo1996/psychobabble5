@@ -1,7 +1,7 @@
 package swinggui;
 
 import java.awt.*;
-import java.awt.image.*;
+
 import javax.swing.*;
 
 /*
@@ -13,6 +13,7 @@ import javax.swing.*;
  *  Also, any component added directly to this panel will be made
  *  non-opaque so that the custom painting can show through.
  */
+@SuppressWarnings("serial")
 public class BackgroundPanel extends JPanel
 {
 	public static final int SCALED = 0;
@@ -259,20 +260,6 @@ public class BackgroundPanel extends JPanel
 		float x = (width - image.getWidth(null)) * alignmentX;
 		float y = (height - image.getHeight(null)) * alignmentY;
 		g.drawImage(image, (int)x + insets.left, (int)y + insets.top, this);
-	}
-	
-	/*
-	 * Custom painting code for drawing a SCALED_HORIZONTAL image as the
-	 * background
-	 */
-	private void drawScaledHorizontal(Graphics g) {
-	    Dimension d = getSize();
-	    Insets insets = getInsets();
-	    int height = d.height - insets.top - insets.bottom;
-	    float ratio = 1.0f * d.width / image.getWidth(null);
-	    int imgHeight = (int) (image.getHeight(null) * ratio);
-	    float y = (height - imgHeight) * alignmentY;
-	    g.drawImage(image, 0, (int) y + insets.top, d.width, imgHeight, null);
 	}
 	 
 	/*

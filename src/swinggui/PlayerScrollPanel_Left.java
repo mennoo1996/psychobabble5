@@ -1,3 +1,6 @@
+/**
+ * GUI Class for creating a selectable JPanel showing Player data
+ */
 package swinggui;
 
 import java.awt.BorderLayout;
@@ -18,6 +21,7 @@ import libraryClasses.FieldPlayer;
 import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 
+@SuppressWarnings("serial")
 class PlayerScrollPanel_Left extends JPanel{
 	
 	private int playerIndex;
@@ -28,7 +32,13 @@ class PlayerScrollPanel_Left extends JPanel{
 	private Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 16);
 	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
 	
-	
+	/**
+	 * Create and initialize a PlayerScrollPanel_Left
+	 * @param player - Attached Player object
+	 * @param playerType - Player type just in case
+	 * @param mouseListener - mouseListener for clickability
+	 * @param index - index to use if player is in a list
+	 */
 	public PlayerScrollPanel_Left(Player player, String playerType, MouseListener mouseListener, int index){
 		playerIndex = index;
 		this.player = player;
@@ -40,6 +50,9 @@ class PlayerScrollPanel_Left extends JPanel{
 		
 	}
 
+	/**
+	 * Initialize the GUI elements contained in the PlayerScrollPanel_Left
+	 */
 	public final void initUI(){
 		setLayout(new BorderLayout());
 		setOpaque(true);
@@ -114,6 +127,9 @@ class PlayerScrollPanel_Left extends JPanel{
 		add(label3, BorderLayout.EAST);
 	}
 	
+	/**
+	 * Toggles PlayerScrollPanel_Left selection state
+	 */
 	public void toggleSelected() {
 		if (isSelected) {
 			setBackground(Color.WHITE);
@@ -125,6 +141,9 @@ class PlayerScrollPanel_Left extends JPanel{
 		isSelected = !isSelected;
 	}
 	
+	/**
+	 * Switches off PlayerScrollPanel_Left selection state, regardless of state
+	 */
 	public void deselect(){
 		if (isSelected) {
 			setBackground(Color.WHITE);
@@ -134,10 +153,18 @@ class PlayerScrollPanel_Left extends JPanel{
 		isSelected = false;
 	}
 
+	/**
+	 * returns player index
+	 * @return - int playerIndex
+	 */
 	public int getPlayerIndex(){
 		return playerIndex;
 	}
 	
+	/**Function to create ImageIcons, just in case I have trouble finding them again
+	 * @param path			- ImageIcon file location
+	 * @return				- new ImageIcon object
+	 */
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
 		if (imgURL != null) {
@@ -149,6 +176,10 @@ class PlayerScrollPanel_Left extends JPanel{
 		}
 	}
 	
+	/**
+	 * returns player object
+	 * @return - Player player
+	 */
 	public Player getPlayer(){
 		return player;
 	}

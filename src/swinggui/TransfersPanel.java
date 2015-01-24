@@ -1,3 +1,6 @@
+/**
+ * GUI Class that displays the Transfers Window
+ */
 package swinggui;
 
 import game.Competition;
@@ -18,12 +21,10 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import libraryClasses.Player;
 import libraryClasses.Team;
+
 @SuppressWarnings("serial")
 public class TransfersPanel extends JPanel implements MouseListener, ActionListener {
-	
-	private MouseListener buttonListener;
 	
 	private Dimension minSize = new Dimension(20,20);
 	private Dimension prefSize = new Dimension(40,20);
@@ -36,12 +37,17 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 	
 	private boolean isleft = true;
 	private int selectedIndex;
-	private Player selectedPlayer;
 	private Competition currentCompetition;
 	private Team currentTeam;
 	
 	private TransferList transfers;
 	
+	/**
+	 * Create and initialize a TransfersPanel
+	 * @param cTeam - current Team
+	 * @param cComp - current Competition
+	 * @param bar - bottombar (used to display messages)
+	 */
 	public TransfersPanel(Team cTeam, Competition cComp, BottomBar bar) {
 		bottomBar = bar;
 		currentCompetition = cComp;
@@ -49,6 +55,9 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 		initUI();
 	}
 	
+	/**
+	 * Initialize the GUI elements contained in the NamePanel
+	 */
 	public final void initUI() {
 
 		transfers = new TransferList();
@@ -74,6 +83,10 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 		
 	}
 
+	/**
+	 * Mouse Listener method
+	 * @param e - MouseEvent that is heard
+	 */
 	public void mouseDetect(MouseEvent e) {
 		if(e.getSource() instanceof PlayerScrollPanel_Right){
 			PlayerScrollPanel_Right panel = (PlayerScrollPanel_Right) e.getSource();
@@ -111,11 +124,17 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 		
 	}
 	
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		mouseDetect(e);
 	}
 
+	/**
+	 * (Re)load all TransfersPanel GUI content when necessary
+	 */
 	public void reload(){
 		
 		remove(fillRight); 
@@ -140,38 +159,53 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 		fillRight = new Box.Filler(minSize, prefSize, null);
 		add(fillRight);
 		
-		
 	}
 	
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		mouseDetect(e);
 	}
 
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * ActionListener listener method
+	 * @param e - heard event
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() instanceof JButton){
 			String Answer;
 			String Answer2;
-			Player transferPlayer = center.getPlayer();
+			
 			if(isleft){
 				Answer = TransferLogic.requestSell(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary());
 				Answer2 = Answer;

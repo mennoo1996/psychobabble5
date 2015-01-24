@@ -1,8 +1,10 @@
+/**
+ * GUI Class for creating the right panel in the Positions Window
+ */
 package swinggui;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -10,17 +12,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -37,7 +35,6 @@ import libraryClasses.Team;
 public class PositionsPanel_Right extends JPanel {
 	
 	private DragGestureListener dragGestureListener;
-	private String panelTitle;
 	private Team currentTeam;
 	private Font fontTitle = new Font("Avenir", Font.ROMAN_BASELINE, 15);
 	private PlayerPanel[] panels = new PlayerPanel[11];
@@ -46,6 +43,12 @@ public class PositionsPanel_Right extends JPanel {
 	private PositionsPanel_Left Left;
 	private Component box = null;
 	
+	/**
+	 * Create and initialize a PositionsPanel_Right
+	 * @param cteam - Attached Team object
+	 * @param listener - DragGestureListener for Drag and Drop
+	 * @param left - opposing PositionsPanel Panel, which it references quite often
+	 */
 	public PositionsPanel_Right(Team cTeam, DragGestureListener listener, PositionsPanel_Left left) {
 		Left = left;
 		dragGestureListener = listener;
@@ -54,7 +57,7 @@ public class PositionsPanel_Right extends JPanel {
 	}
 	
 	/**
-	 * Initialize an example panel
+	 * Initialize the GUI elements contained in the PositionsPanel_Right
 	 */
 	public final void initUI() {
 		//new panel
@@ -96,6 +99,9 @@ public class PositionsPanel_Right extends JPanel {
 		
 	}
 	
+	/**
+	 * (Re)load all Team and Player content into the GUI
+	 */
 	public void loadContent(){
 		ContentPanel.removeAll();
 		
@@ -186,17 +192,27 @@ public class PositionsPanel_Right extends JPanel {
 	
 	
 	
-	//DropTarget Action
-	class MyDropTargetListener extends DropTargetAdapter {
+/**
+ * DropTargetAdapter class extension to handle Player Dropping
+ */
+class MyDropTargetListener extends DropTargetAdapter {
 
-        private DropTarget dropTarget;
+        @SuppressWarnings("unused")
+		private DropTarget dropTarget;
         private JPanel panel;
 
+        /**
+    	 * Create and initialize a MyDropTargetListener
+    	 */
 		public MyDropTargetListener(JPanel panel, PositionsPanel_Left Left) {
 			this.panel = panel;
 		    dropTarget = new DropTarget(panel, DnDConstants.ACTION_COPY, this, true, null);
 		}
 
+		/**
+    	 * Drop action
+    	 * @param event - DropTargetDropEvent to use
+    	 */
 		public void drop(DropTargetDropEvent event) {
 		    try{
 		      Transferable tr = event.getTransferable();
@@ -204,7 +220,6 @@ public class PositionsPanel_Right extends JPanel {
 		      if (event.isDataFlavorSupported(TransferablePlayer.playerFlavor)) {
 		          
 		    	  event.acceptDrop(DnDConstants.ACTION_COPY);
-		          
 		    	  //player to place
 			      Player player = (Player) tr.getTransferData(TransferablePlayer.playerFlavor);
 			      //player to replace
@@ -212,17 +227,13 @@ public class PositionsPanel_Right extends JPanel {
 			      //old position of player
 			      int position = ((PlayerPanel) panel).getPosition();
 			      int oldPosition = (int) tr.getTransferData(TransferablePlayer.intFlavor);
-			      
+			      //perform drop action
 			      setPlayerPanel(player, currentTeam, position);
-			      
 			      if(oldPosition != 0){
 			        	 setPlayerPanel(switchPlayer, currentTeam, oldPosition);
 			      }
-		          
 		          Left.loadContent();
-		          
 		          event.dropComplete(true);
-		          
 		          return;
 		      }
 		      event.rejectDrop();
@@ -234,6 +245,12 @@ public class PositionsPanel_Right extends JPanel {
 		}
     }
 	
+	/**
+	 * set a PlayerPanel to the specified Player
+	 * @param player - Player to use
+	 * @param team - Player's remaining team
+	 * @param position - position to place player on
+	 */
 	public void setPlayerPanel(Player player, Team team, int position){
 		
 		panels[position - 1].removeAll();
@@ -291,12 +308,22 @@ public class PositionsPanel_Right extends JPanel {
   		
 	}
 	
+	/**
+	 * give a player a position
+	 * @param position - position to set
+	 * @param player - player to set position to
+	 * @param team - team to suse
+	 */
 	public static void setPosition(int position, Player player, Team team){
 		Player[] positions = team.getPositions().getPositionArray();
 		positions[position - 1] = player;
 		team.setPositions(new Positions(positions));
 	}
 	
+	/**Function to create ImageIcons, just in case I have trouble finding them again
+	 * @param path			- ImageIcon file location
+	 * @return				- new ImageIcon object
+	 */
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
 		if (imgURL != null) {
