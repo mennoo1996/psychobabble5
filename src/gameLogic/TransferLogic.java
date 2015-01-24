@@ -434,7 +434,7 @@ public abstract class TransferLogic {
 			}
 			Team buyingTeam = teamswithbudget.get(GameLogic.randomGenerator(0, teamswithbudget.size()-1));
 			playersTeam.setBudget(playersTeam.getBudget()+askingPrice);
-			System.out.println(playersTeam.getBudget());
+			//System.out.println(playersTeam.getBudget());
 			buyingTeam.setBudget(buyingTeam.getBudget()-askingPrice);
 			buyingTeam.add(player);
 			player.setTeam(buyingTeam.getTeamName());
@@ -590,7 +590,7 @@ public abstract class TransferLogic {
 			}
 			
 			Team t2 = library.getTeamForName(theplayer.getTeam());
-			System.out.println(TransferLogic.requestTransfer(theplayer, t, 1.1*theplayer.getPrice().doubleValue(), library, new TransferList()));
+			TransferLogic.requestTransfer(theplayer, t, 1.1*theplayer.getPrice().doubleValue(), library, new TransferList());
 			
 		}
 	}

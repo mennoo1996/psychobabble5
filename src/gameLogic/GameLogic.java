@@ -794,7 +794,7 @@ public abstract class GameLogic {
 				if (someoneEligibleAndNotInCurrentTeam) {
 			boolean confirmed=true;
 			do {
-				System.out.println("do loop initiated");
+				//System.out.println("do loop initiated");
 				
 				
 				confirmed=true;

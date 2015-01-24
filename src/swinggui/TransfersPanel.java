@@ -210,7 +210,7 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 				Answer = TransferLogic.requestSell(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary());
 				Answer2 = Answer;
 				Answer = Answer.substring(0, 15); 
-				System.out.println(Answer);
+				//System.out.println(Answer);
 				if(Answer.equals("Congratulations")){
 					reload();
 					bottomBar.showString(Answer2, new Color(139,228,111));
@@ -227,7 +227,7 @@ public class TransfersPanel extends JPanel implements MouseListener, ActionListe
 				Answer = TransferLogic.requestTransfer(center.getPlayer(), currentTeam, center.getPrice(isleft), currentCompetition.getLibrary(), transfers);
 				Answer2 = Answer;
 				Answer = Answer.substring(0, 15); 
-				System.out.println(Answer);
+				//System.out.println(Answer);
 				if(Answer.equals("Congratulations")){
 					reload();
 					bottomBar.showString(Answer2, new Color(139,228,111));

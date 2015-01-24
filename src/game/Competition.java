@@ -83,11 +83,11 @@ public class Competition {
 			Team team1 = library.getTeamForName(match.getTeam1());
 			Team team2 = library.getTeamForName(match.getTeam2());
 			if (!team1.isEligible() || !team2.isEligible()) {
-				System.out.println(team1.getPositions());
+				//System.out.println(team1.getPositions());
 				team1.printPlayersNotEligible();
-				System.out.println(team2.getPositions());
+				//System.out.println(team2.getPositions());
 				team2.printPlayersNotEligible();
-				System.out.println(team1.getTeamName() + " " + team2.getTeamName());
+				//System.out.println(team1.getTeamName() + " " + team2.getTeamName());
 				return false;
 			}
 		}

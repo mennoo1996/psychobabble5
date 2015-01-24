@@ -194,7 +194,6 @@ public class MatchPanel extends JPanel {
 				for(int j = 0; j < redCardGetters.size(); j++) {
 					JPanel cards = new JPanel();
 					cards.setLayout(new BorderLayout());
-					System.out.println("At least one red");
 					JLabel redLabel = new JLabel(redCardGetters.get(j).getName() + " (Red)", JLabel.CENTER);
 					redLabel.setMinimumSize(new Dimension(100,40));
 					redLabel.setPreferredSize(new Dimension(redLabel.getPreferredSize().width, 40));
