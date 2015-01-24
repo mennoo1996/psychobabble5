@@ -8,7 +8,6 @@ import gameLogic.TransferLogic;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -17,8 +16,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,9 +28,6 @@ import javax.swing.plaf.synth.SynthLookAndFeel;
 
 import libraryClasses.Team;
 import xmlIO.XMLParser;
-
-//import aurelienribon.tweenengine.Tween;
-//import aurelienribon.tweenengine.TweenManager;
 
 @SuppressWarnings("serial")
 public class Frame_Main extends JFrame implements ActionListener{
@@ -119,10 +113,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 				exitProcedure();
 			}
 		});
-		
-//		TeamChoicePanel teamChoose = new TeamChoicePanel(curComp, this);
-//		curPanel = teamChoose;
-//		add(curPanel, BorderLayout.CENTER);
 
 		boolean showLoadedGames = games.getGames().size() > 0;
 		
@@ -324,8 +314,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Start playing!
 		// Get screen sizes (for fullscreen)
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		int boxwidth = (int) tk.getScreenSize().getWidth();
-		int boxheight = (int) tk.getScreenSize().getHeight();
 		
 		bottomBar = new BottomBar(curComp, curTeam);
 		
@@ -368,8 +356,6 @@ public class Frame_Main extends JFrame implements ActionListener{
 		// Start playing!
 		// Get screen sizes (for fullscreen)
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		int boxwidth = (int) tk.getScreenSize().getWidth();
-		int boxheight = (int) tk.getScreenSize().getHeight();
 
 		bottomBar = new BottomBar(curComp, curTeam);
 		

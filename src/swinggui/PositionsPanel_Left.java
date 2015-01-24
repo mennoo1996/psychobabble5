@@ -1,20 +1,17 @@
+/**
+ * GUI Class for creating the left panel in the Positions Window
+ */
 package swinggui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -43,11 +40,15 @@ public class PositionsPanel_Left extends JPanel {
 			"Goalkeeper"
 	};
 	private DragSource ds;
-	
 	private Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	private Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 16);
 	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
 	
+	/**
+	 * Create and initialize a PositionsPanel_Left
+	 * @param cteam - Attached Team object
+	 * @param listener - DragGestureListener for Drag and Drop
+	 */
 	public PositionsPanel_Left(Team cTeam, DragGestureListener listener) {
 		dragGestureListener = listener;
 		currentTeam = cTeam;
@@ -56,7 +57,7 @@ public class PositionsPanel_Left extends JPanel {
 	}
 	
 	/**
-	 * Initialize left positions panel, containing all of your team's players
+	 * Initialize the GUI elements contained in the PlayerScrollPanel_Left
 	 */
 	public final void initUI() {
 
@@ -74,15 +75,14 @@ public class PositionsPanel_Left extends JPanel {
 		add(titlepanel);
 
 		//content begins here
-		
-		//top level JPanel holds all scrollable content
+
 		ScrollPaneContent = new JPanel(); 
 		ScrollPaneContent.setLayout(new BoxLayout(ScrollPaneContent, BoxLayout.Y_AXIS));
 		loadContent();
 		JScrollPane ScrollPane = new JScrollPane(ScrollPaneContent, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
 		ScrollPane.getVerticalScrollBar().setUnitIncrement(10);
-		
 		add(ScrollPane);
+		
 		//content ends here
 
 		//Panel Size Declarations
@@ -91,6 +91,9 @@ public class PositionsPanel_Left extends JPanel {
 		setMaximumSize(new Dimension(900,580));
 	}
 	
+	/**
+	 * (Re)load all Team-Player content into the PositionsPanel_Left GUI
+	 */
 	public void loadContent(){
 		ScrollPaneContent.removeAll();
 		
@@ -214,6 +217,10 @@ public class PositionsPanel_Left extends JPanel {
 		}
 	}
 	
+	/**Function to create ImageIcons, just in case I have trouble finding them again
+	 * @param path			- ImageIcon file location
+	 * @return				- new ImageIcon object
+	 */
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
 		if (imgURL != null) {

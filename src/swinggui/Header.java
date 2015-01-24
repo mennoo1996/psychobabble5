@@ -1,3 +1,7 @@
+/**
+ * GUI class that displays a header with clickable buttons
+ * @version 0.0.1
+ */
 package swinggui;
 
 import java.awt.event.ActionListener;
@@ -12,13 +16,17 @@ public class Header extends JPanel {
 	
 	private ActionListener buttonListener;	
 	
+	/**
+	 * Create and initialize Header object
+	 * @param listener button input actionlistener
+	 */
 	public Header(ActionListener listener) {
 		buttonListener = listener;
 		initUI();
 	}
 	
 	/**
-	 * Initialize the header in a jpanel
+	 * Initialize the GUI elements
 	 */
 	public final void initUI() {
 		//new panel

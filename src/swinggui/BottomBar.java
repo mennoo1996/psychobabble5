@@ -1,10 +1,13 @@
+/**
+ * GUI class that displays a bar with useful information
+ * @version 0.0.1
+ */
 package swinggui;
 
 import game.Competition;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,11 +17,9 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -29,14 +30,12 @@ import libraryClasses.Team;
 @SuppressWarnings("serial")
 public class BottomBar extends JPanel {
 	
+	public Dimension minSize = new Dimension(20,0);
+	public Dimension prefSize = new Dimension(40,0);
 	private Competition currentComp;
 	private Team currentTeam;
 	
-	public Dimension minSize = new Dimension(20,0);
-	public Dimension prefSize = new Dimension(40,0);
-	
 	JPanel BarHolder;
-	
 	JLabel moneyLabel;
 	JLabel teamLabel;
 	JLabel pointsLabel;
@@ -45,6 +44,11 @@ public class BottomBar extends JPanel {
 	
 	private Font barfont = new Font("Avenir", Font.ROMAN_BASELINE, 14);
 	
+	/**
+	 * Create and initialize BottomBar object
+	 * @param cComp current competition
+	 * @param cTeam current team
+	 */
 	public BottomBar(Competition cComp, Team cTeam) {
 		currentComp = cComp;
 		currentTeam = cTeam;
@@ -54,12 +58,20 @@ public class BottomBar extends JPanel {
 		initUI();
 	}
 	
+	/**
+	 * Initialize the GUI elements
+	 */
 	public final void initUI() {
 		setLayout(new BorderLayout(0,0));
 		BarHolder = new JPanel();
 		add(BarHolder, BorderLayout.SOUTH);
 	}
 	
+	/**
+	 * Force the BottomBar to display a string in a specified color
+	 * @param text Text to display
+	 * @param color Color to display text in
+	 */
 	public void showString(String text, Color color){
 		System.out.println(text);
 		//removeAll();
@@ -105,15 +117,17 @@ public class BottomBar extends JPanel {
 		repaint();
 	}
 	
+	/**
+	 * Force the BottomBar to display player statistics again
+	 */
 	public void showStats(){
 		remove(BarHolder);
 		
+		//helper panel
 		BarHolder = new JPanel();
 		add(BarHolder, BorderLayout.SOUTH);
 		BarHolder.setAlignmentY(BOTTOM_ALIGNMENT);
-		
 		BarHolder.setLayout(new BoxLayout(BarHolder, BoxLayout.X_AXIS));
-		
 		
 		//left filler
 		BarHolder.add(new Box.Filler(minSize, prefSize, null));
@@ -189,6 +203,9 @@ public class BottomBar extends JPanel {
 		repaint();
 	}
 	
+	/**
+	 * Simply reload cash string in the BottomBar
+	 */
 	public void updateMoney(){
 		
 		BigDecimal big = new BigDecimal(currentTeam.getBudget()); 
@@ -201,6 +218,10 @@ public class BottomBar extends JPanel {
 		
 	}
 	
+	/**Function to create ImageIcons, just in case I have trouble finding them again
+	 * @param path			- ImageIcon file location
+	 * @return				- new ImageIcon object
+	 */
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
 		if (imgURL != null) {

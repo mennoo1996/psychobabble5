@@ -1,3 +1,6 @@
+/**
+ * GUI Class for creating a selectable JPanel showing Player data
+ */
 package swinggui;
 
 import java.awt.BorderLayout;
@@ -8,7 +11,6 @@ import java.awt.Font;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,6 +18,7 @@ import libraryClasses.FieldPlayer;
 import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 
+@SuppressWarnings("serial")
 class PlayerScrollPanel_Right extends JPanel{
 	
 	private int playerIndex;
@@ -25,7 +28,12 @@ class PlayerScrollPanel_Right extends JPanel{
 	private Font fontPlayername = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	
-	
+	/**
+	 * Create and initialize a PlayerScrollPanel_Right
+	 * @param player - Attached Player object
+	 * @param mouseListener - mouseListener for clickability
+	 * @param index - index to use if player is in a list
+	 */
 	public PlayerScrollPanel_Right(Player player, MouseListener mouseListener, int index){
 		playerIndex = index;
 		this.player = player;
@@ -36,12 +44,14 @@ class PlayerScrollPanel_Right extends JPanel{
 		
 	}
 
+	/**
+	 * Initialize the GUI elements contained in the PlayerScrollPanel_Left
+	 */
 	public final void initUI(){
 		//setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		setLayout(new BorderLayout(0,0));
 		setOpaque(true);
 		setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200,200,200)));
-		
 
 		//name label
 		JLabel label1 = new JLabel("	" + player.getName());
@@ -97,6 +107,9 @@ class PlayerScrollPanel_Right extends JPanel{
 		add(panel2, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Toggles PlayerScrollPanel_Right selection state
+	 */
 	public void toggleSelected() {
 		if (isSelected) {
 			setBackground(Color.WHITE);
@@ -108,21 +121,18 @@ class PlayerScrollPanel_Right extends JPanel{
 		isSelected = !isSelected;
 	}
 	
+	/**
+	 * returns player index
+	 * @return - int playerIndex
+	 */
 	public int getPlayerIndex(){
 		return playerIndex;
 	}
-	
-	public ImageIcon createImageIcon(String path) {
-		java.net.URL imgURL = getClass().getResource(path);
-		if (imgURL != null) {
-			return new ImageIcon(imgURL, null);
-		}
-		else {
-			System.err.println("Couldn't find file: " + path);
-			return null;
-		}
-	}
-	
+
+	/**
+	 * returns player object
+	 * @return - Player player
+	 */
 	public Player getPlayer(){
 		return player;
 	}

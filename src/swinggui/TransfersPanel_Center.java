@@ -1,19 +1,16 @@
+/**
+ * GUI Class that displays the centermost Transfers panel
+ */
 package swinggui;
-
-import gameLogic.TransferList;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -24,24 +21,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 import javax.swing.JTextField;
-import javax.swing.SpinnerModel;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.AbstractDocument;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import javax.swing.text.DocumentFilter;
-import javax.swing.text.PlainDocument;
 
 import libraryClasses.FieldPlayer;
 import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
+@SuppressWarnings("serial")
 public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	
 	private ActionListener buttonListener;
@@ -68,17 +57,24 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 	private Font fontPlayerattr = new Font("Avenir", Font.ROMAN_BASELINE, 11);
 	private Font fontSelected = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	
+	/**
+	 * Create and initialize a TransfersPanel_Left
+	 * @param teamActionListener - ActionListener to listen to button inputs
+	 * @param cTeam - Currently selected team of which to display players
+	 */
 	public TransfersPanel_Center(ActionListener teamActionListener, Team cTeam) {
 		currentTeam = cTeam;
 		buttonListener = teamActionListener;
 		initUI();
 	}
 	
+	/**
+	 * Initialize the GUI elements contained in the TransfersPanel_Left
+	 */
 	public final void initUI(){
 		
 		setOpaque(false);
 		setName("Panel");
-		//setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(145,143,143)));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		//panel title
@@ -111,6 +107,11 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 	}
 	
+	/**
+	 * Reload GUI elements to display selected Player
+	 * @param isleft - bool to choose from either left or right-panel players
+	 * @param play - player to show
+	 */
 	public void showPlayer(boolean isleft, Player play){
 		player = play;
 		isLeft = isleft;
@@ -120,8 +121,7 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		remove(statPanel);
 		remove(playerPanel);
 		playerPanel = new JPanel(new BorderLayout());
-		
-		
+
 		//shirt
 		ImageIcon myImageIcon;// = createImageIcon("images/Shirts/T-Shirt.png");
 		if(player.getDaysInjured() > 0) {
@@ -166,7 +166,6 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		statPanel.setPreferredSize(new Dimension(50, 60));
 		statPanel.setMaximumSize(new Dimension(2000, 60));
 		if(player.getPlayerType() != "Goalkeeper"){
-			//statPanel.setLayout(new GridLayout(1,4));
 			FieldPlayer player1 = (FieldPlayer) player;
 			
 			int[] Attr = {	player1.getDefenseValue(),
@@ -306,9 +305,13 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		revalidate();
 		repaint();
 		
-		
 	}
 	
+	/**
+	 * Check price for size
+	 * @param isSell - to choose between fields for selling and buying
+	 * @return price, in int
+	 */
 	public int getPrice(boolean isSell){
 		String stringPrice;
 		if(isSell){
@@ -324,6 +327,10 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		return Price;
 	}
 	
+	/**Function to create ImageIcons, just in case I have trouble finding them again
+	 * @param path			- ImageIcon file location
+	 * @return				- new ImageIcon object
+	 */
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
 		if (imgURL != null) {
@@ -335,15 +342,27 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		}
 	}
 	
+	/**
+	 * Return selected Player object
+	 * @return player - selected Player object
+	 */
 	public Player getPlayer(){
 		return player;
 	}
 	
+	/**
+	 * Set message at bottom panel
+	 * @param message - String to show
+	 * @param color - Color to show string in
+	 */
 	public void setMessage(String message, Color color){
 		messagePanel.setBackground(color);
 		messagePanel2.setText(message);
 	}
 	
+	/**
+	 * Check price integer for validity, and, if viable, allow transfer buttons to show
+	 */
 	public void checkInt(){
 		JTextField input;
 		JLabel output;
@@ -386,16 +405,25 @@ public class TransfersPanel_Center extends JPanel implements DocumentListener{
 		
 	}
 	
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		checkInt();
 	}
 
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		checkInt();
 	}
 
+	/**
+	 * unused required method
+	 */
 	@Override
 	public void changedUpdate(DocumentEvent e) {
 		

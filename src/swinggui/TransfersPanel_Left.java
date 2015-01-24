@@ -1,3 +1,6 @@
+/**
+ * GUI Class that displays the leftmost Transfers panel
+ */
 package swinggui;
 
 import java.awt.Color;
@@ -17,14 +20,22 @@ import javax.swing.JScrollPane;
 import libraryClasses.Player;
 import libraryClasses.Team;
 
+@SuppressWarnings("serial")
 public class TransfersPanel_Left extends JPanel {
 	
+	@SuppressWarnings("unused")
 	private Team currentTeam;
 	private int oldSelection;
 	private ArrayList<PlayerScrollPanel_Left> selections;
 	private ArrayList<Player> Team;
 	private MouseListener changeTeamListener;
+	private Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 	
+	/**
+	 * Create and initialize a TransfersPanel_Left
+	 * @param cTeam - current Team
+	 * @param detailRefresher - MouseListener object to detect clicks
+	 */
 	public TransfersPanel_Left(Team cTeam, MouseListener detailRefresher) {
 		currentTeam = cTeam;
 		Team = cTeam.getTeam();
@@ -36,13 +47,12 @@ public class TransfersPanel_Left extends JPanel {
 	
 	
 	/**
-	 * Initialize an example panel
+	 * Initialize the GUI elements contained in the NamePanel
 	 */
 	public final void initUI() {
 
 		setOpaque(false);
 		setName("Panel");
-		//setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(145,143,143)));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		//panel title
@@ -55,9 +65,6 @@ public class TransfersPanel_Left extends JPanel {
 		add(titlepanel);
 
 		//content begins here
-		
-		//Fonts here
-		Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 		
 		//top level JPanel holds all content for the scrollable.
 		JPanel ScrollPaneContent = new JPanel(); ScrollPaneContent.setLayout(new BoxLayout(ScrollPaneContent, BoxLayout.Y_AXIS));
@@ -102,7 +109,6 @@ public class TransfersPanel_Left extends JPanel {
 					index++;
 				}
 			}
-			
 			ScrollPaneContent.add(ScrollPaneGrid);
 		}
 		
@@ -119,26 +125,46 @@ public class TransfersPanel_Left extends JPanel {
 		setMaximumSize(new Dimension(900,580));
 	}
 	
+	/**
+	 * Return Player at index
+	 * @param index - index at which to find Player
+	 * @return Player object at index
+	 */
 	public Player getPlayer(int index){
 		return selections.get(index).getPlayer();
 	}
 	
+	/**
+	 * Set new selection at index, if an old one already exists
+	 * @param newIndex - index at which to set selection
+	 */
 	public void newSelection(int newIndex) {
 		selections.get(oldSelection).toggleSelected();
 		selections.get(newIndex).toggleSelected();
 		oldSelection = newIndex;
 	}
 	
+	/**
+	 * Turn off all selections
+	 */
 	public void noSelection(){
 		selections.get(oldSelection).deselect();
 		oldSelection = 0;
 	}
 	
+	/**
+	 * Set new selection at index, if an old one does not yet exist
+	 * @param newIndex - index at which to set selection
+	 */
 	public void firstSelection(int newIndex){
 		selections.get(newIndex).toggleSelected();
 		oldSelection = newIndex;
 	}
 	
+	/**Function to create ImageIcons, just in case I have trouble finding them again
+	 * @param path			- ImageIcon file location
+	 * @return				- new ImageIcon object
+	 */
 	public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = getClass().getResource(path);
 		if (imgURL != null) {

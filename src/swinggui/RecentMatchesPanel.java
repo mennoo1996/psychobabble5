@@ -61,7 +61,6 @@ public class RecentMatchesPanel extends JPanel {
 		add(titlepanel);
 
 		//fonts here
-		Font fontSeparator = new Font("Avenir", Font.ROMAN_BASELINE, 12);
 		Font fontHeader = new Font("Avenir", Font.ROMAN_BASELINE, 14);
 		
 		// Fetch scheme and then populate table data

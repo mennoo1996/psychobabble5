@@ -1,3 +1,6 @@
+/**
+ * GUI Class for creating the Positions Panel
+ */
 package swinggui;
 
 import java.awt.Cursor;
@@ -9,9 +12,6 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetAdapter;
-import java.awt.dnd.DropTargetDropEvent;
 import java.io.IOException;
 
 import javax.swing.Box;
@@ -29,11 +29,18 @@ public class PositionsPanel extends JPanel implements DragGestureListener, Trans
 	private PositionsPanel_Left Left;
 	private PositionsPanel_Right Right;
 	
+	/**
+	 * Create and initialize a PositionsPanel
+	 * @param cteam - Attached Team object
+	 */
 	public PositionsPanel(Team cTeam) {
 		currentTeam = cTeam;
 		initUI();
 	}
 	
+	/**
+	 * Initialize the GUI elements contained in the PositionsPanel_Right
+	 */
 	public final void initUI() {
 		Left = new PositionsPanel_Left(currentTeam, this);
 		Right = new PositionsPanel_Right(currentTeam, this, Left);
@@ -46,6 +53,9 @@ public class PositionsPanel extends JPanel implements DragGestureListener, Trans
 	}
 
 	@Override
+	/**
+	 * function to create Transferable when Drag Gesture is recognized
+	 */
 	public void dragGestureRecognized(DragGestureEvent event) {
 		Cursor cursor = null;
         PlayerPanel panel = (PlayerPanel) event.getComponent();
@@ -57,16 +67,26 @@ public class PositionsPanel extends JPanel implements DragGestureListener, Trans
         event.startDrag(cursor, new TransferablePlayer(player, position));
 	}
 
+	// The rest of the (unnecessary) DragGestureListener methods
+	/**
+	 * nothing happens (required interface method)
+	 */
 	@Override
 	public DataFlavor[] getTransferDataFlavors() {
 		return null;
 	}
 
+	/**
+	 * nothing happens (required interface method)
+	 */
 	@Override
 	public boolean isDataFlavorSupported(DataFlavor flavor) {
 		return false;
 	}
 
+	/**
+	 * nothing happens (required interface method)
+	 */
 	@Override
 	public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
 		return null;
@@ -74,7 +94,9 @@ public class PositionsPanel extends JPanel implements DragGestureListener, Trans
 	
 }
 
-//Transferable object (containing player and/or position data)
+/**
+ * Transferable Class containing all necessary data for a Drag and Drop
+ */
 class TransferablePlayer implements Transferable {
 	  protected static DataFlavor playerFlavor = new DataFlavor(Player.class, "A Player Object");
 	  protected static DataFlavor intFlavor = new DataFlavor(int.class, "An Integer Object");
@@ -82,22 +104,43 @@ class TransferablePlayer implements Transferable {
 	      playerFlavor,
 	      intFlavor,
 	  };
-	  
 	  Player player;
 	  int position;
+	  
+	 /**
+	 * Create and initialize a TransferablePlayer
+	 * @param player - Player object to attach
+	 * @param position - int position to attach
+	 */
 	  public TransferablePlayer(Player player, int position) {
 	  	this.player = player;
 	  	this.position = position;
 	  }
+	  
+	 /**
+	 * returns Array of supported flavors
+	 * @return supportedFlavors[]
+	 */
 	  public DataFlavor[] getTransferDataFlavors() {
 	  	return supportedFlavors;
 	  }
+	  
+	 /**
+	 * checks if DataFlavor is supported
+	 * @return boolean if supported
+	 */
 	  public boolean isDataFlavorSupported(DataFlavor flavor) {
 		    if (flavor.equals(playerFlavor)) {
 		    	return true;
 		    }
 		    return false;
 	  }
+	  
+	 /**
+	 * returns Transferrable data for given DataFlavor
+	 * @param flavor - DataFlavor asked for
+	 * @return transferData, depending on Flavor
+	 */
 	 public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
 	   if (flavor.equals(playerFlavor)){
 	       return player;
@@ -111,7 +154,9 @@ class TransferablePlayer implements Transferable {
 	 }  
 }
 
-//JPanel with attached Player Back Number
+/**
+ * PlayerPanel Class extending JPanel with Player and Position object
+ */
 @SuppressWarnings("serial")
 class PlayerPanel extends JPanel {
 	Player player;

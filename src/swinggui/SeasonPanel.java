@@ -15,7 +15,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JScrollPane;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
@@ -24,6 +23,7 @@ import libraryClasses.Team;
 import libraryClasses.Player;
 import libraryClasses.Standings;
 
+@SuppressWarnings("serial")
 public class SeasonPanel extends JPanel{
 	
 	private Competition cComp;
@@ -33,8 +33,7 @@ public class SeasonPanel extends JPanel{
 	
 	private Dimension minSize = new Dimension(20,20);
 	private Dimension prefSize = new Dimension(40, 20); 
-	
-	private Font fontLarge = new Font("Avenir", Font.ROMAN_BASELINE, 20);
+
 	private Font fontSmall = new Font("Avenir", Font.ROMAN_BASELINE, 16);
 	
 	/**

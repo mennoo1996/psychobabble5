@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
 
+@SuppressWarnings("serial")
 public class NamePanel extends JPanel implements DocumentListener {
 	
 	private JTextField nameField;
@@ -41,7 +42,6 @@ public class NamePanel extends JPanel implements DocumentListener {
 	 */
 	public final void initUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
 		add(new Box.Filler(minSize, prefSize, null));
 		
 		JPanel nameChoicePanel = new JPanel();
@@ -59,8 +59,6 @@ public class NamePanel extends JPanel implements DocumentListener {
 		nameField = new JTextField(10);
 		nameField.setName("textField");
 		nameField.getDocument().addDocumentListener(this);
-		
-
 		nameField.setMinimumSize(new Dimension(nameField.getWidth(), 41));
 		nameField.setMaximumSize(new Dimension(250, 41));
 		
@@ -76,9 +74,7 @@ public class NamePanel extends JPanel implements DocumentListener {
 		nameChoicePanel.add(timeToPick);
 		
 		// Add name choice panel dimensions
-		
 		add(nameChoicePanel);
-		
 		add(new Box.Filler(minSize, prefSize, null));
 		nameChoicePanel.setMinimumSize(new Dimension(400,240));
 		nameChoicePanel.setPreferredSize(new Dimension(400,240));
