@@ -41,7 +41,7 @@ public class GameLogicTest {
 		assertTrue(result.size()==0);
 		GameLogic.setSeed(18);
 		result = GameLogic.getInjuredPlayers(t);
-		assertEquals(result.size(), 11);
+		assertEquals(result.size(), 10);
 		
 	}
 
@@ -98,7 +98,7 @@ public class GameLogicTest {
 		GameLogic.setSeed(0);
 		ArrayList<Player> result = GameLogic.getRedCards(1, t);
 		ArrayList<Player> expected = new ArrayList<Player>();
-		expected.add(t.getTeam().get(20));
+		expected.add(t.getTeam().get(17));
 		assertEquals(expected, result);
 	}
 
