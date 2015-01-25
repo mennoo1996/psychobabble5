@@ -6,10 +6,17 @@ public class Positions {
 
 	private Player[] positionArray;
 	
+	/**
+	 * Constructor which initializes an empty arraylist
+	 */
 	public Positions(){
 		positionArray = new Player[11];
 	}
 	
+	/**
+	 * Constructor which initializes an arraylist filled with the given arraylist
+	 * @param positionArray	 - the arraylist to initialize with
+	 */
 	public Positions(Player[] positionArray){
 		this.positionArray = positionArray;
 	}
@@ -21,6 +28,11 @@ public class Positions {
 		return positionArray;
 	}
 	
+	/**
+	 * Method which check if a player is in the positions
+	 * @param p		- the player to check
+	 * @return		- boolean with the result
+	 */
 	public boolean contains(Player p) {
 		for (int i=0; i<positionArray.length; i++) {
 			Player p2 = positionArray[i];
@@ -75,6 +87,10 @@ public class Positions {
 		return true;
 	}
 	
+	/**
+	 * Method to remove a player from te positions
+	 * @param p	- the player to remove
+	 */
 	public void remove (Player p) {
 		for (int i=0;i<positionArray.length;i++) {
 			if (positionArray[i]!=null){

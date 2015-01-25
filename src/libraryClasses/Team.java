@@ -17,8 +17,10 @@ public class Team {
 	private boolean isMax;
 	
 	/**
-	 * Constructor which initialises an empty team with the given team name
-	 * @param teamName - The name of the team
+	 * Constructor
+	 * @param teamName	- the team name
+	 * @param budget	- the budget of the team
+	 * @param standings	- the standings of the team
 	 */
 	public Team(String teamName, double budget, Standings standings) {
 		team = new ArrayList<Player>();
@@ -30,6 +32,10 @@ public class Team {
 		isMax=false;
 	}
 	
+	/**
+	 * Method to print al ineligible players to the console
+	 * 	-
+	 */
 	public void printPlayersNotEligible() {
 		for (int i=0;i<team.size();i++) {
 			if (!team.get(i).isEligible()) {
@@ -41,8 +47,8 @@ public class Team {
 	/**
 	 * Method which checks if a Team has got a CurrentTeam that is allowed to play
 	 * 
-	 * @param t	- The Team
-	 * @return				- true if the team is eligible to play, false otherwise
+	 * @param currentTeam	- The Team
+	 * @return	- true if the team is eligible to play, false otherwise
 	 */
 	public static Boolean isEligible(ArrayList<Player> currentTeam) {
 		
@@ -63,6 +69,10 @@ public class Team {
 		return false;
 	}
 	
+	/**
+	 * Method which deletes a player if it is in the team
+	 * @param player	- the player to delete
+	 */
 	public void deleteIfInCurrentTeam(Player player) {
 		if (positions.contains(player)) {
 			boolean itsdone=false;
@@ -90,7 +100,10 @@ public class Team {
 		}
 	}
 	
-	
+	/**
+	 * Method which checks if the current team is eligible to play
+	 * @return	- boolean with the result
+	 */
 	public boolean isEligible() {
 		int goalkeepers=0;
 		for (int i=0;i<11;i++) {
@@ -108,6 +121,12 @@ public class Team {
 		} return true;
 	}
 	
+	/**
+	 * Method to update the standings of the team
+	 * @param result		- the result of the match (won, draw or lost)
+	 * @param goalsFor		- number of goals for
+	 * @param goalsAgainst	- number of goals against
+	 */
 	public void updateStandings(String result, int goalsFor, int goalsAgainst){
 		standings.updateStandings(result, goalsFor, goalsAgainst);
 		if (result.equals("won")) {
@@ -124,6 +143,12 @@ public class Team {
 		
 	}
 	
+	/**
+	 * Method to get a player for a given name and age
+	 * @param name	- the name of the player
+	 * @param age	- the age of the player
+	 * @return	- the player
+	 */
 	public Player getPlayerForNameAndAge(String name, int age) {
 		for(Player player : team) {
 			if(player.getName().equals(name) && player.getAge() == age) {
@@ -152,6 +177,10 @@ public class Team {
 		}
 	}
 	
+	/**
+	 * Method to set the first 11 eligible players as the current team
+	 * 	-
+	 */
 	public void setFirst11AsCurrentTeam() {
 		ArrayList<Player> res = new ArrayList<Player>();
 		
@@ -175,6 +204,10 @@ public class Team {
 		}
 	}
 	
+	/**
+	 * Method to set the positions of the team as the current team
+	 * 	-
+	 */
 	public void setPositionsAsCurrentTeam() {
 		ArrayList<Player> res = new ArrayList<Player>();
 		
@@ -221,6 +254,10 @@ public class Team {
 		}
 	}
 	
+	/**
+	 * Method to add a player to the current the team
+	 * @param player	- the player to add
+	 */
 	public void addToCurrentTeam(Player player) {
 		currentTeam.add(player);
 	}
@@ -365,6 +402,11 @@ public class Team {
 		return true;
 	}
 	
+	/**
+	 * Method to change a place in the positions
+	 * @param playerout - the player to be deleted
+	 * @param playerin	- the player to be added
+	 */
 	public void changePositions(Player playerout, Player playerin) {
 		Player[] array = positions.getPositionArray();
 		for (int i=0;i<array.length;i++) {
@@ -388,11 +430,5 @@ public class Team {
 	public void setMax(boolean isMax) {
 		this.isMax = isMax;
 	}
-	
-	
-	
-	
-	
-	
 	
 }

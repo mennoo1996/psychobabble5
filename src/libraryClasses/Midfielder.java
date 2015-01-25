@@ -9,22 +9,23 @@ import java.math.BigDecimal;
 public class Midfielder extends FieldPlayer {
 
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
-	 * @param daysInjured
-	 * @param daysSuspended
-	 * @param isEligible
-	 * @param dribblingValue
-	 * @param finishingValue
-	 * @param defenseValue
-	 * @param staminaValue
+	 * Constructor
+	 * @param price				- the recommended price of the midfielder
+	 * @param team				- the team name of the midfielder
+	 * @param name				- the name of the midfielder
+	 * @param age				- the age of the midfielder
+	 * @param number			- the number of the midfielder
+	 * @param goals				- the number of goals of the midfielder
+	 * @param assists			- the number of assists of the midfielder
+	 * @param yellowcards		- the number of yellow cards of the midfielder
+	 * @param redcards			- the number of red cards of the midfielder
+	 * @param daysInjured		- the the number of days injured of the midfielder
+	 * @param daysSuspended		- the the number of days suspended of the midfielder
+	 * @param isEligible		- the boolean which indicates if the midfielder is eligible to play
+	 * @param dribblingValue	- the dribbling value of the midfielder
+	 * @param finishingValue	- the finishing value of the midfielder
+	 * @param defenseValue		- the defense value of the midfielder
+	 * @param staminaValue		- the stamina value of the midfielder
 	 */
 	public Midfielder(BigDecimal price, String team, String name, int age,
 			int number, int goals, int assists, int yellowcards, int redcards,
@@ -39,22 +40,24 @@ public class Midfielder extends FieldPlayer {
 
 	
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
-	 * @param daysInjured
-	 * @param daysSuspended
-	 * @param isEligible
-	 * @param dribblingValue
-	 * @param finishingValue
-	 * @param defenseValue
-	 * @param staminaValue
+	 * Constructor
+	 * @param price				- the recommended price of the midfielder
+	 * @param team				- the team name of the midfielder
+	 * @param name				- the name of the midfielder
+	 * @param age				- the age of the midfielder
+	 * @param number			- the number of the midfielder
+	 * @param goals				- the number of goals of the midfielder
+	 * @param assists			- the number of assists of the midfielder
+	 * @param yellowcards		- the number of yellow cards of the midfielder
+	 * @param redcards			- the number of red cards of the midfielder
+	 * @param daysInjured		- the the number of days injured of the midfielder
+	 * @param daysSuspended		- the the number of days suspended of the midfielder
+	 * @param isEligible		- the boolean which indicates if the midfielder is eligible to play
+	 * @param dribblingValue	- the dribbling value of the midfielder
+	 * @param finishingValue	- the finishing value of the midfielder
+	 * @param defenseValue		- the defense value of the midfielder
+	 * @param staminaValue		- the stamina value of the midfielder
+	 * @param daysNotForSale	- the number of days the midfielder is not for sale.
 	 */
 	public Midfielder(BigDecimal price, String team, String name, int age,
 			int number, int goals, int assists, int yellowcards, int redcards,

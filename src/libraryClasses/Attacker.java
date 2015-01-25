@@ -9,22 +9,23 @@ import java.math.BigDecimal;
 public class Attacker extends FieldPlayer {
 
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
-	 * @param daysInjured
-	 * @param daysSuspended
-	 * @param isEligible
-	 * @param dribblingValue
-	 * @param finishingValue
-	 * @param defenseValue
-	 * @param staminaValue
+	 * Constructor
+	 * @param price				- the recommended price of the attacker
+	 * @param team				- the team name of the attacker
+	 * @param name				- the name of the attacker
+	 * @param age				- the age of the attacker
+	 * @param number			- the number of the attacker
+	 * @param goals				- the number of goals of the attacker
+	 * @param assists			- the number of assists of the attacker
+	 * @param yellowcards		- the number of yellow cards of the attacker
+	 * @param redcards			- the number of red cards of the attacker
+	 * @param daysInjured		- the the number of days injured of the attacker
+	 * @param daysSuspended		- the the number of days suspended of the attacker
+	 * @param isEligible		- the boolean which indicates if the attacker is eligible to play
+	 * @param dribblingValue	- the dribbling value of the attacker
+	 * @param finishingValue	- the finishing value of the attacker
+	 * @param defenseValue		- the defense value of the attacker
+	 * @param staminaValue		- the stamina value of the attacker
 	 */
 	public Attacker(BigDecimal price, String team, String name, int age,
 			int number, int goals, int assists, int yellowcards, int redcards,
@@ -38,22 +39,24 @@ public class Attacker extends FieldPlayer {
 	}
 	
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
-	 * @param daysInjured
-	 * @param daysSuspended
-	 * @param isEligible
-	 * @param dribblingValue
-	 * @param finishingValue
-	 * @param defenseValue
-	 * @param staminaValue
+	 * Constructor
+	 * @param price				- the recommended price of the attacker
+	 * @param team				- the team name of the attacker
+	 * @param name				- the name of the attacker
+	 * @param age				- the age of the attacker
+	 * @param number			- the number of the attacker
+	 * @param goals				- the number of goals of the attacker
+	 * @param assists			- the number of assists of the attacker
+	 * @param yellowcards		- the number of yellow cards of the attacker
+	 * @param redcards			- the number of red cards of the attacker
+	 * @param daysInjured		- the the number of days injured of the attacker
+	 * @param daysSuspended		- the the number of days suspended of the attacker
+	 * @param isEligible		- the boolean which indicates if the attacker is eligible to play
+	 * @param dribblingValue	- the dribbling value of the attacker
+	 * @param finishingValue	- the finishing value of the attacker
+	 * @param defenseValue		- the defense value of the attacker
+	 * @param staminaValue		- the stamina value of the attacker
+	 * @param daysNotForSale	- the number of days the attacker is not for sale.
 	 */
 	public Attacker(BigDecimal price, String team, String name, int age,
 			int number, int goals, int assists, int yellowcards, int redcards,

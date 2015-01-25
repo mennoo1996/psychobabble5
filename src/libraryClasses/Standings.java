@@ -7,11 +7,13 @@ public class Standings {
 	
 
 	/**
-	 * @param won
-	 * @param draw
-	 * @param lost
-	 * @param goalsFor
-	 * @param goalsAgainst
+	 * 
+	 * @param won			- number of matches won
+	 * @param draw			- number of matches draw
+	 * @param lost			- number of matches lost
+	 * @param goalsFor		- number of goals for
+	 * @param goalsAgainst	- number of goals against
+	 * @param teamName		- the team name
 	 */
 	public Standings(int won, int draw, int lost, int goalsFor, int goalsAgainst, String teamName) {
 		this.won = won;
@@ -36,8 +38,13 @@ public class Standings {
 				+ ", goalsAgainst=" + goalsAgainst +  "]";
 	}
 	
+	/**
+	 * Method to update the standings with a given result
+	 * @param result		- the result (won, draw of lost)
+	 * @param goalsFor		- the number of goals for
+	 * @param goalsAgainst	- the number of goals against
+	 */
 	public void updateStandings(String result, int goalsFor, int goalsAgainst){
-		
 		
 		if (result.equals("won")) {
 			won++;
@@ -213,11 +220,4 @@ public class Standings {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
 }

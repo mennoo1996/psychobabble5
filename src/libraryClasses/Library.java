@@ -25,6 +25,11 @@ public class Library {
 		library.add(team);
 	}
 	
+	/**
+	 * Method which return the team for the given teamName if it exists
+	 * @param teamName	- the teamname to search
+	 * @return			- the team
+	 */
 	public Team getTeamForName(String teamName) {
 		for(int i = 0; i < library.size(); i++) {
 			if(teamName.equals(library.get(i).getTeamName())) {

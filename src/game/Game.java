@@ -7,6 +7,7 @@ import java.util.Date;
 import libraryClasses.Team;
 import xmlIO.XMLParser;
 
+
 public class Game {
 	
 	private String name;
@@ -17,6 +18,14 @@ public class Game {
 	private Date date;
 	private TransferList transferList;
 	
+	/**
+	 * Constructor
+	 * @param name				- the name of the player
+	 * @param savefileData		- the filename of the data file
+	 * @param savefileScheme	- the filename of the scheme file
+	 * @param teamname			- the teamname
+	 * @param transferList		- the pending transferlist
+	 */
 	public Game (String name, String savefileData, String savefileScheme, String teamname, TransferList transferList) {
 		this.name=name;
 		this.savefileData=savefileData;
@@ -26,12 +35,6 @@ public class Game {
 		competition=XMLParser.readCompetition(savefileData, savefileScheme);
 		team=competition.getLibrary().getTeamForName(teamname);
 	}
-	
-	
-
-	
-
-
 
 	/**
 	 * @return the name
@@ -39,8 +42,6 @@ public class Game {
 	public String getName() {
 		return name;
 	}
-
-
 
 	/**
 	 * @param name the name to set
@@ -50,11 +51,6 @@ public class Game {
 	}
 
 
-
-	
-
-
-
 	/**
 	 * @return the team
 	 */
@@ -62,25 +58,19 @@ public class Game {
 		return team;
 	}
 
-
-
 	/**
 	 * @param team the team to set
 	 */
 	public void setTeam(Team team) {
 		this.team = team;
 	}
-
-
-
+	
 	/**
 	 * @return the competition
 	 */
 	public Competition getCompetition() {
 		return competition;
 	}
-
-
 
 	/**
 	 * @param competition the competition to set
@@ -89,16 +79,12 @@ public class Game {
 		this.competition = competition;
 	}
 
-
-
 	/**
 	 * @return the date
 	 */
 	public Date getDate() {
 		return date;
 	}
-
-
 
 	/**
 	 * @param date the date to set
@@ -107,14 +93,13 @@ public class Game {
 		this.date = date;
 	}
 	
+	/**
+	 * Method which saves the game to the given filenames.
+	 *
+	 */
 	public void save() {
 		XMLParser.writeCompetition(savefileData, savefileScheme, competition);
 	}
-
-
-
-
-
 
 
 	/* (non-Javadoc)
@@ -128,23 +113,12 @@ public class Game {
 	}
 
 
-
-
-
-
-
 	/**
 	 * @return the savefileData
 	 */
 	public String getSavefileData() {
 		return savefileData;
 	}
-
-
-
-
-
-
 
 	/**
 	 * @param savefileData the savefileData to set
@@ -153,12 +127,6 @@ public class Game {
 		this.savefileData = savefileData;
 	}
 
-
-
-
-
-
-
 	/**
 	 * @return the savefileScheme
 	 */
@@ -166,24 +134,12 @@ public class Game {
 		return savefileScheme;
 	}
 
-
-
-
-
-
-
 	/**
 	 * @param savefileScheme the savefileScheme to set
 	 */
 	public void setSavefileScheme(String savefileScheme) {
 		this.savefileScheme = savefileScheme;
 	}
-
-
-
-
-
-
 
 	/**
 	 * @return the transferList
@@ -193,26 +149,12 @@ public class Game {
 	}
 
 
-
-
-
-
-
 	/**
 	 * @param transferList the transferList to set
 	 */
 	public void setTransferList(TransferList transferList) {
 		this.transferList = transferList;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 }

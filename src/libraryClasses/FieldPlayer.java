@@ -11,22 +11,23 @@ public abstract class FieldPlayer extends Player {
 	private int dribblingValue, finishingValue, defenseValue, staminaValue;
 
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
-	 * @param daysInjured
-	 * @param daysSuspended
-	 * @param isEligible
-	 * @param dribblingValue
-	 * @param finishingValue
-	 * @param defenseValue
-	 * @param staminaValue
+	 * Constructor
+	 * @param price				- the recommended price of the fieldPlayer
+	 * @param team				- the team name of the fieldPlayer
+	 * @param name				- the name of the fieldPlayer
+	 * @param age				- the age of the fieldPlayer
+	 * @param number			- the number of the fieldPlayer
+	 * @param goals				- the number of goals of the fieldPlayer
+	 * @param assists			- the number of assists of the fieldPlayer
+	 * @param yellowcards		- the number of yellow cards of the fieldPlayer
+	 * @param redcards			- the number of red cards of the fieldPlayer
+	 * @param daysInjured		- the the number of days injured of the fieldPlayer
+	 * @param daysSuspended		- the the number of days suspended of the fieldPlayer
+	 * @param isEligible		- the boolean which indicates if the fieldPlayer is eligible to play
+	 * @param dribblingValue	- the dribbling value of the fieldPlayer
+	 * @param finishingValue	- the finishing value of the fieldPlayer
+	 * @param defenseValue		- the defense value of the fieldPlayer
+	 * @param staminaValue		- the stamina value of the fieldPlayer
 	 */
 	public FieldPlayer(BigDecimal price, String team, String name, int age,
 			int number, int goals, int assists, int yellowcards, int redcards,
@@ -43,22 +44,24 @@ public abstract class FieldPlayer extends Player {
 	}
 	
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
-	 * @param daysInjured
-	 * @param daysSuspended
-	 * @param isEligible
-	 * @param dribblingValue
-	 * @param finishingValue
-	 * @param defenseValue
-	 * @param staminaValue
+	 * Constructor
+	 * @param price				- the recommended price of the fieldPlayer
+	 * @param team				- the team name of the fieldPlayer
+	 * @param name				- the name of the fieldPlayer
+	 * @param age				- the age of the fieldPlayer
+	 * @param number			- the number of the fieldPlayer
+	 * @param goals				- the number of goals of the fieldPlayer
+	 * @param assists			- the number of assists of the fieldPlayer
+	 * @param yellowcards		- the number of yellow cards of the fieldPlayer
+	 * @param redcards			- the number of red cards of the fieldPlayer
+	 * @param daysInjured		- the the number of days injured of the fieldPlayer
+	 * @param daysSuspended		- the the number of days suspended of the fieldPlayer
+	 * @param isEligible		- the boolean which indicates if the fieldPlayer is eligible to play
+	 * @param dribblingValue	- the dribbling value of the fieldPlayer
+	 * @param finishingValue	- the finishing value of the fieldPlayer
+	 * @param defenseValue		- the defense value of the fieldPlayer
+	 * @param staminaValue		- the stamina value of the fieldPlayer
+	 * @param daysNotForSale	- the number of days the fieldPlayer is not for sale.
 	 */
 	public FieldPlayer(BigDecimal price, String team, String name, int age,
 			int number, int goals, int assists, int yellowcards, int redcards,
