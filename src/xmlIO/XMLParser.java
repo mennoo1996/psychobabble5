@@ -429,7 +429,6 @@ public class XMLParser {
 		int daysInjured = Integer.parseInt(getNodeValue(element, "daysInjured"));
 		int daysSuspended = Integer.parseInt(getNodeValue(element, "daysSuspended"));
 		int daysNotForSale = Integer.parseInt(getNodeValue(element, "daysNotForSale"));
-		
 		boolean eligible;
 		if(getNodeValue(element, "eligible").equals("1")) {
 			eligible = true;
