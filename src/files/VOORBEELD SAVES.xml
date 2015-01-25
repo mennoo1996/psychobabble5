@@ -1,0 +1,20 @@
+<savelist>
+	<save>
+		<name></name>
+		<datafile></datafile>
+		<schemefile></schemefile>
+		<teamname></teamname>
+		<transferlist>
+			<transfer>
+				<playerName></playerName>
+				<priceReturned></priceReturned>
+				<bid></bid>
+			</transfer>
+			<transfer>
+				<playerName></playerName>
+				<priceReturned></priceReturned>
+				<bid></bid>
+			</transfer>
+		</transferlist>
+	</save>
+</savelist>
