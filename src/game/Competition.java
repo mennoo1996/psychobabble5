@@ -22,8 +22,10 @@ public class Competition {
 	private int roundsPlayed;
 	
 	/**
-	 * @param library
-	 * @param scheme
+	 * 
+	 * @param library		- the Library off the competition
+	 * @param scheme		- the scheme off the competition
+	 * @param roundsPlayed	- the number of played rounds off the competition
 	 */
 	public Competition(Library library, CompetitionScheme scheme, int roundsPlayed) {
 		super();
@@ -359,6 +361,10 @@ public class Competition {
 		return true;
 	}
 	
+	/**
+	 * Method which return the topscorers of the competition
+	 * @return	-	ordered arraylist with all players (ordered on number of goals)
+	 */
 	public Player[] getTopScorers() {
 		Player[] res = new Player[440];
 		int counter=0;
@@ -392,6 +398,10 @@ public class Competition {
 		return res2;
 	}
 	
+	/**
+	 * Method which return the players with the most assists of the competition
+	 * @return	-	ordered arraylist with all players (ordered on number of assist)
+	 */
 	public Player[] getMostAssists() {
 		Player[] res = new Player[440];
 		int counter=0;
@@ -425,6 +435,10 @@ public class Competition {
 		return res2;
 	}
 	
+	/**
+	 * Method which return the players with the most yellow cards of the competition
+	 * @return	-	ordered arraylist with all players (ordered on number of yellow cards)
+	 */
 	public Player[] getMostYellow() {
 		Player[] res = new Player[440];
 		int counter=0;
@@ -458,6 +472,10 @@ public class Competition {
 		return res2;
 	}
 	
+	/**
+	 * Method which return the players with the most red cards of the competition
+	 * @return	-	ordered arraylist with all players (ordered on number of red cards)
+	 */
 	public Player[] getMostRed() {
 		Player[] res = new Player[440];
 		int counter=0;

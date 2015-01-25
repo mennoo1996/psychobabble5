@@ -42,12 +42,15 @@ import schemeClasses.CompetitionScheme;
 import schemeClasses.Match;
 import schemeClasses.Round;
 
-/**
- * Class containing a  method for parsing a xml file into a library of teamsw
- *
- */
+
 public class XMLParser {
 	
+	/**
+	 * Method to read a competition from a data file and a scheme file
+	 * @param libraryFileName	- the file containing the library
+	 * @param schemeFileName	- the file containing the scheme
+	 * @return	- the competition	
+	 */
 	public static Competition readCompetition(String libraryFileName, String schemeFileName) {
 		try {
 			File xmlFile = new File(libraryFileName);
@@ -66,10 +69,10 @@ public class XMLParser {
 	}
 	
 	/**
-	 * Method to write a competition to a xml file
-	 * 
-	 * @param libraryFileName	- The file to write to
-	 * @param competition		- The competition to write
+	 * Method to write a competition to a data file and a schem file
+	 * @param libraryFileName	- the file to write the library to
+	 * @param schemeFileName	- the file to write the scheme to
+	 * @param competition	- the competition to write
 	 */
 	public static void writeCompetition(String libraryFileName, String schemeFileName, Competition competition) {
 		writeLibrary(libraryFileName, competition.getLibrary(), competition.getRoundsPlayed());
@@ -170,6 +173,12 @@ public class XMLParser {
 		return new Standings(won, draw, lost, goalsFor, goalsAgainst, teamName);
 	}
 	
+	/**
+	 * Method to read positions from a positionsELement
+	 * @param positionsElement	- the element containing the positions
+	 * @param team				- the team to which the positions belong
+	 * @return					- the positions
+	 */
 	private static Positions readPositions(Element positionsElement, Team team) {
 		Player[] positionsArray = new Player[11];
 		for(int i = 0; i < 11; i++) {
@@ -190,8 +199,9 @@ public class XMLParser {
 	/**
 	 * Method which writes an library to a file
 	 * 
-	 * @param fileName	- the file to write the library to
-	 * @param library	- the library to write
+	 * @param fileName		- the file to write the library to
+	 * @param library		- the library to write
+	 * @param roundsPlayed	- the amount of rounds the library has played
 	 */
 	public static void writeLibrary(String fileName, Library library, int roundsPlayed) {
 		try {
@@ -273,6 +283,12 @@ public class XMLParser {
 		return standingsElement;
 	}
 	
+	/**
+	 * Method to write a positions to an element
+	 * @param positions	- the positions to write
+	 * @param doc		- the doc to which the element should belong
+	 * @return			- the element containing the written positions
+	 */
 	private static Element writePositions(Positions positions, Document doc) {
 		Element positionsElement = doc.createElement("positions");
 		Player[] positionsArray = positions.getPositionArray();
@@ -546,6 +562,11 @@ public class XMLParser {
 		return res;	
 	}
 	
+	/**
+	 * Method to write a competition scheme to a file
+	 * @param fileName	- the file to write to
+	 * @param scheme	- the scheme to write
+	 */
 	public static void writeScheme(String fileName, CompetitionScheme scheme) {
 		try {
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -568,6 +589,12 @@ public class XMLParser {
 		}
 	}
 	
+	/**
+	 * Method to write a round to an element
+	 * @param round	- the round to write
+	 * @param doc	- the doc to which the element should belong
+	 * @return		- the element containing the written round
+	 */
 	private static Element writeRound(Round round, Document doc) {
 		Element roundElement = doc.createElement("roundScheme");
 		roundElement.setAttribute("round", String.format("%d", round.getRoundNumber()));
@@ -578,6 +605,12 @@ public class XMLParser {
 		return roundElement;
 	}
 	
+	/**
+	 * Method to write a match to an element
+	 * @param match	- the round to write
+	 * @param doc	- the doc to which the element should belong
+	 * @return		- the element containing the written match
+	 */
 	private static Element writeMatch(Match match, Document doc) {
 		Element matchElement = doc.createElement("match");
 		
@@ -600,6 +633,11 @@ public class XMLParser {
 		return matchElement;
 	}
 	
+	/**
+	 * Method which read a gamelist from a file
+	 * @param gameListFileName	- the file containing the gamelist
+	 * @return					- the gamelist
+	 */
 	public static GameList readGameList(String gameListFileName) {
 		try {
 			File xmlFile = new File(gameListFileName);
@@ -626,6 +664,11 @@ public class XMLParser {
 		return null;
 	}
 	
+	/**
+	 * Method which reads a game from an element containing the game
+	 * @param saveElement	- the element containing the game
+	 * @return				- the game
+	 */
 	private static Game readGame(Element saveElement) {
 		String name = getNodeValue(saveElement, "name");
 		String dataFile = getNodeValue(saveElement, "datafile");
@@ -646,6 +689,12 @@ public class XMLParser {
 		return new Game(name, dataFile, schemeFile, teamName, transferList);
 	}
 	
+	/**
+	 * Method which reads a transferlist from an element
+	 * @param transferListElement 	- the element containing the transferlist
+	 * @param dataFile				- the file containing player data
+	 * @return						- the transferlist
+	 */
 	private static TransferList readTransferList(Element transferListElement, String dataFile) {
 		TransferList transferList = new TransferList();
 		
@@ -661,6 +710,12 @@ public class XMLParser {
 		return transferList;
 	}
 	
+	/**
+	 * Method which read a transfer from an element containing the transfer
+	 * @param transferElement	- element containing the transfer
+	 * @param dataFile			- file containing player data
+	 * @return					- the transferInProgress
+	 */
 	private static TransferInProgress readTransfer(Element transferElement, String dataFile) {
 		String playerName = getNodeValue(transferElement, "playerName");
 		int playerAge = Integer.parseInt(getNodeValue(transferElement, "playerAge"));
@@ -687,6 +742,11 @@ public class XMLParser {
 		return new TransferInProgress(player, priceReturned, bid);
 	}
 	
+	/**
+	 * Method to write a gamelist to a file
+	 * @param fileName	- the file to write the gamelist to
+	 * @param gameList	- the gamelist to write
+	 */
 	public static void writeGameList(String fileName, GameList gameList) {
 		try {
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -709,6 +769,12 @@ public class XMLParser {
 		}
 	}
 	
+	/**
+	 * Method to write a game to an element
+	 * @param game	- the game to write
+	 * @param doc	- the document to which the element should belong
+	 * @return		- the element containing the game
+	 */
 	private static Element writeGame(Game game, Document doc) {
 		Element gameElement = doc.createElement("save");
 		
@@ -734,6 +800,12 @@ public class XMLParser {
 		
 	}
 	
+	/**
+	 * Method to write a transferlist to an element
+	 * @param transferList	- the transferlist to write
+	 * @param doc			- document to which the element should belong
+	 * @return				- the element containing the written transferlist
+	 */
 	private static Element writeTransferList(TransferList transferList, Document doc) {
 		Element transferListElement = doc.createElement("transferlist");
 		
@@ -744,6 +816,12 @@ public class XMLParser {
 		return transferListElement;
 	}
 	
+	/**
+	 * Method to write a transfer to an element
+	 * @param transfer	- the transferInProgress to write
+	 * @param doc		- the document to which the element should belong
+	 * @return			- the element containing the written transfer	
+	 */
 	private static Element writeTransferInProgress(TransferInProgress transfer, Document doc) {
 		Element transferElement = doc.createElement("transfer");
 		

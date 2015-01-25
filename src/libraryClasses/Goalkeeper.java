@@ -11,19 +11,20 @@ public class Goalkeeper extends Player {
 	private int goalkeeperValue;
 	
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
-	 * @param daysInjured
-	 * @param daysSuspended
-	 * @param isEligible
-	 * @param goalkeeperValue
+	 * Constructor
+	 * @param price				- the recommended price of the goalkeeper
+	 * @param team				- the team name of the goalkeeper
+	 * @param name				- the name of the goalkeeper
+	 * @param age				- the age of the goalkeeper
+	 * @param number			- the number of the goalkeeper
+	 * @param goals				- the number of goals of the goalkeeper
+	 * @param assists			- the number of assists of the goalkeeper
+	 * @param yellowcards		- the number of yellow cards of the goalkeeper
+	 * @param redcards			- the number of red cards of the goalkeeper
+	 * @param daysInjured		- the the number of days injured of the goalkeeper
+	 * @param daysSuspended		- the the number of days suspended of the goalkeeper
+	 * @param isEligible		- the boolean which indicates if the goalkeeper is eligible to play
+	 * @param goalkeeperValue	- the goalkeeper value of the goalkeeper
 	 */
 	public Goalkeeper(BigDecimal price, String team, String name, int age,
 			int number, int goals, int assists, int yellowcards, int redcards,
@@ -36,19 +37,21 @@ public class Goalkeeper extends Player {
 	}
 	
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
-	 * @param daysInjured
-	 * @param daysSuspended
-	 * @param isEligible
-	 * @param goalkeeperValue
+	 * Constructor
+	 * @param price				- the recommended price of the goalkeeper
+	 * @param team				- the team name of the goalkeeper
+	 * @param name				- the name of the goalkeeper
+	 * @param age				- the age of the goalkeeper
+	 * @param number			- the number of the goalkeeper
+	 * @param goals				- the number of goals of the goalkeeper
+	 * @param assists			- the number of assists of the goalkeeper
+	 * @param yellowcards		- the number of yellow cards of the goalkeeper
+	 * @param redcards			- the number of red cards of the goalkeeper
+	 * @param daysInjured		- the the number of days injured of the goalkeeper
+	 * @param daysSuspended		- the the number of days suspended of the goalkeeper
+	 * @param isEligible		- the boolean which indicates if the goalkeeper is eligible to play
+	 * @param goalkeeperValue	- the goalkeeper value of the goalkeeper
+	 * @param daysNotForSale	- the number of days the goalkeeper is not for sale.
 	 */
 	public Goalkeeper(BigDecimal price, String team, String name, int age,
 			int number, int goals, int assists, int yellowcards, int redcards,

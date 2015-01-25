@@ -14,15 +14,19 @@ public abstract class Player {
 	private boolean isEligible, canBeSold;
 
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
+	 * Constructor
+	 * @param price				- the recommended price of the player
+	 * @param team				- the team name of the player
+	 * @param name				- the name of the player
+	 * @param age				- the age of the player
+	 * @param number			- the number of the player
+	 * @param goals				- the number of goals of the player
+	 * @param assists			- the number of assists of the player
+	 * @param yellowcards		- the number of yellow cards of the player
+	 * @param redcards			- the number of red cards of the player
+	 * @param daysInjured		- the the number of days injured of the player
+	 * @param daysSuspended		- the the number of days suspended of the player
+	 * @param isEligible		- the boolean which indicates if the player is eligible to play
 	 */
 	public Player(BigDecimal price, String team, String name, 
 			int age, int number, int goals, int assists,
@@ -46,15 +50,20 @@ public abstract class Player {
 	}
 	
 	/**
-	 * @param price
-	 * @param team
-	 * @param name
-	 * @param age
-	 * @param number
-	 * @param goals
-	 * @param assists
-	 * @param yellowcards
-	 * @param redcards
+	 * Constructor
+	 * @param price				- the recommended price of the player
+	 * @param team				- the team name of the player
+	 * @param name				- the name of the player
+	 * @param age				- the age of the player
+	 * @param number			- the number of the player
+	 * @param goals				- the number of goals of the player
+	 * @param assists			- the number of assists of the player
+	 * @param yellowcards		- the number of yellow cards of the player
+	 * @param redcards			- the number of red cards of the player
+	 * @param daysInjured		- the the number of days injured of the player
+	 * @param daysSuspended		- the the number of days suspended of the player
+	 * @param isEligible		- the boolean which indicates if the player is eligible to play
+	 * @param daysNotForSale	- the number of days the player is not for sale.
 	 */
 	public Player(BigDecimal price, String team, String name, 
 			int age, int number, int goals, int assists,
@@ -82,6 +91,11 @@ public abstract class Player {
 		}
 	}
 	
+	/*
+	 * Abstract method --> subclasses must implement it
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public abstract String toString();
 
 	/* (non-Javadoc)
@@ -224,18 +238,34 @@ public abstract class Player {
 		this.daysSuspended = daysSuspended;
 	}
 
+	/**
+	 * Method to indicate that the player made a goal
+	 * 	
+	 */
 	public void madeGoal() {
 		goals++;
 	}
 	
+	/**
+	 * Method to indicate that the player made an assist
+	 * 	
+	 */
 	public void madeAssist() {
 		assists++;
 	}
 	
+	/**
+	 * Method to indicate that the player got a yellow card
+	 * 	
+	 */
 	public void gotYellow() {
 		yellowcards++;
 	}
 	
+	/**
+	 * Method to indicate that the player got a red card
+	 * 	
+	 */
 	public void gotRed() {
 		redcards++;
 	}

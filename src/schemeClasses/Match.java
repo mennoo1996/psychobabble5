@@ -27,8 +27,10 @@ public class Match {
 	
 	/**
 	 * Constructor which initializes a match with the two given team names
-	 * @param team1	- The first team name
-	 * @param team2	- the second team name
+	 * @param team1		- The first team name
+	 * @param team2		- the second team name
+	 * @param score1 	- The score of team 1
+	 * @param score2 	- The score of team 2
 	 */
 	public Match(String team1, String team2, int score1, int score2) {
 		this.team1 = team1;
@@ -37,20 +39,12 @@ public class Match {
 		this.score2 = score2;
 	}
 	
-	
-
-	
-	
 	/**
 	 * @return the score1
 	 */
 	public int getScore1() {
 		return score1;
 	}
-
-
-
-
 
 	/**
 	 * @param score1 the score1 to set
@@ -59,20 +53,12 @@ public class Match {
 		this.score1 = score1;
 	}
 
-
-
-
-
 	/**
 	 * @return the score2
 	 */
 	public int getScore2() {
 		return score2;
 	}
-
-
-
-
 
 	/**
 	 * @param score2 the score2 to set
@@ -81,20 +67,12 @@ public class Match {
 		this.score2 = score2;
 	}
 
-
-
-
-
 	/**
 	 * @return the goalMakerst1
 	 */
 	public ArrayList<FieldPlayer> getGoalMakerst1() {
 		return goalMakerst1;
 	}
-
-
-
-
 
 	/**
 	 * @param goalMakerst1 the goalMakerst1 to set
@@ -103,20 +81,12 @@ public class Match {
 		this.goalMakerst1 = goalMakerst1;
 	}
 
-
-
-
-
 	/**
 	 * @return the goalMakerst2
 	 */
 	public ArrayList<FieldPlayer> getGoalMakerst2() {
 		return goalMakerst2;
 	}
-
-
-
-
 
 	/**
 	 * @param goalMakerst2 the goalMakerst2 to set
@@ -126,9 +96,6 @@ public class Match {
 	}
 
 
-
-
-
 	/**
 	 * @return the assistMakerst1
 	 */
@@ -136,31 +103,19 @@ public class Match {
 		return assistMakerst1;
 	}
 
-
-
-
-
 	/**
 	 * @param assistMakerst1 the assistMakerst1 to set
 	 */
 	public void setAssistMakerst1(ArrayList<FieldPlayer> assistMakerst1) {
 		this.assistMakerst1 = assistMakerst1;
 	}
-
-
-
-
-
+	
 	/**
 	 * @return the assistMakerst2
 	 */
 	public ArrayList<FieldPlayer> getAssistMakerst2() {
 		return assistMakerst2;
 	}
-
-
-
-
 
 	/**
 	 * @param assistMakerst2 the assistMakerst2 to set
@@ -169,10 +124,6 @@ public class Match {
 		this.assistMakerst2 = assistMakerst2;
 	}
 
-
-
-
-
 	/**
 	 * @return the yellowCardGetterst1
 	 */
@@ -180,19 +131,12 @@ public class Match {
 		return yellowCardGetterst1;
 	}
 
-
-
-
-
 	/**
 	 * @param yellowCardGetterst1 the yellowCardGetterst1 to set
 	 */
 	public void setYellowCardGetterst1(ArrayList<Player> yellowCardGetterst1) {
 		this.yellowCardGetterst1 = yellowCardGetterst1;
 	}
-
-
-
 
 
 	/**
@@ -203,18 +147,12 @@ public class Match {
 	}
 
 
-
-
-
 	/**
 	 * @param yellowCardGetterst2 the yellowCardGetterst2 to set
 	 */
 	public void setYellowCardGetterst2(ArrayList<Player> yellowCardGetterst2) {
 		this.yellowCardGetterst2 = yellowCardGetterst2;
 	}
-
-
-
 
 
 	/**
@@ -224,19 +162,12 @@ public class Match {
 		return redCardGetterst1;
 	}
 
-
-
-
-
 	/**
 	 * @param redCardGetterst1 the redCardGetterst1 to set
 	 */
 	public void setRedCardGetterst1(ArrayList<Player> redCardGetterst1) {
 		this.redCardGetterst1 = redCardGetterst1;
 	}
-
-
-
 
 
 	/**
@@ -247,18 +178,12 @@ public class Match {
 	}
 
 
-
-
-
 	/**
 	 * @param redCardGetterst2 the redCardGetterst2 to set
 	 */
 	public void setRedCardGetterst2(ArrayList<Player> redCardGetterst2) {
 		this.redCardGetterst2 = redCardGetterst2;
 	}
-
-
-
 
 
 	/**
@@ -269,30 +194,19 @@ public class Match {
 	}
 
 
-
-
-
 	/**
 	 * @param injuredPlayerst1 the injuredPlayerst1 to set
 	 */
 	public void setInjuredPlayerst1(ArrayList<Player> injuredPlayerst1) {
 		this.injuredPlayerst1 = injuredPlayerst1;
 	}
-
-
-
-
-
+	
 	/**
 	 * @return the injuredPlayerst2
 	 */
 	public ArrayList<Player> getInjuredPlayerst2() {
 		return injuredPlayerst2;
 	}
-
-
-
-
 
 	/**
 	 * @param injuredPlayerst2 the injuredPlayerst2 to set
@@ -302,19 +216,12 @@ public class Match {
 	}
 
 
-
-
-
 	/**
 	 * @return the injuriesLengthst1
 	 */
 	public int[] getInjuriesLengthst1() {
 		return injuriesLengthst1;
 	}
-
-
-
-
 
 	/**
 	 * @param injuriesLengthst1 the injuriesLengthst1 to set
@@ -323,19 +230,12 @@ public class Match {
 		this.injuriesLengthst1 = injuriesLengthst1;
 	}
 
-
-
-
-
 	/**
 	 * @return the injuriesLengthst2
 	 */
 	public int[] getInjuriesLengthst2() {
 		return injuriesLengthst2;
 	}
-
-
-
 
 
 	/**
@@ -346,9 +246,6 @@ public class Match {
 	}
 
 
-
-
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -356,8 +253,6 @@ public class Match {
 	public String toString() {
 		return "Match [team1=" + team1 + ", team2=" + team2 + "]";
 	}
-
-
 
 	/**
 	 * @return the team1

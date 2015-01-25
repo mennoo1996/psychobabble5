@@ -9,10 +9,19 @@ public class GameList {
 	
 	private ArrayList<Game> games;
 	
+	/**
+	 * Constructor: creates empty arraylis
+	 */
 	public GameList() {
 		games = new ArrayList<Game>();
 	}
 	
+	/**
+	 * Method which creates a new game and adds it to the list
+	 * @param name		- The playername
+	 * @param teamname	- the teamname
+	 * @return			- the game
+	 */
 	public Game newgame(String name, String teamname) {
 		int gamenumber = games.size()+1;
 		String savefileData = "savefiles/" + gamenumber + "-data.xml";
@@ -52,6 +61,11 @@ public class GameList {
 		
 	}
 	
+	/**
+	 * Method which loads the game of the player with the given name
+	 * @param name	- playername to load game for
+	 * @return		- the game
+	 */
 	public Game loadgame(String name) {
 		
 		for (int i=0;i<games.size(); i++) {
@@ -62,10 +76,19 @@ public class GameList {
 
 	}
 	
+	/**
+	 * Method to add a game to the list
+	 * @param g		- the game
+	 */
 	public void add (Game g) {
 		games.add(g);
 	}
 	
+	/**
+	 * Method which returns the game at the given index
+	 * @param index	- the index
+	 * @return	- the game
+	 */
 	public Game get (int index) {
 		if (index>=0 && index<games.size()) {
 			return games.get(index);
@@ -86,6 +109,9 @@ public class GameList {
 		this.games = games;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		String res = "";
 		for (int i=0;i<games.size();i++) {
@@ -93,8 +119,5 @@ public class GameList {
 		}
 		return res;
 	}
-	
-	
-	
 	
 }
