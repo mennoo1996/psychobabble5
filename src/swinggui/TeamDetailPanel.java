@@ -10,7 +10,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -24,7 +29,6 @@ import libraryClasses.FieldPlayer;
 import libraryClasses.Goalkeeper;
 import libraryClasses.Player;
 import libraryClasses.Team;
-
 import gameLogic.TeamRating;
 
 @SuppressWarnings("serial")
@@ -74,6 +78,16 @@ public class TeamDetailPanel extends JPanel {
 		// Statistics view
 		JPanel statsPanel = new JPanel();
 		statsPanel.setLayout(new BoxLayout(statsPanel, BoxLayout.Y_AXIS));
+		
+		//budget calculation
+		BigDecimal bd = new BigDecimal(detailTeam.getBudget(), MathContext.DECIMAL64);
+		//BigDecimal bd = detailTeam.getBudget();
+		DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+		bd = bd.setScale(2, BigDecimal.ROUND_DOWN);
+		DecimalFormat df = new DecimalFormat();
+		df.setGroupingUsed(false);		
+		String priceString = formatter.format(bd.longValue());
+		
 		// List budget and team rating
 		JLabel ratingLabel = new JLabel("Rating:", JLabel.CENTER);
 		ratingLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -81,7 +95,7 @@ public class TeamDetailPanel extends JPanel {
 		actualRating.setAlignmentX(Component.CENTER_ALIGNMENT);
 		JLabel budgetLabel = new JLabel("Budget:", JLabel.CENTER);
 		budgetLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		JLabel actualBudget = new JLabel("$" + (int)detailTeam.getBudget(), JLabel.CENTER);
+		JLabel actualBudget = new JLabel("$" + priceString, JLabel.CENTER);
 		actualBudget.setAlignmentX(Component.CENTER_ALIGNMENT);
 		statsPanel.add(ratingLabel);
 		statsPanel.add(actualRating);
